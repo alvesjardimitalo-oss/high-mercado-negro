@@ -1,6 +1,6 @@
 const CATALOG_URL = './data/catalogo.json';
 const ITEM_IMAGE_BASE = './assets/itens/';
-const RULE_IMAGE_BASE = './assets/';
+const RULE_IMAGE_BASE = './assets/itens';
 
 const icons = {
   'armas':'🔫','municao':'💥','tecnologia-utilitarios':'💻','drogas-rotas':'🧪',
