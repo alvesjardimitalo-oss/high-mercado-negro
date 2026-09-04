@@ -1,1 +1,85 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#09070d"><title>Mercado Negro • High Roleplay</title><link rel="stylesheet" href="assets/style.css"></head><body><div class="noise"></div><header class="topbar"><div class="wrap topbar-inner"><a class="brand" href="index.html"><img src="assets/high_logo.png" alt="High"><div class="brand-copy"><strong>HIGH ROLEPLAY</strong><span>MERCADO NEGRO // ILEGAL HIGH SEASON 2 - ATO 2</span></div></a><nav class="topnav"><a href="#categorias">Categorias</a><a href="tabela.html">Tabela Geral</a><a href="#destaques">Destaques</a></nav></div></header><main><section class="hero"><div class="wrap hero-grid"><div><div class="eyebrow">High Roleplay // Economia Ilegal</div><h1>MERCADO<br><span>NEGRO</span></h1><p>Consulta oficial de valores de parceria e pista. Escolha uma categoria, consulte a Tabela Geral ou use a busca para localizar rapidamente qualquer item.</p><div class="searchbar"><span>⌕</span><input id="globalSearch" placeholder="Buscar T54, C4, Nitro, Tablet..." autocomplete="off"></div></div><aside class="hero-panel"><div><div class="eyebrow">Status da tabela</div><h2>CATÁLOGO OPERACIONAL</h2><p class="updated" data-updated></p></div><div class="hero-stat"><div class="stat"><span>Itens ativos</span><strong data-total>—</strong></div><div class="stat"><span>Fonte</span><strong style="font-size:17px">HIGH</strong></div></div><div class="sync"><span class="dot"></span> Sincronizado com a publicação do GitHub</div></aside></div></section><section id="categorias" class="wrap"><div class="section-head"><div><div class="eyebrow">01 // Navegação</div><h2>Categorias</h2></div><p>Abra uma categoria para consultar todos os valores.</p></div><div id="categoryGrid" class="category-grid"></div></section><section id="destaques" class="wrap"><div class="section-head"><div><div class="eyebrow">02 // Consulta rápida</div><h2>Destaques e busca</h2></div><p>Os resultados da busca aparecem aqui.</p></div><div id="featured" class="items-grid"></div></section></main><footer class="footer"><div class="wrap footer-row"><span>HIGH ROLEPLAY • MERCADO NEGRO</span><span>Economia fictícia • FiveM</span></div></footer><script src="assets/app.js"></script><script>initHome().catch(e=>document.querySelector('#categoryGrid').innerHTML='<div class="empty">'+e.message+'</div>')</script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#09070d">
+  <title>Mercado Negro • High Roleplay</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="home-v3">
+  <div class="noise"></div>
+  <header class="topbar home-topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/high_logo.png" alt="High">
+        <div class="brand-copy"><strong>MERCADO NEGRO</strong><span>HIGH ROLEPLAY • SEASON 2 • ATO 2</span></div>
+      </a>
+      <nav class="topnav home-nav">
+        <a class="active" href="index.html">⌂ Início</a>
+        <a href="tabela.html">▤ Tabela Geral</a>
+        <a href="#categorias">▦ Categorias</a>
+        <a href="#destaques">★ Destaques</a>
+      </nav>
+      <div class="top-update"><span>ÚLTIMA ATUALIZAÇÃO</span><strong data-updated>—</strong></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="home-hero">
+      <div class="home-hero-glow"></div>
+      <div class="wrap home-hero-inner">
+        <div class="home-hero-copy">
+          <div class="eyebrow">HIGH ROLEPLAY // ECONOMIA ILEGAL</div>
+          <h1>MERCADO <span>NEGRO</span></h1>
+          <p>Consulte valores de parceria e pista, encontre itens rapidamente e acesse a tabela completa do mercado ilegal.</p>
+          <div class="home-points">
+            <div><b>◆</b><span>PREÇOS<br>ATUALIZADOS</span></div>
+            <div><b>◈</b><span>PARCERIA<br>E PISTA</span></div>
+            <div><b>✦</b><span>ITENS<br>ORGANIZADOS</span></div>
+          </div>
+        </div>
+        <div class="home-hero-visual" aria-hidden="true">
+          <div class="hero-orb"></div>
+          <img class="hero-gun hero-gun-a" src="assets/itens/t54.png" alt="" onerror="this.style.display='none'">
+          <img class="hero-gun hero-gun-b" src="assets/itens/ak102.png" alt="" onerror="this.style.display='none'">
+          <div class="hero-stamp">HIGH<br><span>ILEGAL</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap home-commandbar">
+      <div class="searchbar home-search"><span>⌕</span><input id="globalSearch" placeholder="Busque um item, categoria ou palavra-chave..." autocomplete="off"></div>
+      <a class="home-action purple" href="#categorias">▦ EXPLORAR CATEGORIAS</a>
+      <a class="home-action yellow" href="tabela.html">▤ VER TABELA GERAL</a>
+    </section>
+
+    <section id="categorias" class="wrap home-categories">
+      <div class="home-section-title">
+        <div><div class="eyebrow">CATÁLOGO OPERACIONAL</div><h2>CATEGORIAS</h2></div>
+        <p>Escolha uma categoria e veja todos os itens disponíveis.</p>
+      </div>
+      <div id="categoryGrid" class="category-grid category-grid-visual"></div>
+    </section>
+
+    <section class="wrap home-stats">
+      <div class="home-stat"><b>◇</b><div><strong data-total>—</strong><span>ITENS CADASTRADOS</span></div></div>
+      <div class="home-stat"><b>♟</b><div><strong data-category-count-home>—</strong><span>CATEGORIAS</span></div></div>
+      <div class="home-stat"><b>◆</b><div><strong>2</strong><span>VALORES • PARCERIA E PISTA</span></div></div>
+      <div class="home-stat"><b>✓</b><div><strong>HIGH</strong><span>CATÁLOGO OFICIAL</span></div></div>
+    </section>
+
+    <section id="destaques" class="wrap home-featured">
+      <div class="home-section-title">
+        <div><div class="eyebrow">CONSULTA RÁPIDA</div><h2>DESTAQUES</h2></div>
+        <p>Itens sinalizados na planilha aparecem aqui.</p>
+      </div>
+      <div id="featured" class="items-grid"></div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="wrap footer-row"><span>HIGH ROLEPLAY © 2026 • MERCADO NEGRO</span><span>PREÇOS REFERENTES EXCLUSIVAMENTE À ECONOMIA FICTÍCIA DO SERVIDOR • FIVEM</span></div></footer>
+  <script src="assets/app.js"></script>
+  <script>initHome().catch(e=>document.querySelector('#categoryGrid').innerHTML='<div class="empty">'+e.message+'</div>')</script>
+</body>
+</html>
