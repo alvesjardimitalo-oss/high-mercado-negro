@@ -2,7 +2,7 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-09-04T13:58:24-03:00",
+    "atualizado_em": "2026-09-04T14:52:58-03:00",
     "moeda": "BRL",
     "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM."
   },
@@ -376,7 +376,7 @@
       "parceria": 5500,
       "pista": 7500,
       "status": "ativo",
-      "destaque": false,
+      "destaque": true,
       "observacao": "",
       "ordem": 48,
       "imagem": "adrenalina.png"
@@ -384,8 +384,8 @@
     {
       "categoria": "HOSPITAL ILEGAL",
       "item": "ADRENALINA CLANDESTINA PLUS",
-      "parceria": 0,
-      "pista": 0,
+      "parceria": 9000,
+      "pista": 12000,
       "status": "ativo",
       "destaque": true,
       "observacao": "",
@@ -412,7 +412,7 @@
       "destaque": true,
       "observacao": "",
       "ordem": 51,
-      "imagem": "packdrug3.png"
+      "imagem": "metadone.png"
     },
     {
       "categoria": "LAVAGEM",
