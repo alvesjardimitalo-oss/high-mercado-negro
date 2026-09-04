@@ -2,7 +2,7 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-09-04T15:08:34-03:00",
+    "atualizado_em": "2026-09-04T16:16:35-03:00",
     "moeda": "BRL",
     "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM."
   },
@@ -748,11 +748,19 @@
   "regras": {
     "lavagem": [
       {
+        "tipo": "DINHEIRO LIMPO",
         "titulo": "Secagem de dinheiro limpo",
+        "maquina": 30,
+        "lavagem": 20,
+        "cliente": 50,
         "texto": "30% da máquina | 20% da lavagem | 50% do cliente"
       },
       {
+        "tipo": "DINHEIRO SUJO",
         "titulo": "Secagem de dinheiro sujo",
+        "maquina": 15,
+        "lavagem": 10,
+        "cliente": 75,
         "texto": "15% da máquina | 10% da lavagem | 75% do cliente"
       }
     ]
