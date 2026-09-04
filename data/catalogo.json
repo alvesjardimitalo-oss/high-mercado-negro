@@ -2,7 +2,7 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-09-04T11:35:18-03:00",
+    "atualizado_em": "2026-09-04T12:47:14-03:00",
     "moeda": "BRL",
     "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM."
   },
@@ -15,7 +15,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 1
+      "ordem": 1,
+      "imagem": "pistola-m1922.png"
     },
     {
       "categoria": "ARMAS",
@@ -25,7 +26,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 2
+      "ordem": 2,
+      "imagem": "pistola-t54.png"
     },
     {
       "categoria": "ARMAS",
@@ -35,7 +37,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 3
+      "ordem": 3,
+      "imagem": "pistola-desert-eagle.png"
     },
     {
       "categoria": "ARMAS",
@@ -45,7 +48,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 4
+      "ordem": 4,
+      "imagem": "uzi.png"
     },
     {
       "categoria": "ARMAS",
@@ -55,7 +59,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 5
+      "ordem": 5,
+      "imagem": "tec-9.png"
     },
     {
       "categoria": "ARMAS",
@@ -65,7 +70,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 6
+      "ordem": 6,
+      "imagem": "ak-102.png"
     },
     {
       "categoria": "ARMAS",
@@ -75,7 +81,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 7
+      "ordem": 7,
+      "imagem": "cz52.png"
     },
     {
       "categoria": "ARMAS",
@@ -85,7 +92,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 8
+      "ordem": 8,
+      "imagem": "g3-sig-sauer.png"
     },
     {
       "categoria": "ARMAS",
@@ -95,7 +103,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 9
+      "ordem": 9,
+      "imagem": "f2000-mtar.png"
     },
     {
       "categoria": "ARMAS",
@@ -105,7 +114,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 10
+      "ordem": 10,
+      "imagem": "fall.png"
     },
     {
       "categoria": "ARMAS",
@@ -115,7 +125,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 11
+      "ordem": 11,
+      "imagem": "ak-74n.png"
     },
     {
       "categoria": "ARMAS",
@@ -125,7 +136,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 12
+      "ordem": 12,
+      "imagem": "mossberg-500.png"
     },
     {
       "categoria": "ARMAS",
@@ -135,7 +147,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 13
+      "ordem": 13,
+      "imagem": "mpf45.png"
     },
     {
       "categoria": "ARMAS",
@@ -145,7 +158,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 14
+      "ordem": 14,
+      "imagem": "glock-rajada.png"
     },
     {
       "categoria": "ARMAS",
@@ -155,7 +169,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 15
+      "ordem": 15,
+      "imagem": "desert-eagle-dourada.png"
     },
     {
       "categoria": "ARMAS",
@@ -165,7 +180,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 16
+      "ordem": 16,
+      "imagem": "sniper-avancada-b.png"
     },
     {
       "categoria": "ARMAS",
@@ -175,7 +191,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 17
+      "ordem": 17,
+      "imagem": "sniper-avancada.png"
     },
     {
       "categoria": "ARMAS",
@@ -185,7 +202,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 18
+      "ordem": 18,
+      "imagem": "m60.png"
     },
     {
       "categoria": "CONTRABANDO",
@@ -195,7 +213,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 19
+      "ordem": 19,
+      "imagem": "caixa-de-attachs.png"
     },
     {
       "categoria": "DESMANCHE",
@@ -205,7 +224,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 36
+      "ordem": 39,
+      "imagem": "cartao-ilegivel.png"
     },
     {
       "categoria": "DESMANCHE",
@@ -215,7 +235,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 37
+      "ordem": 40,
+      "imagem": "bloqueador-de-sinal.png"
     },
     {
       "categoria": "DESMANCHE",
@@ -225,7 +246,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 38
+      "ordem": 41,
+      "imagem": "lockpick.png"
     },
     {
       "categoria": "DESMANCHE",
@@ -235,27 +257,30 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 39
+      "ordem": 42,
+      "imagem": "lockpick-plus-plus.png"
     },
     {
       "categoria": "DROGAS / ROTAS",
       "item": "PACOTE DE DROGAS",
-      "parceria": 8500,
-      "pista": 10900,
+      "parceria": 15000,
+      "pista": 17000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 51
+      "ordem": 54,
+      "imagem": "pacote-de-drogas.png"
     },
     {
       "categoria": "DROGAS / ROTAS",
       "item": "UNIDADE DA DROGA",
-      "parceria": 350,
-      "pista": 1450,
+      "parceria": 620,
+      "pista": 2260,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 52
+      "ordem": 55,
+      "imagem": "unidade-da-droga.png"
     },
     {
       "categoria": "DROGAS / ROTAS",
@@ -265,7 +290,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 53
+      "ordem": 56,
+      "imagem": "colete.png"
     },
     {
       "categoria": "DROGAS / ROTAS",
@@ -275,7 +301,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 54
+      "ordem": 57,
+      "imagem": "capuz.png"
     },
     {
       "categoria": "DROGAS / ROTAS",
@@ -285,47 +312,52 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 55
+      "ordem": 58,
+      "imagem": "mapeamento-de-bairro.png"
     },
     {
-      "categoria": "FALSIFICACAO",
+      "categoria": "FALSIFICAÇÃO",
       "item": "CARTAO NUHIGH PRATA",
       "parceria": 30000,
       "pista": 45000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 40
+      "ordem": 43,
+      "imagem": "cartao-nuhigh-prata.png"
     },
     {
-      "categoria": "FALSIFICACAO",
+      "categoria": "FALSIFICAÇÃO",
       "item": "CARTAO NUHIGH OURO",
       "parceria": 45000,
       "pista": 65000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 41
+      "ordem": 44,
+      "imagem": "cartao-nuhigh-ouro.png"
     },
     {
-      "categoria": "FALSIFICACAO",
+      "categoria": "FALSIFICAÇÃO",
       "item": "DOLAR FALSO (UN.)",
       "parceria": 650,
       "pista": 1000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 42
+      "ordem": 45,
+      "imagem": "dolar-falso.png"
     },
     {
-      "categoria": "FALSIFICACAO",
+      "categoria": "FALSIFICAÇÃO",
       "item": "KIT DOS 7",
       "parceria": 100000,
       "pista": 140000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 43
+      "ordem": 46,
+      "imagem": "kit-dos-7.png"
     },
     {
       "categoria": "HOSPITAL ILEGAL",
@@ -335,7 +367,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 44
+      "ordem": 47,
+      "imagem": "bandagem-infectada.png"
     },
     {
       "categoria": "HOSPITAL ILEGAL",
@@ -345,7 +378,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 45
+      "ordem": 48,
+      "imagem": "adrenalina-clandestina.png"
     },
     {
       "categoria": "HOSPITAL ILEGAL",
@@ -355,7 +389,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 46
+      "ordem": 49,
+      "imagem": "pacote-de-metadona.png"
     },
     {
       "categoria": "LAVAGEM",
@@ -365,7 +400,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 56
+      "ordem": 59,
+      "imagem": "pendrive-1.png"
     },
     {
       "categoria": "LAVAGEM",
@@ -375,7 +411,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 57
+      "ordem": 60,
+      "imagem": "pendrive-2.png"
     },
     {
       "categoria": "LAVAGEM",
@@ -385,7 +422,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 58
+      "ordem": 61,
+      "imagem": "pendrive-3.png"
     },
     {
       "categoria": "LAVAGEM",
@@ -395,7 +433,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 59
+      "ordem": 62,
+      "imagem": "pendrive-4.png"
     },
     {
       "categoria": "LAVAGEM",
@@ -405,7 +444,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 60
+      "ordem": 63,
+      "imagem": "pendrive-5.png"
     },
     {
       "categoria": "LAVAGEM",
@@ -415,7 +455,8 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 61
+      "ordem": 64,
+      "imagem": "algema.png"
     },
     {
       "categoria": "LAVAGEM",
@@ -425,207 +466,261 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 62
+      "ordem": 65,
+      "imagem": "alcool-em-gel.png"
     },
     {
-      "categoria": "MECANICA",
+      "categoria": "MECÂNICA ILEGAL",
       "item": "TABLET DE CORRIDA",
       "parceria": 6500,
       "pista": 8000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 20
+      "ordem": 20,
+      "imagem": "tablet-de-corrida.png"
     },
     {
-      "categoria": "MECANICA",
+      "categoria": "MECÂNICA ILEGAL",
       "item": "TICKET DE CORRIDA",
       "parceria": 8000,
       "pista": 10000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 21
+      "ordem": 21,
+      "imagem": "ticket-de-corrida.png"
     },
     {
-      "categoria": "MECANICA",
+      "categoria": "MECÂNICA ILEGAL",
       "item": "TICKET DE CORRIDA ++",
       "parceria": 12000,
       "pista": 15000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 22
+      "ordem": 22,
+      "imagem": "ticket-de-corrida-plus-plus.png"
     },
     {
-      "categoria": "MECANICA",
+      "categoria": "MECÂNICA ILEGAL",
       "item": "NOTEBOOK",
       "parceria": 3500,
       "pista": 5500,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 23
+      "ordem": 23,
+      "imagem": "notebook.png"
     },
     {
-      "categoria": "MECANICA",
+      "categoria": "MECÂNICA ILEGAL",
       "item": "NITRO",
       "parceria": 5000,
-      "pista": 7000,
+      "pista": 6000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 24
+      "ordem": 24,
+      "imagem": "nitro.png"
     },
     {
-      "categoria": "MUNICAO",
+      "categoria": "MECÂNICA ILEGAL",
+      "item": "NITRO +",
+      "parceria": 12000,
+      "pista": 17000,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "",
+      "ordem": 25,
+      "imagem": "nitro-plus.png"
+    },
+    {
+      "categoria": "MECÂNICA ILEGAL",
+      "item": "AEROFÓLIO ESPORTIVO",
+      "parceria": 8000,
+      "pista": 11000,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "",
+      "ordem": 26,
+      "imagem": "aerofolio-esportivo.png"
+    },
+    {
+      "categoria": "MECÂNICA ILEGAL",
+      "item": "ESCAPAMENTO ESPORTIVO",
+      "parceria": 10000,
+      "pista": 14000,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "",
+      "ordem": 27,
+      "imagem": "escapamento-esportivo.png"
+    },
+    {
+      "categoria": "MUNIÇÃO",
       "item": "PISTOLA 100X/ ENERGETICO ZERO",
       "parceria": 8000,
       "pista": 11500,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 25
+      "ordem": 28,
+      "imagem": "municao-pistola-100x.png"
     },
     {
-      "categoria": "MUNICAO",
+      "categoria": "MUNIÇÃO",
       "item": "SMG 150X",
       "parceria": 11000,
       "pista": 14000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 26
+      "ordem": 29,
+      "imagem": "municao-smg-150x.png"
     },
     {
-      "categoria": "MUNICAO",
+      "categoria": "MUNIÇÃO",
       "item": "FUZIL 250X",
       "parceria": 16000,
       "pista": 19000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 27
+      "ordem": 30,
+      "imagem": "municao-fuzil-250x.png"
     },
     {
-      "categoria": "MUNICAO",
+      "categoria": "MUNIÇÃO",
       "item": "ESPINGARDA 200X",
       "parceria": 12000,
       "pista": 15000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 28
+      "ordem": 31,
+      "imagem": "municao-espingarda-200x.png"
     },
     {
-      "categoria": "MUNICAO",
+      "categoria": "MUNIÇÃO",
       "item": "CAIXA MUNICAO SNIPER",
       "parceria": 22000,
       "pista": 30000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 29
+      "ordem": 32,
+      "imagem": "caixa-municao-sniper.png"
     },
     {
-      "categoria": "MUNICAO",
+      "categoria": "MUNIÇÃO",
       "item": "C4",
       "parceria": 4000,
       "pista": 5500,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 30
+      "ordem": 33,
+      "imagem": "c4.png"
     },
     {
-      "categoria": "MUNICAO",
+      "categoria": "MUNIÇÃO",
       "item": "C4 ++",
       "parceria": 10000,
       "pista": 14000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 31
+      "ordem": 34,
+      "imagem": "c4-plus-plus.png"
     },
     {
-      "categoria": "MUNICAO",
+      "categoria": "MUNIÇÃO",
       "item": "C4 ADESIVA",
       "parceria": 12000,
       "pista": 18000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 32
+      "ordem": 35,
+      "imagem": "c4-adesiva.png"
     },
     {
-      "categoria": "MUNICAO",
+      "categoria": "MUNIÇÃO",
       "item": "CONTROLE DE EXPLOSIVO",
       "parceria": 8000,
       "pista": 12000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 33
+      "ordem": 36,
+      "imagem": "controle-de-explosivo.png"
     },
     {
-      "categoria": "MUNICAO",
+      "categoria": "MUNIÇÃO",
       "item": "CAIXA DE EXPLOSIVOS",
       "parceria": 45000,
       "pista": 60000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 34
+      "ordem": 37,
+      "imagem": "caixa-de-explosivos.png"
     },
     {
-      "categoria": "MUNICAO",
+      "categoria": "MUNIÇÃO",
       "item": "FLASH BANG E G. DE FUMACA",
       "parceria": 10000,
       "pista": 15000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 35
+      "ordem": 38,
+      "imagem": "flash-bang-granada-fumaca.png"
     },
     {
-      "categoria": "TECNOLOGIA / UTILITARIOS",
+      "categoria": "TECNOLOGIA / UTILITÁRIOS",
       "item": "TABLET HACK",
       "parceria": 35000,
       "pista": 50000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 47
+      "ordem": 50,
+      "imagem": "tablet-hack.png"
     },
     {
-      "categoria": "TECNOLOGIA / UTILITARIOS",
+      "categoria": "TECNOLOGIA / UTILITÁRIOS",
       "item": "TABLET HACK ++",
       "parceria": 75000,
       "pista": 100000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 48
+      "ordem": 51,
+      "imagem": "tablet-hack-plus-plus.png"
     },
     {
-      "categoria": "TECNOLOGIA / UTILITARIOS",
+      "categoria": "TECNOLOGIA / UTILITÁRIOS",
       "item": "MAPEAMENTO DE BAIRRO",
       "parceria": 15000,
       "pista": 22000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 49
+      "ordem": 52,
+      "imagem": "mapeamento-de-bairro.png"
     },
     {
-      "categoria": "TECNOLOGIA / UTILITARIOS",
+      "categoria": "TECNOLOGIA / UTILITÁRIOS",
       "item": "SUPER ALTO-FALANTE",
       "parceria": 15000,
       "pista": 25000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 50
+      "ordem": 53,
+      "imagem": "super-alto-falante.png"
     }
   ],
   "regras": {
