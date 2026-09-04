@@ -321,6 +321,7 @@ async function generateDiscordMarketImage(items,data){
     const ca=Number(a.ordem||9999),cb=Number(b.ordem||9999);
     return ca-cb;
   });
+
   const groups=[];
   for(const item of rows){
     let g=groups.find(x=>slugify(x.name)===slugify(item.categoria));
@@ -328,58 +329,112 @@ async function generateDiscordMarketImage(items,data){
     g.items.push(item);
   }
 
-  const W=1600, margin=72, headerH=300, catH=68, rowH=54, gap=22, footerH=120;
-  const H=headerH+groups.reduce((sum,g)=>sum+catH+g.items.length*rowH+gap,0)+footerH;
+  // Layout compacto estilo tabela oficial antiga: 3 colunas balanceadas.
+  const W=1600;
+  const margin=28;
+  const headerH=175;
+  const footerH=44;
+  const colGap=14;
+  const colW=(W-margin*2-colGap*2)/3;
+  const groupTitleH=38;
+  const tableHeadH=24;
+  const rowH=29;
+  const groupGap=12;
+  const padX=12;
+
+  const blockHeight=g=>groupTitleH+tableHeadH+(g.items.length*rowH)+groupGap;
+  const columns=[[],[],[]];
+  const heights=[0,0,0];
+
+  // Largest-first bin packing keeps the final image short and balanced.
+  [...groups]
+    .sort((a,b)=>blockHeight(b)-blockHeight(a))
+    .forEach(g=>{
+      const idx=heights.indexOf(Math.min(...heights));
+      columns[idx].push(g);
+      heights[idx]+=blockHeight(g);
+    });
+
+  const contentH=Math.max(...heights);
+  const H=Math.ceil(headerH+contentH+footerH+margin);
   const canvas=document.createElement('canvas');
   canvas.width=W;canvas.height=H;
   const ctx=canvas.getContext('2d');
 
   const bg=ctx.createLinearGradient(0,0,W,H);
-  bg.addColorStop(0,'#09070d');bg.addColorStop(.55,'#100b16');bg.addColorStop(1,'#07060a');
+  bg.addColorStop(0,'#08060c');
+  bg.addColorStop(.58,'#100818');
+  bg.addColorStop(1,'#07060a');
   ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-  ctx.fillStyle='rgba(141,53,255,.08)';ctx.beginPath();ctx.arc(W-180,120,420,0,Math.PI*2);ctx.fill();
-  ctx.fillStyle='rgba(244,236,37,.035)';ctx.beginPath();ctx.arc(100,H-180,360,0,Math.PI*2);ctx.fill();
+
+  // Subtle purple branding shapes, like the old official table.
+  ctx.fillStyle='rgba(111,0,185,.14)';
+  ctx.beginPath();ctx.arc(W-180,100,330,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(142,0,230,.07)';
+  ctx.fillRect(0,headerH-12,W,12);
 
   let logo=null;
   try{logo=await loadCanvasImage('./assets/high_logo.png');}catch(_){}
   if(logo){
-    const lh=160,lw=logo.width*(lh/logo.height);ctx.drawImage(logo,margin,44,lw,lh);
+    const lh=108,lw=logo.width*(lh/logo.height);
+    ctx.drawImage(logo,margin,20,lw,lh);
   }
-  ctx.fillStyle='#f4ec25';ctx.font='900 22px Arial, sans-serif';ctx.fillText('HIGH ROLEPLAY // ECONOMIA ILEGAL',margin,230);
-  ctx.fillStyle='#ffffff';ctx.font='900 66px Arial, sans-serif';ctx.fillText('MERCADO NEGRO',margin,292);
+
+  const titleX=logo?margin+185:margin;
+  ctx.fillStyle='#f4f0f6';ctx.font='900 38px Arial, sans-serif';
+  ctx.fillText('TABELA DE PREÇOS DO MERCADO NEGRO',titleX,59);
+  ctx.fillStyle='#8f2cff';ctx.font='900 32px Arial, sans-serif';ctx.fillText('HIGH',titleX,101);
+  ctx.fillStyle='#f4ec25';ctx.fillText('ROLEPLAY',titleX+91,101);
+
   ctx.textAlign='right';
-  ctx.fillStyle='#bba9c9';ctx.font='800 20px Arial, sans-serif';ctx.fillText(`${rows.length} ITENS ATIVOS`,W-margin,112);
-  ctx.fillStyle='#7f7588';ctx.font='700 16px Arial, sans-serif';
+  ctx.fillStyle='#d9cfdf';ctx.font='900 18px Arial, sans-serif';ctx.fillText(`${rows.length} ITENS ATIVOS`,W-margin,48);
   const d=new Date(data.meta?.atualizado_em);
-  ctx.fillText(isNaN(d)?'ATUALIZAÇÃO NÃO INFORMADA':`ATUALIZADO EM ${d.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}).toUpperCase()}`,W-margin,145);
-  ctx.fillText('SEASON 2 • ATO 2',W-margin,178);ctx.textAlign='left';
+  ctx.fillStyle='#9a8fa4';ctx.font='800 14px Arial, sans-serif';
+  ctx.fillText(isNaN(d)?'ATUALIZAÇÃO NÃO INFORMADA':`ATUALIZADA EM ${d.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}).toUpperCase()}`,W-margin,76);
+  ctx.fillText('SEASON 2 • ATO 2',W-margin,102);
+  ctx.textAlign='left';
 
-  let y=headerH;
-  const colItem=margin+24,colPar=W-520,colPista=W-270;
-  for(const group of groups){
-    roundedRect(ctx,margin,y,W-margin*2,catH,18);
-    const cg=ctx.createLinearGradient(margin,y,W-margin,y);cg.addColorStop(0,'#3a1458');cg.addColorStop(1,'#17101f');
-    ctx.fillStyle=cg;ctx.fill();ctx.strokeStyle='rgba(183,123,255,.35)';ctx.lineWidth=1;ctx.stroke();
-    ctx.fillStyle='#f4ec25';ctx.font='900 23px Arial, sans-serif';ctx.fillText(group.name.toUpperCase(),margin+24,y+42);
-    ctx.textAlign='right';ctx.fillStyle='#c5afda';ctx.font='800 16px Arial, sans-serif';ctx.fillText(`${group.items.length} ITENS`,W-margin-24,y+41);ctx.textAlign='left';
-    y+=catH;
+  function drawGroup(group,x,y){
+    roundedRect(ctx,x,y,colW,groupTitleH,4);
+    ctx.fillStyle='#351448';ctx.fill();
+    ctx.fillStyle='#6f00a8';ctx.fillRect(x,y,6,groupTitleH);
+    ctx.fillStyle='#f4ec25';ctx.font='900 17px Arial, sans-serif';
+    drawTextFit(ctx,String(group.name||'').toUpperCase(),x+14,y+25,colW-90,17,'900');
+    ctx.textAlign='right';ctx.fillStyle='#d2c7d7';ctx.font='800 12px Arial, sans-serif';ctx.fillText(`${group.items.length} ITENS`,x+colW-12,y+24);ctx.textAlign='left';
+    y+=groupTitleH;
 
-    ctx.fillStyle='#756a7d';ctx.font='800 13px Arial, sans-serif';ctx.fillText('ITEM',colItem,y+22);ctx.fillText('PARCERIA',colPar,y+22);ctx.fillText('PISTA',colPista,y+22);
-    y+=34;
-    for(let idx=0;idx<group.items.length;idx++){
-      const i=group.items[idx];
-      ctx.fillStyle=idx%2===0?'rgba(255,255,255,.026)':'rgba(141,53,255,.025)';ctx.fillRect(margin,y,W-margin*2,rowH);
-      ctx.strokeStyle='rgba(128,94,151,.14)';ctx.beginPath();ctx.moveTo(margin,y+rowH);ctx.lineTo(W-margin,y+rowH);ctx.stroke();
-      ctx.fillStyle='#f7f3fa';drawTextFit(ctx,String(i.item||'').toUpperCase(),colItem,y+34,colPar-colItem-60,21,'800');
-      ctx.fillStyle='#d7c7e3';ctx.font='800 20px Arial, sans-serif';ctx.fillText(money(i.parceria),colPar,y+34);
-      ctx.fillStyle='#f4ec25';ctx.font='900 20px Arial, sans-serif';ctx.fillText(money(i.pista),colPista,y+34);
+    const itemX=x+padX;
+    const pistaX=x+colW-14;
+    const parceriaX=x+colW-132;
+    ctx.fillStyle='#17111d';ctx.fillRect(x,y,colW,tableHeadH);
+    ctx.fillStyle='#93879b';ctx.font='800 10px Arial, sans-serif';
+    ctx.fillText('ITEM',itemX,y+16);
+    ctx.textAlign='right';ctx.fillText('PARCERIA',parceriaX,y+16);ctx.fillText('PISTA',pistaX,y+16);ctx.textAlign='left';
+    y+=tableHeadH;
+
+    group.items.forEach((i,idx)=>{
+      ctx.fillStyle=idx%2===0?'#0f0d12':'#141019';ctx.fillRect(x,y,colW,rowH);
+      ctx.strokeStyle='rgba(132,109,145,.15)';ctx.beginPath();ctx.moveTo(x,y+rowH);ctx.lineTo(x+colW,y+rowH);ctx.stroke();
+      ctx.fillStyle='#e9e4ed';
+      drawTextFit(ctx,String(i.item||'').toUpperCase(),itemX,y+19,parceriaX-itemX-18,13,'700');
+      ctx.textAlign='right';ctx.fillStyle='#d8d0de';ctx.font='800 12px Arial, sans-serif';ctx.fillText(money(i.parceria),parceriaX,y+19);
+      ctx.fillStyle='#f4ec25';ctx.font='900 12px Arial, sans-serif';ctx.fillText(money(i.pista),pistaX,y+19);ctx.textAlign='left';
       y+=rowH;
-    }
-    y+=gap;
+    });
+    return y+groupGap;
   }
 
-  ctx.fillStyle='#776e7f';ctx.font='700 15px Arial, sans-serif';ctx.fillText('HIGH ROLEPLAY • MERCADO NEGRO • ECONOMIA FICTÍCIA / FIVEM',margin,H-56);
-  ctx.textAlign='right';ctx.fillStyle='#4f4657';ctx.fillText('Gerado automaticamente pelo catálogo oficial',W-margin,H-56);ctx.textAlign='left';
+  const startY=headerH;
+  columns.forEach((col,ci)=>{
+    let y=startY;
+    const x=margin+ci*(colW+colGap);
+    col.forEach(g=>{y=drawGroup(g,x,y);});
+  });
+
+  ctx.fillStyle='#0c0910';ctx.fillRect(0,H-footerH,W,footerH);
+  ctx.fillStyle='#f4ec25';ctx.font='800 10px Arial, sans-serif';
+  ctx.fillText('HIGH ROLEPLAY • PREÇOS REFERENTES EXCLUSIVAMENTE À ECONOMIA FICTÍCIA DO SERVIDOR / FIVEM',margin,H-17);
+  ctx.textAlign='right';ctx.fillStyle='#6d6373';ctx.fillText('GERADO AUTOMATICAMENTE PELO CATÁLOGO OFICIAL',W-margin,H-17);ctx.textAlign='left';
 
   const blob=await canvasBlob(canvas);
   const url=URL.createObjectURL(blob);
