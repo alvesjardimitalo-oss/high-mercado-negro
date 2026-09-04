@@ -109,3 +109,110 @@ async function initCategory(){
   const rules=document.querySelector('#rules');
   if(rules&&slugify(cat)==='lavagem'&&data.regras?.lavagem) rules.innerHTML=data.regras.lavagem.map(r=>`<div class="rule"><strong>${esc(r.titulo)}</strong><span>${esc(r.texto)}</span></div>`).join('');
 }
+
+
+function categoryChip(c, active=false){
+  return `<button type="button" class="filter-chip${active?' active':''}" data-category="${esc(c)}">${esc(c)}</button>`;
+}
+
+function tableImageMarkup(i){
+  const file=String(i.imagem||'').trim();
+  if(!file) return `<div class="table-thumb table-thumb-empty"><span>${iconFor(i.categoria)}</span></div>`;
+  return `<div class="table-thumb"><img src="${ITEM_IMAGE_BASE}${encodeURIComponent(file)}" alt="${esc(i.item)}" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('table-thumb-empty');this.parentElement.innerHTML='<span>${iconFor(i.categoria)}</span>'"></div>`;
+}
+
+async function initGlobalTable(){
+  const data=await loadCatalog();
+  updateMeta(data);
+  const active=(data.itens||[]).filter(isActive);
+
+  const search=document.querySelector('#tableSearch');
+  const body=document.querySelector('#globalTableBody');
+  const filters=document.querySelector('#tableFilters');
+  const count=document.querySelector('#tableVisibleCount');
+  const sortButtons=[...document.querySelectorAll('[data-sort]')];
+  const reset=document.querySelector('#tableReset');
+  const mobileList=document.querySelector('#globalTableMobile');
+
+  let selected='TODOS';
+  let query='';
+  let sortKey='ordem';
+  let sortDir='asc';
+
+  const categories=[...new Set(active.map(i=>i.categoria).filter(Boolean))];
+  if(filters){
+    filters.innerHTML=categoryChip('TODOS',true)+categories.map(c=>categoryChip(c)).join('');
+    filters.addEventListener('click',e=>{
+      const btn=e.target.closest('[data-category]');
+      if(!btn) return;
+      selected=btn.dataset.category;
+      filters.querySelectorAll('.filter-chip').forEach(b=>b.classList.toggle('active',b===btn));
+      render();
+    });
+  }
+
+  const compare=(a,b,key)=>{
+    if(key==='parceria'||key==='pista'||key==='ordem') return Number(a[key]||0)-Number(b[key]||0);
+    return normalizeText(a[key]||'').localeCompare(normalizeText(b[key]||''),'pt-BR');
+  };
+
+  const getRows=()=>{
+    const term=normalizeText(query);
+    let rows=active.filter(i=>selected==='TODOS'||slugify(i.categoria)===slugify(selected));
+    if(term) rows=rows.filter(i=>normalizeText(`${i.item} ${i.categoria} ${i.observacao||''}`).includes(term));
+    rows=[...rows].sort((a,b)=>compare(a,b,sortKey)*(sortDir==='asc'?1:-1));
+    return rows;
+  };
+
+  const tableRow=(i)=>{
+    const diff=Math.max(0,Number(i.pista||0)-Number(i.parceria||0));
+    return `<tr>
+      <td class="col-img">${tableImageMarkup(i)}</td>
+      <td class="col-item"><div class="table-item-name">${esc(i.item)}</div>${i.observacao?`<div class="table-note">${esc(i.observacao)}</div>`:''}</td>
+      <td><a class="category-link" href="categoria.html?c=${slugify(i.categoria)}">${esc(i.categoria)}</a></td>
+      <td class="money-cell partnership">${money(i.parceria)}</td>
+      <td class="money-cell track"><strong>${money(i.pista)}</strong>${diff?`<small>+ ${money(diff)} vs parceria</small>`:''}</td>
+    </tr>`;
+  };
+
+  const mobileCard=(i)=>{
+    const diff=Math.max(0,Number(i.pista||0)-Number(i.parceria||0));
+    return `<article class="table-mobile-card">
+      ${tableImageMarkup(i)}
+      <div class="table-mobile-copy">
+        <a class="table-mobile-category" href="categoria.html?c=${slugify(i.categoria)}">${esc(i.categoria)}</a>
+        <h3>${esc(i.item)}</h3>
+        <div class="table-mobile-prices"><div><span>Parceria</span><strong>${money(i.parceria)}</strong></div><div><span>Pista</span><strong>${money(i.pista)}</strong>${diff?`<small>+ ${money(diff)}</small>`:''}</div></div>
+      </div>
+    </article>`;
+  };
+
+  const render=()=>{
+    const rows=getRows();
+    if(count) count.textContent=`${rows.length} ${rows.length===1?'ITEM':'ITENS'}`;
+    if(body) body.innerHTML=rows.length?rows.map(tableRow).join(''):`<tr><td colspan="5"><div class="empty">Nenhum item encontrado.</div></td></tr>`;
+    if(mobileList) mobileList.innerHTML=rows.length?rows.map(mobileCard).join(''):`<div class="empty">Nenhum item encontrado.</div>`;
+    sortButtons.forEach(btn=>{
+      const activeSort=btn.dataset.sort===sortKey;
+      btn.classList.toggle('active',activeSort);
+      const mark=btn.querySelector('.sort-mark');
+      if(mark) mark.textContent=activeSort?(sortDir==='asc'?'↑':'↓'):'↕';
+    });
+  };
+
+  search?.addEventListener('input',e=>{query=e.target.value;render();});
+  sortButtons.forEach(btn=>btn.addEventListener('click',()=>{
+    const key=btn.dataset.sort;
+    if(sortKey===key) sortDir=sortDir==='asc'?'desc':'asc'; else {sortKey=key;sortDir='asc';}
+    render();
+  }));
+  reset?.addEventListener('click',()=>{
+    selected='TODOS';query='';sortKey='ordem';sortDir='asc';
+    if(search) search.value='';
+    filters?.querySelectorAll('.filter-chip').forEach(b=>b.classList.toggle('active',b.dataset.category==='TODOS'));
+    render();
+  });
+
+  document.querySelector('[data-category-count]')?.replaceChildren(document.createTextNode(String(categories.length)));
+  render();
+}
