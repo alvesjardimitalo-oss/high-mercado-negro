@@ -1,6 +1,6 @@
 const CATALOG_URL = './data/catalogo.json';
 const ITEM_IMAGE_BASE = './assets/itens/';
-const RULE_IMAGE_BASE = './assets/itens';
+const RULE_IMAGE_BASES = ['./assets/','./assets/itens/'];
 
 const icons = {
   'armas':'🔫','municao':'💥','tecnologia-utilitarios':'💻','drogas-rotas':'🧪',
@@ -28,6 +28,29 @@ const categoryVisuals = {
   'mecanica': {image:'Nitro+.png', image2:'Aerofolio_Esportivo.png', desc:'Performance, preparação e equipamentos especiais.'},
   'mecanica-ilegal': {image:'Nitro+.png', image2:'Aerofolio_Esportivo.png', desc:'Performance, preparação e equipamentos especiais.'}
 };
+
+
+function ruleImageUrls(file){
+  const safe=encodeURIComponent(String(file||'').trim());
+  return RULE_IMAGE_BASES.map(base=>`${base}${safe}`);
+}
+
+function ruleImageMarkup(r){
+  const file=String(r?.imagem||'').trim();
+  if(!file) return '';
+  const urls=ruleImageUrls(file);
+  const primary=urls[0]||'';
+  const fallback=urls[1]||'';
+  return `<div class="rule-image"><img src="${primary}" data-fallback="${fallback}" alt="${esc(r.titulo||r.tipo)}" loading="lazy" onerror="if(this.dataset.fallback&&!this.dataset.fallbackTried){this.dataset.fallbackTried='1';this.src=this.dataset.fallback}else{this.parentElement.style.display='none'}"></div>`;
+}
+
+async function loadRuleCanvasImage(file){
+  const urls=ruleImageUrls(file);
+  for(const url of urls){
+    try{return await loadCanvasImage(url);}catch(_){ }
+  }
+  return null;
+}
 
 function categoryVisual(c){ return categoryVisuals[slugify(c)] || {image:'',desc:'Itens e valores disponíveis nesta categoria.'}; }
 function categoryArt(c){
@@ -145,8 +168,7 @@ async function initCategory(){
       const tituloGrupo=grupo==='SECAGEM'?'SECAGEM DE DINHEIRO':grupo==='LAVAGEM'?'LAVAGEM DE DINHEIRO':grupo;
       const rows=data.regras.lavagem.filter(r=>String(r.grupo||'REGRAS').trim().toUpperCase()===grupo);
       return `<section class="rule-group"><div class="rule-group-title">${esc(tituloGrupo)}</div><div class="rule-group-grid">${rows.map(r=>{
-        const file=String(r.imagem||'').trim();
-        const img=file?`<div class="rule-image"><img src="${RULE_IMAGE_BASE}${encodeURIComponent(file)}" alt="${esc(r.titulo||r.tipo)}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`:'';
+        const img=ruleImageMarkup(r);
         return `<article class="rule rule-rich">${img}<div class="rule-copy"><strong>${esc(r.titulo||r.tipo)}</strong><span>${esc(r.texto)}</span><small>${esc(grupo)}</small></div></article>`;
       }).join('')}</div></section>`;
     }).join('');
@@ -369,7 +391,7 @@ async function generateDiscordMarketImage(items,data){
   await Promise.all(lavagemRules.map(async r=>{
     const file=String(r.imagem||'').trim();
     if(!file||ruleImageMap[file]) return;
-    try{ ruleImageMap[file]=await loadCanvasImage(`${RULE_IMAGE_BASE}${encodeURIComponent(file)}`); }catch(_){ ruleImageMap[file]=null; }
+    ruleImageMap[file]=await loadRuleCanvasImage(file);
   }));
 
   const blockHeight=g=>groupTitleH+tableHeadH+(g.items.length*rowH)+(rulesForGroup(g).length?(ruleHeadH+rulesForGroup(g).length*ruleRowH+8):0)+groupGap;
