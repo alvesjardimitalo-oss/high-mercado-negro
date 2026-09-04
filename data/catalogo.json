@@ -2,7 +2,7 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-09-04T16:58:17-03:00",
+    "atualizado_em": "2026-09-04T17:04:02-03:00",
     "moeda": "BRL",
     "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM."
   },
@@ -766,7 +766,7 @@
         "lavagem": 20,
         "cliente": 50,
         "ativo": true,
-        "imagem": "dollars.png",
+        "imagem": "dollar.png",
         "texto": "30% da máquina | 20% da lavagem | 50% do cliente"
       },
       {
