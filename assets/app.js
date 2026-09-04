@@ -14,6 +14,28 @@ const esc = s => String(s ?? '').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;',
 const isActive = i => normalizeText(i?.status || 'ativo') !== 'inativo';
 const iconFor = c => icons[slugify(c)] || '◆';
 
+const categoryVisuals = {
+  'armas': {image:'t54.png', image2:'ak102.png', desc:'Pistolas, SMGs, fuzis e armamento do mercado ilegal.'},
+  'municao': {image:'caixa_m_rifle.png', image2:'sniperammo.png', desc:'Munições, explosivos e acessórios para seu armamento.'},
+  'tecnologia-utilitarios': {image:'tablethack.png', image2:'notebook.png', desc:'Hackeamento, rastreadores e equipamentos eletrônicos.'},
+  'drogas-rotas': {image:'packdrug1.png', image2:'mapabairro1.png', desc:'Drogas, insumos e itens ligados às rotas ilegais.'},
+  'lavagem': {image:'pendrive5.png', image2:'alcoolemgel.png', desc:'Ferramentas e itens utilizados na lavagem de dinheiro.'},
+  'desmanche': {image:'blocksignal.png', image2:'lockpickplus.png', desc:'Peças, bloqueadores e itens para desmanche de veículos.'},
+  'falsificacao': {image:'cartaoclonado2.png', image2:'dollarfake.png', desc:'Documentos, cartões e itens de falsificação.'},
+  'hospital-ilegal': {image:'adrenalineclandestineplus.png', image2:'infectedbandage.png', desc:'Itens médicos de uso clandestino e suporte ilegal.'},
+  'contrabando': {image:'attachbox.png', desc:'Itens raros, cargas e mercadorias de contrabando.'},
+  'mecanica': {image:'Nitro+.png', image2:'Aerofolio_Esportivo.png', desc:'Performance, preparação e equipamentos especiais.'},
+  'mecanica-ilegal': {image:'Nitro+.png', image2:'Aerofolio_Esportivo.png', desc:'Performance, preparação e equipamentos especiais.'}
+};
+
+function categoryVisual(c){ return categoryVisuals[slugify(c)] || {image:'',desc:'Itens e valores disponíveis nesta categoria.'}; }
+function categoryArt(c){
+  const v=categoryVisual(c);
+  const a=v.image?`<img class="category-product category-product-a" src="${ITEM_IMAGE_BASE}${encodeURIComponent(v.image)}" alt="" loading="lazy" onerror="this.style.display='none'">`:'';
+  const b=v.image2?`<img class="category-product category-product-b" src="${ITEM_IMAGE_BASE}${encodeURIComponent(v.image2)}" alt="" loading="lazy" onerror="this.style.display='none'">`:'';
+  return `<div class="category-art"><div class="category-art-grid"></div>${a}${b}<span class="category-art-icon">${iconFor(c)}</span></div>`;
+}
+
 async function loadCatalog(){
   const r=await fetch(`${CATALOG_URL}?v=${Date.now()}`);
   if(!r.ok) throw new Error('Não foi possível carregar o catálogo.');
@@ -69,8 +91,17 @@ async function initHome(){
     const cats=[...new Set(active.map(i=>i.categoria).filter(Boolean))];
     grid.innerHTML=cats.map(c=>{
       const count=active.filter(i=>slugify(i.categoria)===slugify(c)).length;
-      return `<a class="category-card" href="categoria.html?c=${slugify(c)}"><span class="category-count">${count} ITENS</span><div class="category-icon">${iconFor(c)}</div><h3>${esc(c)}</h3><p>Abrir tabela de valores e consulta operacional.</p></a>`;
+      const visual=categoryVisual(c);
+      return `<a class="category-card category-card-visual cat-${slugify(c)}" href="categoria.html?c=${slugify(c)}">
+        ${categoryArt(c)}
+        <div class="category-card-content">
+          <div class="category-card-heading"><span class="category-symbol">${iconFor(c)}</span><h3>${esc(c)}</h3><span class="category-count">${count} ITENS</span></div>
+          <p>${esc(visual.desc)}</p>
+          <span class="category-open">VER ITENS <b>→</b></span>
+        </div>
+      </a>`;
     }).join('');
+    document.querySelectorAll('[data-category-count-home]').forEach(el=>el.textContent=cats.length);
   }
 
   if(featured){
@@ -213,6 +244,145 @@ async function initGlobalTable(){
     render();
   });
 
+  const discordBtn=document.querySelector('#discordImageButton');
+  discordBtn?.addEventListener('click',async()=>{
+    const oldText=discordBtn.textContent;
+    discordBtn.disabled=true;
+    discordBtn.textContent='GERANDO IMAGEM...';
+    try{
+      await generateDiscordMarketImage(active,data);
+    }catch(err){
+      console.error(err);
+      alert('Não foi possível gerar a imagem: '+err.message);
+    }finally{
+      discordBtn.disabled=false;
+      discordBtn.textContent=oldText;
+    }
+  });
+
   document.querySelector('[data-category-count]')?.replaceChildren(document.createTextNode(String(categories.length)));
   render();
+}
+
+function roundedRect(ctx,x,y,w,h,r){
+  const rr=Math.min(r,w/2,h/2);
+  ctx.beginPath();
+  ctx.moveTo(x+rr,y);
+  ctx.arcTo(x+w,y,x+w,y+h,rr);
+  ctx.arcTo(x+w,y+h,x,y+h,rr);
+  ctx.arcTo(x,y+h,x,y,rr);
+  ctx.arcTo(x,y,x+w,y,rr);
+  ctx.closePath();
+}
+
+function drawTextFit(ctx,text,x,y,maxWidth,fontSize,fontWeight='800'){
+  let size=fontSize;
+  do{ctx.font=`${fontWeight} ${size}px Arial, sans-serif`;size-=1;}while(size>14&&ctx.measureText(text).width>maxWidth);
+  ctx.fillText(text,x,y);
+}
+
+function loadCanvasImage(src){
+  return new Promise((resolve,reject)=>{
+    const img=new Image();
+    img.onload=()=>resolve(img);
+    img.onerror=reject;
+    img.src=src;
+  });
+}
+
+function canvasBlob(canvas){
+  return new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('Falha ao criar PNG.')),'image/png'));
+}
+
+function showDiscordImagePreview(url,blob,fileName){
+  document.querySelector('#discordImageModal')?.remove();
+  const modal=document.createElement('div');
+  modal.id='discordImageModal';
+  modal.className='discord-image-modal';
+  modal.innerHTML=`<div class="discord-image-dialog"><div class="discord-image-head"><div><span>IMAGEM PARA DISCORD</span><strong>Tabela gerada com sucesso</strong></div><button type="button" data-close>×</button></div><div class="discord-image-preview"><img src="${url}" alt="Tabela Mercado Negro High"></div><div class="discord-image-actions"><button type="button" data-copy>COPIAR IMAGEM</button><a href="${url}" download="${fileName}">BAIXAR PNG</a></div><p>Use “Copiar imagem” e cole direto no Discord, ou baixe o PNG.</p></div>`;
+  document.body.appendChild(modal);
+  const close=()=>{URL.revokeObjectURL(url);modal.remove();};
+  modal.querySelector('[data-close]')?.addEventListener('click',close);
+  modal.addEventListener('click',e=>{if(e.target===modal)close();});
+  modal.querySelector('[data-copy]')?.addEventListener('click',async e=>{
+    const btn=e.currentTarget;
+    try{
+      if(!navigator.clipboard||typeof ClipboardItem==='undefined') throw new Error('Navegador sem suporte a copiar PNG.');
+      await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);
+      const t=btn.textContent;btn.textContent='COPIADO ✓';setTimeout(()=>btn.textContent=t,1800);
+    }catch(err){
+      alert('Seu navegador não permitiu copiar a imagem. Use BAIXAR PNG.');
+    }
+  });
+}
+
+async function generateDiscordMarketImage(items,data){
+  const rows=[...items].sort((a,b)=>{
+    const ca=Number(a.ordem||9999),cb=Number(b.ordem||9999);
+    return ca-cb;
+  });
+  const groups=[];
+  for(const item of rows){
+    let g=groups.find(x=>slugify(x.name)===slugify(item.categoria));
+    if(!g){g={name:item.categoria,items:[]};groups.push(g);}
+    g.items.push(item);
+  }
+
+  const W=1600, margin=72, headerH=300, catH=68, rowH=54, gap=22, footerH=120;
+  const H=headerH+groups.reduce((sum,g)=>sum+catH+g.items.length*rowH+gap,0)+footerH;
+  const canvas=document.createElement('canvas');
+  canvas.width=W;canvas.height=H;
+  const ctx=canvas.getContext('2d');
+
+  const bg=ctx.createLinearGradient(0,0,W,H);
+  bg.addColorStop(0,'#09070d');bg.addColorStop(.55,'#100b16');bg.addColorStop(1,'#07060a');
+  ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+  ctx.fillStyle='rgba(141,53,255,.08)';ctx.beginPath();ctx.arc(W-180,120,420,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(244,236,37,.035)';ctx.beginPath();ctx.arc(100,H-180,360,0,Math.PI*2);ctx.fill();
+
+  let logo=null;
+  try{logo=await loadCanvasImage('./assets/high_logo.png');}catch(_){}
+  if(logo){
+    const lh=160,lw=logo.width*(lh/logo.height);ctx.drawImage(logo,margin,44,lw,lh);
+  }
+  ctx.fillStyle='#f4ec25';ctx.font='900 22px Arial, sans-serif';ctx.fillText('HIGH ROLEPLAY // ECONOMIA ILEGAL',margin,230);
+  ctx.fillStyle='#ffffff';ctx.font='900 66px Arial, sans-serif';ctx.fillText('MERCADO NEGRO',margin,292);
+  ctx.textAlign='right';
+  ctx.fillStyle='#bba9c9';ctx.font='800 20px Arial, sans-serif';ctx.fillText(`${rows.length} ITENS ATIVOS`,W-margin,112);
+  ctx.fillStyle='#7f7588';ctx.font='700 16px Arial, sans-serif';
+  const d=new Date(data.meta?.atualizado_em);
+  ctx.fillText(isNaN(d)?'ATUALIZAÇÃO NÃO INFORMADA':`ATUALIZADO EM ${d.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}).toUpperCase()}`,W-margin,145);
+  ctx.fillText('SEASON 2 • ATO 2',W-margin,178);ctx.textAlign='left';
+
+  let y=headerH;
+  const colItem=margin+24,colPar=W-520,colPista=W-270;
+  for(const group of groups){
+    roundedRect(ctx,margin,y,W-margin*2,catH,18);
+    const cg=ctx.createLinearGradient(margin,y,W-margin,y);cg.addColorStop(0,'#3a1458');cg.addColorStop(1,'#17101f');
+    ctx.fillStyle=cg;ctx.fill();ctx.strokeStyle='rgba(183,123,255,.35)';ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle='#f4ec25';ctx.font='900 23px Arial, sans-serif';ctx.fillText(group.name.toUpperCase(),margin+24,y+42);
+    ctx.textAlign='right';ctx.fillStyle='#c5afda';ctx.font='800 16px Arial, sans-serif';ctx.fillText(`${group.items.length} ITENS`,W-margin-24,y+41);ctx.textAlign='left';
+    y+=catH;
+
+    ctx.fillStyle='#756a7d';ctx.font='800 13px Arial, sans-serif';ctx.fillText('ITEM',colItem,y+22);ctx.fillText('PARCERIA',colPar,y+22);ctx.fillText('PISTA',colPista,y+22);
+    y+=34;
+    for(let idx=0;idx<group.items.length;idx++){
+      const i=group.items[idx];
+      ctx.fillStyle=idx%2===0?'rgba(255,255,255,.026)':'rgba(141,53,255,.025)';ctx.fillRect(margin,y,W-margin*2,rowH);
+      ctx.strokeStyle='rgba(128,94,151,.14)';ctx.beginPath();ctx.moveTo(margin,y+rowH);ctx.lineTo(W-margin,y+rowH);ctx.stroke();
+      ctx.fillStyle='#f7f3fa';drawTextFit(ctx,String(i.item||'').toUpperCase(),colItem,y+34,colPar-colItem-60,21,'800');
+      ctx.fillStyle='#d7c7e3';ctx.font='800 20px Arial, sans-serif';ctx.fillText(money(i.parceria),colPar,y+34);
+      ctx.fillStyle='#f4ec25';ctx.font='900 20px Arial, sans-serif';ctx.fillText(money(i.pista),colPista,y+34);
+      y+=rowH;
+    }
+    y+=gap;
+  }
+
+  ctx.fillStyle='#776e7f';ctx.font='700 15px Arial, sans-serif';ctx.fillText('HIGH ROLEPLAY • MERCADO NEGRO • ECONOMIA FICTÍCIA / FIVEM',margin,H-56);
+  ctx.textAlign='right';ctx.fillStyle='#4f4657';ctx.fillText('Gerado automaticamente pelo catálogo oficial',W-margin,H-56);ctx.textAlign='left';
+
+  const blob=await canvasBlob(canvas);
+  const url=URL.createObjectURL(blob);
+  const fileName=`mercado-negro-high-${new Date().toISOString().slice(0,10)}.png`;
+  showDiscordImagePreview(url,blob,fileName);
 }
