@@ -2,7 +2,7 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-09-04T16:16:35-03:00",
+    "atualizado_em": "2026-09-04T16:58:17-03:00",
     "moeda": "BRL",
     "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM."
   },
@@ -748,19 +748,36 @@
   "regras": {
     "lavagem": [
       {
-        "tipo": "DINHEIRO LIMPO",
-        "titulo": "Secagem de dinheiro limpo",
+        "grupo": "LAVAGEM",
+        "tipo": "DINHEIRO SUJO",
+        "titulo": "Lavagem de dinheiro sujo",
+        "maquina": 10,
+        "lavagem": 20,
+        "cliente": 70,
+        "ativo": true,
+        "imagem": "dirtydollar.png",
+        "texto": "10% da máquina | 20% da lavagem | 70% do cliente"
+      },
+      {
+        "grupo": "SECAGEM",
+        "tipo": "DINHEIRO LIMPO MOLHADO",
+        "titulo": "Secagem de dinheiro limpo molhado",
         "maquina": 30,
         "lavagem": 20,
         "cliente": 50,
+        "ativo": true,
+        "imagem": "dollars.png",
         "texto": "30% da máquina | 20% da lavagem | 50% do cliente"
       },
       {
-        "tipo": "DINHEIRO SUJO",
-        "titulo": "Secagem de dinheiro sujo",
+        "grupo": "SECAGEM",
+        "tipo": "DINHEIRO SUJO MOLHADO",
+        "titulo": "Secagem de dinheiro sujo molhado",
         "maquina": 15,
         "lavagem": 10,
         "cliente": 75,
+        "ativo": true,
+        "imagem": "dirtywetdollar.png",
         "texto": "15% da máquina | 10% da lavagem | 75% do cliente"
       }
     ]
