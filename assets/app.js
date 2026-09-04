@@ -1,11 +1,114 @@
-const CATALOG_URL = './data/catalogo.json';
-const icons = {'Armas':'🔫','Munição':'💥','Tecnologia / Utilitários':'💻','Drogas / Rotas':'🧪','Desmanche':'🔧','Lavagem':'💸','Falsificação':'💳','Hospital Ilegal':'💉','Mecânica':'🏁','Contrabando':'📦'};
-const slugs = {'armas':'Armas','municao':'Munição','tecnologia':'Tecnologia / Utilitários','drogas':'Drogas / Rotas','desmanche':'Desmanche','lavagem':'Lavagem','falsificacao':'Falsificação','hospital':'Hospital Ilegal','mecanica':'Mecânica','contrabando':'Contrabando'};
-const slugify = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-const money = n => new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}).format(Number(n||0));
-const esc = s => String(s ?? '').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
-async function loadCatalog(){const r=await fetch(`${CATALOG_URL}?v=${Date.now()}`);if(!r.ok)throw new Error('Não foi possível carregar o catálogo.');return r.json()}
-function updateMeta(data){document.querySelectorAll('[data-updated]').forEach(el=>{const d=new Date(data.meta?.atualizado_em);el.textContent=isNaN(d)?'Atualização não informada':`Atualizado em ${d.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'})}`});document.querySelectorAll('[data-total]').forEach(el=>el.textContent=data.itens.filter(i=>i.status!=='inativo').length)}
-function itemCard(i){return `<article class="item-card" data-highlight="${!!i.destaque}"><span class="tag">${i.destaque?'DESTAQUE':esc(i.status||'ATIVO').toUpperCase()}</span><h3>${esc(i.item)}</h3><div class="prices"><div class="price"><span>Parceria</span><strong>${money(i.parceria)}</strong></div><div class="price pista"><span>Pista</span><strong>${money(i.pista)}</strong></div></div>${i.observacao?`<div class="notice">⚠ ${esc(i.observacao)}</div>`:''}</article>`}
-async function initHome(){const data=await loadCatalog();updateMeta(data);const grid=document.querySelector('#categoryGrid');const active=data.itens.filter(i=>i.status!=='inativo');const cats=[...new Set(active.map(i=>i.categoria))];grid.innerHTML=cats.map(c=>{const count=active.filter(i=>i.categoria===c).length;return `<a class="category-card" href="categoria.html?c=${slugify(c)}"><span class="category-count">${count} ITENS</span><div class="category-icon">${icons[c]||'◆'}</div><h3>${esc(c)}</h3><p>Abrir tabela de valores e consulta operacional.</p></a>`}).join('');const featured=document.querySelector('#featured');const render=q=>{const term=q.trim().toLowerCase();const items=active.filter(i=>i.destaque||term).filter(i=>!term||`${i.item} ${i.categoria}`.toLowerCase().includes(term)).slice(0,12);featured.innerHTML=items.length?items.map(itemCard).join(''):'<div class="empty">Nenhum item encontrado.</div>'};render('');document.querySelector('#globalSearch').addEventListener('input',e=>render(e.target.value));}
-async function initCategory(){const data=await loadCatalog();updateMeta(data);const p=new URLSearchParams(location.search);const raw=p.get('c')||'';const active=data.itens.filter(i=>String(i.status||'ativo').toLowerCase()!=='inativo');const matched=active.find(i=>slugify(i.categoria)===raw);const cat=matched?.categoria||active[0]?.categoria||'';const items=active.filter(i=>slugify(i.categoria)===slugify(cat));const displayCat=Object.entries(slugs).find(([k,v])=>k===raw||slugify(v)===raw)?.[1]||cat;document.title=`${displayCat} • Mercado Negro High`;document.querySelector('#catIcon').textContent=icons[displayCat]||icons[cat]||'◆';document.querySelector('#catName').textContent=displayCat;document.querySelector('#catCount').textContent=`${items.length} ITENS ATIVOS`;const list=document.querySelector('#itemList');const render=q=>{const term=q.trim().toLowerCase();const filtered=items.filter(i=>!term||`${i.item} ${i.observacao||''}`.toLowerCase().includes(term));list.innerHTML=filtered.length?filtered.map(itemCard).join(''):'<div class="empty">Nenhum item encontrado nesta categoria.</div>'};render('');document.querySelector('#categorySearch').addEventListener('input',e=>render(e.target.value));if(slugify(cat)==='lavagem'&&data.regras?.lavagem){document.querySelector('#rules').innerHTML=data.regras.lavagem.map(r=>`<div class="rule"><strong>${esc(r.titulo)}</strong><span>${esc(r.texto)}</span></div>`).join('')}}
+async function initHome() {
+  const data = await loadCatalog();
+  updateMeta(data);
+
+  const grid = document.querySelector('#categoryGrid');
+  const search = document.querySelector('#globalSearch');
+  const featured = document.querySelector('#featured');
+
+  const active = data.itens.filter(
+    i => String(i.status || 'ativo').toLowerCase() !== 'inativo'
+  );
+
+  // Categorias
+  const cats = [...new Set(active.map(i => i.categoria))];
+
+  grid.innerHTML = cats.map(c => {
+    const count = active.filter(i => i.categoria === c).length;
+
+    return `
+      <a class="category-card" href="categoria.html?c=${slugify(c)}">
+        <span class="category-count">${count} ITENS</span>
+        <div class="category-icon">${icons[c] || '◆'}</div>
+        <h3>${esc(c)}</h3>
+        <p>Abrir tabela de valores e consulta operacional.</p>
+      </a>
+    `;
+  }).join('');
+
+  // Normaliza texto para pesquisa
+  const normalize = value =>
+    String(value || '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim();
+
+  function renderSearch(query) {
+    const term = normalize(query);
+
+    // Sem pesquisa: não mostra resultados
+    if (!term) {
+      featured.innerHTML = '';
+      featured.style.display = 'none';
+      return;
+    }
+
+    const results = active.filter(i => {
+      const searchable = normalize(
+        `${i.item} ${i.categoria} ${i.observacao || ''}`
+      );
+
+      return searchable.includes(term);
+    });
+
+    featured.style.display = '';
+
+    if (!results.length) {
+      featured.innerHTML = `
+        <div class="empty">
+          Nenhum item encontrado para "${esc(query)}".
+        </div>
+      `;
+      return;
+    }
+
+    featured.innerHTML = `
+      <div style="grid-column:1/-1;margin-bottom:8px">
+        <span class="eyebrow">RESULTADOS DA BUSCA</span>
+        <h2>${results.length} ${results.length === 1 ? 'item encontrado' : 'itens encontrados'}</h2>
+      </div>
+
+      ${results.map(i => `
+        <article class="item-card" data-highlight="${!!i.destaque}">
+          <div style="display:flex;justify-content:space-between;gap:12px;align-items:center">
+            <span class="tag">${esc(i.categoria)}</span>
+            ${i.destaque ? '<span class="tag">DESTAQUE</span>' : ''}
+          </div>
+
+          <h3>${esc(i.item)}</h3>
+
+          <div class="prices">
+            <div class="price">
+              <span>Parceria</span>
+              <strong>${money(i.parceria)}</strong>
+            </div>
+
+            <div class="price pista">
+              <span>Pista</span>
+              <strong>${money(i.pista)}</strong>
+            </div>
+          </div>
+
+          ${i.observacao
+            ? `<div class="notice">⚠ ${esc(i.observacao)}</div>`
+            : ''
+          }
+
+          <a
+            href="categoria.html?c=${slugify(i.categoria)}"
+            style="display:inline-block;margin-top:14px"
+          >
+            ABRIR ${esc(i.categoria).toUpperCase()} →
+          </a>
+        </article>
+      `).join('')}
+    `;
+  }
+
+  renderSearch('');
+
+  search.addEventListener('input', e => {
+    renderSearch(e.target.value);
+  });
+}
