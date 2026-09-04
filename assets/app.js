@@ -1,5 +1,6 @@
 const CATALOG_URL = './data/catalogo.json';
 const ITEM_IMAGE_BASE = './assets/itens/';
+const RULE_IMAGE_BASE = './assets/';
 
 const icons = {
   'armas':'🔫','municao':'💥','tecnologia-utilitarios':'💻','drogas-rotas':'🧪',
@@ -138,7 +139,18 @@ async function initCategory(){
   const render=q=>{if(!list)return;const term=normalizeText(q);const filtered=items.filter(i=>!term||normalizeText(`${i.item} ${i.categoria} ${i.observacao||''}`).includes(term));list.innerHTML=filtered.length?filtered.map(i=>itemCard(i)).join(''):'<div class="empty">Nenhum item encontrado nesta categoria.</div>';};
   render(''); search?.addEventListener('input',e=>render(e.target.value));
   const rules=document.querySelector('#rules');
-  if(rules&&slugify(cat)==='lavagem'&&data.regras?.lavagem) rules.innerHTML=data.regras.lavagem.map(r=>`<div class="rule"><strong>${esc(r.titulo)}</strong><span>${esc(r.texto)}</span></div>`).join('');
+  if(rules&&slugify(cat)==='lavagem'&&Array.isArray(data.regras?.lavagem)&&data.regras.lavagem.length){
+    const grupos=[...new Set(data.regras.lavagem.map(r=>String(r.grupo||'REGRAS').trim().toUpperCase()).filter(Boolean))];
+    rules.innerHTML=`<div class="rules-heading"><span>REGRAS OPERACIONAIS</span><strong>LAVAGEM E SECAGEM DE DINHEIRO</strong><p>Percentuais e imagens publicados diretamente pela planilha oficial.</p></div>`+grupos.map(grupo=>{
+      const tituloGrupo=grupo==='SECAGEM'?'SECAGEM DE DINHEIRO':grupo==='LAVAGEM'?'LAVAGEM DE DINHEIRO':grupo;
+      const rows=data.regras.lavagem.filter(r=>String(r.grupo||'REGRAS').trim().toUpperCase()===grupo);
+      return `<section class="rule-group"><div class="rule-group-title">${esc(tituloGrupo)}</div><div class="rule-group-grid">${rows.map(r=>{
+        const file=String(r.imagem||'').trim();
+        const img=file?`<div class="rule-image"><img src="${RULE_IMAGE_BASE}${encodeURIComponent(file)}" alt="${esc(r.titulo||r.tipo)}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`:'';
+        return `<article class="rule rule-rich">${img}<div class="rule-copy"><strong>${esc(r.titulo||r.tipo)}</strong><span>${esc(r.texto)}</span><small>${esc(grupo)}</small></div></article>`;
+      }).join('')}</div></section>`;
+    }).join('');
+  }
 }
 
 
@@ -275,10 +287,17 @@ function roundedRect(ctx,x,y,w,h,r){
   ctx.closePath();
 }
 
-function drawTextFit(ctx,text,x,y,maxWidth,fontSize,fontWeight='800'){
+function drawTextFit(ctx,text,x,y,maxWidth,fontSize,fontWeight='800',align='left'){
+  const oldAlign=ctx.textAlign;
+  ctx.textAlign=align;
   let size=fontSize;
-  do{ctx.font=`${fontWeight} ${size}px Arial, sans-serif`;size-=1;}while(size>14&&ctx.measureText(text).width>maxWidth);
+  ctx.font=`${fontWeight} ${size}px Arial, sans-serif`;
+  while(size>8&&ctx.measureText(text).width>maxWidth){
+    size-=1;
+    ctx.font=`${fontWeight} ${size}px Arial, sans-serif`;
+  }
   ctx.fillText(text,x,y);
+  ctx.textAlign=oldAlign;
 }
 
 function loadCanvasImage(src){
@@ -341,8 +360,19 @@ async function generateDiscordMarketImage(items,data){
   const rowH=29;
   const groupGap=12;
   const padX=12;
+  const lavagemRules=Array.isArray(data?.regras?.lavagem)?data.regras.lavagem:[];
+  const ruleRowH=62;
+  const ruleHeadH=25;
+  const rulesForGroup=g=>slugify(g.name)==='lavagem'?lavagemRules:[];
 
-  const blockHeight=g=>groupTitleH+tableHeadH+(g.items.length*rowH)+groupGap;
+  const ruleImageMap={};
+  await Promise.all(lavagemRules.map(async r=>{
+    const file=String(r.imagem||'').trim();
+    if(!file||ruleImageMap[file]) return;
+    try{ ruleImageMap[file]=await loadCanvasImage(`${RULE_IMAGE_BASE}${encodeURIComponent(file)}`); }catch(_){ ruleImageMap[file]=null; }
+  }));
+
+  const blockHeight=g=>groupTitleH+tableHeadH+(g.items.length*rowH)+(rulesForGroup(g).length?(ruleHeadH+rulesForGroup(g).length*ruleRowH+8):0)+groupGap;
   const columns=[[],[],[]];
   const heights=[0,0,0];
 
@@ -421,6 +451,37 @@ async function generateDiscordMarketImage(items,data){
       ctx.fillStyle='#f4ec25';ctx.font='900 12px Arial, sans-serif';ctx.fillText(money(i.pista),pistaX,y+19);ctx.textAlign='left';
       y+=rowH;
     });
+
+    const groupRules=rulesForGroup(group);
+    if(groupRules.length){
+      ctx.fillStyle='#17111d';ctx.fillRect(x,y,colW,ruleHeadH);
+      ctx.fillStyle='#f4ec25';ctx.font='900 12px Arial, sans-serif';
+      ctx.textAlign='center';ctx.fillText('LAVAGEM E SECAGEM DE DINHEIRO',x+colW/2,y+17);ctx.textAlign='left';
+      y+=ruleHeadH;
+      groupRules.forEach((r,idx)=>{
+        ctx.fillStyle=idx%2===0?'#0d0b10':'#110d15';ctx.fillRect(x,y,colW,ruleRowH);
+        ctx.strokeStyle='rgba(244,236,37,.16)';ctx.beginPath();ctx.moveTo(x+10,y);ctx.lineTo(x+colW-10,y);ctx.stroke();
+        const file=String(r.imagem||'').trim();
+        const ri=file?ruleImageMap[file]:null;
+        let tx=x+12;
+        let tw=colW-24;
+        if(ri){
+          const box=44;
+          const ratio=Math.min(box/ri.width,box/ri.height);
+          const rw=ri.width*ratio,rh=ri.height*ratio;
+          ctx.drawImage(ri,x+10+(box-rw)/2,y+9+(box-rh)/2,rw,rh);
+          tx=x+64;tw=colW-76;
+        }
+        const grupo=String(r.grupo||'').trim().toUpperCase();
+        const title=(grupo?grupo+' • ':'')+String(r.tipo||r.titulo||'').toUpperCase();
+        ctx.fillStyle='#f4ec25';ctx.font='900 10px Arial, sans-serif';ctx.textAlign='left';
+        drawTextFit(ctx,title,tx,y+22,tw,10,'900','left');
+        ctx.fillStyle='#ece7ef';ctx.font='800 9px Arial, sans-serif';
+        drawTextFit(ctx,String(r.texto||'').toUpperCase(),tx,y+43,tw,9,'800','left');
+        y+=ruleRowH;
+      });
+      y+=8;
+    }
     return y+groupGap;
   }
 
