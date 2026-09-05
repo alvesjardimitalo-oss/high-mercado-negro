@@ -2,7 +2,7 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-09-05T02:23:52-03:00",
+    "atualizado_em": "2026-09-05T17:47:39-03:00",
     "moeda": "BRL",
     "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM."
   },
@@ -175,8 +175,8 @@
     {
       "categoria": "ARMAS",
       "item": "SNIPER AVANCADA B",
-      "parceria": 1050000,
-      "pista": 1250000,
+      "parceria": 1300000,
+      "pista": 1350000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
@@ -186,8 +186,8 @@
     {
       "categoria": "ARMAS",
       "item": "SNIPER AVANCADA",
-      "parceria": 900000,
-      "pista": 1050000,
+      "parceria": 1100000,
+      "pista": 1150000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
@@ -224,8 +224,19 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 39,
-      "imagem": "cartaoclonado1.png"
+      "ordem": 40,
+      "imagem": "dismantle.png"
+    },
+    {
+      "categoria": "DESMANCHE",
+      "item": "CARTAO ILEGIVEL",
+      "parceria": 8000,
+      "pista": 11000,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "",
+      "ordem": 41,
+      "imagem": "dismantle++.png"
     },
     {
       "categoria": "DESMANCHE",
@@ -235,7 +246,7 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 40,
+      "ordem": 42,
       "imagem": "blocksignal.png"
     },
     {
@@ -246,7 +257,7 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 41,
+      "ordem": 43,
       "imagem": "lockpick.png"
     },
     {
@@ -257,62 +268,62 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 42,
+      "ordem": 44,
       "imagem": "lockpickplus.png"
     },
     {
-      "categoria": "DROGAS / ROTAS",
+      "categoria": "DROGAS",
       "item": "PACOTE DE DROGAS",
       "parceria": 15000,
       "pista": 17000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 56,
+      "ordem": 58,
       "imagem": "packdrug1.png"
     },
     {
-      "categoria": "DROGAS / ROTAS",
+      "categoria": "DROGAS",
       "item": "UNIDADE DA DROGA",
       "parceria": 620,
       "pista": 2260,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 57,
+      "ordem": 59,
       "imagem": "packdrug1.png"
     },
     {
-      "categoria": "DROGAS / ROTAS",
+      "categoria": "DROGAS",
       "item": "COLETE",
       "parceria": 9000,
       "pista": 12000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 58,
+      "ordem": 60,
       "imagem": "ballisticplate.png"
     },
     {
-      "categoria": "DROGAS / ROTAS",
+      "categoria": "DROGAS",
       "item": "CAPUZ",
       "parceria": 3500,
       "pista": 5300,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 59,
+      "ordem": 61,
       "imagem": "hood.png"
     },
     {
-      "categoria": "DROGAS / ROTAS",
+      "categoria": "DROGAS",
       "item": "MAPEAMENTO DE BAIRRO",
       "parceria": 15000,
       "pista": 22000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 60,
+      "ordem": 62,
       "imagem": "mapabairro1.png"
     },
     {
@@ -323,7 +334,7 @@
       "status": "ativo",
       "destaque": true,
       "observacao": "",
-      "ordem": 43,
+      "ordem": 45,
       "imagem": "cartaoclonado1.png"
     },
     {
@@ -334,7 +345,7 @@
       "status": "ativo",
       "destaque": true,
       "observacao": "",
-      "ordem": 44,
+      "ordem": 46,
       "imagem": "cartaoclonado2.png"
     },
     {
@@ -345,7 +356,7 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 45,
+      "ordem": 47,
       "imagem": "dollarfake.png"
     },
     {
@@ -356,7 +367,7 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 46,
+      "ordem": 48,
       "imagem": "kitdossete.png"
     },
     {
@@ -367,7 +378,7 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 47,
+      "ordem": 49,
       "imagem": "infectedbandage.png"
     },
     {
@@ -378,7 +389,7 @@
       "status": "ativo",
       "destaque": true,
       "observacao": "",
-      "ordem": 48,
+      "ordem": 50,
       "imagem": "adrenalina2.png"
     },
     {
@@ -389,7 +400,7 @@
       "status": "ativo",
       "destaque": true,
       "observacao": "",
-      "ordem": 49,
+      "ordem": 51,
       "imagem": "adrenalineclandestineplus.png"
     },
     {
@@ -400,7 +411,7 @@
       "status": "ativo",
       "destaque": true,
       "observacao": "",
-      "ordem": 50,
+      "ordem": 52,
       "imagem": "packdrug3.png"
     },
     {
@@ -411,7 +422,7 @@
       "status": "ativo",
       "destaque": true,
       "observacao": "",
-      "ordem": 51,
+      "ordem": 53,
       "imagem": "metadone.png"
     },
     {
@@ -422,7 +433,7 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 61,
+      "ordem": 63,
       "imagem": "pendrive1.png"
     },
     {
@@ -433,7 +444,7 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 62,
+      "ordem": 64,
       "imagem": "pendrive2.png"
     },
     {
@@ -444,7 +455,7 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 63,
+      "ordem": 65,
       "imagem": "pendrive3.png"
     },
     {
@@ -455,7 +466,7 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 64,
+      "ordem": 66,
       "imagem": "pendrive4.png"
     },
     {
@@ -466,7 +477,7 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 65,
+      "ordem": 67,
       "imagem": "pendrive5.png"
     },
     {
@@ -477,7 +488,7 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 66,
+      "ordem": 68,
       "imagem": "handcuff.png"
     },
     {
@@ -488,7 +499,7 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 67,
+      "ordem": 69,
       "imagem": "alcoolemgel.png"
     },
     {
@@ -691,13 +702,24 @@
     },
     {
       "categoria": "MUNIÇÃO",
-      "item": "FLASH BANG E G. DE FUMACA",
+      "item": "FLASH BANG",
       "parceria": 10000,
       "pista": 15000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 38,
+      "imagem": "attach_flashlight.png"
+    },
+    {
+      "categoria": "MUNIÇÃO",
+      "item": "G. DE FUMACA",
+      "parceria": 10000,
+      "pista": 15000,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "",
+      "ordem": 39,
       "imagem": "attach_flashlight.png"
     },
     {
@@ -708,7 +730,7 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 52,
+      "ordem": 54,
       "imagem": "tablethack.png"
     },
     {
@@ -719,7 +741,7 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 53,
+      "ordem": 55,
       "imagem": "tablethacksuper.png"
     },
     {
@@ -730,7 +752,7 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 54,
+      "ordem": 56,
       "imagem": "mapabairro1.png"
     },
     {
@@ -741,7 +763,7 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "",
-      "ordem": 55,
+      "ordem": 57,
       "imagem": "superaltofalante.png"
     }
   ],
