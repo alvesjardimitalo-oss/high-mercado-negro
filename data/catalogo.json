@@ -2,7 +2,7 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-09-05T18:17:31-03:00",
+    "atualizado_em": "2026-09-05T18:19:13-03:00",
     "moeda": "BRL",
     "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM."
   },
@@ -390,7 +390,7 @@
       "destaque": true,
       "observacao": "",
       "ordem": 50,
-      "imagem": "adrenalina2.png"
+      "imagem": "adrenaline2.png"
     },
     {
       "categoria": "HOSPITAL ILEGAL",
