@@ -2,7 +2,7 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-09-04T17:17:18-03:00",
+    "atualizado_em": "2026-09-05T02:23:52-03:00",
     "moeda": "BRL",
     "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM."
   },
@@ -560,8 +560,8 @@
     {
       "categoria": "MECÂNICA ILEGAL",
       "item": "AEROFÓLIO ESPORTIVO",
-      "parceria": 8000,
-      "pista": 11000,
+      "parceria": 50000,
+      "pista": 70000,
       "status": "ativo",
       "destaque": true,
       "observacao": "",
@@ -571,8 +571,8 @@
     {
       "categoria": "MECÂNICA ILEGAL",
       "item": "ESCAPAMENTO ESPORTIVO",
-      "parceria": 10000,
-      "pista": 14000,
+      "parceria": 40500,
+      "pista": 50500,
       "status": "ativo",
       "destaque": true,
       "observacao": "",
