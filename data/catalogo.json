@@ -2,7 +2,7 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-09-05T17:55:41-03:00",
+    "atualizado_em": "2026-09-05T18:10:12-03:00",
     "moeda": "BRL",
     "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM."
   },
@@ -98,8 +98,8 @@
     {
       "categoria": "ARMAS",
       "item": "F2000 - MTAR.",
-      "parceria": 70000,
-      "pista": 90000,
+      "parceria": 80000,
+      "pista": 100000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
@@ -648,8 +648,8 @@
     {
       "categoria": "MUNIÇÃO",
       "item": "C4",
-      "parceria": 4000,
-      "pista": 5500,
+      "parceria": 5000,
+      "pista": 7000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
