@@ -2,7 +2,7 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-09-05T18:19:13-03:00",
+    "atualizado_em": "2026-09-05T18:22:49-03:00",
     "moeda": "BRL",
     "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM."
   },
@@ -592,7 +592,18 @@
     },
     {
       "categoria": "MUNIÇÃO",
-      "item": "PISTOLA 100X/ ENERGETICO ZERO",
+      "item": "ENERGETICO ZERO",
+      "parceria": 8000,
+      "pista": 11500,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "",
+      "ordem": 28,
+      "imagem": "energetic2.png"
+    },
+    {
+      "categoria": "MUNIÇÃO",
+      "item": "PISTOLA 100X/",
       "parceria": 8000,
       "pista": 11500,
       "status": "ativo",
