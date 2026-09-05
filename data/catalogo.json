@@ -2,7 +2,7 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-09-05T18:10:57-03:00",
+    "atualizado_em": "2026-09-05T18:16:20-03:00",
     "moeda": "BRL",
     "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM."
   },
@@ -236,7 +236,7 @@
       "destaque": false,
       "observacao": "",
       "ordem": 41,
-      "imagem": "dismantle++.png"
+      "imagem": "dismantleplus.png"
     },
     {
       "categoria": "DESMANCHE",
