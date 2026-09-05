@@ -2,7 +2,7 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-09-05T18:10:12-03:00",
+    "atualizado_em": "2026-09-05T18:10:57-03:00",
     "moeda": "BRL",
     "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM."
   },
@@ -229,7 +229,7 @@
     },
     {
       "categoria": "DESMANCHE",
-      "item": "CARTAO ILEGIVEL",
+      "item": "CARTAO ILEGIVEL + +",
       "parceria": 8000,
       "pista": 11000,
       "status": "ativo",
