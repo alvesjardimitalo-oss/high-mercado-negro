@@ -2,7 +2,7 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-09-05T17:47:39-03:00",
+    "atualizado_em": "2026-09-05T17:52:38-03:00",
     "moeda": "BRL",
     "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM."
   },
@@ -192,7 +192,7 @@
       "destaque": false,
       "observacao": "",
       "ordem": 17,
-      "imagem": "WEAPON_SNIPERRIFLE3.png"
+      "imagem": "WEAPON_SNIPERRIFLE.png"
     },
     {
       "categoria": "ARMAS",
@@ -203,7 +203,7 @@
       "destaque": false,
       "observacao": "",
       "ordem": 18,
-      "imagem": "WEAPON_SNIPERRIFLE3.png"
+      "imagem": "WEAPON_COMBAMG2.png"
     },
     {
       "categoria": "CONTRABANDO",
