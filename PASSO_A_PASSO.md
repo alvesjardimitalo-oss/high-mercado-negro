@@ -34,6 +34,15 @@ Crie um Fine-grained Personal Access Token limitado SOMENTE ao repositório do M
 4. Cole o token.
 5. Na primeira execução o Google pedirá autorização do script.
 
+## 6.1 (Opcional) Aviso automático no Discord
+1. No Discord: Configurações do canal > Integrações > Webhooks > Novo webhook > Copiar URL.
+2. Na planilha: **HIGH • Mercado Negro > Configurar aviso no Discord** e cole a URL.
+3. Teste com **Enviar teste para o Discord**.
+4. A URL fica salva nas propriedades do script, nunca em célula.
+
+## 6.2 Seu nome nas publicações
+Na primeira publicação o script pergunta o nome que fica registrado (histórico e commit). Para trocar: **Definir meu nome**. Cada auxiliar define o seu.
+
 ## 7. Publicar uma atualização
 1. Edite itens ou valores normalmente.
 2. Clique **HIGH • Mercado Negro > Validar tabela**.

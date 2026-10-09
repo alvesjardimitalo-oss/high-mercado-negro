@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#8d35ff">
+  <title>Histórico de reajustes • Mercado Negro High</title>
+  <meta name="description" content="Registro oficial de alterações de preço do Mercado Negro da High Roleplay.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="High Roleplay • Mercado Negro">
+  <meta property="og:title" content="Histórico de reajustes • Mercado Negro High">
+  <meta property="og:description" content="Registro oficial de alterações de preço do Mercado Negro da High Roleplay.">
+  <meta property="og:url" content="https://alvesjardimitalo-oss.github.io/high-mercado-negro/historico.html">
+  <meta property="og:image" content="https://alvesjardimitalo-oss.github.io/high-mercado-negro/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Mercado Negro">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="topbar"><div class="wrap topbar-inner"><a class="brand" href="index.html"><img src="assets/high_logo.png" alt="High"><div class="brand-copy"><strong>HIGH ROLEPLAY</strong><span>MERCADO NEGRO // ILEGAL HIGH SEASON 2 - ATO 2</span></div></a><nav class="topnav"><a href="index.html">Início</a><a href="tabela.html">Tabela Geral</a><a class="table-nav-active" href="historico.html">Histórico</a><a href="como-funciona.html">Como funciona</a></nav></div></header>
+  <main class="wrap">
+    <section class="guide">
+      <a class="back" href="index.html">← VOLTAR AO MERCADO NEGRO</a>
+      <div class="eyebrow" style="margin-top:24px">Registro oficial // Alterações de preço</div>
+      <h1>HISTÓRICO DE <span>REAJUSTES</span></h1>
+      <p class="guide-lead">Toda vez que a tabela é publicada com preço alterado, item novo ou item removido, a mudança fica registrada aqui com data e responsável.</p>
+      <div class="updated"><span data-updated></span></div>
+    </section>
+    <section id="historyList" class="history-list"><div class="empty">Carregando…</div></section>
+  </main>
+  <footer class="footer"><div class="wrap footer-row"><span>HIGH ROLEPLAY • MERCADO NEGRO</span><span>Economia fictícia • FiveM</span></div><div class="wrap footer-row"><nav class="footer-links" aria-label="Rodapé"><a href="index.html">Início</a><a href="tabela.html">Tabela Geral</a><a href="categoria.html?c=lavagem#calculadora">Calculadora de lavagem</a><a href="historico.html">Histórico</a><a href="como-funciona.html">Como funciona</a></nav></div></footer>
+  <script src="assets/app.js"></script>
+  <script>initHistorico().catch(e=>document.querySelector('#historyList').innerHTML='<div class="empty">'+e.message+'</div>')</script>
+</body>
+</html>
