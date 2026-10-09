@@ -806,6 +806,8 @@ async function initHistorico(){
   const hist=Array.isArray(data.historico)?data.historico:[];
   if(!hist.length){box.innerHTML='<div class="empty">Nenhuma alteração registrada ainda. As próximas publicações com mudança de preço aparecerão aqui.</div>';return;}
   const line=m=>{
+    const ren=m.renomeado_de?` • antes: ${esc(m.renomeado_de)}`:'';
+    if(m.tipo==='renomeado') return `<li><span class="trend-badge novo">RENOMEADO</span><div><strong>${esc(m.item)}</strong><small>${esc(m.categoria)}${ren}</small></div><div class="h-vals"><span>Parceria <b>${money(m.parceria)}</b></span><span>Pista <b>${money(m.pista)}</b></span></div></li>`;
     if(m.tipo==='novo') return `<li class="h-novo"><span class="trend-badge novo">NOVO</span><div><strong>${esc(m.item)}</strong><small>${esc(m.categoria)}</small></div><div class="h-vals"><span>Parceria <b>${money(m.parceria)}</b></span><span>Pista <b>${money(m.pista)}</b></span></div></li>`;
     if(m.tipo==='status'){
       const lab={indisponivel:['indisponivel','INDISPONÍVEL','Indisponível no momento'],revisar:['revisar','EM REVISÃO','Valor em revisão']}[m.status]||['caiu','DISPONÍVEL','Voltou a ficar disponível'];
@@ -814,7 +816,7 @@ async function initHistorico(){
     if(m.tipo==='removido') return `<li class="h-removido"><span class="status-badge indisponivel">REMOVIDO</span><div><strong><s>${esc(m.item)}</s></strong><small>${esc(m.categoria)}</small></div><div class="h-vals"><span>Era parceria ${money(m.parceria_antes)}</span><span>Era pista ${money(m.pista_antes)}</span></div></li>`;
     const up=(m.pista-m.pista_antes||m.parceria-m.parceria_antes)>0;
     const v=(label,a,b)=>a===b?`<span>${label} <b>${money(b)}</b></span>`:`<span>${label} <s>${money(a)}</s> → <b>${money(b)}</b></span>`;
-    return `<li><span class="trend-badge ${up?'subiu':'caiu'}">${up?'▲ SUBIU':'▼ CAIU'}</span><div><strong>${esc(m.item)}</strong><small>${esc(m.categoria)}</small></div><div class="h-vals">${v('Parceria',m.parceria_antes,m.parceria)}${v('Pista',m.pista_antes,m.pista)}</div></li>`;
+    return `<li><span class="trend-badge ${up?'subiu':'caiu'}">${up?'▲ SUBIU':'▼ CAIU'}</span><div><strong>${esc(m.item)}</strong><small>${esc(m.categoria)}${ren}</small></div><div class="h-vals">${v('Parceria',m.parceria_antes,m.parceria)}${v('Pista',m.pista_antes,m.pista)}</div></li>`;
   };
   box.innerHTML=hist.map(h=>{
     const d=new Date(h.em);
