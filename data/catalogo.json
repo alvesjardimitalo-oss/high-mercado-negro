@@ -2,9 +2,12 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-09-24T18:11:46-03:00",
+    "atualizado_em": "2026-10-09T07:28:24-03:00",
+    "publicado_por": "Italo Alves - Sênior Ilegal",
     "moeda": "BRL",
-    "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM."
+    "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM.",
+    "alerta": "",
+    "link_denuncia": ""
   },
   "itens": [
     {
@@ -814,5 +817,6 @@
         "texto": "15% da máquina | 10% da lavagem | 75% do cliente"
       }
     ]
-  }
+  },
+  "historico": []
 }
