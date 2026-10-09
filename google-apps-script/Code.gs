@@ -453,6 +453,9 @@ function montarRegras_(anterior, avisos) {
     const grupo = txt(r, 'grupo').toUpperCase(), tipo = txt(r, 'tipo').toUpperCase();
     let titulo = txt(r, 'titulo');
     if (!titulo && !tipo && !grupo) return;            // linha vazia
+    // Linhas sem nenhuma porcentagem são notas/rodapé da aba (ex.: "Fonte…", "Referência…"): ignora.
+    const semPct = ['maquina', 'lavagem', 'cliente'].every(c => String(r[col[c]] == null ? '' : r[col[c]]).trim() === '' || Number(r[col[c]]) === 0);
+    if (semPct) return;
     if (!titulo) titulo = [grupo, tipo].filter(Boolean).join(' de ').toLowerCase().replace(/^./, c => c.toUpperCase());
     try {
       const st = txt(r, 'ativo');
