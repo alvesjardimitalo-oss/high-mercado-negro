@@ -295,6 +295,7 @@ function montarCatalogo_(anterior, opts) {
   if (mudancas.length) historico.unshift({em: agoraIso, por: opts.por || '', mudancas});
   historico = historico.slice(0, HIGH_SITE.historicoMax);
 
+  const regrasLavagem = montarRegras_(anterior, avisos);
   const config = lerConfig_();
   const metaAnt = (anterior && anterior.meta) || {};
 
@@ -313,7 +314,7 @@ function montarCatalogo_(anterior, opts) {
         link_denuncia: config ? (config.LINK_DENUNCIA || '') : (metaAnt.link_denuncia || '')
       },
       itens,
-      regras: {lavagem: montarRegras_(anterior)},
+      regras: {lavagem: regrasLavagem},
       historico
     }
   };
@@ -352,31 +353,82 @@ function lerConfig_() {
   return out;
 }
 
-/** Regras: aba "Regras Lavagem" > regras já publicadas > REGRAS_PADRAO. */
-function montarRegras_(anterior) {
-  const sh = SpreadsheetApp.getActive().getSheetByName(HIGH_SITE.rulesSheetName);
-  if (sh) {
-    const values = sh.getDataRange().getValues();
-    const headers = (values[0] || []).map(normalizar_);
-    const idx = nome => headers.indexOf(normalizar_(nome));
-    const req = ['GRUPO','TIPO','TITULO','MAQUINA','LAVAGEM','CLIENTE'];
-    const faltando = req.filter(h => idx(h) < 0);
-    if (faltando.length) throw new Error(`Aba "${HIGH_SITE.rulesSheetName}": cabeçalhos ausentes: ${faltando.join(', ')}`);
-    const regras = values.slice(1).filter(r => String(r[idx('TITULO')] || '').trim()).map(r => ({
-      grupo: String(r[idx('GRUPO')] || '').trim().toUpperCase(),
-      tipo: String(r[idx('TIPO')] || '').trim().toUpperCase(),
-      titulo: String(r[idx('TITULO')] || '').trim(),
-      maquina: percentual_(r[idx('MAQUINA')]),
-      lavagem: percentual_(r[idx('LAVAGEM')]),
-      cliente: percentual_(r[idx('CLIENTE')]),
-      ativo: idx('ATIVO') >= 0 ? !/^(nao|não|n|false|0)$/i.test(String(r[idx('ATIVO')]).trim()) : true,
-      imagem: idx('IMAGEM') >= 0 ? String(r[idx('IMAGEM')] || '').trim() : ''
-    }));
-    if (regras.length) return regras.map(comTexto_);
-  }
+/** Regras: aba "Regras Lavagem" > regras já publicadas > REGRAS_PADRAO.
+ *  Aceita variações de cabeçalho (ex.: "% MÁQUINA", "MAQUINA (%)", "CLIENTE %", "NOME")
+ *  e cabeçalho fora da linha 1. Se não reconhecer a aba, mantém as regras publicadas e avisa. */
+function montarRegras_(anterior, avisos) {
+  avisos = avisos || [];
   const publicadas = anterior && anterior.regras && anterior.regras.lavagem;
-  if (Array.isArray(publicadas) && publicadas.length) return publicadas;
-  return REGRAS_PADRAO.map(comTexto_);
+  const reserva = () => (Array.isArray(publicadas) && publicadas.length) ? publicadas : REGRAS_PADRAO.map(comTexto_);
+  const sh = SpreadsheetApp.getActive().getSheetByName(HIGH_SITE.rulesSheetName);
+  if (!sh) return reserva();
+
+  const values = sh.getDataRange().getValues();
+  const limpa = v => normalizar_(v).replace(/[^A-Z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+  const ALIASES = {
+    grupo:   ['GRUPO', 'CATEGORIA', 'SECAO'],
+    tipo:    ['TIPO', 'DINHEIRO', 'MODALIDADE'],
+    titulo:  ['TITULO', 'NOME', 'DESCRICAO', 'REGRA'],
+    maquina: ['MAQUINA', 'MAQ'],
+    lavagem: ['LAVAGEM', 'LAVADOR', 'LAVANDERIA', 'SECAGEM'],
+    cliente: ['CLIENTE', 'DONO'],
+    ativo:   ['ATIVO', 'STATUS'],
+    imagem:  ['IMAGEM', 'IMG', 'ICONE']
+  };
+
+  // Procura a linha de cabeçalho nas 10 primeiras linhas.
+  let hRow = -1, col = {};
+  for (let r = 0; r < Math.min(10, values.length) && hRow < 0; r++) {
+    const hs = values[r].map(limpa), usadas = {}, achou = {};
+    const pega = (campo, exato) => {
+      if (achou[campo] !== undefined) return;
+      for (const a of ALIASES[campo]) {
+        const i = hs.findIndex((h, k) => !usadas[k] && h && (exato ? h === a : (' ' + h + ' ').indexOf(' ' + a + ' ') >= 0));
+        if (i >= 0) { achou[campo] = i; usadas[i] = true; return; }
+      }
+    };
+    const campos = Object.keys(ALIASES);
+    campos.forEach(c => pega(c, true));   // primeiro nomes exatos
+    campos.forEach(c => pega(c, false));  // depois "contém" (ex.: "% MÁQUINA")
+    if (achou.maquina !== undefined && achou.cliente !== undefined) { hRow = r; col = achou; }
+  }
+
+  if (hRow < 0 || col.lavagem === undefined) {
+    avisos.push(`• Aba "${HIGH_SITE.rulesSheetName}": não encontrei as colunas de MÁQUINA / LAVAGEM / CLIENTE. Mantidas as regras que já estão no site.`);
+    return reserva();
+  }
+
+  const txt = (r, c) => col[c] === undefined ? '' : String(r[col[c]] == null ? '' : r[col[c]]).trim();
+  const regras = [];
+  values.slice(hRow + 1).forEach((r, n) => {
+    const grupo = txt(r, 'grupo').toUpperCase(), tipo = txt(r, 'tipo').toUpperCase();
+    let titulo = txt(r, 'titulo');
+    if (!titulo && !tipo && !grupo) return;            // linha vazia
+    if (!titulo) titulo = [grupo, tipo].filter(Boolean).join(' de ').toLowerCase().replace(/^./, c => c.toUpperCase());
+    try {
+      const st = txt(r, 'ativo');
+      const regra = {
+        grupo, tipo, titulo,
+        maquina: percentual_(r[col.maquina]),
+        lavagem: percentual_(r[col.lavagem]),
+        cliente: percentual_(r[col.cliente]),
+        ativo: !/^(nao|não|n|false|0|inativo)$/i.test(st),
+        imagem: txt(r, 'imagem')
+      };
+      if (regra.maquina + regra.lavagem + regra.cliente !== 100)
+        avisos.push(`• Regras Lavagem, linha ${hRow + n + 2} (${titulo}): percentuais somam ${regra.maquina + regra.lavagem + regra.cliente}% (deveria ser 100%).`);
+      regras.push(regra);
+    } catch (e) {
+      avisos.push(`• Regras Lavagem, linha ${hRow + n + 2}: percentual inválido — linha ignorada.`);
+    }
+  });
+
+  // Imagem vazia na aba: reaproveita a imagem já publicada para a mesma regra.
+  (publicadas || []).forEach(p => regras.forEach(r => {
+    if (!r.imagem && p.imagem && normalizar_(p.titulo) === normalizar_(r.titulo)) r.imagem = p.imagem;
+  }));
+
+  return regras.length ? regras.map(comTexto_) : reserva();
 }
 
 /* ─────────────────────────── DISCORD ─────────────────────────── */
