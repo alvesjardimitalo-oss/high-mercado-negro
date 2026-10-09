@@ -2,7 +2,7 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-10-09T07:28:24-03:00",
+    "atualizado_em": "2026-10-09T08:09:50-03:00",
     "publicado_por": "Italo Alves - Sênior Ilegal",
     "moeda": "BRL",
     "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM.",
@@ -24,24 +24,34 @@
     {
       "categoria": "ARMAS",
       "item": "PISTOLA T54",
-      "parceria": 32000,
-      "pista": 40000,
+      "parceria": 30000,
+      "pista": 38000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 2,
-      "imagem": "t54.png"
+      "imagem": "t54.png",
+      "variacao": {
+        "parceria_antes": 32000,
+        "pista_antes": 40000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "ARMAS",
       "item": "PISTOLA DESERT EAGLE",
-      "parceria": 42000,
-      "pista": 52000,
+      "parceria": 45000,
+      "pista": 55000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 3,
-      "imagem": "desert.png"
+      "imagem": "desert.png",
+      "variacao": {
+        "parceria_antes": 42000,
+        "pista_antes": 52000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "ARMAS",
@@ -57,24 +67,34 @@
     {
       "categoria": "ARMAS",
       "item": "TEC-9",
-      "parceria": 55000,
+      "parceria": 50000,
       "pista": 70000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 5,
-      "imagem": "tec9.png"
+      "imagem": "tec9.png",
+      "variacao": {
+        "parceria_antes": 55000,
+        "pista_antes": 70000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "ARMAS",
       "item": "AK-102",
-      "parceria": 110000,
-      "pista": 140000,
+      "parceria": 120000,
+      "pista": 150000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 6,
-      "imagem": "ak102.png"
+      "imagem": "ak102.png",
+      "variacao": {
+        "parceria_antes": 110000,
+        "pista_antes": 140000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "ARMAS",
@@ -90,46 +110,66 @@
     {
       "categoria": "ARMAS",
       "item": "G3 - SIG SAUER",
-      "parceria": 170000,
+      "parceria": 160000,
       "pista": 210000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 8,
-      "imagem": "sigsauer556.png"
+      "imagem": "sigsauer556.png",
+      "variacao": {
+        "parceria_antes": 170000,
+        "pista_antes": 210000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "ARMAS",
-      "item": "F2000 - MTAR.",
-      "parceria": 80000,
+      "item": "F2000 - MTAR",
+      "parceria": 75000,
       "pista": 100000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 9,
-      "imagem": "f2000.png"
+      "imagem": "f2000.png",
+      "variacao": {
+        "parceria_antes": 80000,
+        "pista_antes": 100000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "ARMAS",
-      "item": "FALL",
-      "parceria": 140000,
-      "pista": 175000,
+      "item": "FAL",
+      "parceria": 145000,
+      "pista": 180000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 10,
-      "imagem": "fnfal.png"
+      "imagem": "fnfal.png",
+      "variacao": {
+        "parceria_antes": 140000,
+        "pista_antes": 175000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "ARMAS",
       "item": "AK-74N",
-      "parceria": 155000,
-      "pista": 195000,
+      "parceria": 150000,
+      "pista": 190000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 11,
-      "imagem": "ak74n.png"
+      "imagem": "ak74n.png",
+      "variacao": {
+        "parceria_antes": 155000,
+        "pista_antes": 195000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "ARMAS",
@@ -167,35 +207,50 @@
     {
       "categoria": "ARMAS",
       "item": "DESERT EAGLE DOURADA",
-      "parceria": 65000,
-      "pista": 85000,
+      "parceria": 70000,
+      "pista": 90000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 15,
-      "imagem": "WEAPON_PISTOL50.png"
+      "imagem": "WEAPON_PISTOL50.png",
+      "variacao": {
+        "parceria_antes": 65000,
+        "pista_antes": 85000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "ARMAS",
       "item": "SNIPER AVANCADA B",
-      "parceria": 1300000,
-      "pista": 1350000,
+      "parceria": 1400000,
+      "pista": 1500000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 16,
-      "imagem": "WEAPON_SNIPERRIFLE3.png"
+      "imagem": "WEAPON_SNIPERRIFLE3.png",
+      "variacao": {
+        "parceria_antes": 1300000,
+        "pista_antes": 1350000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "ARMAS",
       "item": "SNIPER AVANCADA",
-      "parceria": 1100000,
-      "pista": 1150000,
+      "parceria": 1200000,
+      "pista": 1350000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 17,
-      "imagem": "WEAPON_SNIPERRIFLE.png"
+      "imagem": "WEAPON_SNIPERRIFLE.png",
+      "variacao": {
+        "parceria_antes": 1100000,
+        "pista_antes": 1150000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "ARMAS",
@@ -232,58 +287,83 @@
     },
     {
       "categoria": "DESMANCHE",
-      "item": "CARTAO ILEGIVEL + +",
-      "parceria": 8000,
-      "pista": 11000,
+      "item": "CARTAO ILEGIVEL ++",
+      "parceria": 10000,
+      "pista": 13000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 41,
-      "imagem": "dismantleplus.png"
+      "imagem": "dismantleplus.png",
+      "variacao": {
+        "parceria_antes": 8000,
+        "pista_antes": 11000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "DESMANCHE",
       "item": "BLOQUEADOR DE SINAL",
-      "parceria": 11000,
-      "pista": 15000,
+      "parceria": 12000,
+      "pista": 16000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 42,
-      "imagem": "blocksignal.png"
+      "imagem": "blocksignal.png",
+      "variacao": {
+        "parceria_antes": 11000,
+        "pista_antes": 15000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "DESMANCHE",
       "item": "LOCKPICK",
-      "parceria": 4500,
-      "pista": 6000,
+      "parceria": 6000,
+      "pista": 8000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 43,
-      "imagem": "lockpick.png"
+      "imagem": "lockpick.png",
+      "variacao": {
+        "parceria_antes": 4500,
+        "pista_antes": 6000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "DESMANCHE",
       "item": "LOCKPICK ++",
-      "parceria": 6500,
-      "pista": 8500,
+      "parceria": 7500,
+      "pista": 9500,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 44,
-      "imagem": "lockpickplus.png"
+      "imagem": "lockpickplus.png",
+      "variacao": {
+        "parceria_antes": 6500,
+        "pista_antes": 8500,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "DROGAS",
       "item": "PACOTE DE DROGAS",
-      "parceria": 15000,
-      "pista": 17000,
+      "parceria": 18000,
+      "pista": 22000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 58,
-      "imagem": "packdrug1.png"
+      "imagem": "packdrug1.png",
+      "variacao": {
+        "parceria_antes": 15000,
+        "pista_antes": 17000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "DROGAS",
@@ -299,35 +379,50 @@
     {
       "categoria": "DROGAS",
       "item": "COLETE",
-      "parceria": 9000,
-      "pista": 12000,
+      "parceria": 10000,
+      "pista": 13000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 60,
-      "imagem": "ballisticplate.png"
+      "imagem": "ballisticplate.png",
+      "variacao": {
+        "parceria_antes": 9000,
+        "pista_antes": 12000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "DROGAS",
       "item": "CAPUZ",
-      "parceria": 3500,
-      "pista": 5300,
+      "parceria": 5000,
+      "pista": 7500,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 61,
-      "imagem": "hood.png"
+      "imagem": "hood.png",
+      "variacao": {
+        "parceria_antes": 3500,
+        "pista_antes": 5300,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "DROGAS",
       "item": "MAPEAMENTO DE BAIRRO",
-      "parceria": 15000,
-      "pista": 22000,
+      "parceria": 20000,
+      "pista": 27000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 62,
-      "imagem": "mapabairro1.png"
+      "imagem": "mapabairro1.png",
+      "variacao": {
+        "parceria_antes": 15000,
+        "pista_antes": 22000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "FALSIFICAÇÃO",
@@ -376,46 +471,66 @@
     {
       "categoria": "HOSPITAL ILEGAL",
       "item": "BANDAGEM INFECTADA",
-      "parceria": 3100,
-      "pista": 5100,
+      "parceria": 4000,
+      "pista": 6000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 49,
-      "imagem": "infectedbandage.png"
+      "imagem": "infectedbandage.png",
+      "variacao": {
+        "parceria_antes": 3100,
+        "pista_antes": 5100,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "HOSPITAL ILEGAL",
       "item": "ADRENALINA CLANDESTINA",
-      "parceria": 5500,
-      "pista": 7500,
+      "parceria": 8000,
+      "pista": 10000,
       "status": "ativo",
       "destaque": true,
       "observacao": "",
       "ordem": 50,
-      "imagem": "adrenaline2.png"
+      "imagem": "adrenaline2.png",
+      "variacao": {
+        "parceria_antes": 5500,
+        "pista_antes": 7500,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "HOSPITAL ILEGAL",
       "item": "ADRENALINA CLANDESTINA PLUS",
-      "parceria": 9000,
-      "pista": 12000,
+      "parceria": 12000,
+      "pista": 15000,
       "status": "ativo",
       "destaque": true,
       "observacao": "",
       "ordem": 51,
-      "imagem": "adrenalineclandestineplus.png"
+      "imagem": "adrenalineclandestineplus.png",
+      "variacao": {
+        "parceria_antes": 9000,
+        "pista_antes": 12000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "HOSPITAL ILEGAL",
       "item": "PACOTE DE METADONA",
-      "parceria": 15000,
-      "pista": 17000,
+      "parceria": 18000,
+      "pista": 22000,
       "status": "ativo",
       "destaque": true,
       "observacao": "",
       "ordem": 52,
-      "imagem": "packdrug1.png"
+      "imagem": "packdrug1.png",
+      "variacao": {
+        "parceria_antes": 15000,
+        "pista_antes": 17000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "HOSPITAL ILEGAL",
@@ -431,112 +546,162 @@
     {
       "categoria": "LAVAGEM",
       "item": "PENDRIVE 1",
-      "parceria": 3500,
-      "pista": 5100,
+      "parceria": 4500,
+      "pista": 6000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 63,
-      "imagem": "pendrive1.png"
+      "imagem": "pendrive1.png",
+      "variacao": {
+        "parceria_antes": 3500,
+        "pista_antes": 5100,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "LAVAGEM",
       "item": "PENDRIVE 2",
-      "parceria": 6000,
-      "pista": 9000,
+      "parceria": 7500,
+      "pista": 10500,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 64,
-      "imagem": "pendrive2.png"
+      "imagem": "pendrive2.png",
+      "variacao": {
+        "parceria_antes": 6000,
+        "pista_antes": 9000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "LAVAGEM",
       "item": "PENDRIVE 3",
-      "parceria": 9500,
-      "pista": 12250,
+      "parceria": 11000,
+      "pista": 13750,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 65,
-      "imagem": "pendrive3.png"
+      "imagem": "pendrive3.png",
+      "variacao": {
+        "parceria_antes": 9500,
+        "pista_antes": 12250,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "LAVAGEM",
       "item": "PENDRIVE 4",
-      "parceria": 14000,
-      "pista": 18000,
+      "parceria": 15000,
+      "pista": 19000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 66,
-      "imagem": "pendrive4.png"
+      "imagem": "pendrive4.png",
+      "variacao": {
+        "parceria_antes": 14000,
+        "pista_antes": 18000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "LAVAGEM",
       "item": "PENDRIVE 5",
-      "parceria": 22000,
-      "pista": 27000,
+      "parceria": 25000,
+      "pista": 30000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 67,
-      "imagem": "pendrive5.png"
+      "imagem": "pendrive5.png",
+      "variacao": {
+        "parceria_antes": 22000,
+        "pista_antes": 27000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "LAVAGEM",
       "item": "ALGEMA",
-      "parceria": 4500,
-      "pista": 6500,
+      "parceria": 5500,
+      "pista": 7500,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 68,
-      "imagem": "handcuff.png"
+      "imagem": "handcuff.png",
+      "variacao": {
+        "parceria_antes": 4500,
+        "pista_antes": 6500,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "LAVAGEM",
       "item": "ALCOOL EM GEL",
-      "parceria": 2850,
-      "pista": 3200,
+      "parceria": 3500,
+      "pista": 4500,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 69,
-      "imagem": "alcoolemgel.png"
+      "imagem": "alcoolemgel.png",
+      "variacao": {
+        "parceria_antes": 2850,
+        "pista_antes": 3200,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "MECÂNICA ILEGAL",
       "item": "TABLET DE CORRIDA",
-      "parceria": 6500,
-      "pista": 8000,
+      "parceria": 8000,
+      "pista": 9500,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 20,
-      "imagem": "racestablet.png"
+      "imagem": "racestablet.png",
+      "variacao": {
+        "parceria_antes": 6500,
+        "pista_antes": 8000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "MECÂNICA ILEGAL",
       "item": "TICKET DE CORRIDA",
-      "parceria": 8000,
+      "parceria": 6000,
       "pista": 10000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 21,
-      "imagem": "racesticket.png"
+      "imagem": "racesticket.png",
+      "variacao": {
+        "parceria_antes": 8000,
+        "pista_antes": 10000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "MECÂNICA ILEGAL",
       "item": "TICKET DE CORRIDA ++",
-      "parceria": 12000,
+      "parceria": 10000,
       "pista": 15000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 22,
-      "imagem": "racesticketplus.png"
+      "imagem": "racesticketplus.png",
+      "variacao": {
+        "parceria_antes": 12000,
+        "pista_antes": 15000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "MECÂNICA ILEGAL",
@@ -606,36 +771,51 @@
     },
     {
       "categoria": "MUNIÇÃO",
-      "item": "PISTOLA 100X/",
-      "parceria": 8000,
-      "pista": 11500,
+      "item": "PISTOLA 100X",
+      "parceria": 10000,
+      "pista": 13500,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 28,
-      "imagem": "caixa_m_pistola.png"
+      "imagem": "caixa_m_pistola.png",
+      "variacao": {
+        "parceria_antes": 8000,
+        "pista_antes": 11500,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "MUNIÇÃO",
       "item": "SMG 150X",
-      "parceria": 11000,
-      "pista": 14000,
+      "parceria": 15000,
+      "pista": 18000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 29,
-      "imagem": "caixa_m_smg.png"
+      "imagem": "caixa_m_smg.png",
+      "variacao": {
+        "parceria_antes": 11000,
+        "pista_antes": 14000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "MUNIÇÃO",
       "item": "FUZIL 250X",
-      "parceria": 16000,
-      "pista": 19000,
+      "parceria": 18000,
+      "pista": 22000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 30,
-      "imagem": "caixa_m_rifle.png"
+      "imagem": "caixa_m_rifle.png",
+      "variacao": {
+        "parceria_antes": 16000,
+        "pista_antes": 19000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "MUNIÇÃO",
@@ -651,46 +831,66 @@
     {
       "categoria": "MUNIÇÃO",
       "item": "CAIXA MUNICAO SNIPER",
-      "parceria": 22000,
-      "pista": 30000,
+      "parceria": 25000,
+      "pista": 33000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 32,
-      "imagem": "sniperammo.png"
+      "imagem": "sniperammo.png",
+      "variacao": {
+        "parceria_antes": 22000,
+        "pista_antes": 30000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "MUNIÇÃO",
       "item": "C4",
-      "parceria": 5000,
-      "pista": 7000,
+      "parceria": 7000,
+      "pista": 9000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 33,
-      "imagem": "c4.png"
+      "imagem": "c4.png",
+      "variacao": {
+        "parceria_antes": 5000,
+        "pista_antes": 7000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "MUNIÇÃO",
       "item": "C4 ++",
-      "parceria": 10000,
-      "pista": 14000,
+      "parceria": 12000,
+      "pista": 16000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 34,
-      "imagem": "c4premium.png"
+      "imagem": "c4premium.png",
+      "variacao": {
+        "parceria_antes": 10000,
+        "pista_antes": 14000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "MUNIÇÃO",
       "item": "C4 ADESIVA",
-      "parceria": 12000,
-      "pista": 18000,
+      "parceria": 15000,
+      "pista": 21000,
       "status": "ativo",
       "destaque": true,
       "observacao": "",
       "ordem": 35,
-      "imagem": "c4.png"
+      "imagem": "c4.png",
+      "variacao": {
+        "parceria_antes": 12000,
+        "pista_antes": 18000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "MUNIÇÃO",
@@ -717,24 +917,34 @@
     {
       "categoria": "MUNIÇÃO",
       "item": "FLASH BANG",
-      "parceria": 10000,
-      "pista": 15000,
+      "parceria": 12000,
+      "pista": 17000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 38,
-      "imagem": "attach_flashlight.png"
+      "imagem": "attach_flashlight.png",
+      "variacao": {
+        "parceria_antes": 10000,
+        "pista_antes": 15000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "MUNIÇÃO",
       "item": "G. DE FUMACA",
-      "parceria": 10000,
-      "pista": 15000,
+      "parceria": 12000,
+      "pista": 17000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 39,
-      "imagem": "attach_flashlight.png"
+      "imagem": "attach_flashlight.png",
+      "variacao": {
+        "parceria_antes": 10000,
+        "pista_antes": 15000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "TECNOLOGIA / UTILITÁRIOS",
@@ -761,13 +971,18 @@
     {
       "categoria": "TECNOLOGIA / UTILITÁRIOS",
       "item": "MAPEAMENTO DE BAIRRO",
-      "parceria": 15000,
-      "pista": 22000,
+      "parceria": 20000,
+      "pista": 27000,
       "status": "ativo",
       "destaque": false,
       "observacao": "",
       "ordem": 56,
-      "imagem": "mapabairro1.png"
+      "imagem": "mapabairro1.png",
+      "variacao": {
+        "parceria_antes": 15000,
+        "pista_antes": 22000,
+        "em": "2026-10-09T08:09:50-03:00"
+      }
     },
     {
       "categoria": "TECNOLOGIA / UTILITÁRIOS",
@@ -818,5 +1033,403 @@
       }
     ]
   },
-  "historico": []
+  "historico": [
+    {
+      "em": "2026-10-09T08:09:50-03:00",
+      "por": "Italo Alves - Sênior Ilegal",
+      "mudancas": [
+        {
+          "tipo": "alterado",
+          "categoria": "ARMAS",
+          "item": "PISTOLA T54",
+          "parceria_antes": 32000,
+          "pista_antes": 40000,
+          "parceria": 30000,
+          "pista": 38000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "ARMAS",
+          "item": "PISTOLA DESERT EAGLE",
+          "parceria_antes": 42000,
+          "pista_antes": 52000,
+          "parceria": 45000,
+          "pista": 55000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "ARMAS",
+          "item": "TEC-9",
+          "parceria_antes": 55000,
+          "pista_antes": 70000,
+          "parceria": 50000,
+          "pista": 70000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "ARMAS",
+          "item": "AK-102",
+          "parceria_antes": 110000,
+          "pista_antes": 140000,
+          "parceria": 120000,
+          "pista": 150000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "ARMAS",
+          "item": "G3 - SIG SAUER",
+          "parceria_antes": 170000,
+          "pista_antes": 210000,
+          "parceria": 160000,
+          "pista": 210000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "ARMAS",
+          "item": "F2000 - MTAR",
+          "parceria_antes": 80000,
+          "pista_antes": 100000,
+          "parceria": 75000,
+          "pista": 100000,
+          "renomeado_de": "F2000 - MTAR."
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "ARMAS",
+          "item": "FAL",
+          "parceria_antes": 140000,
+          "pista_antes": 175000,
+          "parceria": 145000,
+          "pista": 180000,
+          "renomeado_de": "FALL"
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "ARMAS",
+          "item": "AK-74N",
+          "parceria_antes": 155000,
+          "pista_antes": 195000,
+          "parceria": 150000,
+          "pista": 190000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "ARMAS",
+          "item": "DESERT EAGLE DOURADA",
+          "parceria_antes": 65000,
+          "pista_antes": 85000,
+          "parceria": 70000,
+          "pista": 90000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "ARMAS",
+          "item": "SNIPER AVANCADA B",
+          "parceria_antes": 1300000,
+          "pista_antes": 1350000,
+          "parceria": 1400000,
+          "pista": 1500000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "ARMAS",
+          "item": "SNIPER AVANCADA",
+          "parceria_antes": 1100000,
+          "pista_antes": 1150000,
+          "parceria": 1200000,
+          "pista": 1350000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "DESMANCHE",
+          "item": "CARTAO ILEGIVEL ++",
+          "parceria_antes": 8000,
+          "pista_antes": 11000,
+          "parceria": 10000,
+          "pista": 13000,
+          "renomeado_de": "CARTAO ILEGIVEL + +"
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "DESMANCHE",
+          "item": "BLOQUEADOR DE SINAL",
+          "parceria_antes": 11000,
+          "pista_antes": 15000,
+          "parceria": 12000,
+          "pista": 16000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "DESMANCHE",
+          "item": "LOCKPICK",
+          "parceria_antes": 4500,
+          "pista_antes": 6000,
+          "parceria": 6000,
+          "pista": 8000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "DESMANCHE",
+          "item": "LOCKPICK ++",
+          "parceria_antes": 6500,
+          "pista_antes": 8500,
+          "parceria": 7500,
+          "pista": 9500
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "DROGAS",
+          "item": "PACOTE DE DROGAS",
+          "parceria_antes": 15000,
+          "pista_antes": 17000,
+          "parceria": 18000,
+          "pista": 22000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "DROGAS",
+          "item": "COLETE",
+          "parceria_antes": 9000,
+          "pista_antes": 12000,
+          "parceria": 10000,
+          "pista": 13000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "DROGAS",
+          "item": "CAPUZ",
+          "parceria_antes": 3500,
+          "pista_antes": 5300,
+          "parceria": 5000,
+          "pista": 7500
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "DROGAS",
+          "item": "MAPEAMENTO DE BAIRRO",
+          "parceria_antes": 15000,
+          "pista_antes": 22000,
+          "parceria": 20000,
+          "pista": 27000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "HOSPITAL ILEGAL",
+          "item": "BANDAGEM INFECTADA",
+          "parceria_antes": 3100,
+          "pista_antes": 5100,
+          "parceria": 4000,
+          "pista": 6000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "HOSPITAL ILEGAL",
+          "item": "ADRENALINA CLANDESTINA",
+          "parceria_antes": 5500,
+          "pista_antes": 7500,
+          "parceria": 8000,
+          "pista": 10000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "HOSPITAL ILEGAL",
+          "item": "ADRENALINA CLANDESTINA PLUS",
+          "parceria_antes": 9000,
+          "pista_antes": 12000,
+          "parceria": 12000,
+          "pista": 15000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "HOSPITAL ILEGAL",
+          "item": "PACOTE DE METADONA",
+          "parceria_antes": 15000,
+          "pista_antes": 17000,
+          "parceria": 18000,
+          "pista": 22000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "LAVAGEM",
+          "item": "PENDRIVE 1",
+          "parceria_antes": 3500,
+          "pista_antes": 5100,
+          "parceria": 4500,
+          "pista": 6000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "LAVAGEM",
+          "item": "PENDRIVE 2",
+          "parceria_antes": 6000,
+          "pista_antes": 9000,
+          "parceria": 7500,
+          "pista": 10500
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "LAVAGEM",
+          "item": "PENDRIVE 3",
+          "parceria_antes": 9500,
+          "pista_antes": 12250,
+          "parceria": 11000,
+          "pista": 13750
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "LAVAGEM",
+          "item": "PENDRIVE 4",
+          "parceria_antes": 14000,
+          "pista_antes": 18000,
+          "parceria": 15000,
+          "pista": 19000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "LAVAGEM",
+          "item": "PENDRIVE 5",
+          "parceria_antes": 22000,
+          "pista_antes": 27000,
+          "parceria": 25000,
+          "pista": 30000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "LAVAGEM",
+          "item": "ALGEMA",
+          "parceria_antes": 4500,
+          "pista_antes": 6500,
+          "parceria": 5500,
+          "pista": 7500
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "LAVAGEM",
+          "item": "ALCOOL EM GEL",
+          "parceria_antes": 2850,
+          "pista_antes": 3200,
+          "parceria": 3500,
+          "pista": 4500
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "MECÂNICA ILEGAL",
+          "item": "TABLET DE CORRIDA",
+          "parceria_antes": 6500,
+          "pista_antes": 8000,
+          "parceria": 8000,
+          "pista": 9500
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "MECÂNICA ILEGAL",
+          "item": "TICKET DE CORRIDA",
+          "parceria_antes": 8000,
+          "pista_antes": 10000,
+          "parceria": 6000,
+          "pista": 10000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "MECÂNICA ILEGAL",
+          "item": "TICKET DE CORRIDA ++",
+          "parceria_antes": 12000,
+          "pista_antes": 15000,
+          "parceria": 10000,
+          "pista": 15000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "MUNIÇÃO",
+          "item": "PISTOLA 100X",
+          "parceria_antes": 8000,
+          "pista_antes": 11500,
+          "parceria": 10000,
+          "pista": 13500,
+          "renomeado_de": "PISTOLA 100X/"
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "MUNIÇÃO",
+          "item": "SMG 150X",
+          "parceria_antes": 11000,
+          "pista_antes": 14000,
+          "parceria": 15000,
+          "pista": 18000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "MUNIÇÃO",
+          "item": "FUZIL 250X",
+          "parceria_antes": 16000,
+          "pista_antes": 19000,
+          "parceria": 18000,
+          "pista": 22000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "MUNIÇÃO",
+          "item": "CAIXA MUNICAO SNIPER",
+          "parceria_antes": 22000,
+          "pista_antes": 30000,
+          "parceria": 25000,
+          "pista": 33000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "MUNIÇÃO",
+          "item": "C4",
+          "parceria_antes": 5000,
+          "pista_antes": 7000,
+          "parceria": 7000,
+          "pista": 9000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "MUNIÇÃO",
+          "item": "C4 ++",
+          "parceria_antes": 10000,
+          "pista_antes": 14000,
+          "parceria": 12000,
+          "pista": 16000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "MUNIÇÃO",
+          "item": "C4 ADESIVA",
+          "parceria_antes": 12000,
+          "pista_antes": 18000,
+          "parceria": 15000,
+          "pista": 21000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "MUNIÇÃO",
+          "item": "FLASH BANG",
+          "parceria_antes": 10000,
+          "pista_antes": 15000,
+          "parceria": 12000,
+          "pista": 17000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "MUNIÇÃO",
+          "item": "G. DE FUMACA",
+          "parceria_antes": 10000,
+          "pista_antes": 15000,
+          "parceria": 12000,
+          "pista": 17000
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "TECNOLOGIA / UTILITÁRIOS",
+          "item": "MAPEAMENTO DE BAIRRO",
+          "parceria_antes": 15000,
+          "pista_antes": 22000,
+          "parceria": 20000,
+          "pista": 27000
+        }
+      ]
+    }
+  ]
 }
