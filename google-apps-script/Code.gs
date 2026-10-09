@@ -58,6 +58,7 @@ function onOpen() {
     .addItem('Publicar no site', 'publicarNoGitHub')
     .addSeparator()
     .addItem('Enviar teste para o Discord', 'testarDiscord')
+    .addItem('Reenviar último aviso no Discord', 'reenviarUltimoAviso')
     .addToUi();
 }
 
@@ -101,6 +102,21 @@ function definirMeuNome() {
   if (!nome) return;
   PropertiesService.getUserProperties().setProperty('HMN_NOME', nome);
   ui.alert(`Nome salvo: ${nome}`);
+}
+
+/** Reenvia o aviso da última publicação (lido do histórico publicado no site). */
+function reenviarUltimoAviso() {
+  const ui = SpreadsheetApp.getUi();
+  const hook = PropertiesService.getScriptProperties().getProperty('DISCORD_WEBHOOK');
+  if (!hook) throw new Error('Configure primeiro: HIGH • Mercado Negro > Configurar aviso no Discord.');
+  const pub = lerPublicado_();
+  const ult = pub.catalogo && Array.isArray(pub.catalogo.historico) && pub.catalogo.historico[0];
+  if (!ult || !ult.mudancas || !ult.mudancas.length) { ui.alert('Não há mudanças registradas no histórico para reenviar.'); return; }
+  const quando = Utilities.formatDate(new Date(ult.em), Session.getScriptTimeZone() || 'America/Sao_Paulo', 'dd/MM/yyyy HH:mm');
+  const ok = ui.alert('Reenviar aviso', `Reenviar no Discord o aviso da publicação de ${quando} (${ult.mudancas.length} mudança(s), por ${ult.por || '—'})?`, ui.ButtonSet.YES_NO);
+  if (ok !== ui.Button.YES) return;
+  enviarDiscord_(hook, {mudancas: ult.mudancas, por: ult.por, quando});
+  ui.alert('Aviso reenviado no Discord.');
 }
 
 function testarDiscord() {
@@ -480,13 +496,37 @@ function enviarDiscord_(hook, info) {
         url: site ? site + 'historico.html' : undefined,
         description: (i === 0 ? `${resumo}\n\n` : '') + desc + (ultimo && site ? `\n🔗 **[Abrir a tabela completa](${site}tabela.html)**` : ''),
         color: 0x8d35ff,
-        footer: ultimo ? {text: `Publicado por ${info.por || '—'} • ${agora_('dd/MM/yyyy HH:mm')}`} : undefined
+        footer: ultimo ? {text: `Publicado por ${info.por || '—'} • ${info.quando || agora_('dd/MM/yyyy HH:mm')}`} : undefined
       }]
     };
-    const r = UrlFetchApp.fetch(hook, {method:'post', contentType:'application/json', payload: JSON.stringify(payload), muteHttpExceptions:true});
-    if (r.getResponseCode() >= 300) throw new Error(`Discord ${r.getResponseCode()}: ${r.getContentText()}`);
-    if (!ultimo) Utilities.sleep(700); // respeita o limite de mensagens do webhook
+    try { postDiscord_(hook, payload); }
+    catch (e) { throw new Error(`${e.message}${partes.length > 1 ? ` (enviadas ${i} de ${partes.length} mensagens)` : ''}. Use "Reenviar último aviso no Discord" daqui a alguns minutos.`); }
+    if (!ultimo) Utilities.sleep(1500); // respeita o limite de mensagens do webhook
   });
+}
+
+/** POST no webhook com novas tentativas quando o Discord limita (429 / Cloudflare 1015). */
+function postDiscord_(hook, payload) {
+  const esperas = [3, 8, 20, 45];   // segundos entre tentativas (~1min16s no total)
+  for (let t = 0; ; t++) {
+    const r = UrlFetchApp.fetch(hook, {method:'post', contentType:'application/json', payload: JSON.stringify(payload), muteHttpExceptions:true});
+    const code = r.getResponseCode();
+    if (code < 300) return;
+    const limitado = code === 429 || code >= 500;
+    if (!limitado || t >= esperas.length) {
+      const txt = r.getContentText();
+      throw new Error(`Discord ${code}${/1015/.test(txt) ? ' (limite temporário do Discord para os servidores do Google)' : `: ${txt.slice(0, 200)}`}`);
+    }
+    let espera = esperas[t];
+    try {
+      const j = JSON.parse(r.getContentText());
+      if (j && j.retry_after) espera = Math.max(espera, Math.ceil(Number(j.retry_after) > 100 ? Number(j.retry_after) / 1000 : Number(j.retry_after)));
+    } catch (e) { /* resposta não-JSON (Cloudflare): usa a espera padrão */ }
+    const h = r.getHeaders() || {};
+    const ra = Number(h['Retry-After'] || h['retry-after']);
+    if (ra > 0) espera = Math.max(espera, Math.ceil(ra));
+    Utilities.sleep(Math.min(espera, 60) * 1000);
+  }
 }
 
 /** Agrupa as mudanças por categoria e divide em blocos que cabem numa mensagem do Discord. */
