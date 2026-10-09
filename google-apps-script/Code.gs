@@ -435,41 +435,73 @@ function montarRegras_(anterior, avisos) {
 
 function enviarDiscord_(hook, info) {
   const site = PropertiesService.getScriptProperties().getProperty('SITE_URL') || siteUrlPadrao_();
-  const linhas = info.mudancas.map(linhaDiscord_);
-  // Embed do Discord aceita até 4096 caracteres na descrição.
-  let desc = '';
-  for (let i = 0; i < linhas.length; i++) {
-    const prox = desc + linhas[i] + '\n';
-    if (prox.length > 3800) { desc += `…e mais ${linhas.length - i} mudança(s). Veja o histórico no site.`; break; }
-    desc = prox;
-  }
-  const payload = {
-    username: 'Mercado Negro • High',
-    embeds: [{
-      title: info.teste ? '🧪 TESTE — Tabela do Mercado Negro atualizada' : '📢 Tabela do Mercado Negro atualizada',
-      url: site ? site + 'historico.html' : undefined,
-      description: desc + (site ? `\n🔗 **[Abrir a tabela completa](${site}tabela.html)**` : ''),
-      color: 0x8d35ff,
-      footer: {text: `Publicado por ${info.por || '—'} • ${agora_('dd/MM/yyyy HH:mm')}`}
-    }]
-  };
-  const r = UrlFetchApp.fetch(hook, {method:'post', contentType:'application/json', payload: JSON.stringify(payload), muteHttpExceptions:true});
-  if (r.getResponseCode() >= 300) throw new Error(`Discord ${r.getResponseCode()}: ${r.getContentText()}`);
+  const partes = blocosDiscord_(info.mudancas, 3500);
+  const titulo = info.teste ? '🧪 TESTE — Tabela do Mercado Negro atualizada' : '📢 Tabela do Mercado Negro atualizada';
+  const resumo = resumoCurto_(info.mudancas);
+  partes.forEach((desc, i) => {
+    const ultimo = i === partes.length - 1;
+    const payload = {
+      username: 'Mercado Negro • High',
+      embeds: [{
+        title: i === 0 ? titulo : `${titulo} (${i + 1}/${partes.length})`,
+        url: site ? site + 'historico.html' : undefined,
+        description: (i === 0 ? `${resumo}\n\n` : '') + desc + (ultimo && site ? `\n🔗 **[Abrir a tabela completa](${site}tabela.html)**` : ''),
+        color: 0x8d35ff,
+        footer: ultimo ? {text: `Publicado por ${info.por || '—'} • ${agora_('dd/MM/yyyy HH:mm')}`} : undefined
+      }]
+    };
+    const r = UrlFetchApp.fetch(hook, {method:'post', contentType:'application/json', payload: JSON.stringify(payload), muteHttpExceptions:true});
+    if (r.getResponseCode() >= 300) throw new Error(`Discord ${r.getResponseCode()}: ${r.getContentText()}`);
+    if (!ultimo) Utilities.sleep(700); // respeita o limite de mensagens do webhook
+  });
 }
 
-function linhaDiscord_(m) {
-  if (m.tipo === 'novo') return `🆕 **${m.item}** (${m.categoria}) — Parceria ${moeda_(m.parceria)} • Pista ${moeda_(m.pista)}`;
-  if (m.tipo === 'removido') return `🗑️ ~~${m.item}~~ (${m.categoria}) saiu da tabela`;
+/** Agrupa as mudanças por categoria e divide em blocos que cabem numa mensagem do Discord. */
+function blocosDiscord_(mudancas, limite) {
+  const cats = [];
+  mudancas.forEach(m => { if (cats.indexOf(m.categoria) < 0) cats.push(m.categoria); });
+  const linhas = [];
+  cats.forEach(c => {
+    linhas.push(`\n**__${c}__**`);
+    mudancas.filter(m => m.categoria === c).forEach(m => linhas.push(linhaDiscord_(m, true)));
+  });
+  const blocos = [];
+  let atual = '';
+  linhas.forEach(l => {
+    if ((atual + l + '\n').length > limite && atual) { blocos.push(atual.trim()); atual = ''; }
+    atual += l + '\n';
+  });
+  if (atual.trim()) blocos.push(atual.trim());
+  return blocos.slice(0, 8); // segurança: no máximo 8 mensagens por publicação
+}
+
+function resumoCurto_(mudancas) {
+  const n = t => mudancas.filter(m => m.tipo === t).length;
+  const sub = mudancas.filter(m => m.tipo === 'alterado' && (m.pista - m.pista_antes || m.parceria - m.parceria_antes) > 0).length;
+  const partes = [];
+  if (n('alterado')) partes.push(`🔺 ${sub} subiu • 🔻 ${n('alterado') - sub} caiu`);
+  if (n('novo')) partes.push(`🆕 ${n('novo')} novo(s)`);
+  if (n('removido')) partes.push(`🗑️ ${n('removido')} removido(s)`);
+  if (n('status')) partes.push(`⚠️ ${n('status')} mudança(s) de status`);
+  return partes.join('   ');
+}
+
+function linhaDiscord_(m, semCategoria) {
+  const cat = semCategoria ? '' : ` (${m.categoria})`;
+  if (m.tipo === 'novo') return `🆕 **${m.item}**${cat} — Parceria ${moeda_(m.parceria)} • Pista ${moeda_(m.pista)}`;
+  if (m.tipo === 'removido') return `🗑️ ~~${m.item}~~${cat} saiu da tabela`;
   if (m.tipo === 'status') {
-    if (m.status === 'indisponivel') return `⛔ **${m.item}** (${m.categoria}) está INDISPONÍVEL no momento`;
-    if (m.status === 'revisar') return `🔎 **${m.item}** (${m.categoria}) está EM REVISÃO — o valor pode mudar`;
-    return `✅ **${m.item}** (${m.categoria}) voltou a ficar disponível — Parceria ${moeda_(m.parceria)} • Pista ${moeda_(m.pista)}`;
+    if (m.status === 'indisponivel') return `⛔ **${m.item}**${cat} está INDISPONÍVEL no momento`;
+    if (m.status === 'revisar') return `🔎 **${m.item}**${cat} está EM REVISÃO — o valor pode mudar`;
+    return `✅ **${m.item}**${cat} voltou a ficar disponível — Parceria ${moeda_(m.parceria)} • Pista ${moeda_(m.pista)}`;
   }
   const seta = (m.pista - m.pista_antes || m.parceria - m.parceria_antes) > 0 ? '🔺' : '🔻';
   const partes = [];
   if (m.parceria !== m.parceria_antes) partes.push(`Parceria ${moeda_(m.parceria_antes)} → **${moeda_(m.parceria)}**`);
+  else partes.push(`Parceria ${moeda_(m.parceria)}`);
   if (m.pista !== m.pista_antes) partes.push(`Pista ${moeda_(m.pista_antes)} → **${moeda_(m.pista)}**`);
-  return `${seta} **${m.item}** (${m.categoria}) — ${partes.join(' • ')}`;
+  else partes.push(`Pista ${moeda_(m.pista)}`);
+  return `${seta} **${m.item}**${cat} — ${partes.join(' • ')}`;
 }
 
 function resumoMudancas_(mudancas, max) {
