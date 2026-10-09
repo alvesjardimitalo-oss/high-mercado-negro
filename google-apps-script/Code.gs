@@ -243,6 +243,7 @@ function montarCatalogo_(anterior, opts) {
 
   const avisos = [];
   const vistos = {};
+  const renomes = detectarRenomes_(values.slice(1), idx, anteriores);
 
   const itens = values.slice(1).map((r, n) => {
     const linha = n + 2;
@@ -264,7 +265,7 @@ function montarCatalogo_(anterior, opts) {
     if (vistos[k]) avisos.push(`• Linha ${linha}: "${item}" está duplicado em ${categoria} (já aparece na linha ${vistos[k]}).`);
     vistos[k] = linha;
 
-    const ant = antPorChave[k];
+    const ant = antPorChave[k] || renomes[k];
     const imagemCelula = idx('IMAGEM') >= 0 ? String(r[idx('IMAGEM')] || '').trim() : '';
     const imagem = imagemCelula || (ant && ant.imagem) || imgPorItem[normalizar_(item)] || '';
 
@@ -289,7 +290,7 @@ function montarCatalogo_(anterior, opts) {
     return out;
   }).filter(Boolean).sort((a,b) => a.categoria.localeCompare(b.categoria,'pt-BR') || a.ordem-b.ordem || a.item.localeCompare(b.item,'pt-BR'));
 
-  const mudancas = anterior ? calcularMudancas_(anteriores, itens) : [];
+  const mudancas = anterior ? calcularMudancas_(anteriores, itens, renomes) : [];
 
   let historico = (anterior && Array.isArray(anterior.historico)) ? anterior.historico.slice() : [];
   if (mudancas.length) historico.unshift({em: agoraIso, por: opts.por || '', mudancas});
@@ -320,23 +321,55 @@ function montarCatalogo_(anterior, opts) {
   };
 }
 
-/** Compara o site atual com a planilha: preços alterados, itens novos e removidos. */
-function calcularMudancas_(anteriores, atuais) {
+/** Compara o site atual com a planilha: preços alterados, itens novos, removidos, renomeados e status. */
+function calcularMudancas_(anteriores, atuais, renomes) {
+  renomes = renomes || {};
   const visivel = i => i && i.status !== 'inativo';
-  const antMap = {}, atuMap = {};
+  const antMap = {}, atuMap = {}, usados = {};
   anteriores.filter(visivel).forEach(i => antMap[chave_(i.categoria, i.item)] = i);
   atuais.filter(visivel).forEach(i => atuMap[chave_(i.categoria, i.item)] = i);
   const out = [];
   Object.keys(atuMap).forEach(k => {
-    const n = atuMap[k], a = antMap[k];
+    const n = atuMap[k];
+    let a = antMap[k], de = '';
+    if (!a && renomes[k] && visivel(renomes[k])) { a = renomes[k]; de = a.item; }
+    if (a) usados[chave_(a.categoria, a.item)] = true;
+    const extra = de ? {renomeado_de: de} : {};
     if (!a) out.push({tipo:'novo', categoria:n.categoria, item:n.item, parceria:n.parceria, pista:n.pista});
     else if (Number(a.parceria) !== n.parceria || Number(a.pista) !== n.pista)
-      out.push({tipo:'alterado', categoria:n.categoria, item:n.item, parceria_antes:Number(a.parceria), pista_antes:Number(a.pista), parceria:n.parceria, pista:n.pista});
+      out.push(Object.assign({tipo:'alterado', categoria:n.categoria, item:n.item, parceria_antes:Number(a.parceria), pista_antes:Number(a.pista), parceria:n.parceria, pista:n.pista}, extra));
     else if ((a.status || 'ativo') !== n.status)
-      out.push({tipo:'status', categoria:n.categoria, item:n.item, status_antes:a.status || 'ativo', status:n.status, parceria:n.parceria, pista:n.pista});
+      out.push(Object.assign({tipo:'status', categoria:n.categoria, item:n.item, status_antes:a.status || 'ativo', status:n.status, parceria:n.parceria, pista:n.pista}, extra));
+    else if (de)
+      out.push({tipo:'renomeado', categoria:n.categoria, item:n.item, renomeado_de:de, parceria:n.parceria, pista:n.pista});
   });
   Object.keys(antMap).forEach(k => {
-    if (!atuMap[k]) { const a = antMap[k]; out.push({tipo:'removido', categoria:a.categoria, item:a.item, parceria_antes:Number(a.parceria), pista_antes:Number(a.pista)}); }
+    if (!atuMap[k] && !usados[k]) { const a = antMap[k]; out.push({tipo:'removido', categoria:a.categoria, item:a.item, parceria_antes:Number(a.parceria), pista_antes:Number(a.pista)}); }
+  });
+  return out;
+}
+
+/** Item que sumiu e item que apareceu na MESMA categoria com a MESMA imagem = renomeação.
+ *  Só vale quando o par é único (evita confundir itens que dividem a mesma imagem). */
+function detectarRenomes_(linhas, idx, anteriores) {
+  if (idx('IMAGEM') < 0 || !anteriores.length) return {};
+  const novasChaves = {}, novos = [];
+  linhas.forEach(r => {
+    const cat = String(r[idx('CATEGORIA')] || '').trim(), item = String(r[idx('ITEM')] || '').trim();
+    if (!cat || !item) return;
+    const k = chave_(cat, item);
+    novasChaves[k] = true;
+    novos.push({k, cat: normalizar_(cat), img: String(r[idx('IMAGEM')] || '').trim()});
+  });
+  const antChaves = {};
+  anteriores.forEach(a => antChaves[chave_(a.categoria, a.item)] = true);
+  const orfaos = anteriores.filter(a => !novasChaves[chave_(a.categoria, a.item)] && a.imagem);
+  const semPar = novos.filter(n => !antChaves[n.k] && n.img);
+  const out = {};
+  semPar.forEach(n => {
+    const cand = orfaos.filter(a => normalizar_(a.categoria) === n.cat && a.imagem === n.img);
+    const concorrentes = semPar.filter(x => x.cat === n.cat && x.img === n.img);
+    if (cand.length === 1 && concorrentes.length === 1) out[n.k] = cand[0];
   });
   return out;
 }
@@ -483,11 +516,13 @@ function resumoCurto_(mudancas) {
   if (n('novo')) partes.push(`🆕 ${n('novo')} novo(s)`);
   if (n('removido')) partes.push(`🗑️ ${n('removido')} removido(s)`);
   if (n('status')) partes.push(`⚠️ ${n('status')} mudança(s) de status`);
+  if (n('renomeado')) partes.push(`✏️ ${n('renomeado')} renomeado(s)`);
   return partes.join('   ');
 }
 
 function linhaDiscord_(m, semCategoria) {
-  const cat = semCategoria ? '' : ` (${m.categoria})`;
+  const cat = (semCategoria ? '' : ` (${m.categoria})`) + (m.renomeado_de ? ` _(antes: ${m.renomeado_de})_` : '');
+  if (m.tipo === 'renomeado') return `✏️ **${m.item}**${cat} — só mudou o nome`;
   if (m.tipo === 'novo') return `🆕 **${m.item}**${cat} — Parceria ${moeda_(m.parceria)} • Pista ${moeda_(m.pista)}`;
   if (m.tipo === 'removido') return `🗑️ ~~${m.item}~~${cat} saiu da tabela`;
   if (m.tipo === 'status') {
@@ -506,7 +541,7 @@ function linhaDiscord_(m, semCategoria) {
 
 function resumoMudancas_(mudancas, max) {
   const n = t => mudancas.filter(m => m.tipo === t).length;
-  const cab = `${n('alterado')} preço(s) alterado(s), ${n('novo')} item(ns) novo(s), ${n('removido')} removido(s), ${n('status')} mudança(s) de status`;
+  const cab = `${n('alterado')} preço(s) alterado(s), ${n('novo')} item(ns) novo(s), ${n('removido')} removido(s), ${n('renomeado')} renomeado(s), ${n('status')} mudança(s) de status`;
   const lista = mudancas.slice(0, max).map(m => '  ' + linhaDiscord_(m).replace(/\*\*|~~/g, ''));
   return `${cab}\n${lista.join('\n')}${mudancas.length > max ? '\n  …' : ''}`;
 }
