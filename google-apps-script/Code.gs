@@ -24,7 +24,7 @@
  *   - selo ▲ SUBIU / ▼ CAIU / NOVO nos itens que mudaram (some depois de 15 dias)
  *   - histórico de mudanças (página historico.html)
  *   - quem publicou
- *   - aviso no Discord com o que mudou (se configurado o webhook)
+ *   - (o aviso com imagem no Discord é enviado pelo GitHub — veja .github/workflows/discord-aviso.yml)
  */
 const HIGH_SITE = {
   sheetName: 'Tabela Mercado Negro',
@@ -51,14 +51,10 @@ function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu('HIGH • Mercado Negro')
     .addItem('Configurar GitHub', 'configurarGitHub')
-    .addItem('Configurar aviso no Discord', 'configurarDiscord')
     .addItem('Definir meu nome', 'definirMeuNome')
     .addSeparator()
     .addItem('Validar tabela', 'validarTabela')
     .addItem('Publicar no site', 'publicarNoGitHub')
-    .addSeparator()
-    .addItem('Enviar teste para o Discord', 'testarDiscord')
-    .addItem('Reenviar último aviso no Discord', 'reenviarUltimoAviso')
     .addToUi();
 }
 
@@ -75,24 +71,6 @@ function configurarGitHub() {
   ui.alert('Configuração salva nas propriedades do Apps Script. O token não foi gravado em nenhuma célula.');
 }
 
-function configurarDiscord() {
-  const ui = SpreadsheetApp.getUi();
-  const props = PropertiesService.getScriptProperties();
-  const r = ui.prompt('Discord',
-    'Cole a URL do webhook do canal onde os reajustes serão anunciados.\n' +
-    '(Discord > Configurações do canal > Integrações > Webhooks > Copiar URL)\n\n' +
-    'Deixe em branco e clique OK para DESATIVAR o aviso.', ui.ButtonSet.OK_CANCEL);
-  if (r.getSelectedButton() !== ui.Button.OK) return;
-  const url = r.getResponseText().trim();
-  if (!url) { props.deleteProperty('DISCORD_WEBHOOK'); ui.alert('Aviso no Discord desativado.'); return; }
-  if (!/^https:\/\/(canary\.|ptb\.)?(discord|discordapp)\.com\/api\/webhooks\//.test(url)) throw new Error('Isso não parece uma URL de webhook do Discord.');
-  props.setProperty('DISCORD_WEBHOOK', url);
-
-  const site = ui.prompt('Discord', `Link do site (aparece no aviso). Deixe em branco para usar:\n${siteUrlPadrao_() || '(configure o GitHub primeiro)'}`, ui.ButtonSet.OK_CANCEL);
-  if (site.getSelectedButton() === ui.Button.OK && site.getResponseText().trim()) props.setProperty('SITE_URL', site.getResponseText().trim());
-  ui.alert('Webhook salvo. Use "Enviar teste para o Discord" para conferir.');
-}
-
 function definirMeuNome() {
   const ui = SpreadsheetApp.getUi();
   const atual = PropertiesService.getUserProperties().getProperty('HMN_NOME') || '';
@@ -102,33 +80,6 @@ function definirMeuNome() {
   if (!nome) return;
   PropertiesService.getUserProperties().setProperty('HMN_NOME', nome);
   ui.alert(`Nome salvo: ${nome}`);
-}
-
-/** Reenvia o aviso da última publicação (lido do histórico publicado no site). */
-function reenviarUltimoAviso() {
-  const ui = SpreadsheetApp.getUi();
-  const hook = PropertiesService.getScriptProperties().getProperty('DISCORD_WEBHOOK');
-  if (!hook) throw new Error('Configure primeiro: HIGH • Mercado Negro > Configurar aviso no Discord.');
-  const pub = lerPublicado_();
-  const ult = pub.catalogo && Array.isArray(pub.catalogo.historico) && pub.catalogo.historico[0];
-  if (!ult || !ult.mudancas || !ult.mudancas.length) { ui.alert('Não há mudanças registradas no histórico para reenviar.'); return; }
-  const quando = Utilities.formatDate(new Date(ult.em), Session.getScriptTimeZone() || 'America/Sao_Paulo', 'dd/MM/yyyy HH:mm');
-  const ok = ui.alert('Reenviar aviso', `Reenviar no Discord o aviso da publicação de ${quando} (${ult.mudancas.length} mudança(s), por ${ult.por || '—'})?`, ui.ButtonSet.YES_NO);
-  if (ok !== ui.Button.YES) return;
-  enviarDiscord_(hook, {mudancas: ult.mudancas, por: ult.por, quando});
-  ui.alert('Aviso reenviado no Discord.');
-}
-
-function testarDiscord() {
-  const props = PropertiesService.getScriptProperties();
-  const hook = props.getProperty('DISCORD_WEBHOOK');
-  if (!hook) throw new Error('Configure primeiro: HIGH • Mercado Negro > Configurar aviso no Discord.');
-  enviarDiscord_(hook, {
-    mudancas: [{tipo:'alterado', categoria:'TESTE', item:'ITEM DE EXEMPLO', parceria_antes:10000, pista_antes:12000, parceria:11000, pista:13000}],
-    por: nomePublicador_(false) || 'teste',
-    teste: true
-  });
-  SpreadsheetApp.getUi().alert('Mensagem de teste enviada. Confira o canal do Discord.');
 }
 
 /* ─────────────────────────── AÇÕES ─────────────────────────── */
@@ -172,14 +123,7 @@ function publicarNoGitHub() {
   const put = UrlFetchApp.fetch(pub.api, {method:'put', headers: pub.headers, contentType:'application/json', payload:JSON.stringify(payload), muteHttpExceptions:true});
   if (![200,201].includes(put.getResponseCode())) throw new Error(`GitHub PUT ${put.getResponseCode()}: ${put.getContentText()}`);
 
-  let discordMsg = '';
-  const hook = PropertiesService.getScriptProperties().getProperty('DISCORD_WEBHOOK');
-  if (hook && res.mudancas.length) {
-    try { enviarDiscord_(hook, {mudancas: res.mudancas, por}); discordMsg = '\nAviso enviado no Discord.'; }
-    catch (e) { discordMsg = `\n⚠ Publicado, mas o aviso no Discord falhou: ${e.message}`; }
-  }
-
-  ui.alert(`Publicado com sucesso.\n\n${res.catalogo.itens.length} itens enviados.\n${res.mudancas.length ? res.mudancas.length + ' mudança(s) registrada(s) no histórico.' : 'Nenhuma mudança de preço.'}${discordMsg}\n\nO GitHub Pages atualiza em 1–2 minutos.`);
+  ui.alert(`Publicado com sucesso.\n\n${res.catalogo.itens.length} itens enviados.\n${res.mudancas.length ? res.mudancas.length + ' mudança(s) registrada(s) no histórico.\nO aviso com imagem será postado no Discord pelo GitHub em 1–2 minutos.' : 'Nenhuma mudança de preço (sem aviso no Discord).'}\n\nO site atualiza em 1–2 minutos.`);
 }
 
 /* ─────────────────────────── GITHUB ─────────────────────────── */
@@ -224,12 +168,6 @@ function listarImagens_(pub) {
   const r = UrlFetchApp.fetch(`${pub.base}${HIGH_SITE.imagesPath}?ref=${encodeURIComponent(HIGH_SITE.branch)}`, {method:'get', headers: pub.headers, muteHttpExceptions:true});
   if (r.getResponseCode() !== 200) return null;
   return JSON.parse(r.getContentText()).filter(f => f.type === 'file').map(f => f.name);
-}
-
-function siteUrlPadrao_() {
-  const props = PropertiesService.getScriptProperties();
-  const owner = props.getProperty('GH_OWNER'), repo = props.getProperty('GH_REPO');
-  return owner && repo ? `https://${owner.toLowerCase()}.github.io/${repo}/` : '';
 }
 
 /* ─────────────────────────── CATÁLOGO ─────────────────────────── */
@@ -483,87 +421,9 @@ function montarRegras_(anterior, avisos) {
   return regras.length ? regras.map(comTexto_) : reserva();
 }
 
-/* ─────────────────────────── DISCORD ─────────────────────────── */
+/* ─────────────────────────── RESUMO DAS MUDANÇAS ─────────────────────────── */
 
-function enviarDiscord_(hook, info) {
-  const site = PropertiesService.getScriptProperties().getProperty('SITE_URL') || siteUrlPadrao_();
-  const partes = blocosDiscord_(info.mudancas, 3500);
-  const titulo = info.teste ? '🧪 TESTE — Tabela do Mercado Negro atualizada' : '📢 Tabela do Mercado Negro atualizada';
-  const resumo = resumoCurto_(info.mudancas);
-  partes.forEach((desc, i) => {
-    const ultimo = i === partes.length - 1;
-    const payload = {
-      username: 'Mercado Negro • High',
-      embeds: [{
-        title: i === 0 ? titulo : `${titulo} (${i + 1}/${partes.length})`,
-        url: site ? site + 'historico.html' : undefined,
-        description: (i === 0 ? `${resumo}\n\n` : '') + desc + (ultimo && site ? `\n🔗 **[Abrir a tabela completa](${site}tabela.html)**` : ''),
-        color: 0x8d35ff,
-        footer: ultimo ? {text: `Publicado por ${info.por || '—'} • ${info.quando || agora_('dd/MM/yyyy HH:mm')}`} : undefined
-      }]
-    };
-    try { postDiscord_(hook, payload); }
-    catch (e) { throw new Error(`${e.message}${partes.length > 1 ? ` (enviadas ${i} de ${partes.length} mensagens)` : ''}. Use "Reenviar último aviso no Discord" daqui a alguns minutos.`); }
-    if (!ultimo) Utilities.sleep(1500); // respeita o limite de mensagens do webhook
-  });
-}
-
-/** POST no webhook com novas tentativas quando o Discord limita (429 / Cloudflare 1015). */
-function postDiscord_(hook, payload) {
-  const esperas = [3, 8, 20, 45];   // segundos entre tentativas (~1min16s no total)
-  for (let t = 0; ; t++) {
-    const r = UrlFetchApp.fetch(hook, {method:'post', contentType:'application/json', payload: JSON.stringify(payload), muteHttpExceptions:true});
-    const code = r.getResponseCode();
-    if (code < 300) return;
-    const limitado = code === 429 || code >= 500;
-    if (!limitado || t >= esperas.length) {
-      const txt = r.getContentText();
-      throw new Error(`Discord ${code}${/1015/.test(txt) ? ' (limite temporário do Discord para os servidores do Google)' : `: ${txt.slice(0, 200)}`}`);
-    }
-    let espera = esperas[t];
-    try {
-      const j = JSON.parse(r.getContentText());
-      if (j && j.retry_after) espera = Math.max(espera, Math.ceil(Number(j.retry_after) > 100 ? Number(j.retry_after) / 1000 : Number(j.retry_after)));
-    } catch (e) { /* resposta não-JSON (Cloudflare): usa a espera padrão */ }
-    const h = r.getHeaders() || {};
-    const ra = Number(h['Retry-After'] || h['retry-after']);
-    if (ra > 0) espera = Math.max(espera, Math.ceil(ra));
-    Utilities.sleep(Math.min(espera, 60) * 1000);
-  }
-}
-
-/** Agrupa as mudanças por categoria e divide em blocos que cabem numa mensagem do Discord. */
-function blocosDiscord_(mudancas, limite) {
-  const cats = [];
-  mudancas.forEach(m => { if (cats.indexOf(m.categoria) < 0) cats.push(m.categoria); });
-  const linhas = [];
-  cats.forEach(c => {
-    linhas.push(`\n**__${c}__**`);
-    mudancas.filter(m => m.categoria === c).forEach(m => linhas.push(linhaDiscord_(m, true)));
-  });
-  const blocos = [];
-  let atual = '';
-  linhas.forEach(l => {
-    if ((atual + l + '\n').length > limite && atual) { blocos.push(atual.trim()); atual = ''; }
-    atual += l + '\n';
-  });
-  if (atual.trim()) blocos.push(atual.trim());
-  return blocos.slice(0, 8); // segurança: no máximo 8 mensagens por publicação
-}
-
-function resumoCurto_(mudancas) {
-  const n = t => mudancas.filter(m => m.tipo === t).length;
-  const sub = mudancas.filter(m => m.tipo === 'alterado' && (m.pista - m.pista_antes || m.parceria - m.parceria_antes) > 0).length;
-  const partes = [];
-  if (n('alterado')) partes.push(`🔺 ${sub} subiu • 🔻 ${n('alterado') - sub} caiu`);
-  if (n('novo')) partes.push(`🆕 ${n('novo')} novo(s)`);
-  if (n('removido')) partes.push(`🗑️ ${n('removido')} removido(s)`);
-  if (n('status')) partes.push(`⚠️ ${n('status')} mudança(s) de status`);
-  if (n('renomeado')) partes.push(`✏️ ${n('renomeado')} renomeado(s)`);
-  return partes.join('   ');
-}
-
-function linhaDiscord_(m, semCategoria) {
+function linhaMudanca_(m, semCategoria) {
   const cat = (semCategoria ? '' : ` (${m.categoria})`) + (m.renomeado_de ? ` _(antes: ${m.renomeado_de})_` : '');
   if (m.tipo === 'renomeado') return `✏️ **${m.item}**${cat} — só mudou o nome`;
   if (m.tipo === 'novo') return `🆕 **${m.item}**${cat} — Parceria ${moeda_(m.parceria)} • Pista ${moeda_(m.pista)}`;
@@ -585,7 +445,7 @@ function linhaDiscord_(m, semCategoria) {
 function resumoMudancas_(mudancas, max) {
   const n = t => mudancas.filter(m => m.tipo === t).length;
   const cab = `${n('alterado')} preço(s) alterado(s), ${n('novo')} item(ns) novo(s), ${n('removido')} removido(s), ${n('renomeado')} renomeado(s), ${n('status')} mudança(s) de status`;
-  const lista = mudancas.slice(0, max).map(m => '  ' + linhaDiscord_(m).replace(/\*\*|~~/g, ''));
+  const lista = mudancas.slice(0, max).map(m => '  ' + linhaMudanca_(m).replace(/\*\*|~~/g, ''));
   return `${cab}\n${lista.join('\n')}${mudancas.length > max ? '\n  …' : ''}`;
 }
 

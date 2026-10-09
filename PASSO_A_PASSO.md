@@ -34,11 +34,14 @@ Crie um Fine-grained Personal Access Token limitado SOMENTE ao repositório do M
 4. Cole o token.
 5. Na primeira execução o Google pedirá autorização do script.
 
-## 6.1 (Opcional) Aviso automático no Discord
-1. No Discord: Configurações do canal > Integrações > Webhooks > Novo webhook > Copiar URL.
-2. Na planilha: **HIGH • Mercado Negro > Configurar aviso no Discord** e cole a URL.
-3. Teste com **Enviar teste para o Discord**.
-4. A URL fica salva nas propriedades do script, nunca em célula.
+## 6.1 (Opcional) Aviso com imagem no Discord
+O aviso é enviado pelo **GitHub**, não pela planilha (os servidores do Google costumam ser bloqueados pelo Discord).
+1. No Discord: Configurações do canal > Integrações > Webhooks > Novo webhook > **Copiar URL do webhook**.
+2. No GitHub, no repositório: **Settings > Secrets and variables > Actions > New repository secret**.
+3. Name: `DISCORD_WEBHOOK` — Secret: cole a URL — **Add secret**.
+4. Teste: aba **Actions > Aviso de reajuste no Discord > Run workflow > Run workflow**. Isso posta o último reajuste do histórico.
+
+A partir daí, toda publicação com mudança de preço gera a imagem e posta sozinha (1–2 min depois). Se algo falhar, use o mesmo **Run workflow** para reenviar.
 
 ## 6.2 Seu nome nas publicações
 Na primeira publicação o script pergunta o nome que fica registrado (histórico e commit). Para trocar: **Definir meu nome**. Cada auxiliar define o seu.
