@@ -47,7 +47,7 @@ Depois use o menu: **HIGH • Mercado Negro > Publicar no site**.
 ## O que acontece ao publicar
 - O script compara com o site atual: itens com preço alterado ganham o selo **▲ SUBIU / ▼ CAIU** e itens novos o selo **NOVO** (os selos somem sozinhos após 15 dias).
 - As mudanças ficam registradas em `historico.html`, com data e nome de quem publicou (as 40 publicações mais recentes).
-- Se o webhook estiver configurado (**Configurar aviso no Discord**), uma mensagem com as mudanças é enviada no canal.
+- Se o segredo `DISCORD_WEBHOOK` estiver configurado no repositório, o GitHub gera uma **imagem com as mudanças** e posta no Discord (`.github/workflows/discord-aviso.yml` + `tools/discord/aviso.py`). Para reenviar: Actions > *Aviso de reajuste no Discord* > Run workflow.
 - Antes de publicar, o script mostra avisos: item duplicado, pista abaixo da parceria, valor zerado, status desconhecido e imagem que não existe no repositório.
 
 ## Recursos do site

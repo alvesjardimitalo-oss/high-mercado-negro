@@ -1,0 +1,52 @@
+name: Aviso de reajuste no Discord
+
+# Roda quando a planilha publica o catálogo. Só posta se a publicação teve mudanças
+# (a última entrada do histórico é desta publicação). Também pode ser rodado à mão
+# em Actions > "Aviso de reajuste no Discord" > Run workflow, para reenviar o último aviso.
+on:
+  push:
+    branches: [main]
+    paths: ['data/catalogo.json']
+  workflow_dispatch:
+    inputs:
+      reenviar:
+        description: 'Reenviar o último reajuste do histórico (mesmo que já tenha sido enviado)'
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: discord-aviso
+  cancel-in-progress: false
+
+jobs:
+  aviso:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar Pillow
+        run: pip install pillow==11.3.0
+
+      - name: Gerar imagem e enviar no Discord
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          SITE_URL: ${{ vars.SITE_URL }}
+          FORCAR: ${{ github.event_name == 'workflow_dispatch' && inputs.reenviar && '--forcar' || '' }}
+        run: python tools/discord/aviso.py --enviar --saida reajuste.png $FORCAR
+
+      - name: Guardar a imagem gerada
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reajuste
+          path: reajuste.png
+          if-no-files-found: ignore
+          retention-days: 14
