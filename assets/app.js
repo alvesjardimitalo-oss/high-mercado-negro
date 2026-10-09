@@ -3,7 +3,7 @@ const ITEM_IMAGE_BASE = './assets/itens/';
 const RULE_IMAGE_BASES = ['./assets/','./assets/itens/'];
 
 const icons = {
-  'armas':'🔫','municao':'💥','tecnologia-utilitarios':'💻','drogas-rotas':'🧪',
+  'armas':'🔫','municao':'💥','tecnologia-utilitarios':'💻','drogas':'🧪','drogas-rotas':'🧪',
   'desmanche':'🔧','lavagem':'💸','falsificacao':'💳','hospital-ilegal':'💉',
   'mecanica':'🏁','mecanica-ilegal':'🏁','contrabando':'📦'
 };
@@ -19,6 +19,7 @@ const categoryVisuals = {
   'armas': {image:'t54.png', image2:'ak102.png', desc:'Pistolas, SMGs, fuzis e armamento do mercado ilegal.'},
   'municao': {image:'caixa_m_rifle.png', image2:'sniperammo.png', desc:'Munições, explosivos e acessórios para seu armamento.'},
   'tecnologia-utilitarios': {image:'tablethack.png', image2:'notebook.png', desc:'Hackeamento, rastreadores e equipamentos eletrônicos.'},
+  'drogas': {image:'packdrug1.png', image2:'mapabairro1.png', desc:'Drogas, insumos e itens ligados às rotas ilegais.'},
   'drogas-rotas': {image:'packdrug1.png', image2:'mapabairro1.png', desc:'Drogas, insumos e itens ligados às rotas ilegais.'},
   'lavagem': {image:'pendrive5.png', image2:'alcoolemgel.png', desc:'Ferramentas e itens utilizados na lavagem de dinheiro.'},
   'desmanche': {image:'blocksignal.png', image2:'lockpickplus.png', desc:'Peças, bloqueadores e itens para desmanche de veículos.'},

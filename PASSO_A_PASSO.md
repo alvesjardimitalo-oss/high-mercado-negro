@@ -15,7 +15,7 @@
 1. Importe `Tabela_Mercado_Negro_High_2026_Editavel.xlsx` no Google Drive/Sheets ou monte a aba com os mesmos cabeçalhos.
 2. A aba usada pelo script precisa se chamar exatamente `Tabela Mercado Negro`.
 3. As quatro primeiras colunas mínimas são CATEGORIA, ITEM, VALOR PARCERIA e VALOR PISTA.
-4. Se quiser, adicione STATUS, DESTAQUE, OBSERVAÇÃO e ORDEM.
+4. Se quiser, adicione STATUS, DESTAQUE, OBSERVAÇÃO, ORDEM e IMAGEM (veja o README).
 
 ## 4. Instalar o Apps Script
 1. Na planilha: **Extensões > Apps Script**.
