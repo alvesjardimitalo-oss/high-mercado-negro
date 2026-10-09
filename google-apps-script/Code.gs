@@ -8,20 +8,35 @@
  * Opcionais:
  * STATUS | DESTAQUE | OBSERVAÇÃO | ORDEM | IMAGEM
  *
- * IMAGEM = nome do arquivo em assets/itens (ex.: ak102.png).
- * Se a coluna não existir ou a célula estiver vazia, o script mantém a imagem
- * que o item já tem no site publicado — assim nenhuma imagem some ao publicar.
+ * STATUS: ativo | inativo (some do site) | revisar (selo "EM REVISÃO") | indisponivel (selo "INDISPONÍVEL")
+ * IMAGEM: nome do arquivo em assets/itens (ex.: ak102.png). Vazia = mantém a imagem já publicada.
  *
- * Regras de lavagem/secagem:
- * Se existir a aba "Regras Lavagem" (GRUPO | TIPO | TITULO | MAQUINA | LAVAGEM | CLIENTE,
- * opcionais ATIVO | IMAGEM), ela é usada. Senão, o script mantém as regras já publicadas.
+ * Aba opcional "Regras Lavagem":
+ *   GRUPO | TIPO | TITULO | MAQUINA | LAVAGEM | CLIENTE (opcionais ATIVO | IMAGEM)
+ *   Sem a aba, mantém as regras já publicadas.
+ *
+ * Aba opcional "Config" (coluna A = CHAVE, coluna B = VALOR):
+ *   AVISO          → faixa de aviso no topo do site (vazio = sem faixa)
+ *   LINK_DENUNCIA  → link para abrir denúncia/ticket (página "Como funciona")
+ *   Sem a aba, mantém os valores já publicados.
+ *
+ * A cada publicação o script compara com o site atual e registra:
+ *   - selo ▲ SUBIU / ▼ CAIU / NOVO nos itens que mudaram (some depois de 15 dias)
+ *   - histórico de mudanças (página historico.html)
+ *   - quem publicou
+ *   - aviso no Discord com o que mudou (se configurado o webhook)
  */
 const HIGH_SITE = {
   sheetName: 'Tabela Mercado Negro',
   rulesSheetName: 'Regras Lavagem',
+  configSheetName: 'Config',
   githubPath: 'data/catalogo.json',
-  branch: 'main'
+  imagesPath: 'assets/itens',
+  branch: 'main',
+  historicoMax: 40           // publicações com mudança guardadas no histórico
 };
+
+const STATUS_VALIDOS = ['ativo', 'inativo', 'revisar', 'indisponivel'];
 
 // Usado só se não houver aba de regras nem regras já publicadas no site.
 const REGRAS_PADRAO = [
@@ -30,13 +45,19 @@ const REGRAS_PADRAO = [
   {grupo:'SECAGEM', tipo:'DINHEIRO SUJO MOLHADO', titulo:'Secagem de dinheiro sujo molhado', maquina:15, lavagem:10, cliente:75, ativo:true, imagem:'dirtywetdollar.png'}
 ];
 
+/* ───────────────────────────── MENU ───────────────────────────── */
+
 function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu('HIGH • Mercado Negro')
     .addItem('Configurar GitHub', 'configurarGitHub')
+    .addItem('Configurar aviso no Discord', 'configurarDiscord')
+    .addItem('Definir meu nome', 'definirMeuNome')
     .addSeparator()
     .addItem('Validar tabela', 'validarTabela')
     .addItem('Publicar no site', 'publicarNoGitHub')
+    .addSeparator()
+    .addItem('Enviar teste para o Discord', 'testarDiscord')
     .addToUi();
 }
 
@@ -53,67 +74,152 @@ function configurarGitHub() {
   ui.alert('Configuração salva nas propriedades do Apps Script. O token não foi gravado em nenhuma célula.');
 }
 
+function configurarDiscord() {
+  const ui = SpreadsheetApp.getUi();
+  const props = PropertiesService.getScriptProperties();
+  const r = ui.prompt('Discord',
+    'Cole a URL do webhook do canal onde os reajustes serão anunciados.\n' +
+    '(Discord > Configurações do canal > Integrações > Webhooks > Copiar URL)\n\n' +
+    'Deixe em branco e clique OK para DESATIVAR o aviso.', ui.ButtonSet.OK_CANCEL);
+  if (r.getSelectedButton() !== ui.Button.OK) return;
+  const url = r.getResponseText().trim();
+  if (!url) { props.deleteProperty('DISCORD_WEBHOOK'); ui.alert('Aviso no Discord desativado.'); return; }
+  if (!/^https:\/\/(canary\.|ptb\.)?(discord|discordapp)\.com\/api\/webhooks\//.test(url)) throw new Error('Isso não parece uma URL de webhook do Discord.');
+  props.setProperty('DISCORD_WEBHOOK', url);
+
+  const site = ui.prompt('Discord', `Link do site (aparece no aviso). Deixe em branco para usar:\n${siteUrlPadrao_() || '(configure o GitHub primeiro)'}`, ui.ButtonSet.OK_CANCEL);
+  if (site.getSelectedButton() === ui.Button.OK && site.getResponseText().trim()) props.setProperty('SITE_URL', site.getResponseText().trim());
+  ui.alert('Webhook salvo. Use "Enviar teste para o Discord" para conferir.');
+}
+
+function definirMeuNome() {
+  const ui = SpreadsheetApp.getUi();
+  const atual = PropertiesService.getUserProperties().getProperty('HMN_NOME') || '';
+  const r = ui.prompt('Seu nome', `Nome que fica registrado nas publicações (ex.: Ítalo • Auxiliar Ilegal).\nAtual: ${atual || '(não definido)'}`, ui.ButtonSet.OK_CANCEL);
+  if (r.getSelectedButton() !== ui.Button.OK) return;
+  const nome = r.getResponseText().trim();
+  if (!nome) return;
+  PropertiesService.getUserProperties().setProperty('HMN_NOME', nome);
+  ui.alert(`Nome salvo: ${nome}`);
+}
+
+function testarDiscord() {
+  const props = PropertiesService.getScriptProperties();
+  const hook = props.getProperty('DISCORD_WEBHOOK');
+  if (!hook) throw new Error('Configure primeiro: HIGH • Mercado Negro > Configurar aviso no Discord.');
+  enviarDiscord_(hook, {
+    mudancas: [{tipo:'alterado', categoria:'TESTE', item:'ITEM DE EXEMPLO', parceria_antes:10000, pista_antes:12000, parceria:11000, pista:13000}],
+    por: nomePublicador_(false) || 'teste',
+    teste: true
+  });
+  SpreadsheetApp.getUi().alert('Mensagem de teste enviada. Confira o canal do Discord.');
+}
+
+/* ─────────────────────────── AÇÕES ─────────────────────────── */
+
 function validarTabela() {
-  let anterior = null;
-  try { anterior = lerPublicado_().catalogo; } catch (e) { /* sem GitHub configurado: valida só a planilha */ }
-  const data = montarCatalogo_(anterior);
-  const semImagem = data.itens.filter(i => !i.imagem).map(i => `• ${i.categoria} — ${i.item}`);
-  let msg = `Tabela válida.\n\n${data.itens.length} itens prontos para publicação.\n${new Set(data.itens.map(i => i.categoria)).size} categorias.\n${data.regras.lavagem.length} regras de lavagem/secagem.`;
-  if (semImagem.length) msg += `\n\nItens sem imagem (${semImagem.length}) — preencha a coluna IMAGEM:\n${semImagem.slice(0, 15).join('\n')}${semImagem.length > 15 ? '\n…' : ''}`;
-  if (!anterior) msg += '\n\n(Aviso: não foi possível ler o site publicado; imagens/regras atuais não foram consideradas na validação.)';
+  let pub = null, imagens = null;
+  try { pub = lerPublicado_(); imagens = listarImagens_(pub); } catch (e) { /* sem GitHub: valida só a planilha */ }
+  const res = montarCatalogo_(pub && pub.catalogo, {imagens, por: nomePublicador_(false)});
+  const data = res.catalogo;
+  let msg = `Tabela válida.\n\n${data.itens.length} itens • ${new Set(data.itens.map(i => i.categoria)).size} categorias • ${data.regras.lavagem.length} regras de lavagem.`;
+  msg += `\n\nMudanças em relação ao site: ${res.mudancas.length ? resumoMudancas_(res.mudancas, 12) : 'nenhuma.'}`;
+  msg += res.avisos.length ? `\n\n⚠ AVISOS (${res.avisos.length}):\n${res.avisos.slice(0, 20).join('\n')}${res.avisos.length > 20 ? '\n…' : ''}` : '\n\n✓ Nenhum aviso.';
+  if (!pub) msg += '\n\n(Não foi possível ler o site publicado; variações e imagens não foram conferidas.)';
   SpreadsheetApp.getUi().alert(msg);
 }
 
 function publicarNoGitHub() {
   const ui = SpreadsheetApp.getUi();
-  const {api, headers, sha, catalogo: anterior} = lerPublicado_();
+  const por = nomePublicador_(true);
+  if (!por) return;
 
-  const catalogo = montarCatalogo_(anterior);
-  const content = JSON.stringify(catalogo, null, 2);
+  const pub = lerPublicado_();
+  let imagens = null;
+  try { imagens = listarImagens_(pub); } catch (e) { imagens = null; }
+  const res = montarCatalogo_(pub.catalogo, {imagens, por});
+
+  if (res.avisos.length) {
+    const ok = ui.alert('Avisos encontrados',
+      `${res.avisos.slice(0, 15).join('\n')}${res.avisos.length > 15 ? '\n…' : ''}\n\nPublicar mesmo assim?`, ui.ButtonSet.YES_NO);
+    if (ok !== ui.Button.YES) return;
+  }
+
+  const content = JSON.stringify(res.catalogo, null, 2);
   const payload = {
-    message: `Atualiza Mercado Negro • ${Utilities.formatDate(new Date(), Session.getScriptTimeZone() || 'America/Sao_Paulo', 'dd/MM/yyyy HH:mm')}`,
+    message: `Atualiza Mercado Negro • ${agora_('dd/MM/yyyy HH:mm')} • por ${por}${res.mudancas.length ? ` • ${res.mudancas.length} mudança(s)` : ''}`,
     content: Utilities.base64Encode(content, Utilities.Charset.UTF_8),
     branch: HIGH_SITE.branch
   };
-  if (sha) payload.sha = sha;
+  if (pub.sha) payload.sha = pub.sha;
 
-  const put = UrlFetchApp.fetch(api, {method:'put', headers, contentType:'application/json', payload:JSON.stringify(payload), muteHttpExceptions:true});
+  const put = UrlFetchApp.fetch(pub.api, {method:'put', headers: pub.headers, contentType:'application/json', payload:JSON.stringify(payload), muteHttpExceptions:true});
   if (![200,201].includes(put.getResponseCode())) throw new Error(`GitHub PUT ${put.getResponseCode()}: ${put.getContentText()}`);
-  const semImagem = catalogo.itens.filter(i => !i.imagem).length;
-  ui.alert(`Publicado com sucesso.\n\n${catalogo.itens.length} itens enviados para ${HIGH_SITE.githubPath}.${semImagem ? `\n${semImagem} item(ns) sem imagem.` : ''}\nO GitHub Pages atualiza após o novo commit ser publicado.`);
+
+  let discordMsg = '';
+  const hook = PropertiesService.getScriptProperties().getProperty('DISCORD_WEBHOOK');
+  if (hook && res.mudancas.length) {
+    try { enviarDiscord_(hook, {mudancas: res.mudancas, por}); discordMsg = '\nAviso enviado no Discord.'; }
+    catch (e) { discordMsg = `\n⚠ Publicado, mas o aviso no Discord falhou: ${e.message}`; }
+  }
+
+  ui.alert(`Publicado com sucesso.\n\n${res.catalogo.itens.length} itens enviados.\n${res.mudancas.length ? res.mudancas.length + ' mudança(s) registrada(s) no histórico.' : 'Nenhuma mudança de preço.'}${discordMsg}\n\nO GitHub Pages atualiza em 1–2 minutos.`);
 }
 
-/** Lê o catalogo.json publicado no GitHub (sha + conteúdo). */
-function lerPublicado_() {
+/* ─────────────────────────── GITHUB ─────────────────────────── */
+
+function credenciais_() {
   const props = PropertiesService.getScriptProperties();
   const owner = props.getProperty('GH_OWNER');
   const repo = props.getProperty('GH_REPO');
   const token = props.getProperty('GH_TOKEN');
   if (!owner || !repo || !token) throw new Error('Execute primeiro HIGH • Mercado Negro > Configurar GitHub.');
-
-  const api = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${HIGH_SITE.githubPath}`;
-  const headers = {
+  return {owner, repo, headers: {
     Authorization: `Bearer ${token}`,
     Accept: 'application/vnd.github+json',
     'X-GitHub-Api-Version': '2022-11-28'
-  };
+  }};
+}
 
+/** Lê o catalogo.json publicado no GitHub (sha + conteúdo). */
+function lerPublicado_() {
+  const {owner, repo, headers} = credenciais_();
+  const base = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/`;
+  const api = base + HIGH_SITE.githubPath;
   const get = UrlFetchApp.fetch(`${api}?ref=${encodeURIComponent(HIGH_SITE.branch)}`, {method:'get', headers, muteHttpExceptions:true});
-  if (get.getResponseCode() === 404) return {api, headers, sha: null, catalogo: null};
+  if (get.getResponseCode() === 404) return {api, base, headers, sha: null, catalogo: null};
   if (get.getResponseCode() !== 200) throw new Error(`GitHub GET ${get.getResponseCode()}: ${get.getContentText()}`);
 
   const file = JSON.parse(get.getContentText());
   let catalogo = null;
   try {
-    if (file.content) {
-      const texto = Utilities.newBlob(Utilities.base64Decode(file.content.replace(/\n/g, ''))).getDataAsString('UTF-8');
-      catalogo = JSON.parse(texto);
+    let b64 = file.content;
+    if (!b64 && file.download_url) {           // arquivo > 1 MB: a API não manda o conteúdo inline
+      catalogo = JSON.parse(UrlFetchApp.fetch(file.download_url, {headers}).getContentText());
+    } else if (b64) {
+      catalogo = JSON.parse(Utilities.newBlob(Utilities.base64Decode(b64.replace(/\n/g, ''))).getDataAsString('UTF-8'));
     }
   } catch (e) { catalogo = null; }
-  return {api, headers, sha: file.sha, catalogo};
+  return {api, base, headers, sha: file.sha, catalogo};
 }
 
-function montarCatalogo_(anterior) {
+/** Lista os arquivos de assets/itens no GitHub (para conferir a coluna IMAGEM). */
+function listarImagens_(pub) {
+  const r = UrlFetchApp.fetch(`${pub.base}${HIGH_SITE.imagesPath}?ref=${encodeURIComponent(HIGH_SITE.branch)}`, {method:'get', headers: pub.headers, muteHttpExceptions:true});
+  if (r.getResponseCode() !== 200) return null;
+  return JSON.parse(r.getContentText()).filter(f => f.type === 'file').map(f => f.name);
+}
+
+function siteUrlPadrao_() {
+  const props = PropertiesService.getScriptProperties();
+  const owner = props.getProperty('GH_OWNER'), repo = props.getProperty('GH_REPO');
+  return owner && repo ? `https://${owner.toLowerCase()}.github.io/${repo}/` : '';
+}
+
+/* ─────────────────────────── CATÁLOGO ─────────────────────────── */
+
+function montarCatalogo_(anterior, opts) {
+  opts = opts || {};
   const ss = SpreadsheetApp.getActive();
   const sh = ss.getSheetByName(HIGH_SITE.sheetName);
   if (!sh) throw new Error(`Aba não encontrada: ${HIGH_SITE.sheetName}`);
@@ -126,54 +232,124 @@ function montarCatalogo_(anterior) {
   const missing = required.filter(h => idx(h) < 0);
   if (missing.length) throw new Error(`Cabeçalhos obrigatórios ausentes: ${missing.join(', ')}`);
 
-  // Imagens já publicadas: por categoria+item e, como reserva, só pelo item.
-  const imgPorChave = {}, imgPorItem = {};
-  ((anterior && anterior.itens) || []).forEach(i => {
-    if (!i || !i.imagem) return;
-    imgPorChave[`${normalizar_(i.categoria)}|${normalizar_(i.item)}`] = i.imagem;
-    if (!imgPorItem[normalizar_(i.item)]) imgPorItem[normalizar_(i.item)] = i.imagem;
+  const agoraIso = agora_("yyyy-MM-dd'T'HH:mm:ssXXX");
+  const anteriores = (anterior && anterior.itens) || [];
+  const antPorChave = {}, imgPorItem = {};
+  anteriores.forEach(i => {
+    if (!i) return;
+    antPorChave[chave_(i.categoria, i.item)] = i;
+    if (i.imagem && !imgPorItem[normalizar_(i.item)]) imgPorItem[normalizar_(i.item)] = i.imagem;
   });
 
+  const avisos = [];
+  const vistos = {};
+
   const itens = values.slice(1).map((r, n) => {
+    const linha = n + 2;
     const categoria = String(r[idx('CATEGORIA')] || '').trim();
     const item = String(r[idx('ITEM')] || '').trim();
     if (!categoria || !item) return null;
-    const status = idx('STATUS') >= 0 ? String(r[idx('STATUS')] || 'ativo').trim().toLowerCase() : 'ativo';
+
+    let status = idx('STATUS') >= 0 ? normalizar_(r[idx('STATUS')] || 'ativo').toLowerCase() : 'ativo';
+    if (!status) status = 'ativo';
+    if (STATUS_VALIDOS.indexOf(status) < 0) { avisos.push(`• Linha ${linha} (${item}): STATUS "${r[idx('STATUS')]}" desconhecido — tratado como ativo.`); status = 'ativo'; }
+
     const destaqueRaw = idx('DESTAQUE') >= 0 ? r[idx('DESTAQUE')] : false;
     const observacao = idx('OBSERVAÇÃO') >= 0 ? String(r[idx('OBSERVAÇÃO')] || '').trim() : '';
     const ordem = idx('ORDEM') >= 0 ? Number(r[idx('ORDEM')] || n + 1) : n + 1;
+    const parceria = numero_(r[idx('VALOR PARCERIA')], linha);
+    const pista = numero_(r[idx('VALOR PISTA')], linha);
+
+    const k = chave_(categoria, item);
+    if (vistos[k]) avisos.push(`• Linha ${linha}: "${item}" está duplicado em ${categoria} (já aparece na linha ${vistos[k]}).`);
+    vistos[k] = linha;
+
+    const ant = antPorChave[k];
     const imagemCelula = idx('IMAGEM') >= 0 ? String(r[idx('IMAGEM')] || '').trim() : '';
-    const imagem = imagemCelula
-      || imgPorChave[`${normalizar_(categoria)}|${normalizar_(item)}`]
-      || imgPorItem[normalizar_(item)]
-      || '';
-    return {
-      categoria,
-      item,
-      parceria: numero_(r[idx('VALOR PARCERIA')]),
-      pista: numero_(r[idx('VALOR PISTA')]),
-      status: status || 'ativo',
-      destaque: /^(sim|s|true|1|x)$/i.test(String(destaqueRaw).trim()) || destaqueRaw === true,
-      observacao,
-      ordem,
-      imagem
-    };
+    const imagem = imagemCelula || (ant && ant.imagem) || imgPorItem[normalizar_(item)] || '';
+
+    if (status !== 'inativo') {
+      if (!parceria || !pista) avisos.push(`• Linha ${linha} (${item}): valor de parceria ou pista está zerado/vazio.`);
+      if (pista && parceria && pista < parceria) avisos.push(`• Linha ${linha} (${item}): pista (${moeda_(pista)}) está ABAIXO da parceria (${moeda_(parceria)}).`);
+      if (!imagem) avisos.push(`• Linha ${linha} (${item}): sem imagem.`);
+      else if (opts.imagens && opts.imagens.indexOf(imagem) < 0) avisos.push(`• Linha ${linha} (${item}): imagem "${imagem}" não existe em ${HIGH_SITE.imagesPath} (atenção a maiúsculas/minúsculas).`);
+    }
+
+    // Variação de preço (selo SUBIU/CAIU/NOVO no site). Se o preço não mudou, mantém a última variação.
+    let variacao = (ant && ant.variacao) || null;
+    if (ant) {
+      if (Number(ant.parceria) !== parceria || Number(ant.pista) !== pista)
+        variacao = {parceria_antes: Number(ant.parceria), pista_antes: Number(ant.pista), em: agoraIso};
+    } else if (anterior) {
+      variacao = {novo: true, em: agoraIso};
+    }
+
+    const out = {categoria, item, parceria, pista, status, destaque: /^(sim|s|true|1|x)$/i.test(String(destaqueRaw).trim()) || destaqueRaw === true, observacao, ordem, imagem};
+    if (variacao) out.variacao = variacao;
+    return out;
   }).filter(Boolean).sort((a,b) => a.categoria.localeCompare(b.categoria,'pt-BR') || a.ordem-b.ordem || a.item.localeCompare(b.item,'pt-BR'));
 
-  const now = new Date();
+  const mudancas = anterior ? calcularMudancas_(anteriores, itens) : [];
+
+  let historico = (anterior && Array.isArray(anterior.historico)) ? anterior.historico.slice() : [];
+  if (mudancas.length) historico.unshift({em: agoraIso, por: opts.por || '', mudancas});
+  historico = historico.slice(0, HIGH_SITE.historicoMax);
+
+  const config = lerConfig_();
+  const metaAnt = (anterior && anterior.meta) || {};
+
   return {
-    meta: {
-      titulo: 'Mercado Negro',
-      subtitulo: 'High Roleplay',
-      atualizado_em: Utilities.formatDate(now, Session.getScriptTimeZone() || 'America/Sao_Paulo', "yyyy-MM-dd'T'HH:mm:ssXXX"),
-      moeda: 'BRL',
-      aviso: 'Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM.'
-    },
-    itens,
-    regras: {
-      lavagem: montarRegras_(anterior)
+    avisos,
+    mudancas,
+    catalogo: {
+      meta: {
+        titulo: 'Mercado Negro',
+        subtitulo: 'High Roleplay',
+        atualizado_em: agoraIso,
+        publicado_por: opts.por || metaAnt.publicado_por || '',
+        moeda: 'BRL',
+        aviso: 'Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM.',
+        alerta: config ? (config.AVISO || '') : (metaAnt.alerta || ''),
+        link_denuncia: config ? (config.LINK_DENUNCIA || '') : (metaAnt.link_denuncia || '')
+      },
+      itens,
+      regras: {lavagem: montarRegras_(anterior)},
+      historico
     }
   };
+}
+
+/** Compara o site atual com a planilha: preços alterados, itens novos e removidos. */
+function calcularMudancas_(anteriores, atuais) {
+  const visivel = i => i && i.status !== 'inativo';
+  const antMap = {}, atuMap = {};
+  anteriores.filter(visivel).forEach(i => antMap[chave_(i.categoria, i.item)] = i);
+  atuais.filter(visivel).forEach(i => atuMap[chave_(i.categoria, i.item)] = i);
+  const out = [];
+  Object.keys(atuMap).forEach(k => {
+    const n = atuMap[k], a = antMap[k];
+    if (!a) out.push({tipo:'novo', categoria:n.categoria, item:n.item, parceria:n.parceria, pista:n.pista});
+    else if (Number(a.parceria) !== n.parceria || Number(a.pista) !== n.pista)
+      out.push({tipo:'alterado', categoria:n.categoria, item:n.item, parceria_antes:Number(a.parceria), pista_antes:Number(a.pista), parceria:n.parceria, pista:n.pista});
+    else if ((a.status || 'ativo') !== n.status)
+      out.push({tipo:'status', categoria:n.categoria, item:n.item, status_antes:a.status || 'ativo', status:n.status, parceria:n.parceria, pista:n.pista});
+  });
+  Object.keys(antMap).forEach(k => {
+    if (!atuMap[k]) { const a = antMap[k]; out.push({tipo:'removido', categoria:a.categoria, item:a.item, parceria_antes:Number(a.parceria), pista_antes:Number(a.pista)}); }
+  });
+  return out;
+}
+
+/** Aba "Config": coluna A = chave, coluna B = valor. Retorna null se a aba não existir. */
+function lerConfig_() {
+  const sh = SpreadsheetApp.getActive().getSheetByName(HIGH_SITE.configSheetName);
+  if (!sh) return null;
+  const out = {};
+  sh.getDataRange().getValues().forEach(r => {
+    const k = normalizar_(r[0]).replace(/\s+/g, '_');
+    if (k && k !== 'CHAVE') out[k] = String(r[1] == null ? '' : r[1]).trim();
+  });
+  return out;
 }
 
 /** Regras: aba "Regras Lavagem" > regras já publicadas > REGRAS_PADRAO. */
@@ -203,6 +379,69 @@ function montarRegras_(anterior) {
   return REGRAS_PADRAO.map(comTexto_);
 }
 
+/* ─────────────────────────── DISCORD ─────────────────────────── */
+
+function enviarDiscord_(hook, info) {
+  const site = PropertiesService.getScriptProperties().getProperty('SITE_URL') || siteUrlPadrao_();
+  const linhas = info.mudancas.map(linhaDiscord_);
+  // Embed do Discord aceita até 4096 caracteres na descrição.
+  let desc = '';
+  for (let i = 0; i < linhas.length; i++) {
+    const prox = desc + linhas[i] + '\n';
+    if (prox.length > 3800) { desc += `…e mais ${linhas.length - i} mudança(s). Veja o histórico no site.`; break; }
+    desc = prox;
+  }
+  const payload = {
+    username: 'Mercado Negro • High',
+    embeds: [{
+      title: info.teste ? '🧪 TESTE — Tabela do Mercado Negro atualizada' : '📢 Tabela do Mercado Negro atualizada',
+      url: site ? site + 'historico.html' : undefined,
+      description: desc + (site ? `\n🔗 **[Abrir a tabela completa](${site}tabela.html)**` : ''),
+      color: 0x8d35ff,
+      footer: {text: `Publicado por ${info.por || '—'} • ${agora_('dd/MM/yyyy HH:mm')}`}
+    }]
+  };
+  const r = UrlFetchApp.fetch(hook, {method:'post', contentType:'application/json', payload: JSON.stringify(payload), muteHttpExceptions:true});
+  if (r.getResponseCode() >= 300) throw new Error(`Discord ${r.getResponseCode()}: ${r.getContentText()}`);
+}
+
+function linhaDiscord_(m) {
+  if (m.tipo === 'novo') return `🆕 **${m.item}** (${m.categoria}) — Parceria ${moeda_(m.parceria)} • Pista ${moeda_(m.pista)}`;
+  if (m.tipo === 'removido') return `🗑️ ~~${m.item}~~ (${m.categoria}) saiu da tabela`;
+  if (m.tipo === 'status') {
+    if (m.status === 'indisponivel') return `⛔ **${m.item}** (${m.categoria}) está INDISPONÍVEL no momento`;
+    if (m.status === 'revisar') return `🔎 **${m.item}** (${m.categoria}) está EM REVISÃO — o valor pode mudar`;
+    return `✅ **${m.item}** (${m.categoria}) voltou a ficar disponível — Parceria ${moeda_(m.parceria)} • Pista ${moeda_(m.pista)}`;
+  }
+  const seta = (m.pista - m.pista_antes || m.parceria - m.parceria_antes) > 0 ? '🔺' : '🔻';
+  const partes = [];
+  if (m.parceria !== m.parceria_antes) partes.push(`Parceria ${moeda_(m.parceria_antes)} → **${moeda_(m.parceria)}**`);
+  if (m.pista !== m.pista_antes) partes.push(`Pista ${moeda_(m.pista_antes)} → **${moeda_(m.pista)}**`);
+  return `${seta} **${m.item}** (${m.categoria}) — ${partes.join(' • ')}`;
+}
+
+function resumoMudancas_(mudancas, max) {
+  const n = t => mudancas.filter(m => m.tipo === t).length;
+  const cab = `${n('alterado')} preço(s) alterado(s), ${n('novo')} item(ns) novo(s), ${n('removido')} removido(s), ${n('status')} mudança(s) de status`;
+  const lista = mudancas.slice(0, max).map(m => '  ' + linhaDiscord_(m).replace(/\*\*|~~/g, ''));
+  return `${cab}\n${lista.join('\n')}${mudancas.length > max ? '\n  …' : ''}`;
+}
+
+/* ─────────────────────────── UTILITÁRIOS ─────────────────────────── */
+
+function nomePublicador_(perguntar) {
+  const up = PropertiesService.getUserProperties();
+  let nome = up.getProperty('HMN_NOME');
+  if (!nome && perguntar) {
+    const ui = SpreadsheetApp.getUi();
+    const r = ui.prompt('Seu nome', 'Primeira publicação neste usuário: qual nome deve ficar registrado?\n(ex.: Ítalo • Auxiliar Ilegal — dá para trocar depois em "Definir meu nome")', ui.ButtonSet.OK_CANCEL);
+    if (r.getSelectedButton() !== ui.Button.OK || !r.getResponseText().trim()) return '';
+    nome = r.getResponseText().trim();
+    up.setProperty('HMN_NOME', nome);
+  }
+  return nome || '';
+}
+
 function comTexto_(r) {
   return Object.assign({}, r, {texto: `${r.maquina}% da máquina | ${r.lavagem}% da lavagem | ${r.cliente}% do cliente`});
 }
@@ -212,14 +451,26 @@ function percentual_(v) {
   return numero_(String(v || '').replace('%', ''));
 }
 
+function chave_(categoria, item) {
+  return `${normalizar_(categoria)}|${normalizar_(item)}`;
+}
+
+function agora_(fmt) {
+  return Utilities.formatDate(new Date(), Session.getScriptTimeZone() || 'America/Sao_Paulo', fmt);
+}
+
+function moeda_(n) {
+  return 'R$ ' + Math.round(Number(n) || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
 function normalizar_(v) {
   return String(v || '').normalize('NFD').replace(/[̀-ͯ]/g,'').trim().toUpperCase();
 }
 
-function numero_(v) {
+function numero_(v, linha) {
   if (typeof v === 'number') return v;
   const s = String(v || '').replace(/R\$/gi,'').replace(/\s/g,'').replace(/\./g,'').replace(',','.').replace(/[^0-9.-]/g,'');
   const n = Number(s);
-  if (!Number.isFinite(n)) throw new Error(`Valor monetário inválido: ${v}`);
+  if (!Number.isFinite(n)) throw new Error(`Valor monetário inválido${linha ? ` na linha ${linha}` : ''}: ${v}`);
   return n;
 }

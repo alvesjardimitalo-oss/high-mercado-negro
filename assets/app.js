@@ -1,6 +1,6 @@
 const CATALOG_URL = './data/catalogo.json';
 const ITEM_IMAGE_BASE = './assets/itens/';
-const RULE_IMAGE_BASES = ['./assets/','./assets/itens/'];
+const RULE_IMAGE_BASES = ['./assets/itens/','./assets/'];
 
 const icons = {
   'armas':'🔫','municao':'💥','tecnologia-utilitarios':'💻','drogas':'🧪','drogas-rotas':'🧪',
@@ -73,6 +73,7 @@ function updateMeta(data){
     el.textContent=isNaN(d)?'Atualização não informada':`Atualizado em ${d.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'})}`;
   });
   document.querySelectorAll('[data-total]').forEach(el=>el.textContent=(data.itens||[]).filter(isActive).length);
+  initShared(data);
 }
 
 function imageMarkup(i){
@@ -82,15 +83,19 @@ function imageMarkup(i){
 }
 
 function itemCard(i,showCategory=false){
-  return `<article class="item-card" data-highlight="${!!i.destaque}">
+  const st=statusInfo(i);
+  return `<article class="item-card" data-highlight="${!!i.destaque}" data-status="${st?st.cls:'ativo'}">
     ${imageMarkup(i)}
     <div class="item-card-top">
-      <span class="tag-inline">${showCategory?esc(i.categoria):(i.destaque?'DESTAQUE':esc(i.status||'ATIVO').toUpperCase())}</span>
+      <span class="tag-inline">${showCategory?esc(i.categoria):(i.destaque?'DESTAQUE':'ATIVO')}</span>
       ${showCategory&&i.destaque?'<span class="tag-inline">DESTAQUE</span>':''}
+      ${st?`<span class="status-badge ${st.cls}">${st.label}</span>`:''}
+      ${trendBadge(i)}
     </div>
     <h3>${esc(i.item)}</h3>
     <div class="prices"><div class="price"><span>Parceria</span><strong>${money(i.parceria)}</strong></div><div class="price pista"><span>Pista</span><strong>${money(i.pista)}</strong></div></div>
     ${i.observacao?`<div class="notice">⚠ ${esc(i.observacao)}</div>`:''}
+    ${itemActions(i)}
     ${showCategory?`<a class="item-open" href="categoria.html?c=${slugify(i.categoria)}">ABRIR ${esc(i.categoria).toUpperCase()} →</a>`:''}
   </article>`;
 }
@@ -129,6 +134,18 @@ async function initHome(){
     document.querySelectorAll('[data-category-count-home]').forEach(el=>el.textContent=cats.length);
   }
 
+  const favBox=document.querySelector('#favoritesSection');
+  if(favBox){
+    const renderFavs=()=>{
+      const favs=active.filter(i=>isFav(i));
+      favBox.hidden=!favs.length;
+      const grid=favBox.querySelector('#favorites');
+      if(grid) grid.innerHTML=favs.map(i=>itemCard(i,true)).join('');
+    };
+    renderFavs();
+    document.addEventListener('hmn:favs',renderFavs);
+  }
+
   if(featured){
     const highlights=active.filter(i=>!!i.destaque).slice(0,12);
     featured.innerHTML=highlights.length?highlights.map(i=>itemCard(i,true)).join(''):'<div class="empty">Use a busca acima para localizar qualquer item do catálogo.</div>';
@@ -155,13 +172,15 @@ async function initCategory(){
   const matched=active.find(i=>slugify(i.categoria)===slugify(raw));
   const cat=matched?.categoria||active[0]?.categoria||'';
   const items=active.filter(i=>slugify(i.categoria)===slugify(cat));
+  const favFirst=list=>[...list].sort((a,b)=>Number(isFav(b))-Number(isFav(a)));
   document.title=`${cat} • Mercado Negro High`;
   document.querySelector('#catIcon') && (document.querySelector('#catIcon').textContent=iconFor(cat));
   document.querySelector('#catName') && (document.querySelector('#catName').textContent=cat);
   document.querySelector('#catCount') && (document.querySelector('#catCount').textContent=`${items.length} ITENS ATIVOS`);
   const list=document.querySelector('#itemList'), search=document.querySelector('#categorySearch');
-  const render=q=>{if(!list)return;const term=normalizeText(q);const filtered=items.filter(i=>!term||normalizeText(`${i.item} ${i.categoria} ${i.observacao||''}`).includes(term));list.innerHTML=filtered.length?filtered.map(i=>itemCard(i)).join(''):'<div class="empty">Nenhum item encontrado nesta categoria.</div>';};
+  const render=q=>{if(!list)return;const term=normalizeText(q);const filtered=favFirst(items.filter(i=>!term||normalizeText(`${i.item} ${i.categoria} ${i.observacao||''}`).includes(term)));list.innerHTML=filtered.length?filtered.map(i=>itemCard(i)).join(''):'<div class="empty">Nenhum item encontrado nesta categoria.</div>';};
   render(''); search?.addEventListener('input',e=>render(e.target.value));
+  document.addEventListener('hmn:favs',()=>render(search?.value||''));
   const rules=document.querySelector('#rules');
   if(rules&&slugify(cat)==='lavagem'&&Array.isArray(data.regras?.lavagem)&&data.regras.lavagem.length){
     const grupos=[...new Set(data.regras.lavagem.map(r=>String(r.grupo||'REGRAS').trim().toUpperCase()).filter(Boolean))];
@@ -172,7 +191,8 @@ async function initCategory(){
         const img=ruleImageMarkup(r);
         return `<article class="rule rule-rich">${img}<div class="rule-copy"><strong>${esc(r.titulo||r.tipo)}</strong><span>${esc(r.texto)}</span><small>${esc(grupo)}</small></div></article>`;
       }).join('')}</div></section>`;
-    }).join('');
+    }).join('')+lavagemCalculatorMarkup();
+    initLavagemCalculator(data.regras.lavagem.filter(r=>r.ativo!==false));
   }
 }
 
@@ -200,14 +220,19 @@ async function initGlobalTable(){
   const reset=document.querySelector('#tableReset');
   const mobileList=document.querySelector('#globalTableMobile');
 
+  const params=new URLSearchParams(location.search);
   let selected='TODOS';
-  let query='';
+  let query=params.get('q')||'';
   let sortKey='ordem';
   let sortDir='asc';
 
   const categories=[...new Set(active.map(i=>i.categoria).filter(Boolean))];
+  const paramCat=params.get('c');
+  if(params.get('fav')) selected=FAV_FILTER;
+  else if(paramCat){const m=categories.find(c=>slugify(c)===slugify(paramCat)); if(m) selected=m;}
+  if(search&&query) search.value=query;
   if(filters){
-    filters.innerHTML=categoryChip('TODOS',true)+categories.map(c=>categoryChip(c)).join('');
+    filters.innerHTML=categoryChip('TODOS',selected==='TODOS')+categoryChip(FAV_FILTER,selected===FAV_FILTER)+categories.map(c=>categoryChip(c,c===selected)).join('');
     filters.addEventListener('click',e=>{
       const btn=e.target.closest('[data-category]');
       if(!btn) return;
@@ -224,7 +249,7 @@ async function initGlobalTable(){
 
   const getRows=()=>{
     const term=normalizeText(query);
-    let rows=active.filter(i=>selected==='TODOS'||slugify(i.categoria)===slugify(selected));
+    let rows=active.filter(i=>selected==='TODOS'||(selected===FAV_FILTER?isFav(i):slugify(i.categoria)===slugify(selected)));
     if(term) rows=rows.filter(i=>normalizeText(`${i.item} ${i.categoria} ${i.observacao||''}`).includes(term));
     rows=[...rows].sort((a,b)=>compare(a,b,sortKey)*(sortDir==='asc'?1:-1));
     return rows;
@@ -232,9 +257,10 @@ async function initGlobalTable(){
 
   const tableRow=(i)=>{
     const diff=Math.max(0,Number(i.pista||0)-Number(i.parceria||0));
-    return `<tr>
+    const st=statusInfo(i);
+    return `<tr data-status="${st?st.cls:'ativo'}">
       <td class="col-img">${tableImageMarkup(i)}</td>
-      <td class="col-item"><div class="table-item-name">${esc(i.item)}</div>${i.observacao?`<div class="table-note">${esc(i.observacao)}</div>`:''}</td>
+      <td class="col-item"><div class="table-item-name">${esc(i.item)}${st?` <span class="status-badge ${st.cls}">${st.label}</span>`:''} ${trendBadge(i)}</div>${i.observacao?`<div class="table-note">${esc(i.observacao)}</div>`:''}${itemActions(i,true)}</td>
       <td><a class="category-link" href="categoria.html?c=${slugify(i.categoria)}">${esc(i.categoria)}</a></td>
       <td class="money-cell partnership">${money(i.parceria)}</td>
       <td class="money-cell track"><strong>${money(i.pista)}</strong>${diff?`<small>+ ${money(diff)} vs parceria</small>`:''}</td>
@@ -243,12 +269,14 @@ async function initGlobalTable(){
 
   const mobileCard=(i)=>{
     const diff=Math.max(0,Number(i.pista||0)-Number(i.parceria||0));
-    return `<article class="table-mobile-card">
+    const st=statusInfo(i);
+    return `<article class="table-mobile-card" data-status="${st?st.cls:'ativo'}">
       ${tableImageMarkup(i)}
       <div class="table-mobile-copy">
         <a class="table-mobile-category" href="categoria.html?c=${slugify(i.categoria)}">${esc(i.categoria)}</a>
-        <h3>${esc(i.item)}</h3>
+        <h3>${esc(i.item)}${st?` <span class="status-badge ${st.cls}">${st.label}</span>`:''} ${trendBadge(i)}</h3>
         <div class="table-mobile-prices"><div><span>Parceria</span><strong>${money(i.parceria)}</strong></div><div><span>Pista</span><strong>${money(i.pista)}</strong>${diff?`<small>+ ${money(diff)}</small>`:''}</div></div>
+        ${itemActions(i,true)}
       </div>
     </article>`;
   };
@@ -267,6 +295,7 @@ async function initGlobalTable(){
   };
 
   search?.addEventListener('input',e=>{query=e.target.value;render();});
+  document.addEventListener('hmn:favs',()=>{if(selected===FAV_FILTER)render();});
   sortButtons.forEach(btn=>btn.addEventListener('click',()=>{
     const key=btn.dataset.sort;
     if(sortKey===key) sortDir=sortDir==='asc'?'desc':'asc'; else {sortKey=key;sortDir='asc';}
@@ -274,6 +303,7 @@ async function initGlobalTable(){
   }));
   reset?.addEventListener('click',()=>{
     selected='TODOS';query='';sortKey='ordem';sortDir='asc';
+    history.replaceState(null,'',location.pathname);
     if(search) search.value='';
     filters?.querySelectorAll('.filter-chip').forEach(b=>b.classList.toggle('active',b.dataset.category==='TODOS'));
     render();
@@ -524,4 +554,273 @@ async function generateDiscordMarketImage(items,data){
   const url=URL.createObjectURL(blob);
   const fileName=`mercado-negro-high-${new Date().toISOString().slice(0,10)}.png`;
   showDiscordImagePreview(url,blob,fileName);
+}
+
+/* ═════════════════════ RECURSOS COMPARTILHADOS ═════════════════════
+   Favoritos, orçamento, link direto, status, faixa de aviso,
+   calculadora de lavagem e instalação no celular.                    */
+
+const FAV_FILTER='★ FAVORITOS';
+const STORE_FAVS='hmn_favs_v1';
+const STORE_CART='hmn_cart_v1';
+const itemKey=i=>slugify(`${i.categoria}-${i.item}`);
+let CATALOG_DATA=null;
+
+const store={
+  get(k,fallback){try{const v=JSON.parse(localStorage.getItem(k));return v??fallback;}catch(_){return fallback;}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(_){}}
+};
+
+/* ── Status ── */
+function statusInfo(i){
+  const s=normalizeText(i?.status||'ativo');
+  if(s==='revisar') return {cls:'revisar',label:'EM REVISÃO'};
+  if(s==='indisponivel') return {cls:'indisponivel',label:'INDISPONÍVEL'};
+  return null;
+}
+const isUnavailable=i=>normalizeText(i?.status||'')==='indisponivel';
+
+/* ── Selo de variação (SUBIU / CAIU / NOVO) — some depois de 15 dias ── */
+const TREND_DAYS=15;
+function priceTrend(i){
+  const v=i?.variacao; if(!v?.em) return null;
+  const d=new Date(v.em); if(isNaN(d)||Date.now()-d>TREND_DAYS*864e5) return null;
+  if(v.novo) return {cls:'novo',label:'NOVO',title:`Adicionado em ${d.toLocaleDateString('pt-BR')}`};
+  const dp=Number(i.pista)-Number(v.pista_antes), dc=Number(i.parceria)-Number(v.parceria_antes);
+  const dir=dp||dc; if(!dir) return null;
+  const title=`Antes: parceria ${money(v.parceria_antes)} • pista ${money(v.pista_antes)} (alterado em ${d.toLocaleDateString('pt-BR')})`;
+  return dir>0?{cls:'subiu',label:'▲ SUBIU',title}:{cls:'caiu',label:'▼ CAIU',title};
+}
+function trendBadge(i){
+  const t=priceTrend(i);
+  return t?`<span class="trend-badge ${t.cls}" title="${esc(t.title)}">${t.label}</span>`:'';
+}
+
+/* ── Favoritos ── */
+const getFavs=()=>new Set(store.get(STORE_FAVS,[]));
+const isFav=i=>getFavs().has(itemKey(i));
+function toggleFav(key){
+  const f=getFavs(); f.has(key)?f.delete(key):f.add(key);
+  store.set(STORE_FAVS,[...f]);
+  document.querySelectorAll(`[data-fav="${key}"]`).forEach(b=>{b.classList.toggle('on',f.has(key));b.textContent=f.has(key)?'★':'☆';b.title=f.has(key)?'Remover dos favoritos':'Favoritar';});
+  document.dispatchEvent(new CustomEvent('hmn:favs'));
+  return f.has(key);
+}
+
+/* ── Botões de ação de cada item ── */
+function itemActions(i,compact=false){
+  const k=itemKey(i), fav=isFav(i), off=isUnavailable(i);
+  return `<div class="item-actions${compact?' compact':''}">
+    <button type="button" class="ia-btn ia-fav${fav?' on':''}" data-fav="${k}" title="${fav?'Remover dos favoritos':'Favoritar'}" aria-label="Favoritar ${esc(i.item)}">${fav?'★':'☆'}</button>
+    <button type="button" class="ia-btn ia-add" data-cart-add="${k}" ${off?'disabled title="Item indisponível no momento"':'title="Adicionar ao orçamento"'}>＋ ORÇAMENTO</button>
+    <button type="button" class="ia-btn ia-link" data-share="${k}" title="Copiar link direto deste item" aria-label="Copiar link de ${esc(i.item)}">🔗</button>
+  </div>`;
+}
+
+/* ── Utilidades de UI ── */
+function toast(msg){
+  let t=document.querySelector('#hmnToast');
+  if(!t){t=document.createElement('div');t.id='hmnToast';t.className='hmn-toast';t.setAttribute('role','status');document.body.appendChild(t);}
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2200);
+}
+async function copyText(text){
+  try{await navigator.clipboard.writeText(text);return true;}catch(_){}
+  try{
+    const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();const ok=document.execCommand('copy');ta.remove();return ok;
+  }catch(_){return false;}
+}
+const siteBase=()=>location.href.replace(/[^/]*([?#].*)?$/,'');
+const findItem=key=>(CATALOG_DATA?.itens||[]).filter(isActive).find(i=>itemKey(i)===key);
+const itemLink=i=>`${siteBase()}tabela.html?q=${encodeURIComponent(i.item)}&c=${slugify(i.categoria)}`;
+
+/* ── Orçamento ── */
+const getCart=()=>store.get(STORE_CART,{items:{},modo:'pista'});
+const saveCart=c=>{store.set(STORE_CART,c);renderCart();};
+function cartLines(){
+  const c=getCart();
+  return Object.entries(c.items||{}).map(([k,q])=>({item:findItem(k),key:k,qtd:Number(q)||0})).filter(l=>l.item&&l.qtd>0);
+}
+function addToCart(key,n=1){
+  const c=getCart(); c.items=c.items||{};
+  c.items[key]=Math.max(0,(Number(c.items[key])||0)+n);
+  if(!c.items[key]) delete c.items[key];
+  saveCart(c);
+}
+function cartText(){
+  const c=getCart(), lines=cartLines(), modo=c.modo==='parceria'?'parceria':'pista';
+  const total=lines.reduce((s,l)=>s+l.qtd*Number(l.item[modo]||0),0);
+  const d=new Date(CATALOG_DATA?.meta?.atualizado_em);
+  return [
+    `**ORÇAMENTO • MERCADO NEGRO HIGH**`,
+    `Valor: **${modo.toUpperCase()}**`,
+    ``,
+    ...lines.map(l=>`• ${l.qtd}x ${l.item.item} — ${money(l.qtd*Number(l.item[modo]||0))}${l.qtd>1?` (${money(l.item[modo])} cada)`:''}`),
+    ``,
+    `**TOTAL: ${money(total)}**`,
+    isNaN(d)?'':`Tabela de ${d.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'})} • ${siteBase()}tabela.html`
+  ].filter((l,i,a)=>!(l===''&&a[i-1]==='')).join('\n').trim();
+}
+function ensureCartUI(){
+  if(document.querySelector('#cartFab')) return;
+  document.body.insertAdjacentHTML('beforeend',`
+    <button type="button" id="cartFab" class="cart-fab" hidden aria-controls="cartDrawer">🧾 ORÇAMENTO <b id="cartCount">0</b></button>
+    <div id="cartBackdrop" class="cart-backdrop" hidden></div>
+    <aside id="cartDrawer" class="cart-drawer" aria-hidden="true" aria-label="Orçamento">
+      <div class="cart-head"><div><span class="eyebrow">MONTE SEU PEDIDO</span><strong>ORÇAMENTO</strong></div><button type="button" class="cart-close" data-cart-close aria-label="Fechar">×</button></div>
+      <div class="cart-mode" role="group" aria-label="Tipo de valor">
+        <button type="button" data-cart-mode="parceria">PARCERIA</button>
+        <button type="button" data-cart-mode="pista">PISTA</button>
+      </div>
+      <div id="cartList" class="cart-list"></div>
+      <div class="cart-total"><span>TOTAL</span><strong id="cartTotal">R$ 0</strong></div>
+      <div class="cart-actions">
+        <button type="button" class="cart-copy" data-cart-copy>COPIAR PARA O DISCORD</button>
+        <button type="button" class="cart-clear" data-cart-clear>LIMPAR</button>
+      </div>
+      <p class="cart-hint">Valores de referência da tabela oficial. O texto copiado já vem formatado para colar no Discord.</p>
+    </aside>`);
+}
+function openCart(open){
+  const d=document.querySelector('#cartDrawer'), b=document.querySelector('#cartBackdrop');
+  if(!d) return;
+  d.classList.toggle('open',open); d.setAttribute('aria-hidden',String(!open)); b.hidden=!open;
+}
+function renderCart(){
+  ensureCartUI();
+  const c=getCart(), lines=cartLines(), modo=c.modo==='parceria'?'parceria':'pista';
+  const qtd=lines.reduce((s,l)=>s+l.qtd,0);
+  const fab=document.querySelector('#cartFab');
+  fab.hidden=!qtd; document.querySelector('#cartCount').textContent=qtd;
+  document.querySelectorAll('[data-cart-mode]').forEach(b=>b.classList.toggle('active',b.dataset.cartMode===modo));
+  document.querySelector('#cartList').innerHTML=lines.length?lines.map(l=>`
+    <div class="cart-line">
+      <div class="cart-line-name"><strong>${esc(l.item.item)}</strong><small>${esc(l.item.categoria)} • ${money(l.item[modo])} cada</small></div>
+      <div class="cart-qty"><button type="button" data-cart-dec="${l.key}" aria-label="Diminuir">−</button><span>${l.qtd}</span><button type="button" data-cart-inc="${l.key}" aria-label="Aumentar">+</button></div>
+      <strong class="cart-line-total">${money(l.qtd*Number(l.item[modo]||0))}</strong>
+    </div>`).join(''):'<div class="empty">Seu orçamento está vazio. Use “＋ ORÇAMENTO” nos itens.</div>';
+  document.querySelector('#cartTotal').textContent=money(lines.reduce((s,l)=>s+l.qtd*Number(l.item[modo]||0),0));
+  if(!qtd) openCart(false);
+}
+
+/* ── Faixa de aviso (célula AVISO da aba Config) ── */
+function renderSiteAlert(data){
+  const txt=String(data?.meta?.alerta||'').trim();
+  document.querySelector('#siteAlert')?.remove();
+  if(!txt) return;
+  const el=document.createElement('div');
+  el.id='siteAlert';el.className='site-alert';el.setAttribute('role','status');
+  el.innerHTML=`<div class="wrap"><b>⚠ AVISO</b><span>${esc(txt)}</span></div>`;
+  (document.querySelector('.topbar')||document.body.firstElementChild).insertAdjacentElement('afterend',el);
+}
+
+/* ── Calculadora de lavagem ── */
+function parseValor(raw){
+  let s=String(raw||'').toLowerCase().replace(/r\$|\s/g,'');
+  if(!s) return 0;
+  let mult=1;
+  if(/(kk|m|mi|milh(ao|ão|oes|ões)?)$/.test(s)){mult=1e6;s=s.replace(/(kk|m|mi|milh(ao|ão|oes|ões)?)$/,'');}
+  else if(/(k|mil)$/.test(s)){mult=1e3;s=s.replace(/(k|mil)$/,'');}
+  if(mult>1) s=s.replace(',','.');               // 1,5kk ou 1.5kk
+  else s=s.replace(/\./g,'').replace(',','.');    // 100.000 ou 100000,50
+  const n=Number(s.replace(/[^0-9.]/g,''));
+  return Number.isFinite(n)?Math.round(n*mult):0;
+}
+function lavagemCalculatorMarkup(){
+  return `<section id="calculadora" class="calc-box">
+    <div class="calc-head"><span class="eyebrow">FERRAMENTA</span><strong>CALCULADORA DE LAVAGEM E SECAGEM</strong><p>Digite o valor e veja quanto fica para cada parte. Aceita 150000, 150.000, 150k ou 1,5kk.</p></div>
+    <div class="calc-input searchbar"><span>R$</span><input id="calcValor" inputmode="decimal" placeholder="Valor a lavar/secar (ex.: 500k)" autocomplete="off"></div>
+    <div id="calcResult" class="calc-result"></div>
+  </section>`;
+}
+function initLavagemCalculator(regras){
+  const input=document.querySelector('#calcValor'), out=document.querySelector('#calcResult');
+  if(!input||!out) return;
+  const render=()=>{
+    const v=parseValor(input.value);
+    out.innerHTML=regras.map(r=>{
+      const m=Math.round(v*Number(r.maquina||0)/100), l=Math.round(v*Number(r.lavagem||0)/100), c=v-m-l;
+      return `<article class="calc-card">
+        <div class="calc-card-title"><small>${esc(r.grupo||'')}</small><strong>${esc(r.titulo||r.tipo)}</strong></div>
+        <div class="calc-split">
+          <div><span>Máquina • ${r.maquina}%</span><b>${money(m)}</b></div>
+          <div><span>Lavagem • ${r.lavagem}%</span><b>${money(l)}</b></div>
+          <div class="calc-client"><span>Cliente recebe • ${r.cliente}%</span><b>${money(c)}</b></div>
+        </div>
+      </article>`;
+    }).join('');
+  };
+  input.addEventListener('input',render); render();
+  if(location.hash==='#calculadora') setTimeout(()=>document.querySelector('#calculadora')?.scrollIntoView({behavior:'smooth',block:'start'}),150);
+}
+
+/* ── Página "Como funciona" ── */
+function initComoFunciona(){
+  return loadCatalog().then(data=>{
+    updateMeta(data);
+    const link=String(data.meta?.link_denuncia||'').trim();
+    document.querySelectorAll('[data-denuncia]').forEach(el=>{
+      el.innerHTML=/^https?:\/\//i.test(link)
+        ?`<a class="home-action yellow" href="${esc(link)}" target="_blank" rel="noopener">⚑ ABRIR DENÚNCIA / TICKET</a>`
+        :`<div class="notice">⚑ Para denunciar, abra um ticket no Discord da High informando o item, o valor cobrado e, se possível, um print ou clipe.</div>`;
+    });
+  });
+}
+
+/* ── Inicialização comum a todas as páginas ── */
+let sharedReady=false;
+function initShared(data){
+  CATALOG_DATA=data;
+  renderSiteAlert(data);
+  renderCart();
+  if(sharedReady) return;
+  sharedReady=true;
+  document.addEventListener('click',async e=>{
+    const t=e.target.closest('[data-fav],[data-cart-add],[data-share],[data-cart-inc],[data-cart-dec],[data-cart-mode],[data-cart-copy],[data-cart-clear],[data-cart-close],#cartFab,#cartBackdrop');
+    if(!t) return;
+    if(t.dataset.fav){toast(toggleFav(t.dataset.fav)?'★ Adicionado aos favoritos':'Removido dos favoritos');return;}
+    if(t.dataset.cartAdd){const i=findItem(t.dataset.cartAdd);addToCart(t.dataset.cartAdd,1);toast(`＋ ${i?i.item:'Item'} no orçamento`);return;}
+    if(t.dataset.share){const i=findItem(t.dataset.share);if(i){toast(await copyText(itemLink(i))?'🔗 Link copiado — cole no Discord':'Não foi possível copiar o link');}return;}
+    if(t.dataset.cartInc){addToCart(t.dataset.cartInc,1);return;}
+    if(t.dataset.cartDec){addToCart(t.dataset.cartDec,-1);return;}
+    if(t.dataset.cartMode){const c=getCart();c.modo=t.dataset.cartMode;saveCart(c);return;}
+    if(t.hasAttribute('data-cart-copy')){toast(await copyText(cartText())?'Orçamento copiado — cole no Discord':'Não foi possível copiar');return;}
+    if(t.hasAttribute('data-cart-clear')){saveCart({items:{},modo:getCart().modo});return;}
+    if(t.id==='cartFab'){openCart(true);return;}
+    if(t.hasAttribute('data-cart-close')||t.id==='cartBackdrop'){openCart(false);return;}
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')openCart(false);});
+  window.addEventListener('storage',e=>{if(e.key===STORE_CART)renderCart();});
+}
+
+/* ── Instalar no celular (PWA) ── */
+if('serviceWorker' in navigator && location.protocol==='https:'){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+
+/* ── Página Histórico ── */
+async function initHistorico(){
+  const data=await loadCatalog(); updateMeta(data);
+  const box=document.querySelector('#historyList'); if(!box) return;
+  const hist=Array.isArray(data.historico)?data.historico:[];
+  if(!hist.length){box.innerHTML='<div class="empty">Nenhuma alteração registrada ainda. As próximas publicações com mudança de preço aparecerão aqui.</div>';return;}
+  const line=m=>{
+    if(m.tipo==='novo') return `<li class="h-novo"><span class="trend-badge novo">NOVO</span><div><strong>${esc(m.item)}</strong><small>${esc(m.categoria)}</small></div><div class="h-vals"><span>Parceria <b>${money(m.parceria)}</b></span><span>Pista <b>${money(m.pista)}</b></span></div></li>`;
+    if(m.tipo==='status'){
+      const lab={indisponivel:['indisponivel','INDISPONÍVEL','Indisponível no momento'],revisar:['revisar','EM REVISÃO','Valor em revisão']}[m.status]||['caiu','DISPONÍVEL','Voltou a ficar disponível'];
+      return `<li><span class="${m.status==='ativo'?'trend-badge':'status-badge'} ${lab[0]}">${lab[1]}</span><div><strong>${esc(m.item)}</strong><small>${esc(m.categoria)} • ${lab[2]}</small></div><div class="h-vals"><span>Parceria <b>${money(m.parceria)}</b></span><span>Pista <b>${money(m.pista)}</b></span></div></li>`;
+    }
+    if(m.tipo==='removido') return `<li class="h-removido"><span class="status-badge indisponivel">REMOVIDO</span><div><strong><s>${esc(m.item)}</s></strong><small>${esc(m.categoria)}</small></div><div class="h-vals"><span>Era parceria ${money(m.parceria_antes)}</span><span>Era pista ${money(m.pista_antes)}</span></div></li>`;
+    const up=(m.pista-m.pista_antes||m.parceria-m.parceria_antes)>0;
+    const v=(label,a,b)=>a===b?`<span>${label} <b>${money(b)}</b></span>`:`<span>${label} <s>${money(a)}</s> → <b>${money(b)}</b></span>`;
+    return `<li><span class="trend-badge ${up?'subiu':'caiu'}">${up?'▲ SUBIU':'▼ CAIU'}</span><div><strong>${esc(m.item)}</strong><small>${esc(m.categoria)}</small></div><div class="h-vals">${v('Parceria',m.parceria_antes,m.parceria)}${v('Pista',m.pista_antes,m.pista)}</div></li>`;
+  };
+  box.innerHTML=hist.map(h=>{
+    const d=new Date(h.em);
+    return `<article class="history-entry">
+      <header><strong>${isNaN(d)?'—':d.toLocaleString('pt-BR',{dateStyle:'long',timeStyle:'short'})}</strong><span>${(h.mudancas||[]).length} mudança(s)${h.por?` • por ${esc(h.por)}`:''}</span></header>
+      <ul>${(h.mudancas||[]).map(line).join('')}</ul>
+    </article>`;
+  }).join('');
 }
