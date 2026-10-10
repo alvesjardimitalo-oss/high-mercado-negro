@@ -604,6 +604,13 @@ function publicarAcoesBlipadas_(pub) {
     a.cooldown_segundos = 5000;
     a.tempo_maximo_minutos = 25;
   });
+  // Barbearia: configuracoes habilitadas no painel da cidade.
+  acoes.filter(a => String(a.nome).trim().toUpperCase() === 'BARBEARIA').forEach(a => {
+    a.policiais_minimos = 4;
+    a.regras_confronto = [{invasores:3,policiais:4,refens:0},{invasores:4,policiais:5,refens:0}];
+    a.cooldown_segundos = 1500;
+    a.tempo_maximo_minutos = 15;
+  });
   // Coordenadas em aba própria: múltiplos locais por modalidade.
   const locSheet = SpreadsheetApp.getActive().getSheetByName('LOCAIS DE ROUBO');
   const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3]),descricao:String(r[5]||'').trim(),imagem:String(r[6]||'').trim()})) : [];
