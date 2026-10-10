@@ -560,9 +560,16 @@ function publicarAcoesBlipadas_(pub) {
   });
   // Assalto ao Navio: regras do painel oficial da cidade.
   acoes.filter(a => String(a.nome).trim().toUpperCase() === 'ASSALTO AO NAVIO').forEach(a => {
+    a.policiais_minimos = 8;
+    a.regras_confronto = [5,6,7,8,9,10,11].map(n => ({invasores:n,policiais:n+3,refens:0}));
+    a.pendrive_exigido = 'PENDRIVE 4';
+    a.cooldown_segundos = 5000;
+    a.tempo_maximo_minutos = 20;
+  });
+  // Assalto ao Porto: configuração de 8 a 10 invasores, 11 a 13 policiais.
+  acoes.filter(a => String(a.nome).trim().toUpperCase() === 'ASSALTO AO PORTO').forEach(a => {
     a.policiais_minimos = 11;
     a.regras_confronto = [8,9,10].map(n => ({invasores:n,policiais:n+3,refens:4}));
-    a.pendrive_exigido = 'PENDRIVE 4';
     a.cooldown_segundos = 3500;
     a.tempo_maximo_minutos = 20;
   });
