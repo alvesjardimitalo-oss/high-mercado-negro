@@ -17,3 +17,5 @@
 .ab-preparation>small{display:block;font-size:10px;color:#9e91ac;line-height:1.5}
 .ab-preparation .ab-items{margin:0 0 10px}
 .ab-card details{margin-top:10px}
+
+.ab-rules{margin:16px 0;padding:13px;background:#180e24;border:1px solid #67428b;border-radius:12px}.ab-rules h3{font-size:13px;color:#e2c2ff;margin:0 0 10px}.ab-rules table{width:100%;border-collapse:collapse;text-align:center;font-size:12px}.ab-rules th{background:#6723a0;color:#fff;padding:9px 5px}.ab-rules td{border-bottom:1px solid #40304d;padding:9px 5px}.ab-rules tr:last-child td{border-bottom:0}
