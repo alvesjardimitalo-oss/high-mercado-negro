@@ -327,7 +327,56 @@
           "z": 28.1,
           "descricao": "Nióbio — Humane Labs"
         }
-      ]
+      ],
+      "policiais_minimos": 12,
+      "regras_confronto": [
+        {
+          "invasores": 7,
+          "policiais": 12,
+          "refens": 4
+        },
+        {
+          "invasores": 8,
+          "policiais": 13,
+          "refens": 4
+        },
+        {
+          "invasores": 9,
+          "policiais": 14,
+          "refens": 4
+        },
+        {
+          "invasores": 10,
+          "policiais": 15,
+          "refens": 4
+        },
+        {
+          "invasores": 11,
+          "policiais": 16,
+          "refens": 4
+        },
+        {
+          "invasores": 12,
+          "policiais": 17,
+          "refens": 4
+        },
+        {
+          "invasores": 13,
+          "policiais": 18,
+          "refens": 4
+        },
+        {
+          "invasores": 14,
+          "policiais": 19,
+          "refens": 4
+        }
+      ],
+      "pendrive_exigido": "PENDRIVE 5",
+      "cooldown_segundos": 5000,
+      "tempo_maximo_minutos": 30,
+      "nivel_procurado": true,
+      "mini_game": true,
+      "permissao_iniciar": true
     },
     {
       "nome": "JOALHERIA",
