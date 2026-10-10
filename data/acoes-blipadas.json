@@ -640,7 +640,43 @@
           "z": 80.6,
           "descricao": "Madeireira — Paleto Forest"
         }
-      ]
+      ],
+      "policiais_minimos": 24,
+      "regras_confronto": [
+        {
+          "invasores": 20,
+          "policiais": 24,
+          "refens": 5
+        },
+        {
+          "invasores": 21,
+          "policiais": 25,
+          "refens": 5
+        },
+        {
+          "invasores": 22,
+          "policiais": 26,
+          "refens": 5
+        },
+        {
+          "invasores": 23,
+          "policiais": 27,
+          "refens": 5
+        },
+        {
+          "invasores": 24,
+          "policiais": 28,
+          "refens": 5
+        },
+        {
+          "invasores": 25,
+          "policiais": 29,
+          "refens": 5
+        }
+      ],
+      "pendrive_exigido": "PENDRIVE 5",
+      "cooldown_segundos": 5000,
+      "tempo_maximo_minutos": 25
     },
     {
       "nome": "UNIVERSIDADE",
