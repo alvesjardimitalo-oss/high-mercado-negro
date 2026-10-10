@@ -1226,7 +1226,37 @@
           "descricao": "Banco Paleto — Paleto Bay",
           "imagem": "banco_blaine_county.webp"
         }
-      ]
+      ],
+      "policiais_minimos": 12,
+      "regras_confronto": [
+        {
+          "invasores": 8,
+          "policiais": 12,
+          "refens": 6
+        },
+        {
+          "invasores": 9,
+          "policiais": 13,
+          "refens": 6
+        },
+        {
+          "invasores": 10,
+          "policiais": 14,
+          "refens": 6
+        },
+        {
+          "invasores": 11,
+          "policiais": 15,
+          "refens": 6
+        },
+        {
+          "invasores": 12,
+          "policiais": 16,
+          "refens": 6
+        }
+      ],
+      "cooldown_segundos": 5000,
+      "tempo_maximo_minutos": 25
     },
     {
       "nome": "AÇOUGUE E GALINHEIRO",
