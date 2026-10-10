@@ -777,7 +777,28 @@
           "descricao": "Container — Terminal portuário",
           "imagem": "container_porto.webp"
         }
-      ]
+      ],
+      "policiais_minimos": 10,
+      "regras_confronto": [
+        {
+          "invasores": 8,
+          "policiais": 10,
+          "refens": 0
+        },
+        {
+          "invasores": 9,
+          "policiais": 11,
+          "refens": 0
+        },
+        {
+          "invasores": 10,
+          "policiais": 12,
+          "refens": 0
+        }
+      ],
+      "pendrive_exigido": "PENDRIVE 3",
+      "cooldown_segundos": 1950,
+      "tempo_maximo_minutos": 20
     },
     {
       "nome": "Assalto ao Porto",
