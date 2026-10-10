@@ -800,9 +800,9 @@
       "nome": "DOMINAÇÃO A MADEIREIRA",
       "localizacao": "-489.8, 5326.7, 80.6",
       "status": "ativo",
-      "premio_min": 3227000,
-      "premio_max": 3711050,
-      "custo": 1591000,
+      "premio_min": 3261286,
+      "premio_max": 3750479,
+      "custo": 1615000,
       "buff": 954143,
       "nerf": 0,
       "itens": [
@@ -819,7 +819,7 @@
           "quantidade": 15
         },
         {
-          "nome": "PENDRIVE 1",
+          "nome": "PENDRIVE 5",
           "quantidade": 1
         }
       ],
