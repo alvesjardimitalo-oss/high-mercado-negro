@@ -1781,7 +1781,28 @@
           "z": 31.5,
           "descricao": "Estacionamento Marrom — Rancho"
         }
-      ]
+      ],
+      "policiais_minimos": 9,
+      "regras_confronto": [
+        {
+          "invasores": 6,
+          "policiais": 9,
+          "refens": 2
+        },
+        {
+          "invasores": 7,
+          "policiais": 10,
+          "refens": 2
+        },
+        {
+          "invasores": 8,
+          "policiais": 11,
+          "refens": 2
+        }
+      ],
+      "pendrive_exigido": "PENDRIVE 3",
+      "cooldown_segundos": 3000,
+      "tempo_maximo_minutos": 20
     }
   ]
 }
