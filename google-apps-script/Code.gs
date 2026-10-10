@@ -558,6 +558,14 @@ function publicarAcoesBlipadas_(pub) {
     a.cooldown_segundos = 5000;
     a.tempo_maximo_minutos = 30;
   });
+  // Assalto ao Navio: regras do painel oficial da cidade.
+  acoes.filter(a => String(a.nome).trim().toUpperCase() === 'ASSALTO AO NAVIO').forEach(a => {
+    a.policiais_minimos = 8;
+    a.regras_confronto = [5,6,7,8,9,10,11].map(n => ({invasores:n,policiais:n+3,refens:0}));
+    a.pendrive_exigido = 'PENDRIVE 4';
+    a.cooldown_segundos = 5000;
+    a.tempo_maximo_minutos = 20;
+  });
   // Coordenadas em aba própria: múltiplos locais por modalidade.
   const locSheet = SpreadsheetApp.getActive().getSheetByName('LOCAIS DE ROUBO');
   const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3]),descricao:String(r[5]||'').trim(),imagem:String(r[6]||'').trim()})) : [];
