@@ -246,6 +246,58 @@
       "cooldown_origem": "Valor aprovado pela gestão em 10/10/2026 com base no padrão de ações; não transcrito de print do preset."
     },
     {
+      "nome": "FLECCA",
+      "localizacao": "-1218.07, -318.6, 37.69, 204.1",
+      "status": "ativo",
+      "premio_min": 851786,
+      "premio_max": 979554,
+      "custo": 403750,
+      "buff": 275000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 5
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 5
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 5
+        },
+        {
+          "nome": "PENDRIVE 3",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "",
+      "locais": [],
+      "policiais_minimos": 6,
+      "regras_confronto": [
+        {
+          "invasores": 3,
+          "policiais": 6,
+          "refens": 4
+        },
+        {
+          "invasores": 4,
+          "policiais": 7,
+          "refens": 4
+        },
+        {
+          "invasores": 5,
+          "policiais": 8,
+          "refens": 4
+        }
+      ],
+      "pendrive_exigido": "PENDRIVE 3",
+      "cooldown_segundos": 3500,
+      "tempo_maximo_minutos": 20,
+      "imagem": "fleeca-rockford.webp"
+    },
+    {
       "nome": "NIOBIO",
       "localizacao": "3559.8, 3674.6, 28.1",
       "status": "ativo",
@@ -1138,61 +1190,6 @@
       "pendrive_exigido": "PENDRIVE 3",
       "cooldown_segundos": 3500,
       "tempo_maximo_minutos": 20
-    },
-    {
-      "nome": "FLEECA LIFE",
-      "localizacao": "-1218.07, -318.6, 37.69, 204.1",
-      "status": "ativo",
-      "premio_min": 786429,
-      "premio_max": 863143,
-      "custo": 403750,
-      "buff": 275000,
-      "nerf": 0,
-      "itens": [
-        {
-          "nome": "ARMA SUB",
-          "quantidade": 5
-        },
-        {
-          "nome": "MUNIÇÃO SUB (x200)",
-          "quantidade": 5
-        },
-        {
-          "nome": "COLETE",
-          "quantidade": 5
-        },
-        {
-          "nome": "PENDRIVE 3",
-          "quantidade": 1
-        }
-      ],
-      "observacao": "",
-      "locais": [],
-      "policiais_minimos": 6,
-      "regras_confronto": [
-        {
-          "invasores": 3,
-          "policiais": 6,
-          "refens": 4
-        },
-        {
-          "invasores": 4,
-          "policiais": 7,
-          "refens": 4
-        },
-        {
-          "invasores": 5,
-          "policiais": 8,
-          "refens": 3
-        }
-      ],
-      "pendrive_exigido": "PENDRIVE 3",
-      "cooldown_segundos": 3500,
-      "tempo_maximo_minutos": 20,
-      "nivel_procurado": true,
-      "mini_game": true,
-      "permissao_iniciar": true,
-      "imagem": "fleeca-entrada.webp"
     },
     {
       "nome": "FLEECA NORTE",
