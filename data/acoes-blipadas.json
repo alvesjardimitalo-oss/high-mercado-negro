@@ -2104,9 +2104,9 @@
       "nome": "PELADOS",
       "localizacao": "-1111.2, 4937.6, 218.4",
       "status": "ativo",
-      "premio_min": 1200000,
-      "premio_max": 1380000,
-      "custo": 630000,
+      "premio_min": 1211071,
+      "premio_max": 1392732,
+      "custo": 637750,
       "buff": 300000,
       "nerf": 0,
       "itens": [
@@ -2123,7 +2123,7 @@
           "quantidade": 8
         },
         {
-          "nome": "PENDRIVE 1",
+          "nome": "PENDRIVE 3",
           "quantidade": 1
         }
       ],
