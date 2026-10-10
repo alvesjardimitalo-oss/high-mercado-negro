@@ -42,6 +42,8 @@ function drawDirectory() {
 }
 function card(e) {
  const n=entries.indexOf(e), fav=favorites.has(e.id), checked=compare.has(e.id), t=teams(e);
+ const selectedTeam=Number($('team').value), rule=rulesFor(e.a,e.l).find(r=>Number(r.invasores)===selectedTeam);
+ const police=rule?.policiais??e.l?.policiais_minimos??e.a.policiais_minimos??'A confirmar';
  return `<article class="ab-card"><div class="ab-card-media">${picture(e,'ab-cover')}<span class="ab-tag">${e.a.status==='inativo'?'INATIVO':e.a.status==='indisponivel'?'INDISPONÍVEL · SEM BLIP':escape(ranges[e.size])}</span><button class="ab-star" data-favorite="${n}" aria-label="${fav?'Remover dos favoritos':'Favoritar'}: ${escape(e.title)}" aria-pressed="${fav}">${fav?'★':'☆'}</button></div><div class="ab-card-body"><p class="ab-card-category">${escape(e.a.nome)}</p><h3>${escape(e.title)}</h3><div class="ab-card-spec"><span>♙ ${t.length?t[0]+(t.length>1?'–'+t.at(-1):'')+' invasores':'Contingente a confirmar'}</span><span>${escape(weapon(e.a))}</span><span>Policiais: ${escape(police)}</span></div><div class="ab-card-money"><div><span>INVESTIMENTO DO KIT</span><strong>${money(amount(e.a.custo))}</strong></div></div><div class="ab-card-actions"><button class="ab-btn ab-primary" data-open="${n}">Simular gastos <span aria-hidden="true">↗</span></button><button class="ab-compare-btn" data-compare="${n}" aria-pressed="${checked}" aria-label="${checked?'Remover da comparação':'Comparar'}: ${escape(e.title)}">${checked?'✓ Comparando':'+ Comparar'}</button></div></div></article>`;
 }
 function draw() {
