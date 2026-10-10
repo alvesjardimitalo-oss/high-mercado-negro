@@ -1452,10 +1452,10 @@
       "nome": "FAST FOOD",
       "localizacao": "1249.1, -350.5, 69.2",
       "status": "ativo",
-      "premio_min": 265714,
-      "premio_max": 305571,
+      "premio_min": 280714,
+      "premio_max": 322821,
       "custo": 165000,
-      "buff": 30000,
+      "buff": 45000,
       "nerf": 0,
       "itens": [
         {
