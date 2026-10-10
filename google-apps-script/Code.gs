@@ -538,6 +538,11 @@ function publicarAcoesBlipadas_(pub) {
       imagem: txt(r, 'IMAGEM')
     };
   });
+  // Regras oficiais da Ammu-Nation: opções habilitadas no painel da cidade.
+  acoes.filter(a => String(a.nome).trim().toUpperCase() === 'AMMUNATION').forEach(a => {
+    a.policiais_minimos = 3;
+    a.regras_confronto = [{invasores:2,policiais:3,refens:0},{invasores:3,policiais:4,refens:0}];
+  });
   // Coordenadas em aba própria: múltiplos locais por modalidade.
   const locSheet = SpreadsheetApp.getActive().getSheetByName('LOCAIS DE ROUBO');
   const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3]),descricao:String(r[5]||'').trim(),imagem:String(r[6]||'').trim()})) : [];
