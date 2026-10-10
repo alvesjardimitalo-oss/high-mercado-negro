@@ -727,6 +727,17 @@ function publicarAcoesBlipadas_(pub) {
     a.mini_game = true;
     a.permissao_iniciar = true;
   });
+  // Galinheiro: configuracoes informadas no painel da cidade.
+  acoes.filter(a => String(a.nome).trim().toUpperCase() === 'AÇOUGUE E GALINHEIRO').forEach(a => {
+    a.policiais_minimos = 8;
+    a.regras_confronto = [5,6,7,8].map(n => ({invasores:n,policiais:n+3,refens:4}));
+    a.pendrive_exigido = 'PENDRIVE 3';
+    a.cooldown_segundos = 3500;
+    a.tempo_maximo_minutos = 20;
+    a.nivel_procurado = true;
+    a.mini_game = true;
+    a.permissao_iniciar = true;
+  });
   // Coordenadas em aba própria: múltiplos locais por modalidade.
   const locSheet = SpreadsheetApp.getActive().getSheetByName('LOCAIS DE ROUBO');
   const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3]),descricao:String(r[5]||'').trim(),imagem:String(r[6]||'').trim()})) : [];
