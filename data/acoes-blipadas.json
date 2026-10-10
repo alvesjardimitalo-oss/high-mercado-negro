@@ -73,7 +73,8 @@
         }
       ],
       "cooldown_segundos": 1500,
-      "tempo_maximo_minutos": 15
+      "tempo_maximo_minutos": 15,
+      "pendrive_exigido": "PENDRIVE 1"
     },
     {
       "nome": "LOJA DE DEPARTAMENTO",
@@ -1007,7 +1008,8 @@
       ],
       "cooldown_segundos": 1700,
       "tempo_maximo_minutos": 20,
-      "bonus_policial": "Aleatório"
+      "bonus_policial": "Aleatório",
+      "pendrive_exigido": "PENDRIVE 2"
     },
     {
       "nome": "CONTAINER",
@@ -1092,7 +1094,7 @@
           "quantidade": 10
         },
         {
-          "nome": "PENDRIVE 1",
+          "nome": "PENDRIVE 4",
           "quantidade": 1
         }
       ],
@@ -1126,7 +1128,8 @@
         }
       ],
       "cooldown_segundos": 3500,
-      "tempo_maximo_minutos": 20
+      "tempo_maximo_minutos": 20,
+      "pendrive_exigido": "PENDRIVE 4"
     },
     {
       "nome": "FLEECA CHAVES",
@@ -1758,7 +1761,8 @@
         }
       ],
       "cooldown_segundos": 5000,
-      "tempo_maximo_minutos": 25
+      "tempo_maximo_minutos": 25,
+      "pendrive_exigido": "PENDRIVE 5"
     },
     {
       "nome": "AÇOUGUE E GALINHEIRO",
@@ -2051,7 +2055,7 @@
           "quantidade": 4
         },
         {
-          "nome": "PENDRIVE 2",
+          "nome": "PENDRIVE 3",
           "quantidade": 1
         }
       ],
@@ -2085,7 +2089,8 @@
         }
       ],
       "cooldown_segundos": 1200,
-      "tempo_maximo_minutos": 15
+      "tempo_maximo_minutos": 15,
+      "pendrive_exigido": "PENDRIVE 3"
     },
     {
       "nome": "HOTEL",
