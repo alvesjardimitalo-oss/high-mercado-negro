@@ -659,6 +659,14 @@ function publicarAcoesBlipadas_(pub) {
     a.cooldown_segundos = 3000;
     a.tempo_maximo_minutos = 20;
   });
+  // Fast Food: configuracoes confirmadas no painel da cidade.
+  acoes.filter(a => String(a.nome).trim().toUpperCase() === 'MACDONALD E FAST FOOD').forEach(a => {
+    a.policiais_minimos = 3;
+    a.regras_confronto = [{invasores:2,policiais:3,refens:0},{invasores:3,policiais:4,refens:0}];
+    a.pendrive_exigido = 'PENDRIVE 2';
+    a.cooldown_segundos = 1200;
+    a.tempo_maximo_minutos = 15;
+  });
   // Coordenadas em aba própria: múltiplos locais por modalidade.
   const locSheet = SpreadsheetApp.getActive().getSheetByName('LOCAIS DE ROUBO');
   const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3]),descricao:String(r[5]||'').trim(),imagem:String(r[6]||'').trim()})) : [];
