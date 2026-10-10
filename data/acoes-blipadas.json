@@ -953,7 +953,28 @@
           "descricao": "Fleeca Chaves — Alta",
           "imagem": "fleeca_entrada.webp"
         }
-      ]
+      ],
+      "policiais_minimos": 6,
+      "regras_confronto": [
+        {
+          "invasores": 3,
+          "policiais": 6,
+          "refens": 4
+        },
+        {
+          "invasores": 4,
+          "policiais": 7,
+          "refens": 4
+        },
+        {
+          "invasores": 5,
+          "policiais": 8,
+          "refens": 4
+        }
+      ],
+      "pendrive_exigido": "PENDRIVE 3",
+      "cooldown_segundos": 3500,
+      "tempo_maximo_minutos": 20
     },
     {
       "nome": "FLEECA LIFE",
