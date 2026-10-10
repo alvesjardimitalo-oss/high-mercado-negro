@@ -1867,9 +1867,9 @@
       "nome": "AUDITÓRIO 2",
       "localizacao": "185.7, 1213.64, 225.59, 17.01",
       "status": "ativo",
-      "premio_min": 4194286,
-      "premio_max": 4823429,
-      "custo": 2586000,
+      "premio_min": 4228571,
+      "premio_max": 4862857,
+      "custo": 2610000,
       "buff": 500000,
       "nerf": 0,
       "itens": [
@@ -1886,7 +1886,7 @@
           "quantidade": 12
         },
         {
-          "nome": "PENDRIVE 1",
+          "nome": "PENDRIVE 5",
           "quantidade": 1
         }
       ],
