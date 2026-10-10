@@ -838,7 +838,47 @@
           "z": 169.6,
           "descricao": "Universidade — ULSSA"
         }
-      ]
+      ],
+      "policiais_minimos": 14,
+      "regras_confronto": [
+        {
+          "invasores": 10,
+          "policiais": 14,
+          "refens": 0
+        },
+        {
+          "invasores": 11,
+          "policiais": 15,
+          "refens": 0
+        },
+        {
+          "invasores": 12,
+          "policiais": 16,
+          "refens": 0
+        },
+        {
+          "invasores": 13,
+          "policiais": 17,
+          "refens": 0
+        },
+        {
+          "invasores": 14,
+          "policiais": 18,
+          "refens": 0
+        },
+        {
+          "invasores": 15,
+          "policiais": 19,
+          "refens": 0
+        }
+      ],
+      "pendrive_exigido": "PENDRIVE 5",
+      "cooldown_segundos": 5000,
+      "tempo_maximo_minutos": 25,
+      "nivel_procurado": true,
+      "mini_game": true,
+      "permissao_iniciar": true,
+      "animacao": true
     },
     {
       "nome": "CELEIRO DO HIPÓDROMO",
