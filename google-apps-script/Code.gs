@@ -851,6 +851,16 @@ function publicarAcoesBlipadas_(pub) {
     a.permissao_iniciar = false;
     a.animacao = false;
   });
+  // Cooldowns aprovados pela gestão em 10/10/2026 por padrão de ações.
+  // Não representam leitura de print do preset; tempo máximo e confrontos não são inferidos.
+  const cooldownsAprovados = {'AMMUNATION':1700, 'AUDITÓRIO 2 SUB':5000};
+  acoes.forEach(a => {
+    const nome = String(a.nome).trim().toUpperCase();
+    if (Object.prototype.hasOwnProperty.call(cooldownsAprovados, nome)) {
+      a.cooldown_segundos = cooldownsAprovados[nome];
+      a.cooldown_origem = 'Valor aprovado pela gestão em 10/10/2026 com base no padrão de ações; não transcrito de print do preset.';
+    }
+  });
   // Coordenadas em aba própria: múltiplos locais por modalidade.
   const locSheet = SpreadsheetApp.getActive().getSheetByName('LOCAIS DE ROUBO');
   const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3]),descricao:String(r[5]||'').trim(),imagem:String(r[6]||'').trim()})) : [];
