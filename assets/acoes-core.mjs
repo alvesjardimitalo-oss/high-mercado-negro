@@ -18,7 +18,7 @@ export function economy(action, tax = .3, team = 1) {
     perLow: low === null || team <= 0 ? null : low / team, perHigh: high === null || team <= 0 ? null : high / team };
 }
 export function entriesFor(actions) {
-  return actions.filter(a => norm(a.status) !== 'inativo').flatMap(a => (a.locais?.length ? a.locais : [null]).map(l => ({
+  return actions.flatMap(a => (a.locais?.length ? a.locais : [null]).map(l => ({
     id: [a.nome, l?.nome || '', l?.x ?? '', l?.y ?? '', l?.z ?? ''].join('|'),
     a, l, title: l?.descricao || l?.nome || a.nome, size: sizeFor(a, l)
   })));
