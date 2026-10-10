@@ -619,6 +619,14 @@ function publicarAcoesBlipadas_(pub) {
     a.tempo_maximo_minutos = 20;
     a.bonus_policial = 'Aleatório';
   });
+  // Comedy: requisitos oficiais informados pelo painel.
+  acoes.filter(a => String(a.nome).trim().toUpperCase() === 'COMEDY').forEach(a => {
+    a.policiais_minimos = 6;
+    a.regras_confronto = [{invasores:4,policiais:6,refens:0},{invasores:5,policiais:7,refens:0}];
+    a.pendrive_exigido = 'PENDRIVE 2';
+    a.cooldown_segundos = 1200;
+    a.tempo_maximo_minutos = 20;
+  });
   // Coordenadas em aba própria: múltiplos locais por modalidade.
   const locSheet = SpreadsheetApp.getActive().getSheetByName('LOCAIS DE ROUBO');
   const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3]),descricao:String(r[5]||'').trim(),imagem:String(r[6]||'').trim()})) : [];
