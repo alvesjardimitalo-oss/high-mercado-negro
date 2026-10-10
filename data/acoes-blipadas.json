@@ -190,6 +190,19 @@
           "descricao": "Ammunation — Cypress Flats",
           "imagem": "ammunation_industrial.webp"
         }
+      ],
+      "policiais_minimos": 3,
+      "regras_confronto": [
+        {
+          "invasores": 2,
+          "policiais": 3,
+          "refens": 0
+        },
+        {
+          "invasores": 3,
+          "policiais": 4,
+          "refens": 0
+        }
       ]
     },
     {
