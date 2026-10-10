@@ -1466,7 +1466,27 @@
           "descricao": "Loja de Bebidas — Murrieta Heights",
           "imagem": "loja_bebidas.webp"
         }
-      ]
+      ],
+      "policiais_minimos": 2,
+      "regras_confronto": [
+        {
+          "invasores": 2,
+          "policiais": 2,
+          "refens": 0
+        },
+        {
+          "invasores": 3,
+          "policiais": 3,
+          "refens": 0
+        }
+      ],
+      "pendrive_exigido": "PENDRIVE 2",
+      "cooldown_segundos": 1200,
+      "tempo_maximo_minutos": 15,
+      "nivel_procurado": false,
+      "mini_game": false,
+      "permissao_iniciar": false,
+      "animacao": false
     },
     {
       "nome": "MACDONALD E FAST FOOD",
