@@ -345,7 +345,41 @@
           "z": 38.1,
           "descricao": "Joalheria Vangelico — Rockford Hills"
         }
-      ]
+      ],
+      "policiais_minimos": 10,
+      "regras_confronto": [
+        {
+          "invasores": 6,
+          "policiais": 10,
+          "refens": 6
+        },
+        {
+          "invasores": 7,
+          "policiais": 11,
+          "refens": 6
+        },
+        {
+          "invasores": 8,
+          "policiais": 12,
+          "refens": 6
+        },
+        {
+          "invasores": 9,
+          "policiais": 13,
+          "refens": 6
+        },
+        {
+          "invasores": 10,
+          "policiais": 14,
+          "refens": 6
+        }
+      ],
+      "pendrive_exigido": "PENDRIVE 5",
+      "cooldown_segundos": 5000,
+      "tempo_maximo_minutos": 30,
+      "nivel_procurado": true,
+      "mini_game": true,
+      "permissao_iniciar": true
     },
     {
       "nome": "AUDITÓRIO",
