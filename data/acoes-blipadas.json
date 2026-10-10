@@ -187,10 +187,10 @@
       "nome": "AMMUNATION",
       "localizacao": "23.8, -1106, 29.8 | 814, -2154.6, 29.6",
       "status": "ativo",
-      "premio_min": 326429,
-      "premio_max": 375393,
+      "premio_min": 336429,
+      "premio_max": 386893,
       "custo": 204000,
-      "buff": 35000,
+      "buff": 45000,
       "nerf": 0,
       "itens": [
         {
