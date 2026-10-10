@@ -113,7 +113,7 @@ async function load() {
  try {
   const response=await fetch('data/acoes-blipadas.json',{cache:'no-store'});if(!response.ok)throw Error('Não foi possível carregar os dados.');
   const data=await response.json();if(!Array.isArray(data.acoes))throw Error('Dados das ações indisponíveis.');
-  entries=entriesFor(data.acoes);tax=taxFor(data.meta);$('tax-label').textContent=pct(tax*100);
+  entries=entriesFor(data.acoes);tax=taxFor(data.meta);
   const names=[...new Set(entries.filter(e=>e.a.status!=='inativo').map(e=>e.a.nome))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
   $('category').innerHTML='<option value="">Todas as ações</option>'+names.map(n=>`<option value="${escape(n)}">${escape(n)}</option>`).join('');
   $('overview').innerHTML=`<div><strong>${names.length}</strong><span>AÇÕES CADASTRADAS</span></div><div><strong>${entries.filter(e=>e.a.status!=='inativo'&&e.l).length}</strong><span>LOCAIS CADASTRADOS</span></div><div><strong>${pct(tax*100)}</strong><span>TAXA DE LAVAGEM</span></div><div class="ab-overview-note"><span>SEU PRÓXIMO PASSO</span><b>Preparar. Comparar. Escolher. ↗</b></div>`;
