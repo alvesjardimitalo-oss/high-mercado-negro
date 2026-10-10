@@ -1,0 +1,1008 @@
+{
+  "meta": {
+    "titulo": "Ações Blipadas",
+    "fonte": "Planilha Mercado Negro",
+    "taxa_lavagem": 0.3
+  },
+  "acoes": [
+    {
+      "nome": "BARBEARIA",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 19143,
+      "premio_max": 22014,
+      "custo": 9900,
+      "buff": 5000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA BRANCA",
+          "quantidade": 4
+        },
+        {
+          "nome": "PENDRIVE 1",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "LOJA DE DEPARTAMENTO",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 423571,
+      "premio_max": 487107,
+      "custo": 268500,
+      "buff": 40000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA PISTOLA",
+          "quantidade": 4
+        },
+        {
+          "nome": "MUNIÇÃO PISTOLA (x100)",
+          "quantidade": 4
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 4
+        },
+        {
+          "nome": "PENDRIVE 2",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "AMMUNATION",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 326429,
+      "premio_max": 375393,
+      "custo": 204000,
+      "buff": 35000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA PISTOLA",
+          "quantidade": 3
+        },
+        {
+          "nome": "MUNIÇÃO PISTOLA (x100)",
+          "quantidade": 3
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 3
+        },
+        {
+          "nome": "PENDRIVE 2",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "FLECCA",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 851786,
+      "premio_max": 979554,
+      "custo": 403750,
+      "buff": 275000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 5
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 5
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 5
+        },
+        {
+          "nome": "PENDRIVE 3",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "NIOBIO",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 4842857,
+      "premio_max": 5569286,
+      "custo": 3040000,
+      "buff": 500000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA FUZIL",
+          "quantidade": 14
+        },
+        {
+          "nome": "MUNIÇÃO FUZIL (x250)",
+          "quantidade": 14
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 14
+        },
+        {
+          "nome": "PENDRIVE 5",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "JOALHERIA",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 3643714,
+      "premio_max": 4190272,
+      "custo": 2169000,
+      "buff": 545143,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA FUZIL",
+          "quantidade": 10
+        },
+        {
+          "nome": "MUNIÇÃO FUZIL (x250)",
+          "quantidade": 10
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 10
+        },
+        {
+          "nome": "PENDRIVE 4",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "AUDITÓRIO",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 998571,
+      "premio_max": 1148357,
+      "custo": 552000,
+      "buff": 210000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 7
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 7
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 7
+        },
+        {
+          "nome": "PENDRIVE 1",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "TITANIC",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 915714,
+      "premio_max": 1053071,
+      "custo": 487000,
+      "buff": 220000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 6
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 6
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 6
+        },
+        {
+          "nome": "PENDRIVE 4",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "HOLLYWOOD",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 3520000,
+      "premio_max": 4048000,
+      "custo": 2156000,
+      "buff": 440000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA FUZIL",
+          "quantidade": 10
+        },
+        {
+          "nome": "MUNIÇÃO FUZIL (x250)",
+          "quantidade": 10
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 10
+        },
+        {
+          "nome": "PENDRIVE 1",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "ASSALTO AO NAVIO",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 3902143,
+      "premio_max": 4487464,
+      "custo": 2371000,
+      "buff": 515000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA FUZIL",
+          "quantidade": 11
+        },
+        {
+          "nome": "MUNIÇÃO FUZIL (x250)",
+          "quantidade": 11
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 11
+        },
+        {
+          "nome": "PENDRIVE 1",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "ASSALTO A PALETO",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 5215714,
+      "premio_max": 5998071,
+      "custo": 3231000,
+      "buff": 600000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA FUZIL",
+          "quantidade": 15
+        },
+        {
+          "nome": "MUNIÇÃO FUZIL (x250)",
+          "quantidade": 15
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 15
+        },
+        {
+          "nome": "PENDRIVE 1",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "DOMINAÇÃO A MADEIREIRA",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 3227000,
+      "premio_max": 3711050,
+      "custo": 1591000,
+      "buff": 954143,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 20
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 25
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 15
+        },
+        {
+          "nome": "PENDRIVE 1",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "UNIVERSIDADE",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 2424000,
+      "premio_max": 2787600,
+      "custo": 1189000,
+      "buff": 725429,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 15
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 15
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 15
+        },
+        {
+          "nome": "PENDRIVE 4",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "CELEIRO DO HIPÓDROMO",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 433571,
+      "premio_max": 498607,
+      "custo": 268500,
+      "buff": 50000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA PISTOLA",
+          "quantidade": 4
+        },
+        {
+          "nome": "MUNIÇÃO PISTOLA (x100)",
+          "quantidade": 4
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 4
+        },
+        {
+          "nome": "PENDRIVE 2",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "CONTAINER",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 1522857,
+      "premio_max": 1751286,
+      "custo": 786000,
+      "buff": 400000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 10
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 10
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 10
+        },
+        {
+          "nome": "PENDRIVE 1",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "Assalto ao Porto",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 1472857,
+      "premio_max": 1693786,
+      "custo": 786000,
+      "buff": 350000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 10
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 10
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 10
+        },
+        {
+          "nome": "PENDRIVE 1",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "FLEECA CHAVES",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 886429,
+      "premio_max": 913143,
+      "custo": 403750,
+      "buff": 275000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 5
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 5
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 5
+        },
+        {
+          "nome": "PENDRIVE 3",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "FLEECA LIFE",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 786429,
+      "premio_max": 863143,
+      "custo": 403750,
+      "buff": 275000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 5
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 5
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 5
+        },
+        {
+          "nome": "PENDRIVE 3",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "FLEECA NORTE",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 667143,
+      "premio_max": 734464,
+      "custo": 559750,
+      "buff": 275000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 7
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 7
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 7
+        },
+        {
+          "nome": "PENDRIVE 3",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "FLEECA PRAIA",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 786429,
+      "premio_max": 863143,
+      "custo": 403750,
+      "buff": 275000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 5
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 5
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 5
+        },
+        {
+          "nome": "PENDRIVE 3",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "FLEECA SHOPPING",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 806429,
+      "premio_max": 873143,
+      "custo": 403750,
+      "buff": 275000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 5
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 5
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 5
+        },
+        {
+          "nome": "PENDRIVE 3",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "LOJA DE BEBIDAS",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 249286,
+      "premio_max": 286679,
+      "custo": 160500,
+      "buff": 20000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA PISTOLA",
+          "quantidade": 3
+        },
+        {
+          "nome": "MUNIÇÃO PISTOLA (x100)",
+          "quantidade": 3
+        },
+        {
+          "nome": "PENDRIVE 1",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "MACDONALD E FAST FOOD",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 265714,
+      "premio_max": 305571,
+      "custo": 165000,
+      "buff": 30000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA PISTOLA",
+          "quantidade": 3
+        },
+        {
+          "nome": "MUNIÇÃO PISTOLA (x100)",
+          "quantidade": 3
+        },
+        {
+          "nome": "PENDRIVE 2",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "COMEDY",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 535714,
+      "premio_max": 616071,
+      "custo": 333000,
+      "buff": 60000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA PISTOLA",
+          "quantidade": 5
+        },
+        {
+          "nome": "MUNIÇÃO PISTOLA (x100)",
+          "quantidade": 5
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 5
+        },
+        {
+          "nome": "PENDRIVE 2",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "BANCO CENTRAL",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 4842857,
+      "premio_max": 5569286,
+      "custo": 3040000,
+      "buff": 500000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA FUZIL",
+          "quantidade": 14
+        },
+        {
+          "nome": "MUNIÇÃO FUZIL (x250)",
+          "quantidade": 14
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 14
+        },
+        {
+          "nome": "PENDRIVE 5",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "BANCO PALETO",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 4178571,
+      "premio_max": 4805357,
+      "custo": 2610000,
+      "buff": 450000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA FUZIL",
+          "quantidade": 12
+        },
+        {
+          "nome": "MUNIÇÃO FUZIL (x250)",
+          "quantidade": 12
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 12
+        },
+        {
+          "nome": "PENDRIVE 5",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "AÇOUGUE E GALINHEIRO",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 1111071,
+      "premio_max": 1277732,
+      "custo": 637750,
+      "buff": 200000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 8
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 8
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 8
+        },
+        {
+          "nome": "PENDRIVE 3",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "YELLOW JACK",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 661429,
+      "premio_max": 760643,
+      "custo": 393000,
+      "buff": 100000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA PISTOLA",
+          "quantidade": 6
+        },
+        {
+          "nome": "MUNIÇÃO PISTOLA (x100)",
+          "quantidade": 6
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 6
+        },
+        {
+          "nome": "PENDRIVE 1",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "AUDITÓRIO 2 FUZIL",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 4194286,
+      "premio_max": 4823429,
+      "custo": 2586000,
+      "buff": 500000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA FUZIL",
+          "quantidade": 12
+        },
+        {
+          "nome": "MUNIÇÃO FUZIL (x250)",
+          "quantidade": 12
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 12
+        },
+        {
+          "nome": "PENDRIVE 1",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "CYPRESS",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 1300000,
+      "premio_max": 1495000,
+      "custo": 630000,
+      "buff": 400000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 8
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 8
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 8
+        },
+        {
+          "nome": "PENDRIVE 1",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "AUDITÓRIO 2 SUB",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 2095000,
+      "premio_max": 2409250,
+      "custo": 949750,
+      "buff": 738214,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 12
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 12
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 12
+        },
+        {
+          "nome": "PENDRIVE 3",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "ANTENA PISTOLA",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 433571,
+      "premio_max": 498607,
+      "custo": 268500,
+      "buff": 50000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA PISTOLA",
+          "quantidade": 4
+        },
+        {
+          "nome": "MUNIÇÃO PISTOLA (x100)",
+          "quantidade": 4
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 4
+        },
+        {
+          "nome": "PENDRIVE 2",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "HOTEL",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 1607000,
+      "premio_max": 1848050,
+      "custo": 786000,
+      "buff": 484143,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 10
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 10
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 10
+        },
+        {
+          "nome": "PENDRIVE 1",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "PELADOS",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 1200000,
+      "premio_max": 1380000,
+      "custo": 630000,
+      "buff": 300000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 8
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 8
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 8
+        },
+        {
+          "nome": "PENDRIVE 1",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    },
+    {
+      "nome": "Estacionamento Marrom",
+      "localizacao": "",
+      "status": "ativo",
+      "premio_min": 1200000,
+      "premio_max": 1380000,
+      "custo": 630000,
+      "buff": 300000,
+      "nerf": 0,
+      "itens": [
+        {
+          "nome": "ARMA SUB",
+          "quantidade": 8
+        },
+        {
+          "nome": "MUNIÇÃO SUB (x200)",
+          "quantidade": 8
+        },
+        {
+          "nome": "COLETE",
+          "quantidade": 8
+        },
+        {
+          "nome": "PENDRIVE 1",
+          "quantidade": 1
+        }
+      ],
+      "observacao": "Localização pendente de confirmação"
+    }
+  ]
+}
