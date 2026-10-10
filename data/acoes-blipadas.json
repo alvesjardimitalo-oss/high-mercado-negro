@@ -597,9 +597,9 @@
       "nome": "HOLLYWOOD",
       "localizacao": "-1063.3, -504.2, 36.6",
       "status": "ativo",
-      "premio_min": 3520000,
-      "premio_max": 4048000,
-      "custo": 2156000,
+      "premio_min": 3554286,
+      "premio_max": 4087429,
+      "custo": 2180000,
       "buff": 440000,
       "nerf": 0,
       "itens": [
@@ -616,7 +616,7 @@
           "quantidade": 10
         },
         {
-          "nome": "PENDRIVE 1",
+          "nome": "PENDRIVE 5",
           "quantidade": 1
         }
       ],
