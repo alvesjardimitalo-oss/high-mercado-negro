@@ -4,3 +4,16 @@
 .ab-cover{width:100%;height:175px;object-fit:cover;display:block;border-radius:12px;margin-bottom:16px;background:#20152c}
 
 .ab-unit{display:inline-block;color:#c8a6ec;background:#2b193d;padding:5px 10px;border-radius:7px;font-size:11px;margin:7px 0 12px}.ab-photo-pending{height:175px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;background:linear-gradient(135deg,#21142f,#130e1b);border:1px dashed #63467a;border-radius:12px;margin-bottom:16px;color:#8d72a4}.ab-photo-pending span{font-size:30px}.ab-photo-pending small{font-size:11px}.ab-location span{display:block;color:#d2b7ec;margin:8px 0 4px}
+
+/* Ficha de requisitos da ação */
+.ab-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0 18px}
+.ab-stat{min-width:0;background:#160e21;border:1px solid #4c3262;border-radius:12px;padding:12px}
+.ab-stat-primary{background:#32174a;border-color:#8652b2}
+.ab-stat small{display:block;color:#b9a2cb;font-size:9px;letter-spacing:.07em;line-height:1.5}
+.ab-stat strong{display:block;color:#fff;font-size:15px;margin-top:5px;overflow-wrap:anywhere}
+.ab-stat-primary strong{color:#e7c4ff}
+.ab-preparation{margin-top:17px;padding:14px;background:#150f1c;border:1px solid #3c294e;border-radius:12px}
+.ab-preparation h3{font-size:14px;color:#e3c4ff;margin:0 0 10px}
+.ab-preparation>small{display:block;font-size:10px;color:#9e91ac;line-height:1.5}
+.ab-preparation .ab-items{margin:0 0 10px}
+.ab-card details{margin-top:10px}
