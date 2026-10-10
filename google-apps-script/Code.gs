@@ -828,6 +828,17 @@ function publicarAcoesBlipadas_(pub) {
     a.mini_game = false;
     a.permissao_iniciar = true;
   });
+  // Hollywood: configuracoes confirmadas no painel da cidade.
+  acoes.filter(a => String(a.nome).trim().toUpperCase() === 'HOLLYWOOD').forEach(a => {
+    a.policiais_minimos = 12;
+    a.regras_confronto = [8,9,10,11,12].map(n => ({invasores:n,policiais:n+4,refens:6}));
+    a.pendrive_exigido = 'PENDRIVE 5';
+    a.cooldown_segundos = 5000;
+    a.tempo_maximo_minutos = 20;
+    a.nivel_procurado = false;
+    a.mini_game = false;
+    a.permissao_iniciar = false;
+  });
   // Coordenadas em aba própria: múltiplos locais por modalidade.
   const locSheet = SpreadsheetApp.getActive().getSheetByName('LOCAIS DE ROUBO');
   const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3]),descricao:String(r[5]||'').trim(),imagem:String(r[6]||'').trim()})) : [];
