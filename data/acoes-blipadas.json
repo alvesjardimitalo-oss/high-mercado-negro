@@ -158,7 +158,27 @@
           "descricao": "Loja de Departamento — Grapeseed",
           "imagem": "loja_departamento.webp"
         }
-      ]
+      ],
+      "policiais_minimos": 4,
+      "regras_confronto": [
+        {
+          "invasores": 3,
+          "policiais": 4,
+          "refens": 1
+        },
+        {
+          "invasores": 4,
+          "policiais": 5,
+          "refens": 1
+        }
+      ],
+      "pendrive_exigido": "PENDRIVE 2",
+      "cooldown_segundos": 1200,
+      "tempo_maximo_minutos": 15,
+      "nivel_procurado": true,
+      "mini_game": true,
+      "permissao_iniciar": true,
+      "animacao": true
     },
     {
       "nome": "AMMUNATION",
