@@ -2000,7 +2000,7 @@
           "quantidade": 4
         },
         {
-          "nome": "PENDRIVE 3",
+          "nome": "PENDRIVE 2",
           "quantidade": 1
         }
       ],
@@ -2035,7 +2035,7 @@
       ],
       "cooldown_segundos": 1200,
       "tempo_maximo_minutos": 15,
-      "pendrive_exigido": "PENDRIVE 3"
+      "pendrive_exigido": "PENDRIVE 2"
     },
     {
       "nome": "HOTEL",
