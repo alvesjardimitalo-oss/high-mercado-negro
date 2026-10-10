@@ -1796,7 +1796,31 @@
         }
       ],
       "observacao": "Localização pendente de confirmação",
-      "locais": []
+      "locais": [],
+      "policiais_minimos": 5,
+      "regras_confronto": [
+        {
+          "invasores": 4,
+          "policiais": 5,
+          "refens": 4
+        },
+        {
+          "invasores": 5,
+          "policiais": 6,
+          "refens": 4
+        },
+        {
+          "invasores": 6,
+          "policiais": 7,
+          "refens": 4
+        }
+      ],
+      "pendrive_exigido": "safependrive",
+      "cooldown_segundos": 2600,
+      "tempo_maximo_minutos": 25,
+      "nivel_procurado": true,
+      "mini_game": true,
+      "permissao_iniciar": true
     },
     {
       "nome": "AUDITÓRIO 2 FUZIL",
