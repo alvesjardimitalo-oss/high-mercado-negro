@@ -1004,7 +1004,31 @@
         }
       ],
       "observacao": "Localização pendente de confirmação",
-      "locais": []
+      "locais": [],
+      "policiais_minimos": 6,
+      "regras_confronto": [
+        {
+          "invasores": 3,
+          "policiais": 6,
+          "refens": 4
+        },
+        {
+          "invasores": 4,
+          "policiais": 7,
+          "refens": 4
+        },
+        {
+          "invasores": 5,
+          "policiais": 8,
+          "refens": 3
+        }
+      ],
+      "pendrive_exigido": "PENDRIVE 3",
+      "cooldown_segundos": 3500,
+      "tempo_maximo_minutos": 20,
+      "nivel_procurado": true,
+      "mini_game": true,
+      "permissao_iniciar": true
     },
     {
       "nome": "FLEECA NORTE",
