@@ -545,7 +545,14 @@ function publicarAcoesBlipadas_(pub) {
   const alias = {'AÇOUGUE E GALINHEIRO':'Galinheiro','MACDONALD E FAST FOOD':'Fast Food','ANTENA PISTOLA':'Antena','ASSALTO A PALETO':'Assalto a Paleto 2','FLECCA':'Fleeca'};
   acoes.forEach(a => {
     const chave = normal(alias[a.nome] || a.nome);
-    a.locais = locais.filter(l => normal(l.nome) === chave).map(l => ({nome:l.nome,x:l.x,y:l.y,z:l.z,descricao:l.descricao,imagem:l.imagem}));
+    a.locais = locais.filter(l => normal(l.nome) === chave || (normal(a.nome) === 'ACOUGUEEGALINHEIRO' && normal(l.nome) === 'ACOUGUE')).map(l => {
+      const item = {nome:l.nome,x:l.x,y:l.y,z:l.z,descricao:l.descricao,imagem:l.imagem};
+      if (normal(l.nome) === 'ACOUGUE' && normal(a.nome) === 'ACOUGUEEGALINHEIRO') {
+        item.policiais_minimos = 8;
+        item.regras_confronto = [{invasores:5,policiais:8,refens:4},{invasores:6,policiais:9,refens:4},{invasores:7,policiais:10,refens:4},{invasores:8,policiais:11,refens:4}];
+      }
+      return item;
+    });
   });
   const path = 'data/acoes-blipadas.json';
   const api = pub.base + path;
