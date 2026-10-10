@@ -31,14 +31,16 @@
           "x": -823.2,
           "y": -184,
           "z": 37.6,
-          "descricao": "Barbearia Bob Mulét — Rockford Hills, próxima à Joalheria Vangelico"
+          "descricao": "Barbearia Bob Mulét — Rockford Hills, próxima à Joalheria Vangelico",
+          "imagem": "barbearia_bob_mulet.webp"
         },
         {
           "nome": "Barbearia",
           "x": -30.6,
           "y": -1511.7,
           "z": 57.1,
-          "descricao": "Barbearia — região sul de Los Santos, próximo a Davis"
+          "descricao": "Barbearia — região sul de Los Santos, próximo a Davis",
+          "imagem": "barbearia_bob_mulet.webp"
         },
         {
           "nome": "Barbearia",
@@ -90,49 +92,56 @@
           "x": -709.8,
           "y": -904.2,
           "z": 19.2,
-          "descricao": "Loja de Departamento — Little Seoul"
+          "descricao": "Loja de Departamento — Little Seoul",
+          "imagem": "loja_departamento.webp"
         },
         {
           "nome": "Loja de Departamento",
           "x": 378.3,
           "y": 333.4,
           "z": 103.6,
-          "descricao": "Loja de Departamento — região de Alta"
+          "descricao": "Loja de Departamento — região de Alta",
+          "imagem": "loja_departamento_3.webp"
         },
         {
           "nome": "Loja de Departamento",
           "x": -3047.9,
           "y": 585.7,
           "z": 7.9,
-          "descricao": "Loja de Departamento — Chumash"
+          "descricao": "Loja de Departamento — Chumash",
+          "imagem": "loja_departamento.webp"
         },
         {
           "nome": "Loja de Departamento",
           "x": 28.2,
           "y": -1339.2,
           "z": 29.5,
-          "descricao": "Loja de Departamento — Strawberry"
+          "descricao": "Loja de Departamento — Strawberry",
+          "imagem": "loja_departamento_2.webp"
         },
         {
           "nome": "Loja de Departamento",
           "x": -43.5,
           "y": -1748.5,
           "z": 29.4,
-          "descricao": "Loja de Departamento — Davis"
+          "descricao": "Loja de Departamento — Davis",
+          "imagem": "loja_departamento_2.webp"
         },
         {
           "nome": "Loja de Departamento",
           "x": 1159.5,
           "y": -314.1,
           "z": 69.2,
-          "descricao": "Loja de Departamento — Mirror Park"
+          "descricao": "Loja de Departamento — Mirror Park",
+          "imagem": "loja_departamento_3.webp"
         },
         {
           "nome": "Loja de Departamento",
           "x": 1707.9,
           "y": 4920.4,
           "z": 42.1,
-          "descricao": "Loja de Departamento — Grapeseed"
+          "descricao": "Loja de Departamento — Grapeseed",
+          "imagem": "loja_departamento.webp"
         }
       ]
     },
@@ -170,14 +179,16 @@
           "x": 23.8,
           "y": -1106,
           "z": 29.8,
-          "descricao": "Ammunation — Pillbox Hill"
+          "descricao": "Ammunation — Pillbox Hill",
+          "imagem": "ammunation_centro.webp"
         },
         {
           "nome": "Ammunation",
           "x": 814,
           "y": -2154.6,
           "z": 29.6,
-          "descricao": "Ammunation — Cypress Flats"
+          "descricao": "Ammunation — Cypress Flats",
+          "imagem": "ammunation_industrial.webp"
         }
       ]
     },
@@ -321,7 +332,8 @@
           "x": 700.7,
           "y": 576,
           "z": 130.5,
-          "descricao": "Auditório — Vinewood Hills"
+          "descricao": "Auditório — Vinewood Hills",
+          "imagem": "auditorio_arquibancada.webp"
         }
       ]
     },
@@ -389,7 +401,8 @@
           "x": -1063.3,
           "y": -504.2,
           "z": 36.6,
-          "descricao": "Hollywood — oeste de Los Santos"
+          "descricao": "Hollywood — oeste de Los Santos",
+          "imagem": "estudio_kortz.webp"
         }
       ]
     },
@@ -427,7 +440,8 @@
           "x": 1244.9,
           "y": -2944.2,
           "z": 9.3,
-          "descricao": "Assalto ao Navio — Porto de Los Santos"
+          "descricao": "Assalto ao Navio — Porto de Los Santos",
+          "imagem": "navio_carga.webp"
         }
       ]
     },
@@ -579,7 +593,8 @@
           "x": 1222.9,
           "y": 340.4,
           "z": 82,
-          "descricao": "Celeiro do Hipódromo — nordeste de Los Santos"
+          "descricao": "Celeiro do Hipódromo — nordeste de Los Santos",
+          "imagem": "celeiro_hipodromo.webp"
         }
       ]
     },
@@ -617,7 +632,8 @@
           "x": 1051.3,
           "y": -3035.4,
           "z": 5.9,
-          "descricao": "Container — Terminal portuário"
+          "descricao": "Container — Terminal portuário",
+          "imagem": "container_porto.webp"
         }
       ]
     },
@@ -655,7 +671,8 @@
           "x": 1009.8,
           "y": -2892.7,
           "z": 11.3,
-          "descricao": "Assalto ao Porto — Elysian Island"
+          "descricao": "Assalto ao Porto — Elysian Island",
+          "imagem": "container_porto.webp"
         }
       ]
     },
@@ -693,7 +710,8 @@
           "x": 311.2,
           "y": -284.4,
           "z": 54.2,
-          "descricao": "Fleeca Chaves — Alta"
+          "descricao": "Fleeca Chaves — Alta",
+          "imagem": "fleeca_entrada.webp"
         }
       ]
     },
@@ -761,7 +779,8 @@
           "x": 1176,
           "y": 2712.9,
           "z": 38.1,
-          "descricao": "Fleeca Norte — Harmony"
+          "descricao": "Fleeca Norte — Harmony",
+          "imagem": "fleeca_outra.webp"
         }
       ]
     },
@@ -799,7 +818,8 @@
           "x": -2956.6,
           "y": 481.7,
           "z": 15.7,
-          "descricao": "Fleeca Praia — Banham Canyon"
+          "descricao": "Fleeca Praia — Banham Canyon",
+          "imagem": "fleeca_praia.webp"
         }
       ]
     },
@@ -837,7 +857,8 @@
           "x": -353.9,
           "y": -55.3,
           "z": 49,
-          "descricao": "Fleeca Shopping — Burton"
+          "descricao": "Fleeca Shopping — Burton",
+          "imagem": "fleeca_centro.webp"
         }
       ]
     },
@@ -871,14 +892,16 @@
           "x": -1478.9,
           "y": -375.3,
           "z": 39.2,
-          "descricao": "Loja de Bebidas — Morningwood"
+          "descricao": "Loja de Bebidas — Morningwood",
+          "imagem": "loja_bebidas_fachada.webp"
         },
         {
           "nome": "Loja de Bebidas",
           "x": 1126.9,
           "y": -980.2,
           "z": 45.4,
-          "descricao": "Loja de Bebidas — Murrieta Heights"
+          "descricao": "Loja de Bebidas — Murrieta Heights",
+          "imagem": "loja_bebidas.webp"
         }
       ]
     },
@@ -912,7 +935,8 @@
           "x": 1249.1,
           "y": -350.5,
           "z": 69.2,
-          "descricao": "Fast Food — Mirror Park"
+          "descricao": "Fast Food — Mirror Park",
+          "imagem": "fast_food.webp"
         }
       ]
     },
@@ -988,7 +1012,8 @@
           "x": 265.1,
           "y": 213.8,
           "z": 101.7,
-          "descricao": "Banco Central — Downtown"
+          "descricao": "Banco Central — Downtown",
+          "imagem": "banco_entrada.webp"
         }
       ]
     },
@@ -1026,7 +1051,8 @@
           "x": -104,
           "y": 6477.6,
           "z": 31.6,
-          "descricao": "Banco Paleto — Paleto Bay"
+          "descricao": "Banco Paleto — Paleto Bay",
+          "imagem": "banco_blaine_county.webp"
         }
       ]
     },
@@ -1064,7 +1090,8 @@
           "x": -68.6,
           "y": 6253.9,
           "z": 31.1,
-          "descricao": "Galinheiro — Paleto Bay"
+          "descricao": "Galinheiro — Paleto Bay",
+          "imagem": "galinheiro.webp"
         }
       ]
     },
@@ -1222,7 +1249,8 @@
           "x": 780.5,
           "y": 1296.9,
           "z": 361.4,
-          "descricao": "Antena — montanhas Tataviam"
+          "descricao": "Antena — montanhas Tataviam",
+          "imagem": "antena.webp"
         }
       ]
     },
@@ -1260,7 +1288,8 @@
           "x": -1306,
           "y": 336.8,
           "z": 65.5,
-          "descricao": "Hotel — Rockford Hills"
+          "descricao": "Hotel — Rockford Hills",
+          "imagem": "hotel_piscina.webp"
         }
       ]
     },
