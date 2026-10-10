@@ -1893,7 +1893,31 @@
           "descricao": "Hotel — Rockford Hills",
           "imagem": "hotel_piscina.webp"
         }
-      ]
+      ],
+      "policiais_minimos": 11,
+      "regras_confronto": [
+        {
+          "invasores": 8,
+          "policiais": 11,
+          "refens": 5
+        },
+        {
+          "invasores": 9,
+          "policiais": 12,
+          "refens": 5
+        },
+        {
+          "invasores": 10,
+          "policiais": 13,
+          "refens": 5
+        }
+      ],
+      "pendrive_exigido": "PENDRIVE 3",
+      "cooldown_segundos": 1900,
+      "tempo_maximo_minutos": 25,
+      "nivel_procurado": true,
+      "mini_game": true,
+      "permissao_iniciar": true
     },
     {
       "nome": "PELADOS",
