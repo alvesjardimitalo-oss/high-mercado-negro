@@ -12,6 +12,13 @@ const card=(a,l,index,total)=>{
  const locationImage=(a,l)=>{const direct=l?.imagem||a.imagem;if(direct)return direct;const match=(a.locais||[]).find(v=>v!==l&&v.imagem&&Math.hypot(Number(v.x)-Number(l?.x),Number(v.y)-Number(l?.y))<15);return match?.imagem||'';};
  const photo=imageSrc(locationImage(a,l));
  const title=l?.descricao||a.nome;
+ const pendrive=a.itens.find(i=>/^PENDRIVE\\s*[1-5]$/i.test(i.nome));
+ const arm=a.itens.find(i=>/^ARMA\s/i.test(i.nome));
+ const colete=a.itens.find(i=>['colete','placa balistica'].includes(norm(i.nome)));
+ const armCount=arm?.quantidade||null;
+ const police=a.policiais_minimos??a.min_policiais??null;
+ const stats='<div class="ab-stats"><div class="ab-stat ab-stat-primary"><small>PENDRIVE EXIGIDO</small><strong>'+safe(pendrive?.nome||'A confirmar')+'</strong></div><div class="ab-stat"><small>POLICIAIS MÍNIMOS</small><strong>'+safe(police===null||police===''?'A confirmar':police)+'</strong></div><div class="ab-stat"><small>ARMAMENTO</small><strong>'+safe(arm?.nome.replace(/^ARMA\\s+/i,'')||'A confirmar')+'</strong></div><div class="ab-stat"><small>EQUIPAMENTOS / JOGADORES*</small><strong>'+safe(armCount??'A confirmar')+'</strong></div></div>';
+ const preparation='<div class="ab-preparation"><h3>Preparação da ação</h3><div class="ab-items">'+gear+'</div><small>*Quantidade de armas cadastradas; não representa necessariamente o limite de participantes.</small></div>';
  const where=l?'<div class="ab-location"><span>Coordenadas</span><div>'+safe(coords(l))+' <button class="ab-copy" data-coords="'+safe(coords(l))+'">Copiar</button></div></div>':'<div class="ab-location">'+safe(a.localizacao||'Localização a confirmar')+'</div>';
  return '<article class="ab-card">'+(photo?'<img class="ab-cover" loading="lazy" src="'+safe(photo)+'" alt="'+safe(title)+'" onerror="this.remove()">':'<div class="ab-photo-pending"><span>⌖</span><small>Foto do local a adicionar</small></div>')+'<span class="ab-tag">'+safe(a.nome)+'</span><h2>'+safe(title)+'</h2>'+(total>1?'<div class="ab-unit">Unidade '+(index+1)+' de '+total+'</div>':'')+where+'<div class="ab-prizes"><div><small>PRÊMIO MÍNIMO (SUJO)</small><strong>'+fmt(a.premio_min)+'</strong></div><div><small>PRÊMIO MÁXIMO (SUJO)</small><strong>'+fmt(a.premio_max)+'</strong></div></div><div class="ab-cost"><span>Custo da preparação</span><strong>'+fmt(a.custo)+'</strong></div><details><summary>Equipamentos e lucro estimado</summary><div class="ab-items">'+gear+'</div><div class="ab-profit">Após 30% de lavagem e custos: <strong>'+fmt(a.premio_min*.7-a.custo)+' a '+fmt(a.premio_max*.7-a.custo)+'</strong></div></details></article>';
 };
