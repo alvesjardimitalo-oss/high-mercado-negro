@@ -29,6 +29,33 @@ const card=(a,l,index,total)=>{
  const where=l?'<div class="ab-location"><span>Coordenadas</span><div>'+safe(coords(l))+' <button class="ab-copy" data-coords="'+safe(coords(l))+'">Copiar</button></div></div>':'<div class="ab-location">'+safe(a.localizacao||'Localização a confirmar')+'</div>';
  return '<article class="ab-card">'+(photo?'<img class="ab-cover" loading="lazy" src="'+safe(photo)+'" alt="'+safe(title)+'" onerror="this.remove()">':'<div class="ab-photo-pending"><span>⌖</span><small>Foto do local a adicionar</small></div>')+'<span class="ab-tag">'+safe(a.nome)+'</span><h2>'+safe(title)+'</h2>'+(total>1?'<div class="ab-unit">Unidade '+(index+1)+' de '+total+'</div>':'')+where+stats+'<div class="ab-prizes"><div><small>PRÊMIO MÍNIMO (SUJO)</small><strong>'+fmt(a.premio_min)+'</strong></div><div><small>PRÊMIO MÁXIMO (SUJO)</small><strong>'+fmt(a.premio_max)+'</strong></div></div><div class="ab-cost"><span>Custo da preparação</span><strong>'+fmt(a.custo)+'</strong></div>'+rules+timing+preparation+'<details><summary>Lucro líquido estimado</summary><div class="ab-profit">Após 30% de lavagem e custos: <strong>'+fmt(a.premio_min*.7-a.custo)+' a '+fmt(a.premio_max*.7-a.custo)+'</strong></div></details></article>';
 };
+const sizeDescriptions={pequena:'Operações rápidas e equipes menores',media:'Confrontos intermediários e equipes maiores',grande:'Operações de grande escala e alto contingente',pendente:'Ações aguardando confirmação de participantes'};
+const sizeRanges={pequena:'ATÉ 5 INVASORES',media:'6 A 9 INVASORES',grande:'10+ INVASORES',pendente:'REQUISITOS PENDENTES'};
+function showDirectory(){
+ document.getElementById('ab-directory').hidden=false;
+ document.getElementById('ab-listing').hidden=true;
+ document.getElementById('category').value='';
+ document.getElementById('search').value='';
+ document.getElementById('filter').value='';
+ selectedSize='todas';
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function openSize(k){
+ selectedSize=k;
+ document.getElementById('ab-directory').hidden=true;
+ document.getElementById('ab-listing').hidden=false;
+ draw();
+ document.getElementById('ab-listing').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function drawDirectory(){
+ const available=records.filter(a=>norm(a.status)!=='inativo');
+ const groups=['pequena','media','grande','pendente'];
+ document.getElementById('ab-directory-cards').innerHTML=groups.map(k=>{
+  const count=available.filter(a=>actionSize(a)===k).length;
+  if(k==='pendente'&&!count)return '';
+  return '<button type="button" class="ab-directory-card ab-directory-'+k+'" data-open-size="'+k+'"><div class="ab-directory-art"><img src="assets/high_logo.png" alt="Logo High Roleplay" loading="lazy"></div><div class="ab-directory-body"><span class="ab-directory-range">'+sizeRanges[k]+'</span><h3>'+sizeNames[k]+'</h3><p>'+sizeDescriptions[k]+'</p><div class="ab-directory-foot"><span>'+count+' ações cadastradas</span><strong>Ver ações →</strong></div></div></button>';
+ }).join('');
+}
 function draw(){
  const q=norm(document.getElementById('search').value),filter=norm(document.getElementById('filter').value),selected=document.getElementById('category').value;
  const list=records.filter(a=>norm(a.status)!=='inativo'&&(!selected||category(a)===selected)&&(!filter||a.itens.some(i=>norm(i.nome).includes(filter)))&&norm([a.nome,a.localizacao,...(a.locais||[]).map(l=>l.descricao||''),...a.itens.flatMap(i=>[i.nome,canonicalItem(i.nome),norm(i.nome)==='colete'?'placa balistica':'colete'])].join(' ')).includes(q));
@@ -53,7 +80,10 @@ function setupCategories(){
  [...new Set(records.filter(a=>norm(a.status)!=='inativo').map(category))].sort((a,b)=>a.localeCompare(b,'pt-BR')).forEach(name=>{const o=document.createElement('option');o.value=name;o.textContent=name+' ('+records.find(a=>a.nome===name)?.locais?.length+' locais)';select.appendChild(o)});
 }
 
-fetch('data/acoes-blipadas.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Falha ao carregar ações');return r.json()}).then(data=>{records=data.acoes||[];setupCategories();draw()}).catch(e=>{document.getElementById('counter').textContent=e.message});['search','filter','category'].forEach(id=>document.getElementById(id).addEventListener(id==='search'?'input':'change',draw));
+fetch('data/acoes-blipadas.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Falha ao carregar ações');return r.json()}).then(data=>{records=data.acoes||[];setupCategories();drawDirectory();draw()}).catch(e=>{document.getElementById('counter').textContent=e.message});['search','filter','category'].forEach(id=>document.getElementById(id).addEventListener(id==='search'?'input':'change',draw));
 document.getElementById('actions').addEventListener('click',e=>{const b=e.target.closest('button[data-coords]');if(b&&navigator.clipboard)navigator.clipboard.writeText(b.dataset.coords).then(()=>{b.textContent='Copiado!';setTimeout(()=>b.textContent='Copiar',1200)}).catch(()=>{});});
 
 document.querySelectorAll('[data-size]').forEach(b=>b.addEventListener('click',()=>{selectedSize=b.dataset.size;draw();}));
+
+document.getElementById('ab-directory-cards').addEventListener('click',e=>{const b=e.target.closest('[data-open-size]');if(b)openSize(b.dataset.openSize);});
+document.getElementById('ab-back').addEventListener('click',showDirectory);
