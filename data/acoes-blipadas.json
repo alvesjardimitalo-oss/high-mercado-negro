@@ -32,7 +32,7 @@
           "y": -184,
           "z": 37.6,
           "descricao": "Barbearia Bob Mulét — Rockford Hills, próxima à Joalheria Vangelico",
-          "imagem": "barbearia_bob_mulet.webp"
+          "imagem": "barbearia-rockford.webp"
         },
         {
           "nome": "Barbearia",
@@ -40,21 +40,23 @@
           "y": -1511.7,
           "z": 57.1,
           "descricao": "Barbearia — região sul de Los Santos, próximo a Davis",
-          "imagem": "barbearia_bob_mulet.webp"
+          "imagem": "barbearia-sul.webp"
         },
         {
           "nome": "Barbearia",
           "x": -1284.2,
           "y": -1115.4,
           "z": 7,
-          "descricao": "Barbearia — Vespucci Canals"
+          "descricao": "Barbearia — Vespucci Canals",
+          "imagem": "barbearia-vespucci.webp"
         },
         {
           "nome": "Barbearia",
           "x": 1211.5,
           "y": -470.8,
           "z": 66.2,
-          "descricao": "Barbearia — Mirror Park"
+          "descricao": "Barbearia — Mirror Park",
+          "imagem": "barbearia-mirror.webp"
         }
       ],
       "policiais_minimos": 4,
@@ -289,7 +291,8 @@
       ],
       "pendrive_exigido": "PENDRIVE 3",
       "cooldown_segundos": 3500,
-      "tempo_maximo_minutos": 20
+      "tempo_maximo_minutos": 20,
+      "imagem": "fleeca-rockford.webp"
     },
     {
       "nome": "NIOBIO",
@@ -325,7 +328,8 @@
           "x": 3559.8,
           "y": 3674.6,
           "z": 28.1,
-          "descricao": "Nióbio — Humane Labs"
+          "descricao": "Nióbio — Humane Labs",
+          "imagem": "niobio.webp"
         }
       ],
       "policiais_minimos": 12,
@@ -412,7 +416,8 @@
           "x": -630.8,
           "y": -229.8,
           "z": 38.1,
-          "descricao": "Joalheria Vangelico — Rockford Hills"
+          "descricao": "Joalheria Vangelico — Rockford Hills",
+          "imagem": "joalheria.webp"
         }
       ],
       "policiais_minimos": 10,
@@ -582,7 +587,8 @@
       "tempo_maximo_minutos": 25,
       "nivel_procurado": false,
       "mini_game": false,
-      "permissao_iniciar": true
+      "permissao_iniciar": true,
+      "imagem": "navio.webp"
     },
     {
       "nome": "HOLLYWOOD",
@@ -771,7 +777,8 @@
           "x": 150.9,
           "y": 6647.9,
           "z": 31.6,
-          "descricao": "Assalto a Paleto 2 — Paleto Bay"
+          "descricao": "Assalto a Paleto 2 — Paleto Bay",
+          "imagem": "paleto-2.webp"
         }
       ],
       "policiais_minimos": 17,
@@ -820,7 +827,8 @@
           "x": -489.8,
           "y": 5326.7,
           "z": 80.6,
-          "descricao": "Madeireira — Paleto Forest"
+          "descricao": "Madeireira — Paleto Forest",
+          "imagem": "madeireira.webp"
         }
       ],
       "policiais_minimos": 24,
@@ -894,7 +902,8 @@
           "x": -2293.2,
           "y": 282.6,
           "z": 169.6,
-          "descricao": "Universidade — ULSSA"
+          "descricao": "Universidade — ULSSA",
+          "imagem": "universidade.webp"
         }
       ],
       "policiais_minimos": 14,
@@ -1229,7 +1238,8 @@
       "tempo_maximo_minutos": 20,
       "nivel_procurado": true,
       "mini_game": true,
-      "permissao_iniciar": true
+      "permissao_iniciar": true,
+      "imagem": "fleeca-entrada.webp"
     },
     {
       "nome": "FLEECA NORTE",
@@ -1573,7 +1583,8 @@
           "x": -431.3,
           "y": 289.1,
           "z": 86.1,
-          "descricao": "Comedy — West Vinewood"
+          "descricao": "Comedy — West Vinewood",
+          "imagem": "comedy.webp"
         }
       ],
       "policiais_minimos": 6,
@@ -1898,7 +1909,8 @@
       "tempo_maximo_minutos": 25,
       "nivel_procurado": true,
       "mini_game": true,
-      "permissao_iniciar": true
+      "permissao_iniciar": true,
+      "imagem": "galpao.webp"
     },
     {
       "nome": "AUDITÓRIO 2 FUZIL",
@@ -1959,7 +1971,8 @@
       ],
       "pendrive_exigido": "PENDRIVE 5",
       "cooldown_segundos": 5000,
-      "tempo_maximo_minutos": 20
+      "tempo_maximo_minutos": 20,
+      "imagem": "auditorio_palco.webp"
     },
     {
       "nome": "CYPRESS",
@@ -2010,7 +2023,8 @@
       ],
       "pendrive_exigido": "safependrive",
       "cooldown_segundos": 5000,
-      "tempo_maximo_minutos": 15
+      "tempo_maximo_minutos": 15,
+      "imagem": "galpao_industrial.webp"
     },
     {
       "nome": "AUDITÓRIO 2 SUB",
@@ -2040,7 +2054,8 @@
         }
       ],
       "observacao": "Localização pendente de confirmação",
-      "locais": []
+      "locais": [],
+      "imagem": "auditorio_terraco.webp"
     },
     {
       "nome": "ANTENA PISTOLA",
@@ -2198,7 +2213,8 @@
           "x": -1111.2,
           "y": 4937.6,
           "z": 218.4,
-          "descricao": "Pelados — Mount Chiliad"
+          "descricao": "Pelados — Mount Chiliad",
+          "imagem": "pelados.webp"
         }
       ],
       "policiais_minimos": 8,
@@ -2260,7 +2276,8 @@
           "x": 252.1,
           "y": -1595,
           "z": 31.5,
-          "descricao": "Estacionamento Marrom — Rancho"
+          "descricao": "Estacionamento Marrom — Rancho",
+          "imagem": "estacionamento.webp"
         }
       ],
       "policiais_minimos": 9,
