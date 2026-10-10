@@ -456,7 +456,48 @@
           "descricao": "Assalto ao Navio — Porto de Los Santos",
           "imagem": "navio_carga.webp"
         }
-      ]
+      ],
+      "policiais_minimos": 8,
+      "regras_confronto": [
+        {
+          "invasores": 5,
+          "policiais": 8,
+          "refens": 0
+        },
+        {
+          "invasores": 6,
+          "policiais": 9,
+          "refens": 0
+        },
+        {
+          "invasores": 7,
+          "policiais": 10,
+          "refens": 0
+        },
+        {
+          "invasores": 8,
+          "policiais": 11,
+          "refens": 0
+        },
+        {
+          "invasores": 9,
+          "policiais": 12,
+          "refens": 0
+        },
+        {
+          "invasores": 10,
+          "policiais": 13,
+          "refens": 0
+        },
+        {
+          "invasores": 11,
+          "policiais": 14,
+          "refens": 0
+        }
+      ],
+      "pendrive_exigido": "PENDRIVE 4",
+      "cooldown_segundos": 5000,
+      "tempo_maximo_minutos": 20
     },
     {
       "nome": "ASSALTO A PALETO",
