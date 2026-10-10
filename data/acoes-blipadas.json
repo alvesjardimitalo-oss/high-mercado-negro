@@ -875,9 +875,9 @@
       "nome": "UNIVERSIDADE",
       "localizacao": "-2293.2, 282.6, 169.6",
       "status": "ativo",
-      "premio_min": 2424000,
-      "premio_max": 2787600,
-      "custo": 1189000,
+      "premio_min": 2439715,
+      "premio_max": 2805672,
+      "custo": 1200000,
       "buff": 725429,
       "nerf": 0,
       "itens": [
@@ -894,7 +894,7 @@
           "quantidade": 15
         },
         {
-          "nome": "PENDRIVE 4",
+          "nome": "PENDRIVE 5",
           "quantidade": 1
         }
       ],
