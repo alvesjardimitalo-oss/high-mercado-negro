@@ -954,10 +954,10 @@
       "nome": "CELEIRO DO HIPÓDROMO",
       "localizacao": "1222.9, 340.4, 82",
       "status": "ativo",
-      "premio_min": 433571,
-      "premio_max": 498607,
+      "premio_min": 443571,
+      "premio_max": 510107,
       "custo": 268500,
-      "buff": 50000,
+      "buff": 60000,
       "nerf": 0,
       "itens": [
         {
