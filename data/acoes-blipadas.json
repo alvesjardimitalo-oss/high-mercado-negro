@@ -1811,7 +1811,7 @@
     {
       "nome": "YELLOW JACK",
       "localizacao": "1984.49, 3054.89, 47.21, 311.82",
-      "status": "indisponivel",
+      "status": "ativo",
       "premio_min": 661429,
       "premio_max": 760643,
       "custo": 393000,
@@ -1835,7 +1835,7 @@
           "quantidade": 1
         }
       ],
-      "observacao": "INDISPONÍVEL — blip para iniciar a ação não localizado; aguarda confirmação.",
+      "observacao": "",
       "locais": [],
       "policiais_minimos": 5,
       "regras_confronto": [
@@ -1928,7 +1928,7 @@
     {
       "nome": "CYPRESS",
       "localizacao": "961.72, -2503.41, 28.44, 99.22",
-      "status": "indisponivel",
+      "status": "ativo",
       "premio_min": 1300000,
       "premio_max": 1495000,
       "custo": 630000,
@@ -1952,7 +1952,7 @@
           "quantidade": 1
         }
       ],
-      "observacao": "INDISPONÍVEL — blip para iniciar a ação não localizado; aguarda confirmação.",
+      "observacao": "",
       "locais": [],
       "policiais_minimos": 9,
       "regras_confronto": [
