@@ -110,7 +110,8 @@ document.addEventListener('click',e=>{
  if(b.dataset.comparisonOpen!==undefined){$('comparison').close();dossier(entries[Number(b.dataset.comparisonOpen)]);}
  if(b.id==='dossier-favorite')toggleFavorite(current.id);
  if(b.id==='copy-coords')copy(coords(current));
- if(b.id==='copy-plan')copy(planText());\n if(b.id==='copy-sim')copy(simulationText());
+ if(b.id==='copy-plan')copy(planText());
+ if(b.id==='copy-sim')copy(simulationText());
  if(b.id==='share'){const url=new URL(location.href);url.search='';url.hash='acao='+encodeURIComponent(current.id);copy(url.href);}
 });
 document.addEventListener('input',e=>{if(['sim-owned-weapons','sim-owned-vests'].includes(e.target.id))updateKitSimulation();});
