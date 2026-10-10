@@ -31,32 +31,28 @@
           "x": -823.2,
           "y": -184,
           "z": 37.6,
-          "descricao": "Barbearia Bob Mulét — Rockford Hills, próxima à Joalheria Vangelico",
-          "imagem": "barbearia-rockford.webp"
+          "descricao": "Barbearia Bob Mulét — Rockford Hills, próxima à Joalheria Vangelico"
         },
         {
           "nome": "Barbearia",
           "x": -30.6,
           "y": -1511.7,
           "z": 57.1,
-          "descricao": "Barbearia — região sul de Los Santos, próximo a Davis",
-          "imagem": "barbearia-sul.webp"
+          "descricao": "Barbearia — região sul de Los Santos, próximo a Davis"
         },
         {
           "nome": "Barbearia",
           "x": -1284.2,
           "y": -1115.4,
           "z": 7,
-          "descricao": "Barbearia — Vespucci Canals",
-          "imagem": "barbearia-vespucci.webp"
+          "descricao": "Barbearia — Vespucci Canals"
         },
         {
           "nome": "Barbearia",
           "x": 1211.5,
           "y": -470.8,
           "z": 66.2,
-          "descricao": "Barbearia — Mirror Park",
-          "imagem": "barbearia-mirror.webp"
+          "descricao": "Barbearia — Mirror Park"
         }
       ]
     },
@@ -94,56 +90,49 @@
           "x": -709.8,
           "y": -904.2,
           "z": 19.2,
-          "descricao": "Loja de Departamento — Little Seoul",
-          "imagem": "loja-little-seoul.webp"
+          "descricao": "Loja de Departamento — Little Seoul"
         },
         {
           "nome": "Loja de Departamento",
           "x": 378.3,
           "y": 333.4,
           "z": 103.6,
-          "descricao": "Loja de Departamento — região de Alta",
-          "imagem": "loja-alta.webp"
+          "descricao": "Loja de Departamento — região de Alta"
         },
         {
           "nome": "Loja de Departamento",
           "x": -3047.9,
           "y": 585.7,
           "z": 7.9,
-          "descricao": "Loja de Departamento — Chumash",
-          "imagem": "loja-chumash.webp"
+          "descricao": "Loja de Departamento — Chumash"
         },
         {
           "nome": "Loja de Departamento",
           "x": 28.2,
           "y": -1339.2,
           "z": 29.5,
-          "descricao": "Loja de Departamento — Strawberry",
-          "imagem": "loja-strawberry.webp"
+          "descricao": "Loja de Departamento — Strawberry"
         },
         {
           "nome": "Loja de Departamento",
           "x": -43.5,
           "y": -1748.5,
           "z": 29.4,
-          "descricao": "Loja de Departamento — Davis",
-          "imagem": "loja-davis.webp"
+          "descricao": "Loja de Departamento — Davis"
         },
         {
           "nome": "Loja de Departamento",
           "x": 1159.5,
           "y": -314.1,
           "z": 69.2,
-          "descricao": "Loja de Departamento — Mirror Park",
-          "imagem": "loja-mirror-park.webp"
+          "descricao": "Loja de Departamento — Mirror Park"
         },
         {
           "nome": "Loja de Departamento",
           "x": 1707.9,
           "y": 4920.4,
           "z": 42.1,
-          "descricao": "Loja de Departamento — Grapeseed",
-          "imagem": "loja-grapeseed.webp"
+          "descricao": "Loja de Departamento — Grapeseed"
         }
       ]
     },
@@ -181,16 +170,14 @@
           "x": 23.8,
           "y": -1106,
           "z": 29.8,
-          "descricao": "Ammunation — Pillbox Hill",
-          "imagem": "ammunation-pillbox.webp"
+          "descricao": "Ammunation — Pillbox Hill"
         },
         {
           "nome": "Ammunation",
           "x": 814,
           "y": -2154.6,
           "z": 29.6,
-          "descricao": "Ammunation — Cypress Flats",
-          "imagem": "ammunation-cypress.webp"
+          "descricao": "Ammunation — Cypress Flats"
         }
       ]
     },
@@ -258,8 +245,7 @@
           "x": 3559.8,
           "y": 3674.6,
           "z": 28.1,
-          "descricao": "Nióbio — Humane Labs",
-          "imagem": "niobio.webp"
+          "descricao": "Nióbio — Humane Labs"
         }
       ]
     },
@@ -297,8 +283,7 @@
           "x": -630.8,
           "y": -229.8,
           "z": 38.1,
-          "descricao": "Joalheria Vangelico — Rockford Hills",
-          "imagem": "joalheria.webp"
+          "descricao": "Joalheria Vangelico — Rockford Hills"
         }
       ]
     },
@@ -336,8 +321,7 @@
           "x": 700.7,
           "y": 576,
           "z": 130.5,
-          "descricao": "Auditório — Vinewood Hills",
-          "imagem": "auditorio.webp"
+          "descricao": "Auditório — Vinewood Hills"
         }
       ]
     },
@@ -405,8 +389,7 @@
           "x": -1063.3,
           "y": -504.2,
           "z": 36.6,
-          "descricao": "Hollywood — oeste de Los Santos",
-          "imagem": "hollywood.webp"
+          "descricao": "Hollywood — oeste de Los Santos"
         }
       ]
     },
@@ -444,8 +427,7 @@
           "x": 1244.9,
           "y": -2944.2,
           "z": 9.3,
-          "descricao": "Assalto ao Navio — Porto de Los Santos",
-          "imagem": "navio.webp"
+          "descricao": "Assalto ao Navio — Porto de Los Santos"
         }
       ]
     },
@@ -483,8 +465,7 @@
           "x": 150.9,
           "y": 6647.9,
           "z": 31.6,
-          "descricao": "Assalto a Paleto 2 — Paleto Bay",
-          "imagem": "paleto-2.webp"
+          "descricao": "Assalto a Paleto 2 — Paleto Bay"
         }
       ]
     },
@@ -522,8 +503,7 @@
           "x": -489.8,
           "y": 5326.7,
           "z": 80.6,
-          "descricao": "Madeireira — Paleto Forest",
-          "imagem": "madeireira.webp"
+          "descricao": "Madeireira — Paleto Forest"
         }
       ]
     },
@@ -561,8 +541,7 @@
           "x": -2293.2,
           "y": 282.6,
           "z": 169.6,
-          "descricao": "Universidade — ULSSA",
-          "imagem": "universidade.webp"
+          "descricao": "Universidade — ULSSA"
         }
       ]
     },
@@ -600,8 +579,7 @@
           "x": 1222.9,
           "y": 340.4,
           "z": 82,
-          "descricao": "Celeiro do Hipódromo — nordeste de Los Santos",
-          "imagem": "celeiro.webp"
+          "descricao": "Celeiro do Hipódromo — nordeste de Los Santos"
         }
       ]
     },
@@ -639,8 +617,7 @@
           "x": 1051.3,
           "y": -3035.4,
           "z": 5.9,
-          "descricao": "Container — Terminal portuário",
-          "imagem": "container.webp"
+          "descricao": "Container — Terminal portuário"
         }
       ]
     },
@@ -678,8 +655,7 @@
           "x": 1009.8,
           "y": -2892.7,
           "z": 11.3,
-          "descricao": "Assalto ao Porto — Elysian Island",
-          "imagem": "porto.webp"
+          "descricao": "Assalto ao Porto — Elysian Island"
         }
       ]
     },
@@ -717,8 +693,7 @@
           "x": 311.2,
           "y": -284.4,
           "z": 54.2,
-          "descricao": "Fleeca Chaves — Alta",
-          "imagem": "fleeca-chaves.webp"
+          "descricao": "Fleeca Chaves — Alta"
         }
       ]
     },
@@ -786,8 +761,7 @@
           "x": 1176,
           "y": 2712.9,
           "z": 38.1,
-          "descricao": "Fleeca Norte — Harmony",
-          "imagem": "fleeca-norte.webp"
+          "descricao": "Fleeca Norte — Harmony"
         }
       ]
     },
@@ -825,8 +799,7 @@
           "x": -2956.6,
           "y": 481.7,
           "z": 15.7,
-          "descricao": "Fleeca Praia — Banham Canyon",
-          "imagem": "fleeca-praia.webp"
+          "descricao": "Fleeca Praia — Banham Canyon"
         }
       ]
     },
@@ -864,8 +837,7 @@
           "x": -353.9,
           "y": -55.3,
           "z": 49,
-          "descricao": "Fleeca Shopping — Burton",
-          "imagem": "fleeca-shopping.webp"
+          "descricao": "Fleeca Shopping — Burton"
         }
       ]
     },
@@ -899,16 +871,14 @@
           "x": -1478.9,
           "y": -375.3,
           "z": 39.2,
-          "descricao": "Loja de Bebidas — Morningwood",
-          "imagem": "bebidas-morningwood.webp"
+          "descricao": "Loja de Bebidas — Morningwood"
         },
         {
           "nome": "Loja de Bebidas",
           "x": 1126.9,
           "y": -980.2,
           "z": 45.4,
-          "descricao": "Loja de Bebidas — Murrieta Heights",
-          "imagem": "bebidas-murrieta.webp"
+          "descricao": "Loja de Bebidas — Murrieta Heights"
         }
       ]
     },
@@ -942,8 +912,7 @@
           "x": 1249.1,
           "y": -350.5,
           "z": 69.2,
-          "descricao": "Fast Food — Mirror Park",
-          "imagem": "fast-food.webp"
+          "descricao": "Fast Food — Mirror Park"
         }
       ]
     },
@@ -981,8 +950,7 @@
           "x": -431.3,
           "y": 289.1,
           "z": 86.1,
-          "descricao": "Comedy — West Vinewood",
-          "imagem": "comedy.webp"
+          "descricao": "Comedy — West Vinewood"
         }
       ]
     },
@@ -1020,8 +988,7 @@
           "x": 265.1,
           "y": 213.8,
           "z": 101.7,
-          "descricao": "Banco Central — Downtown",
-          "imagem": "banco-central.webp"
+          "descricao": "Banco Central — Downtown"
         }
       ]
     },
@@ -1059,8 +1026,7 @@
           "x": -104,
           "y": 6477.6,
           "z": 31.6,
-          "descricao": "Banco Paleto — Paleto Bay",
-          "imagem": "banco-paleto.webp"
+          "descricao": "Banco Paleto — Paleto Bay"
         }
       ]
     },
@@ -1098,8 +1064,7 @@
           "x": -68.6,
           "y": 6253.9,
           "z": 31.1,
-          "descricao": "Galinheiro — Paleto Bay",
-          "imagem": "galinheiro.webp"
+          "descricao": "Galinheiro — Paleto Bay"
         }
       ]
     },
@@ -1257,8 +1222,7 @@
           "x": 780.5,
           "y": 1296.9,
           "z": 361.4,
-          "descricao": "Antena — montanhas Tataviam",
-          "imagem": "antena.webp"
+          "descricao": "Antena — montanhas Tataviam"
         }
       ]
     },
@@ -1296,8 +1260,7 @@
           "x": -1306,
           "y": 336.8,
           "z": 65.5,
-          "descricao": "Hotel — Rockford Hills",
-          "imagem": "hotel.webp"
+          "descricao": "Hotel — Rockford Hills"
         }
       ]
     },
@@ -1335,8 +1298,7 @@
           "x": -1111.2,
           "y": 4937.6,
           "z": 218.4,
-          "descricao": "Pelados — Mount Chiliad",
-          "imagem": "pelados.webp"
+          "descricao": "Pelados — Mount Chiliad"
         }
       ]
     },
@@ -1374,8 +1336,7 @@
           "x": 252.1,
           "y": -1595,
           "z": 31.5,
-          "descricao": "Estacionamento Marrom — Rancho",
-          "imagem": "estacionamento.webp"
+          "descricao": "Estacionamento Marrom — Rancho"
         }
       ]
     }
