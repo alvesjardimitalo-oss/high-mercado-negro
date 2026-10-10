@@ -494,7 +494,18 @@
           "z": 31.6,
           "descricao": "Assalto a Paleto 2 — Paleto Bay"
         }
-      ]
+      ],
+      "policiais_minimos": 17,
+      "regras_confronto": [
+        {
+          "invasores": 15,
+          "policiais": 17,
+          "refens": 0
+        }
+      ],
+      "cooldown_segundos": 5000,
+      "tempo_maximo_minutos": 30,
+      "pendrive_exigido": "safependrive"
     },
     {
       "nome": "DOMINAÇÃO A MADEIREIRA",
