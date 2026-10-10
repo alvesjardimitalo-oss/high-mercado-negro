@@ -2029,39 +2029,6 @@
       "imagem": "https://forum-cfx-re.akamaized.net/original/4X/4/2/f/42ff83567a894afe08d2efab376a2d6aa5c8ea32.jpeg"
     },
     {
-      "nome": "AUDITÓRIO 2 SUB",
-      "localizacao": "",
-      "status": "ativo",
-      "premio_min": 2095000,
-      "premio_max": 2409250,
-      "custo": 949750,
-      "buff": 738214,
-      "nerf": 0,
-      "itens": [
-        {
-          "nome": "ARMA SUB",
-          "quantidade": 12
-        },
-        {
-          "nome": "MUNIÇÃO SUB (x200)",
-          "quantidade": 12
-        },
-        {
-          "nome": "COLETE",
-          "quantidade": 12
-        },
-        {
-          "nome": "PENDRIVE 3",
-          "quantidade": 1
-        }
-      ],
-      "observacao": "Localização pendente de confirmação",
-      "locais": [],
-      "imagem": "auditorio_terraco.webp",
-      "cooldown_segundos": 5000,
-      "cooldown_origem": "Valor aprovado pela gestão em 10/10/2026 com base no padrão de ações; não transcrito de print do preset."
-    },
-    {
       "nome": "ANTENA PISTOLA",
       "localizacao": "780.5, 1296.9, 361.4",
       "status": "ativo",
