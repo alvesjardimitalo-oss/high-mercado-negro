@@ -63,20 +63,20 @@ function draw() {
 function reset() {['search','category','weapon','team','budget'].forEach(id=>$(id).value='');$('sort').value='name';selectedSize='todas';onlyFavorites=false;draw();}
 function duration(seconds) {if(amount(seconds)===null)return 'A confirmar';const n=Number(seconds);return `${Math.floor(n/60)} min${n%60?' '+n%60+' s':''}`;}
 const kitPrices={'ARMA BRANCA':975,'ARMA PISTOLA':38000,'ARMA SUB':47000,'ARMA FUZIL':180000,'MUNIÇÃO PISTOLA (x100)':13500,'MUNIÇÃO SUB (x200)':18000,'MUNIÇÃO FUZIL (x250)':22000,'COLETE':13000,'PLACA BALÍSTICA':13000,'PENDRIVE 1':6000,'PENDRIVE 2':10500,'PENDRIVE 3':13750,'PENDRIVE 4':19000,'PENDRIVE 5':30000};
-function kitEstimate(a, team) {
- const rows=(a.itens||[]).map(i=>{const name=String(i.nome||'').toUpperCase(),unit=kitPrices[name];const original=Math.max(0,Number(i.quantidade)||0);const qty=name.startsWith('PENDRIVE')?original:team;return {name,qty,unit,total:unit===undefined?null:qty*unit};});
+function kitEstimate(a, team, ownedWeapons=0, ownedVests=0) {
+ const rows=(a.itens||[]).map(i=>{const name=String(i.nome||'').toUpperCase(),unit=kitPrices[name];const original=Math.max(0,Number(i.quantidade)||0);const qty=name.startsWith('PENDRIVE')?original:/^ARMA\s/.test(name)?Math.max(0,team-ownedWeapons):['COLETE','PLACA BALÍSTICA'].includes(name)?Math.max(0,team-ownedVests):team;return {name,qty,unit,total:unit===undefined?null:qty*unit};});
  const known=rows.every(r=>r.total!==null);return {rows,total:known?rows.reduce((s,r)=>s+r.total,0):null};
 }
 function simulationHTML(a,valid,preset) {
  const opts=valid.length?valid:[Math.max(1,(a.itens||[]).find(i=>String(i.nome).startsWith('ARMA '))?.quantidade||1)];
- return `<section class="ab-dossier-section"><div class="ab-section-title"><h3>04 / Simulador de gastos</h3></div><label class="ab-label" for="dossier-team">Quantidade de participantes</label><select id="dossier-team" class="ab-sim-select">${opts.map(n=>`<option value="${n}" ${n===preset?'selected':''}>${n} participantes</option>`).join('')}</select><p class="ab-help">Estimativa para equipar cada participante com 1 arma, 1 caixa de munição e 1 colete quando previstos. Pendrive é contabilizado uma única vez. Não inclui premiação.</p><div id="sim-results" aria-live="polite"></div><button class="ab-btn" id="copy-sim">Copiar orçamento ↗</button></section>`;
+ return `<section class="ab-dossier-section"><div class="ab-section-title"><h3>04 / Simulador de gastos</h3></div><label class="ab-label" for="dossier-team">Quantidade de participantes</label><select id="dossier-team" class="ab-sim-select">${opts.map(n=>`<option value="${n}" ${n===preset?'selected':''}>${n} participantes</option>`).join('')}</select><p class="ab-help">Estimativa do que falta comprar: 1 arma e 1 colete por participante quando previstos, descontando os equipamentos já disponíveis. Pendrive é contabilizado uma única vez. Não inclui premiação.</p><div class="ab-filters" style="margin-top:12px"><label><span class="ab-label">Participantes que já possuem arma</span><input type="number" id="sim-owned-weapons" min="0" value="0"></label><label><span class="ab-label">Participantes que já possuem colete</span><input type="number" id="sim-owned-vests" min="0" value="0"></label></div><div id="sim-results" aria-live="polite"></div><button class="ab-btn" id="copy-sim">Copiar orçamento ↗</button></section>`;
 }
 function updateKitSimulation() {
  if(!current||!$('dossier-team')||!$('sim-results'))return;
- const n=Number($('dossier-team').value),estimate=kitEstimate(current.a,n);
+ const n=Number($('dossier-team').value),w=Math.min(n,Math.max(0,Math.floor(Number($('sim-owned-weapons').value)||0))),v=Math.min(n,Math.max(0,Math.floor(Number($('sim-owned-vests').value)||0))),estimate=kitEstimate(current.a,n,w,v);$('sim-owned-weapons').value=w;$('sim-owned-vests').value=v;
  $('sim-results').innerHTML=`<div class="ab-table-scroll"><table class="ab-rules"><thead><tr><th>Item</th><th>Qtd.</th><th>Unitário</th><th>Subtotal</th></tr></thead><tbody>${estimate.rows.map(r=>`<tr><td>${escape(r.name)}</td><td>${r.qty}</td><td>${money(r.unit)}</td><td>${money(r.total)}</td></tr>`).join('')}</tbody></table></div><div class="ab-ledger"><div><span>Gasto estimado para ${n} participantes</span><b>${money(estimate.total)}</b></div><div><span>Kit completo cadastrado (referência)</span><b>${money(amount(current.a.custo))}</b></div></div>`;
 }
-function simulationText() {const n=Number($('dossier-team').value),e=kitEstimate(current.a,n);return ['HIGH ROLEPLAY | ORÇAMENTO DE AÇÃO',current.a.nome+' — '+current.title,'Participantes: '+n,...e.rows.map(r=>'- '+r.qty+'× '+r.name+' — '+money(r.total)),'GASTO ESTIMADO: '+money(e.total),'Kit completo cadastrado: '+money(amount(current.a.custo)),'Valores estimados; premiação não incluída.'].join('\\n');}
+function simulationText() {const n=Number($('dossier-team').value),w=Math.min(n,Math.max(0,Number($('sim-owned-weapons').value)||0)),v=Math.min(n,Math.max(0,Number($('sim-owned-vests').value)||0)),e=kitEstimate(current.a,n,w,v);return ['HIGH ROLEPLAY | ORÇAMENTO DE AÇÃO',current.a.nome+' — '+current.title,'Participantes: '+n,'Já possuem arma: '+w,'Já possuem colete: '+v,...e.rows.map(r=>'- '+r.qty+'× '+r.name+' — '+money(r.total)),'GASTO ESTIMADO: '+money(e.total),'Kit completo cadastrado: '+money(amount(current.a.custo)),'Valores estimados; premiação não incluída.'].join('\\n');}
 function dossier(e) {
  current=e;const a=e.a, valid=teams(e), rows=rulesFor(a,e.l), preset=valid.includes(Number($('team').value))?Number($('team').value):valid.at(-1);
  const selected=checklist.get(e.id)||new Set();
@@ -111,6 +111,7 @@ document.addEventListener('click',e=>{
  if(b.id==='copy-plan')copy(planText());\n if(b.id==='copy-sim')copy(simulationText());
  if(b.id==='share'){const url=new URL(location.href);url.search='';url.hash='acao='+encodeURIComponent(current.id);copy(url.href);}
 });
+document.addEventListener('input',e=>{if(['sim-owned-weapons','sim-owned-vests'].includes(e.target.id))updateKitSimulation();});
 document.addEventListener('change',e=>{
  if(e.target.id==='dossier-team'){updateSimulation();updateKitSimulation();}
  if(e.target.dataset.check!==undefined){const checked=checklist.get(current.id)||new Set(),index=Number(e.target.dataset.check);e.target.checked?checked.add(index):checked.delete(index);checklist.set(current.id,checked);updateProgress();}
