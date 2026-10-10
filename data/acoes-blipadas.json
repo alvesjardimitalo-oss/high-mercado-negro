@@ -1389,9 +1389,9 @@
       "nome": "LOJA DE BEBIDAS",
       "localizacao": "-1478.9, -375.3, 39.2 | 1126.9, -980.2, 45.4",
       "status": "ativo",
-      "premio_min": 249286,
-      "premio_max": 286679,
-      "custo": 160500,
+      "premio_min": 255714,
+      "premio_max": 294071,
+      "custo": 165000,
       "buff": 20000,
       "nerf": 0,
       "itens": [
@@ -1404,7 +1404,7 @@
           "quantidade": 3
         },
         {
-          "nome": "PENDRIVE 1",
+          "nome": "PENDRIVE 2",
           "quantidade": 1
         }
       ],
