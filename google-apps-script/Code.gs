@@ -123,6 +123,8 @@ function publicarNoGitHub() {
   const put = UrlFetchApp.fetch(pub.api, {method:'put', headers: pub.headers, contentType:'application/json', payload:JSON.stringify(payload), muteHttpExceptions:true});
   if (![200,201].includes(put.getResponseCode())) throw new Error(`GitHub PUT ${put.getResponseCode()}: ${put.getContentText()}`);
 
+  publicarAcoesBlipadas_(pub); // Atualiza também o catálogo das ações, usando as mesmas credenciais e botão.
+
   ui.alert(`Publicado com sucesso.\n\n${res.catalogo.itens.length} itens enviados.\n${res.mudancas.length ? res.mudancas.length + ' mudança(s) registrada(s) no histórico.\nO aviso com imagem será postado no Discord pelo GitHub em 1–2 minutos.' : 'Nenhuma mudança de preço (sem aviso no Discord).'}\n\nO site atualiza em 1–2 minutos.`);
 }
 
@@ -495,4 +497,62 @@ function numero_(v, linha) {
   const n = Number(s);
   if (!Number.isFinite(n)) throw new Error(`Valor monetário inválido${linha ? ` na linha ${linha}` : ''}: ${v}`);
   return n;
+}
+
+/* ───────────────────── AÇÕES BLIPADAS ─────────────────────
+ * Aba: AÇÕES BLIPADAS. Publica em data/acoes-blipadas.json
+ * Mantém a publicação do catálogo original inalterada.
+ * Localizações vazias não são inventadas.
+ */
+function publicarAcoesBlipadas_(pub) {
+  const sh = SpreadsheetApp.getActive().getSheetByName('AÇÕES BLIPADAS');
+  if (!sh) return; // Compatível com instalações antigas sem a nova aba.
+  const values = sh.getDataRange().getValues();
+  if (values.length < 2) return;
+  const headers = values[0].map(normalizar_);
+  const col = nome => headers.indexOf(normalizar_(nome));
+  const txt = (r, nome) => col(nome) < 0 ? '' : String(r[col(nome)] || '').trim();
+  const num = (r, nome) => col(nome) < 0 ? 0 : numero_(r[col(nome)]);
+  const required = ['AÇÃO','PRÊMIO MÍNIMO (SUJO)','PRÊMIO MÁXIMO (SUJO)','CUSTO TOTAL'];
+  const missing = required.filter(x => col(x) < 0);
+  if (missing.length) throw new Error('AÇÕES BLIPADAS: cabeçalhos ausentes: ' + missing.join(', '));
+  const acoes = values.slice(1).filter(r => txt(r, 'AÇÃO')).map(r => {
+    const itens = [];
+    for (let n = 1; n <= 4; n++) {
+      const nome = txt(r, 'ITEM ' + n);
+      const quantidade = num(r, 'QTD ' + n);
+      if (nome && quantidade > 0) itens.push({nome, quantidade});
+    }
+    return {
+      nome: txt(r, 'AÇÃO'),
+      localizacao: txt(r, 'LOCALIZAÇÃO'),
+      status: txt(r, 'STATUS') || 'ativo',
+      premio_min: num(r, 'PRÊMIO MÍNIMO (SUJO)'),
+      premio_max: num(r, 'PRÊMIO MÁXIMO (SUJO)'),
+      custo: num(r, 'CUSTO TOTAL'),
+      buff: num(r, 'BUFF'),
+      nerf: num(r, 'NERF'),
+      itens,
+      observacao: txt(r, 'OBSERVAÇÃO')
+    };
+  });
+  const path = 'data/acoes-blipadas.json';
+  const api = pub.base + path;
+  const get = UrlFetchApp.fetch(api + '?ref=' + encodeURIComponent(HIGH_SITE.branch),
+    {headers:pub.headers, muteHttpExceptions:true});
+  if (get.getResponseCode() !== 200 && get.getResponseCode() !== 404)
+    throw new Error('Falha ao consultar ações no GitHub: ' + get.getResponseCode());
+  const payload = {
+    message:'Atualiza ações blipadas pela planilha',
+    branch:HIGH_SITE.branch,
+    content:Utilities.base64Encode(JSON.stringify({
+      meta:{titulo:'Ações Blipadas',fonte:'Planilha Mercado Negro',taxa_lavagem:0.30},
+      acoes
+    },null,2), Utilities.Charset.UTF_8)
+  };
+  if (get.getResponseCode() === 200) payload.sha = JSON.parse(get.getContentText()).sha;
+  const put = UrlFetchApp.fetch(api, {method:'put',headers:pub.headers,contentType:'application/json',
+    payload:JSON.stringify(payload),muteHttpExceptions:true});
+  if (![200,201].includes(put.getResponseCode()))
+    throw new Error('Falha ao publicar ações: GitHub ' + put.getResponseCode() + ': ' + put.getContentText());
 }
