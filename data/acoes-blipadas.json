@@ -1138,7 +1138,23 @@
           "z": 86.1,
           "descricao": "Comedy — West Vinewood"
         }
-      ]
+      ],
+      "policiais_minimos": 6,
+      "regras_confronto": [
+        {
+          "invasores": 4,
+          "policiais": 6,
+          "refens": 0
+        },
+        {
+          "invasores": 5,
+          "policiais": 7,
+          "refens": 0
+        }
+      ],
+      "pendrive_exigido": "PENDRIVE 2",
+      "cooldown_segundos": 1200,
+      "tempo_maximo_minutos": 20
     },
     {
       "nome": "BANCO CENTRAL",
