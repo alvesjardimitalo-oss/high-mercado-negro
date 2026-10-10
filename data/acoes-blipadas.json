@@ -56,7 +56,22 @@
           "z": 66.2,
           "descricao": "Barbearia — Mirror Park"
         }
-      ]
+      ],
+      "policiais_minimos": 4,
+      "regras_confronto": [
+        {
+          "invasores": 3,
+          "policiais": 4,
+          "refens": 0
+        },
+        {
+          "invasores": 4,
+          "policiais": 5,
+          "refens": 0
+        }
+      ],
+      "cooldown_segundos": 1500,
+      "tempo_maximo_minutos": 15
     },
     {
       "nome": "LOJA DE DEPARTAMENTO",
