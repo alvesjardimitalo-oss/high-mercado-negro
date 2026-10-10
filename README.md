@@ -58,3 +58,25 @@ Depois use o menu: **HIGH • Mercado Negro > Publicar no site**.
 
 ## Segurança
 Nunca coloque o token do GitHub em uma célula ou arquivo do repositório. O script salva o token em Script Properties.
+
+
+## Ações Blipadas
+
+- Página: `acoes-blipadas.html`
+- Dados publicados: `data/acoes-blipadas.json`
+- Fonte de dados: aba `AÇÕES BLIPADAS` da planilha Mercado Negro.
+- O botão **HIGH • Mercado Negro > Publicar no site** publica também as ações, após instalar a versão atualizada de `google-apps-script/Code.gs` no Apps Script vinculado à planilha.
+- Localizações vazias aparecem como **Localização a confirmar**. Não inventar localizações.
+- Equipamentos usam as imagens de `assets/itens` quando disponíveis.
+- A página calcula lucro estimado com 30% de lavagem sobre a premiação suja, menos o custo total de equipamentos.
+
+### Instalação do script atualizado
+
+1. Abra a planilha Mercado Negro e acesse **Extensões > Apps Script**.
+2. Faça uma cópia de segurança do conteúdo atual de `Code.gs`.
+3. Substitua o conteúdo do arquivo vinculado pelo código completo de [google-apps-script/Code.gs](google-apps-script/Code.gs) e salve.
+4. Volte à planilha e recarregue a página.
+5. Use **HIGH • Mercado Negro > Validar tabela** e, em seguida, **Publicar no site**.
+6. Confira a página `acoes-blipadas.html` e o arquivo `data/acoes-blipadas.json` no GitHub.
+
+O token GitHub permanece nas propriedades do Apps Script; não o cole na planilha nem no repositório. Caso haja outros arquivos ou personalizações locais no projeto Apps Script, revise antes de substituir.
