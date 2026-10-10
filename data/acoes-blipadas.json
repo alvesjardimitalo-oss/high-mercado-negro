@@ -621,7 +621,41 @@
           "descricao": "Hollywood — oeste de Los Santos",
           "imagem": "estudio_kortz.webp"
         }
-      ]
+      ],
+      "policiais_minimos": 12,
+      "regras_confronto": [
+        {
+          "invasores": 8,
+          "policiais": 12,
+          "refens": 6
+        },
+        {
+          "invasores": 9,
+          "policiais": 13,
+          "refens": 6
+        },
+        {
+          "invasores": 10,
+          "policiais": 14,
+          "refens": 6
+        },
+        {
+          "invasores": 11,
+          "policiais": 15,
+          "refens": 6
+        },
+        {
+          "invasores": 12,
+          "policiais": 16,
+          "refens": 6
+        }
+      ],
+      "pendrive_exigido": "PENDRIVE 5",
+      "cooldown_segundos": 5000,
+      "tempo_maximo_minutos": 20,
+      "nivel_procurado": false,
+      "mini_game": false,
+      "permissao_iniciar": false
     },
     {
       "nome": "ASSALTO AO NAVIO",
