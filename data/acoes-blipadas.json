@@ -9,10 +9,10 @@
       "nome": "BARBEARIA",
       "localizacao": "-823.2, -184, 37.6 | -30.6, -1511.7, 57.1 | -1284.2, -1115.4, 7 | 1211.5, -470.8, 66.2",
       "status": "ativo",
-      "premio_min": 19143,
-      "premio_max": 22014,
+      "premio_min": 23143,
+      "premio_max": 26614,
       "custo": 9900,
-      "buff": 5000,
+      "buff": 9000,
       "nerf": 0,
       "itens": [
         {
