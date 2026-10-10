@@ -651,6 +651,14 @@ function publicarAcoesBlipadas_(pub) {
     a.cooldown_segundos = 5000;
     a.tempo_maximo_minutos = 25;
   });
+  // Estacionamento Marrom: regras confirmadas no painel da cidade.
+  acoes.filter(a => String(a.nome).trim().toUpperCase() === 'ESTACIONAMENTO MARROM').forEach(a => {
+    a.policiais_minimos = 9;
+    a.regras_confronto = [6,7,8].map(n => ({invasores:n,policiais:n+3,refens:2}));
+    a.pendrive_exigido = 'PENDRIVE 3';
+    a.cooldown_segundos = 3000;
+    a.tempo_maximo_minutos = 20;
+  });
   // Coordenadas em aba própria: múltiplos locais por modalidade.
   const locSheet = SpreadsheetApp.getActive().getSheetByName('LOCAIS DE ROUBO');
   const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3]),descricao:String(r[5]||'').trim(),imagem:String(r[6]||'').trim()})) : [];
