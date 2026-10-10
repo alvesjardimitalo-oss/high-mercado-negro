@@ -534,13 +534,14 @@ function publicarAcoesBlipadas_(pub) {
       buff: num(r, 'BUFF'),
       nerf: num(r, 'NERF'),
       itens,
-      observacao: txt(r, 'OBSERVAÇÃO')
+      observacao: txt(r, 'OBSERVAÇÃO'),
+      imagem: txt(r, 'IMAGEM')
     };
   });
   // Coordenadas em aba própria: múltiplos locais por modalidade.
   const locSheet = SpreadsheetApp.getActive().getSheetByName('LOCAIS DE ROUBO');
   const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3])})) : [];
-  const normal = s => String(s || '').normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  const normal = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().replace(/[^A-Z0-9]/g, '');
   const alias = {'AÇOUGUE E GALINHEIRO':'Galinheiro','MACDONALD E FAST FOOD':'Fast Food','ANTENA PISTOLA':'Antena','ASSALTO A PALETO':'Assalto a Paleto 2'};
   acoes.forEach(a => {
     const chave = normal(alias[a.nome] || a.nome);
