@@ -1520,7 +1520,28 @@
         }
       ],
       "observacao": "Localização pendente de confirmação",
-      "locais": []
+      "locais": [],
+      "policiais_minimos": 9,
+      "regras_confronto": [
+        {
+          "invasores": 6,
+          "policiais": 9,
+          "refens": 3
+        },
+        {
+          "invasores": 7,
+          "policiais": 10,
+          "refens": 3
+        },
+        {
+          "invasores": 8,
+          "policiais": 11,
+          "refens": 3
+        }
+      ],
+      "pendrive_exigido": "safependrive",
+      "cooldown_segundos": 5000,
+      "tempo_maximo_minutos": 15
     },
     {
       "nome": "AUDITÓRIO 2 SUB",
