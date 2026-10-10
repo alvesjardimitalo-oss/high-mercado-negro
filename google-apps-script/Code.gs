@@ -540,12 +540,12 @@ function publicarAcoesBlipadas_(pub) {
   });
   // Coordenadas em aba própria: múltiplos locais por modalidade.
   const locSheet = SpreadsheetApp.getActive().getSheetByName('LOCAIS DE ROUBO');
-  const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3]),descricao:String(r[5]||'').trim()})) : [];
+  const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3]),descricao:String(r[5]||'').trim(),imagem:String(r[6]||'').trim()})) : [];
   const normal = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().replace(/[^A-Z0-9]/g, '');
-  const alias = {'AÇOUGUE E GALINHEIRO':'Galinheiro','MACDONALD E FAST FOOD':'Fast Food','ANTENA PISTOLA':'Antena','ASSALTO A PALETO':'Assalto a Paleto 2'};
+  const alias = {'AÇOUGUE E GALINHEIRO':'Galinheiro','MACDONALD E FAST FOOD':'Fast Food','ANTENA PISTOLA':'Antena','ASSALTO A PALETO':'Assalto a Paleto 2','FLECCA':'Fleeca'};
   acoes.forEach(a => {
     const chave = normal(alias[a.nome] || a.nome);
-    a.locais = locais.filter(l => normal(l.nome) === chave).map(l => ({nome:l.nome,x:l.x,y:l.y,z:l.z,descricao:l.descricao}));
+    a.locais = locais.filter(l => normal(l.nome) === chave).map(l => ({nome:l.nome,x:l.x,y:l.y,z:l.z,descricao:l.descricao,imagem:l.imagem}));
   });
   const path = 'data/acoes-blipadas.json';
   const api = pub.base + path;
