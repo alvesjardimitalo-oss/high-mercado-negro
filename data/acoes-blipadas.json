@@ -1157,7 +1157,23 @@
           "descricao": "Fast Food — Mirror Park",
           "imagem": "fast_food.webp"
         }
-      ]
+      ],
+      "policiais_minimos": 3,
+      "regras_confronto": [
+        {
+          "invasores": 2,
+          "policiais": 3,
+          "refens": 0
+        },
+        {
+          "invasores": 3,
+          "policiais": 4,
+          "refens": 0
+        }
+      ],
+      "pendrive_exigido": "PENDRIVE 2",
+      "cooldown_segundos": 1200,
+      "tempo_maximo_minutos": 15
     },
     {
       "nome": "COMEDY",
