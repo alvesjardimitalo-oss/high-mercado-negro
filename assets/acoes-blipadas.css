@@ -122,3 +122,9 @@
 .ab-back:hover{border-color:#a363cf}
 @media(max-width:850px){.ab-directory-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.ab-directory{padding-top:18px}.ab-directory-cards{grid-template-columns:1fr;gap:11px}.ab-directory-art{height:150px}.ab-directory-art img{height:112px}.ab-directory-body{padding:15px}.ab-directory-body h3{font-size:21px}.ab-directory-pendente{grid-column:auto}}
+
+/* Identidade visual para locais sem fotografia cadastrada */
+.ab-photo-branded{height:150px;gap:4px;background:radial-gradient(ellipse at center,#2b183a 0%,#120d19 72%);border:0;border-bottom:1px solid #38263f}
+.ab-photo-branded img{height:102px;max-width:72%;object-fit:contain;filter:drop-shadow(0 6px 12px rgba(0,0,0,.35))}
+.ab-photo-branded small{font-size:9px;color:#a18baa}
+.ab-cover-fallback{object-fit:contain!important;padding:18px;background:radial-gradient(ellipse at center,#2b183a,#120d19)}
