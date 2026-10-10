@@ -821,7 +821,7 @@ function publicarAcoesBlipadas_(pub) {
   acoes.filter(a => String(a.nome).trim().toUpperCase() === 'TITANIC').forEach(a => {
     a.policiais_minimos = 7;
     a.regras_confronto = [4,5,6].map(n => ({invasores:n,policiais:n+3,refens:3}));
-    a.pendrive_exigido = 'safependrive';
+    a.pendrive_exigido = 'PENDRIVE CLANDESTINO 3';
     a.cooldown_segundos = 5000;
     a.tempo_maximo_minutos = 25;
     a.nivel_procurado = false;
