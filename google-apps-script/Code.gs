@@ -611,6 +611,14 @@ function publicarAcoesBlipadas_(pub) {
     a.cooldown_segundos = 1500;
     a.tempo_maximo_minutos = 15;
   });
+  // Celeiro do Hipodromo: configuracoes habilitadas no painel da cidade.
+  acoes.filter(a => String(a.nome).trim().toUpperCase() === 'CELEIRO DO HIPÓDROMO').forEach(a => {
+    a.policiais_minimos = 3;
+    a.regras_confronto = [2,3,4].map(n => ({invasores:n,policiais:n+1,refens:2}));
+    a.cooldown_segundos = 1700;
+    a.tempo_maximo_minutos = 20;
+    a.bonus_policial = 'Aleatório';
+  });
   // Coordenadas em aba própria: múltiplos locais por modalidade.
   const locSheet = SpreadsheetApp.getActive().getSheetByName('LOCAIS DE ROUBO');
   const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3]),descricao:String(r[5]||'').trim(),imagem:String(r[6]||'').trim()})) : [];
