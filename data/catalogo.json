@@ -2,7 +2,7 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-10-09T08:56:59-03:00",
+    "atualizado_em": "2026-10-10T00:19:15-03:00",
     "publicado_por": "Italo Alves - Sênior Ilegal",
     "moeda": "BRL",
     "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM.",
@@ -787,7 +787,7 @@
     },
     {
       "categoria": "MUNIÇÃO",
-      "item": "SMG 150X",
+      "item": "SMG 200X",
       "parceria": 15000,
       "pista": 18000,
       "status": "ativo",
@@ -973,7 +973,7 @@
       "item": "MAPEAMENTO DE BAIRRO",
       "parceria": 20000,
       "pista": 27000,
-      "status": "ativo",
+      "status": "inativo",
       "destaque": false,
       "observacao": "",
       "ordem": 56,
@@ -1034,6 +1034,27 @@
     ]
   },
   "historico": [
+    {
+      "em": "2026-10-10T00:19:15-03:00",
+      "por": "Italo Alves - Sênior Ilegal",
+      "mudancas": [
+        {
+          "tipo": "renomeado",
+          "categoria": "MUNIÇÃO",
+          "item": "SMG 200X",
+          "renomeado_de": "SMG 150X",
+          "parceria": 15000,
+          "pista": 18000
+        },
+        {
+          "tipo": "removido",
+          "categoria": "TECNOLOGIA / UTILITÁRIOS",
+          "item": "MAPEAMENTO DE BAIRRO",
+          "parceria_antes": 20000,
+          "pista_antes": 27000
+        }
+      ]
+    },
     {
       "em": "2026-10-09T08:09:50-03:00",
       "por": "Italo Alves - Sênior Ilegal",
