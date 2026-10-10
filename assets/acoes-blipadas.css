@@ -91,3 +91,34 @@
 .ab-group .ab-grid{padding-bottom:0}
 .ab-empty{color:#a99bb2;font-size:13px;padding:24px 0}
 @media(max-width:650px){.ab-size-nav{gap:5px}.ab-size-nav button{font-size:11px;padding:8px 9px}.ab-group-head h2{font-size:18px}}
+
+/* Entrada por categoria: tres vitrines clicaveis */
+[hidden]{display:none!important}
+.ab-directory{padding:24px 0 48px}
+.ab-directory-intro{margin-bottom:18px}
+.ab-directory-intro h2{font-size:23px;letter-spacing:-.025em;margin:0 0 6px}
+.ab-directory-intro p{font-size:12px;color:#a99bb2;margin:0}
+.ab-directory-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:stretch}
+.ab-directory-card{display:flex;flex-direction:column;min-width:0;text-align:left;cursor:pointer;color:#fff;font:inherit;border:1px solid #49335b;background:#120d19;border-radius:10px;padding:0;overflow:hidden;transition:transform .2s,border-color .2s,box-shadow .2s}
+.ab-directory-card:hover,.ab-directory-card:focus-visible{transform:translateY(-3px);border-color:#a363cf;box-shadow:0 12px 35px rgba(0,0,0,.32);outline:none}
+.ab-directory-art{height:190px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 40%,rgba(129,45,190,.3),transparent 65%),linear-gradient(145deg,#1b1029,#0b0910);border-bottom:1px solid #36243f}
+.ab-directory-art img{max-width:76%;height:145px;object-fit:contain;filter:drop-shadow(0 10px 20px rgba(0,0,0,.5))}
+.ab-directory-media .ab-directory-art{background:radial-gradient(ellipse at 50% 40%,rgba(139,66,199,.34),transparent 65%),linear-gradient(145deg,#21112c,#0b0910)}
+.ab-directory-grande .ab-directory-art{background:radial-gradient(ellipse at 50% 40%,rgba(104,36,168,.45),transparent 65%),linear-gradient(145deg,#260e32,#0b0910)}
+.ab-directory-body{display:flex;flex:1;flex-direction:column;padding:18px}
+.ab-directory-range{font-size:9px;letter-spacing:.1em;font-weight:800;color:#c79de7}
+.ab-directory-body h3{font-size:23px;letter-spacing:-.03em;margin:7px 0 8px}
+.ab-directory-body p{font-size:12px;line-height:1.5;color:#a99eaf;margin:0 0 22px}
+.ab-directory-foot{margin-top:auto;padding-top:13px;border-top:1px solid #32253b;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ab-directory-foot span{font-size:11px;color:#a99eaf}
+.ab-directory-foot strong{font-size:11px;color:#e1b7ff;white-space:nowrap}
+.ab-directory-pendente{grid-column:1/-1;flex-direction:row}
+.ab-directory-pendente .ab-directory-art{width:130px;height:auto;min-height:110px;border-bottom:0;border-right:1px solid #36243f}
+.ab-directory-pendente .ab-directory-art img{width:85px;height:85px}
+.ab-directory-pendente .ab-directory-body{padding:13px 18px}
+.ab-directory-pendente .ab-directory-body h3{font-size:17px;margin:4px 0}
+.ab-directory-pendente .ab-directory-body p{margin-bottom:8px}
+.ab-back{border:1px solid #49335b;border-radius:6px;background:#1a1123;color:#e3c5f4;font-size:12px;font-weight:700;padding:10px 14px;cursor:pointer;margin:20px 0 2px}
+.ab-back:hover{border-color:#a363cf}
+@media(max-width:850px){.ab-directory-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.ab-directory{padding-top:18px}.ab-directory-cards{grid-template-columns:1fr;gap:11px}.ab-directory-art{height:150px}.ab-directory-art img{height:112px}.ab-directory-body{padding:15px}.ab-directory-body h3{font-size:21px}.ab-directory-pendente{grid-column:auto}}
