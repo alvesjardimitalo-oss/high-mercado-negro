@@ -8,7 +8,7 @@ let records=[];
 const category=a=>a.nome;
 // Porte baseado no maior numero de invasores habilitados, nunca na quantidade de armas.
 const actionSize=a=>{const rows=[...(a.regras_confronto||[]),...(a.locais||[]).flatMap(l=>l.regras_confronto||[])];const max=Math.max(0,...rows.map(r=>Number(r.invasores)||0));return !max?'pendente':max<=5?'pequena':max<=9?'media':'grande';};
-const sizeNames={pequena:'Ações pequenas',media:'Ações médias',grande:'Ações grandes',pendente:'Porte a confirmar'};
+const sizeNames={pequena:'Operações pequenas',media:'Operações médias',grande:'Operações grandes',pendente:'Porte a confirmar'};
 let selectedSize='todas';
 const coords=l=>[l.x,l.y,l.z].join(', ');
 const card=(a,l,index,total)=>{
@@ -31,8 +31,8 @@ const card=(a,l,index,total)=>{
  const where=splitPhotos?'<div class="ab-location">'+a.locais.map(v=>'<div><span>'+safe(v.nome)+':</span> '+safe(coords(v))+' <button class="ab-copy" data-coords="'+safe(coords(v))+'">Copiar</button></div>').join('')+'</div>':l?'<div class="ab-location"><span>Coordenadas</span><div>'+safe(coords(l))+' <button class="ab-copy" data-coords="'+safe(coords(l))+'">Copiar</button></div></div>':'<div class="ab-location">'+safe(a.localizacao||'Localização a confirmar')+'</div>';
  return '<article class="ab-card">'+(splitPhotos?splitCover:photo?'<img class="ab-cover" loading="lazy" src="'+safe(photo)+'" alt="'+safe(title)+'" onerror="this.onerror=null;this.src=\'assets/high_logo.png\';this.classList.add(\'ab-cover-fallback\')">':'<div class="ab-photo-pending ab-photo-branded"><img src="assets/high_logo.png" alt="High Roleplay"><small>Imagem ilustrativa</small></div>')+'<span class="ab-tag">'+safe(a.nome)+'</span><h2>'+safe(title)+'</h2>'+(total>1?'<div class="ab-unit">Unidade '+(index+1)+' de '+total+'</div>':'')+where+stats+'<div class="ab-prizes"><div><small>PRÊMIO MÍNIMO (SUJO)</small><strong>'+fmt(a.premio_min)+'</strong></div><div><small>PRÊMIO MÁXIMO (SUJO)</small><strong>'+fmt(a.premio_max)+'</strong></div></div><div class="ab-cost"><span>Custo da preparação</span><strong>'+fmt(a.custo)+'</strong></div>'+rules+timing+preparation+'<details><summary>Lucro líquido estimado</summary><div class="ab-profit">Após 30% de lavagem e custos: <strong>'+fmt(a.premio_min*.7-a.custo)+' a '+fmt(a.premio_max*.7-a.custo)+'</strong></div></details></article>';
 };
-const sizeDescriptions={pequena:'Operações rápidas e equipes menores',media:'Confrontos intermediários e equipes maiores',grande:'Operações de grande escala e alto contingente',pendente:'Ações aguardando confirmação de participantes'};
-const sizeRanges={pequena:'ATÉ 5 INVASORES',media:'6 A 9 INVASORES',grande:'10+ INVASORES',pendente:'REQUISITOS PENDENTES'};
+const sizeDescriptions={pequena:'Abordagens rápidas, baixo contingente e operações de entrada.',media:'Operações táticas com equipes intermediárias e confronto ampliado.',grande:'Alvos de alto valor, maior contingente e preparação reforçada.',pendente:'Operações aguardando confirmação de participantes'};
+const sizeRanges={pequena:'NÍVEL 01 • ATÉ 5 INVASORES',media:'NÍVEL 02 • 6 A 9 INVASORES',grande:'NÍVEL 03 • 10+ INVASORES',pendente:'REQUISITOS PENDENTES'};
 function showDirectory(){
  document.getElementById('ab-directory').hidden=false;
  document.getElementById('ab-listing').hidden=true;
@@ -55,7 +55,7 @@ function drawDirectory(){
  document.getElementById('ab-directory-cards').innerHTML=groups.map(k=>{
   const count=available.filter(a=>actionSize(a)===k).length;
   if(k==='pendente'&&!count)return '';
-  return '<button type="button" class="ab-directory-card ab-directory-'+k+'" data-open-size="'+k+'"><div class="ab-directory-art"><img src="assets/high_logo.png" alt="Logo High Roleplay" loading="lazy"></div><div class="ab-directory-body"><span class="ab-directory-range">'+sizeRanges[k]+'</span><h3>'+sizeNames[k]+'</h3><p>'+sizeDescriptions[k]+'</p><div class="ab-directory-foot"><span>'+count+' ações cadastradas</span><strong>Ver ações →</strong></div></div></button>';
+  return '<button type="button" class="ab-directory-card ab-directory-'+k+'" data-open-size="'+k+'"><div class="ab-directory-art"><img src="assets/high_logo.png" alt="Logo High Roleplay" loading="lazy"></div><div class="ab-directory-body"><span class="ab-directory-range">'+sizeRanges[k]+'</span><h3>'+sizeNames[k]+'</h3><p>'+sizeDescriptions[k]+'</p><div class="ab-directory-foot"><span>'+count+' DOSSIÊS DISPONÍVEIS</span><strong>ACESSAR DOSSIÊS →</strong></div></div></button>';
  }).join('');
 }
 function draw(){
