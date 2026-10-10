@@ -1015,9 +1015,9 @@
       "nome": "CONTAINER",
       "localizacao": "1051.3, -3035.4, 5.9",
       "status": "ativo",
-      "premio_min": 1522857,
-      "premio_max": 1751286,
-      "custo": 786000,
+      "premio_min": 1533929,
+      "premio_max": 1764018,
+      "custo": 793750,
       "buff": 400000,
       "nerf": 0,
       "itens": [
@@ -1034,7 +1034,7 @@
           "quantidade": 10
         },
         {
-          "nome": "PENDRIVE 1",
+          "nome": "PENDRIVE 3",
           "quantidade": 1
         }
       ],
