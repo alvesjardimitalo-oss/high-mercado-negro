@@ -1,4 +1,41 @@
-import { norm, amount, rulesFor, sizeFor, taxFor, economy, entriesFor, matches } from './acoes-core.mjs';
+// Dependências locais integradas para evitar falha de carregamento de módulo.
+// Shared pure calculations. Published action costs remain the source of truth.
+const norm = value => String(value ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+const amount = value => value === null || value === undefined || value === '' || !Number.isFinite(Number(value)) ? null : Number(value);
+const rulesFor = (action, location) => location?.regras_confronto?.length ? location.regras_confronto : action.regras_confronto || [];
+function sizeFor(action, location) {
+  const max = Math.max(0, ...rulesFor(action, location).map(row => Number(row.invasores) || 0));
+  return !max ? 'pendente' : max <= 5 ? 'pequena' : max <= 9 ? 'media' : 'grande';
+}
+function taxFor(meta) {
+  const tax = amount(meta?.taxa_lavagem);
+  return tax !== null && tax >= 0 && tax <= 1 ? tax : 0.3;
+}
+function economy(action, tax = .3, team = 1) {
+  const min = amount(action.premio_min), max = amount(action.premio_max), cost = amount(action.custo);
+  const low = min === null || cost === null ? null : min * (1 - tax) - cost;
+  const high = max === null || cost === null ? null : max * (1 - tax) - cost;
+  return { low, high, roi: low === null || cost === null || cost <= 0 ? null : low / cost * 100,
+    perLow: low === null || team <= 0 ? null : low / team, perHigh: high === null || team <= 0 ? null : high / team };
+}
+function entriesFor(actions) {
+  return actions.flatMap(a => (a.locais?.length ? a.locais : [null]).map(l => ({
+    id: [a.nome, l?.nome || '', l?.x ?? '', l?.y ?? '', l?.z ?? ''].join('|'),
+    a, l, title: l?.descricao || l?.nome || a.nome, size: sizeFor(a, l)
+  })));
+}
+function matches(entry, filters, favorites = new Set()) {
+  const { a, l, size } = entry;
+  const text = norm([a.nome, l?.descricao, l?.nome, l ? [l.x,l.y,l.z].join(', ') : a.localizacao,
+    ...(a.itens || []).map(i => norm(i.nome) === 'colete' ? 'colete placa balistica' : i.nome)].join(' '));
+  return (!filters.q || text.includes(norm(filters.q))) && (!filters.category || a.nome === filters.category)
+    && (!filters.weapon || (a.itens || []).some(i => norm(i.nome).includes('arma ') && norm(i.nome).includes(norm(filters.weapon))))
+    && (!filters.size || filters.size === 'todas' || size === filters.size)
+    && (!filters.team || rulesFor(a,l).some(r => Number(r.invasores) === Number(filters.team)))
+    && (filters.budget === '' || filters.budget == null || (amount(a.custo) !== null && Number(a.custo) <= Number(filters.budget)))
+    && (!filters.favorites || favorites.has(entry.id));
+}
+
 const $ = id => document.getElementById(id);
 const escape = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money = n => n === null || n === undefined ? 'A confirmar' : new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}).format(n);
@@ -130,7 +167,7 @@ function openLinked() {if(location.hash.startsWith('#acao=')){let id;try{id=deco
 window.addEventListener('hashchange',openLinked);
 async function load() {
  try {
-  const response=await fetch('data/acoes-blipadas.json',{cache:'no-store'});if(!response.ok)throw Error('Não foi possível carregar os dados.');
+  const response=await fetch(new URL('data/acoes-blipadas.json',document.baseURI),{cache:'no-store'});if(!response.ok)throw Error('Não foi possível carregar os dados.');
   const data=await response.json();if(!Array.isArray(data.acoes))throw Error('Dados das ações indisponíveis.');
   entries=entriesFor(data.acoes);tax=taxFor(data.meta);
   const names=[...new Set(entries.filter(e=>e.a.status!=='inativo').map(e=>e.a.nome))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
@@ -138,6 +175,7 @@ async function load() {
   $('overview').innerHTML=`<div><strong>${names.length}</strong><span>AÇÕES CADASTRADAS</span></div><div><strong>${entries.filter(e=>e.a.status!=='inativo'&&e.l).length}</strong><span>LOCAIS CADASTRADOS</span></div><div><strong>${pct(tax*100)}</strong><span>TAXA DE LAVAGEM</span></div><div class="ab-overview-note"><span>SEU PRÓXIMO PASSO</span><b>Preparar. Comparar. Escolher. ↗</b></div>`;
   document.querySelector('.ab-art-index').textContent='01—'+String(names.length).padStart(2,'0');drawDirectory();draw();openLinked();
  } catch(error) {
+  console.error('Mercado Negro — falha no carregamento das ações:',error);
   $('overview').textContent='Dados indisponíveis no momento.';$('counter').textContent='Falha ao carregar o guia.';
   $('actions').innerHTML='<div class="ab-empty"><h3>Não conseguimos carregar as ações.</h3><p>Verifique sua conexão e tente novamente.</p><button class="ab-btn" id="retry">Tentar novamente</button></div>';$('retry').addEventListener('click',load);
  } finally {$('actions').setAttribute('aria-busy','false');}
