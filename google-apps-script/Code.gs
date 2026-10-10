@@ -839,6 +839,18 @@ function publicarAcoesBlipadas_(pub) {
     a.mini_game = false;
     a.permissao_iniciar = false;
   });
+  // Loja de Bebidas: configuracoes confirmadas no painel da cidade.
+  acoes.filter(a => String(a.nome).trim().toUpperCase() === 'LOJA DE BEBIDAS').forEach(a => {
+    a.policiais_minimos = 2;
+    a.regras_confronto = [{invasores:2,policiais:2,refens:0},{invasores:3,policiais:3,refens:0}];
+    a.pendrive_exigido = 'PENDRIVE 2';
+    a.cooldown_segundos = 1200;
+    a.tempo_maximo_minutos = 15;
+    a.nivel_procurado = false;
+    a.mini_game = false;
+    a.permissao_iniciar = false;
+    a.animacao = false;
+  });
   // Coordenadas em aba própria: múltiplos locais por modalidade.
   const locSheet = SpreadsheetApp.getActive().getSheetByName('LOCAIS DE ROUBO');
   const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3]),descricao:String(r[5]||'').trim(),imagem:String(r[6]||'').trim()})) : [];
