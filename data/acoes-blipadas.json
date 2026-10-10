@@ -2041,9 +2041,9 @@
       "nome": "HOTEL",
       "localizacao": "-1306, 336.8, 65.5",
       "status": "ativo",
-      "premio_min": 1607000,
-      "premio_max": 1848050,
-      "custo": 786000,
+      "premio_min": 1618072,
+      "premio_max": 1860782,
+      "custo": 793750,
       "buff": 484143,
       "nerf": 0,
       "itens": [
@@ -2060,7 +2060,7 @@
           "quantidade": 10
         },
         {
-          "nome": "PENDRIVE 1",
+          "nome": "PENDRIVE 3",
           "quantidade": 1
         }
       ],
