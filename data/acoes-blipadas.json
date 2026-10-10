@@ -558,7 +558,7 @@
           "quantidade": 6
         },
         {
-          "nome": "PENDRIVE 4",
+          "nome": "PENDRIVE CLANDESTINO 3",
           "quantidade": 1
         }
       ],
@@ -582,7 +582,7 @@
           "refens": 3
         }
       ],
-      "pendrive_exigido": "safependrive",
+      "pendrive_exigido": "PENDRIVE CLANDESTINO 3",
       "cooldown_segundos": 5000,
       "tempo_maximo_minutos": 25,
       "nivel_procurado": false,
