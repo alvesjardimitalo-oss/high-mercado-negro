@@ -1296,7 +1296,27 @@
           "descricao": "Antena — montanhas Tataviam",
           "imagem": "antena.webp"
         }
-      ]
+      ],
+      "policiais_minimos": 2,
+      "regras_confronto": [
+        {
+          "invasores": 2,
+          "policiais": 2,
+          "refens": 0
+        },
+        {
+          "invasores": 3,
+          "policiais": 3,
+          "refens": 0
+        },
+        {
+          "invasores": 4,
+          "policiais": 4,
+          "refens": 0
+        }
+      ],
+      "cooldown_segundos": 1200,
+      "tempo_maximo_minutos": 15
     },
     {
       "nome": "HOTEL",
