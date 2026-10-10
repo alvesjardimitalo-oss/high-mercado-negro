@@ -670,9 +670,9 @@
       "nome": "ASSALTO AO NAVIO",
       "localizacao": "1244.9, -2944.2, 9.3",
       "status": "ativo",
-      "premio_min": 3902143,
-      "premio_max": 4487464,
-      "custo": 2371000,
+      "premio_min": 3920714,
+      "premio_max": 4508821,
+      "custo": 2384000,
       "buff": 515000,
       "nerf": 0,
       "itens": [
@@ -689,7 +689,7 @@
           "quantidade": 11
         },
         {
-          "nome": "PENDRIVE 1",
+          "nome": "PENDRIVE 4",
           "quantidade": 1
         }
       ],
