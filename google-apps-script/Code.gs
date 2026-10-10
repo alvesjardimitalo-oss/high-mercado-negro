@@ -683,6 +683,17 @@ function publicarAcoesBlipadas_(pub) {
     a.cooldown_segundos = 3500;
     a.tempo_maximo_minutos = 20;
   });
+  // Fleeca Life: configuracoes confirmadas no painel da cidade.
+  acoes.filter(a => String(a.nome).trim().toUpperCase() === 'FLEECA LIFE').forEach(a => {
+    a.policiais_minimos = 6;
+    a.regras_confronto = [{invasores:3,policiais:6,refens:4},{invasores:4,policiais:7,refens:4},{invasores:5,policiais:8,refens:3}];
+    a.pendrive_exigido = 'PENDRIVE 3';
+    a.cooldown_segundos = 3500;
+    a.tempo_maximo_minutos = 20;
+    a.nivel_procurado = true;
+    a.mini_game = true;
+    a.permissao_iniciar = true;
+  });
   // Coordenadas em aba própria: múltiplos locais por modalidade.
   const locSheet = SpreadsheetApp.getActive().getSheetByName('LOCAIS DE ROUBO');
   const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3]),descricao:String(r[5]||'').trim(),imagem:String(r[6]||'').trim()})) : [];
