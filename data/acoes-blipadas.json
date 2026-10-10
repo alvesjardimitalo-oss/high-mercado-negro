@@ -541,7 +541,7 @@
     {
       "nome": "TITANIC",
       "localizacao": "1244.15, -2942.79, 9.32, 272.13",
-      "status": "ativo",
+      "status": "inativo",
       "premio_min": 915714,
       "premio_max": 1053071,
       "custo": 487000,
