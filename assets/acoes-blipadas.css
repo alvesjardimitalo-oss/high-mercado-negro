@@ -128,3 +128,11 @@
 .ab-photo-branded img{height:102px;max-width:72%;object-fit:contain;filter:drop-shadow(0 6px 12px rgba(0,0,0,.35))}
 .ab-photo-branded small{font-size:9px;color:#a18baa}
 .ab-cover-fallback{object-fit:contain!important;padding:18px;background:radial-gradient(ellipse at center,#2b183a,#120d19)}
+
+/* Card compartilhado: Açougue e Galinheiro, metade da capa para cada local. */
+.ab-cover-split{display:grid;grid-template-columns:1fr 1fr;height:150px;margin:-14px -14px 12px;width:calc(100% + 28px);overflow:hidden;border-radius:5px;background:#20152c}
+.ab-cover-half{position:relative;min-width:0;overflow:hidden}
+.ab-cover-half+.ab-cover-half{border-left:2px solid #a363cf}
+.ab-cover-half img{width:100%;height:100%;display:block;object-fit:cover}
+.ab-cover-half span{position:absolute;left:0;right:0;bottom:0;padding:12px 5px 6px;text-align:center;color:#fff;font-size:11px;font-weight:800;text-shadow:0 1px 5px #000;background:linear-gradient(transparent,rgba(0,0,0,.75))}
+@media(max-width:650px){.ab-cover-split{height:145px}}
