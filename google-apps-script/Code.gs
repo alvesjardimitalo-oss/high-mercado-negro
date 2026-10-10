@@ -806,6 +806,17 @@ function publicarAcoesBlipadas_(pub) {
     a.permissao_iniciar = true;
     a.animacao = true;
   });
+  // Yellow Jack: configuracoes confirmadas no painel da cidade.
+  acoes.filter(a => String(a.nome).trim().toUpperCase() === 'YELLOW JACK').forEach(a => {
+    a.policiais_minimos = 5;
+    a.regras_confronto = [4,5,6].map(n => ({invasores:n,policiais:n+1,refens:4}));
+    a.pendrive_exigido = 'safependrive';
+    a.cooldown_segundos = 2600;
+    a.tempo_maximo_minutos = 25;
+    a.nivel_procurado = true;
+    a.mini_game = true;
+    a.permissao_iniciar = true;
+  });
   // Coordenadas em aba própria: múltiplos locais por modalidade.
   const locSheet = SpreadsheetApp.getActive().getSheetByName('LOCAIS DE ROUBO');
   const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3]),descricao:String(r[5]||'').trim(),imagem:String(r[6]||'').trim()})) : [];
