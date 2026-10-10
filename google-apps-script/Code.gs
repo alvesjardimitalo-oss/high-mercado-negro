@@ -772,6 +772,17 @@ function publicarAcoesBlipadas_(pub) {
     a.permissao_iniciar = true;
     a.animacao = true;
   });
+  // Niobio: configuracoes confirmadas no painel da cidade.
+  acoes.filter(a => String(a.nome).trim().toUpperCase() === 'NIOBIO').forEach(a => {
+    a.policiais_minimos = 12;
+    a.regras_confronto = [7,8,9,10,11,12,13,14].map(n => ({invasores:n,policiais:n+5,refens:4}));
+    a.pendrive_exigido = 'PENDRIVE 5';
+    a.cooldown_segundos = 5000;
+    a.tempo_maximo_minutos = 30;
+    a.nivel_procurado = true;
+    a.mini_game = true;
+    a.permissao_iniciar = true;
+  });
   // Coordenadas em aba própria: múltiplos locais por modalidade.
   const locSheet = SpreadsheetApp.getActive().getSheetByName('LOCAIS DE ROUBO');
   const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3]),descricao:String(r[5]||'').trim(),imagem:String(r[6]||'').trim()})) : [];
