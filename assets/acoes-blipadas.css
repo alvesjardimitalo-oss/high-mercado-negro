@@ -75,3 +75,19 @@
 .ab-profit{padding:9px 0 2px;border:0;font-size:11px}
 .ab-profit strong{font-size:13px;margin-top:5px}
 @media(max-width:650px){.ab-hero{padding-top:22px}.ab-grid{gap:10px}.ab-items,.ab-preparation .ab-items{grid-template-columns:1fr 1fr}.ab-prizes strong{font-size:15px}.ab-cover{height:145px}}
+
+/* Organização por porte */
+.ab-size-nav{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:14px 0 6px}
+.ab-size-nav button{display:flex;align-items:center;gap:9px;border:1px solid #32283a;background:#131018;color:#a99bb2;padding:9px 12px;border-radius:5px;font-size:12px;font-weight:700;cursor:pointer;transition:background .15s,border-color .15s}
+.ab-size-nav button span{font-size:10px;font-variant-numeric:tabular-nums;color:#9584a2;border-left:1px solid #403247;padding-left:8px}
+.ab-size-nav button:hover{color:#fff;border-color:#76508f}
+.ab-size-nav button.active{background:#2a1937;border-color:#9b64bd;color:#fff}
+.ab-size-nav button.active span{color:#e4bfff}
+.ab-group{margin:19px 0 27px}
+.ab-group-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:0 0 11px;border-bottom:1px solid #382c40;margin-bottom:12px}
+.ab-group-head h2{font-size:20px;letter-spacing:-.02em;margin:0 0 4px;color:#f4edf8}
+.ab-group-head p{font-size:11px;color:#998aa4;margin:0}
+.ab-group-head>span{font-size:11px;color:#bca4ce;white-space:nowrap}
+.ab-group .ab-grid{padding-bottom:0}
+.ab-empty{color:#a99bb2;font-size:13px;padding:24px 0}
+@media(max-width:650px){.ab-size-nav{gap:5px}.ab-size-nav button{font-size:11px;padding:8px 9px}.ab-group-head h2{font-size:18px}}
