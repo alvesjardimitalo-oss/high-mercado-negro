@@ -643,6 +643,14 @@ function publicarAcoesBlipadas_(pub) {
     a.cooldown_segundos = 5000;
     a.tempo_maximo_minutos = 15;
   });
+  // Dominacao da Madeireira: configuracoes confirmadas no painel da cidade.
+  acoes.filter(a => String(a.nome).trim().toUpperCase() === 'DOMINAÇÃO A MADEIREIRA').forEach(a => {
+    a.policiais_minimos = 24;
+    a.regras_confronto = [20,21,22,23,24,25].map(n => ({invasores:n,policiais:n+4,refens:5}));
+    a.pendrive_exigido = 'PENDRIVE 5';
+    a.cooldown_segundos = 5000;
+    a.tempo_maximo_minutos = 25;
+  });
   // Coordenadas em aba própria: múltiplos locais por modalidade.
   const locSheet = SpreadsheetApp.getActive().getSheetByName('LOCAIS DE ROUBO');
   const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3]),descricao:String(r[5]||'').trim(),imagem:String(r[6]||'').trim()})) : [];
