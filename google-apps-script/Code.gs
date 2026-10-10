@@ -550,6 +550,14 @@ function publicarAcoesBlipadas_(pub) {
     a.cooldown_segundos = 1200;
     a.tempo_maximo_minutos = 15;
   });
+  // Assalto a Paleto: configuração oficial apresentada no painel.
+  acoes.filter(a => String(a.nome).trim().toUpperCase() === 'ASSALTO A PALETO').forEach(a => {
+    a.policiais_minimos = 17;
+    a.regras_confronto = [{invasores:15,policiais:17,refens:0}];
+    a.pendrive_exigido = 'safependrive';
+    a.cooldown_segundos = 5000;
+    a.tempo_maximo_minutos = 30;
+  });
   // Coordenadas em aba própria: múltiplos locais por modalidade.
   const locSheet = SpreadsheetApp.getActive().getSheetByName('LOCAIS DE ROUBO');
   const locais = locSheet ? locSheet.getDataRange().getValues().slice(1).filter(r => r[0]).map(r => ({nome:String(r[0]).trim(),x:Number(r[1]),y:Number(r[2]),z:Number(r[3]),descricao:String(r[5]||'').trim(),imagem:String(r[6]||'').trim()})) : [];
