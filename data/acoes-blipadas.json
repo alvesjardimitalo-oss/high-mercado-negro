@@ -247,7 +247,7 @@
     },
     {
       "nome": "FLECCA",
-      "localizacao": "-1210.8, -336.6, 37.8",
+      "localizacao": "-1218.07, -318.6, 37.69, 204.1",
       "status": "ativo",
       "premio_min": 851786,
       "premio_max": 979554,
@@ -272,7 +272,7 @@
           "quantidade": 1
         }
       ],
-      "observacao": "Localização pendente de confirmação",
+      "observacao": "",
       "locais": [],
       "policiais_minimos": 6,
       "regras_confronto": [
@@ -540,7 +540,7 @@
     },
     {
       "nome": "TITANIC",
-      "localizacao": "",
+      "localizacao": "1244.15, -2942.79, 9.32, 272.13",
       "status": "ativo",
       "premio_min": 915714,
       "premio_max": 1053071,
@@ -565,7 +565,7 @@
           "quantidade": 1
         }
       ],
-      "observacao": "Localização pendente de confirmação",
+      "observacao": "",
       "locais": [],
       "policiais_minimos": 7,
       "regras_confronto": [
@@ -1193,7 +1193,7 @@
     },
     {
       "nome": "FLEECA LIFE",
-      "localizacao": "",
+      "localizacao": "-1218.07, -318.6, 37.69, 204.1",
       "status": "ativo",
       "premio_min": 786429,
       "premio_max": 863143,
@@ -1218,7 +1218,7 @@
           "quantidade": 1
         }
       ],
-      "observacao": "Localização pendente de confirmação",
+      "observacao": "",
       "locais": [],
       "policiais_minimos": 6,
       "regras_confronto": [
@@ -1865,8 +1865,8 @@
     },
     {
       "nome": "YELLOW JACK",
-      "localizacao": "",
-      "status": "ativo",
+      "localizacao": "1984.49, 3054.89, 47.21, 311.82",
+      "status": "indisponivel",
       "premio_min": 661429,
       "premio_max": 760643,
       "custo": 393000,
@@ -1890,7 +1890,7 @@
           "quantidade": 1
         }
       ],
-      "observacao": "Localização pendente de confirmação",
+      "observacao": "INDISPONÍVEL — blip para iniciar a ação não localizado; aguarda confirmação.",
       "locais": [],
       "policiais_minimos": 5,
       "regras_confronto": [
@@ -1920,7 +1920,7 @@
     },
     {
       "nome": "AUDITÓRIO 2 FUZIL",
-      "localizacao": "",
+      "localizacao": "185.7, 1213.64, 225.59, 17.01",
       "status": "ativo",
       "premio_min": 4194286,
       "premio_max": 4823429,
@@ -1945,7 +1945,7 @@
           "quantidade": 1
         }
       ],
-      "observacao": "Localização pendente de confirmação",
+      "observacao": "",
       "locais": [],
       "policiais_minimos": 10,
       "regras_confronto": [
@@ -1982,8 +1982,8 @@
     },
     {
       "nome": "CYPRESS",
-      "localizacao": "",
-      "status": "ativo",
+      "localizacao": "961.72, -2503.41, 28.44, 99.22",
+      "status": "indisponivel",
       "premio_min": 1300000,
       "premio_max": 1495000,
       "custo": 630000,
@@ -2007,7 +2007,7 @@
           "quantidade": 1
         }
       ],
-      "observacao": "Localização pendente de confirmação",
+      "observacao": "INDISPONÍVEL — blip para iniciar a ação não localizado; aguarda confirmação.",
       "locais": [],
       "policiais_minimos": 9,
       "regras_confronto": [
