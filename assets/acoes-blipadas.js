@@ -6,6 +6,10 @@ const pics={'PLACA BALÍSTICA':'ballisticplate.png','COLETE':'ballisticplate.png
 const imageSrc=s=>{const v=String(s||'').trim();if(!v)return '';if(/^https:\/\//i.test(v))return v;if(!/^[\w.\-]+\.(png|jpe?g|webp)$/i.test(v))return '';return 'assets/itens/'+encodeURIComponent(v)};
 let records=[];
 const category=a=>a.nome;
+// Porte baseado no maior numero de invasores habilitados, nunca na quantidade de armas.
+const actionSize=a=>{const rows=[...(a.regras_confronto||[]),...(a.locais||[]).flatMap(l=>l.regras_confronto||[])];const max=Math.max(0,...rows.map(r=>Number(r.invasores)||0));return !max?'pendente':max<=5?'pequena':max<=9?'media':'grande';};
+const sizeNames={pequena:'Ações pequenas',media:'Ações médias',grande:'Ações grandes',pendente:'Porte a confirmar'};
+let selectedSize='todas';
 const coords=l=>[l.x,l.y,l.z].join(', ');
 const card=(a,l,index,total)=>{
  const gear=a.itens.map(i=>{const p=imageSrc(i.imagem||pics[i.nome]||pics[canonicalItem(i.nome)]);return '<div class="ab-item">'+(p?'<img loading="lazy" src="'+safe(p)+'" alt="" onerror="this.remove()">':'')+'<div><strong>'+safe(canonicalItem(i.nome))+'</strong><small>Qtd: '+i.quantidade+'</small></div></div>'}).join('');
@@ -28,9 +32,21 @@ const card=(a,l,index,total)=>{
 function draw(){
  const q=norm(document.getElementById('search').value),filter=norm(document.getElementById('filter').value),selected=document.getElementById('category').value;
  const list=records.filter(a=>norm(a.status)!=='inativo'&&(!selected||category(a)===selected)&&(!filter||a.itens.some(i=>norm(i.nome).includes(filter)))&&norm([a.nome,a.localizacao,...(a.locais||[]).map(l=>l.descricao||''),...a.itens.flatMap(i=>[i.nome,canonicalItem(i.nome),norm(i.nome)==='colete'?'placa balistica':'colete'])].join(' ')).includes(q));
- const cards=list.flatMap(a=>(a.locais?.length?a.locais:[null]).map((l,i)=>card(a,l,i,a.locais?.length||1)));
- document.getElementById('counter').textContent=list.length+' categorias de ação · '+cards.length+' locais';
- document.getElementById('actions').innerHTML=cards.join('')||'<p>Nenhuma ação encontrada.</p>';
+ const sizes=['pequena','media','grande','pendente'];
+ const counts=Object.fromEntries(sizes.map(k=>[k,list.filter(a=>actionSize(a)===k).length]));
+ document.querySelectorAll('[data-size]').forEach(b=>{const k=b.dataset.size;b.classList.toggle('active',k===selectedSize);b.setAttribute('aria-pressed',String(k===selectedSize));const n=k==='todas'?list.length:counts[k];b.querySelector('span').textContent=n;});
+ const visible=sizes.filter(k=>selectedSize==='todas'||selectedSize===k);
+ let locations=0;
+ const html=visible.map(k=>{
+   const group=list.filter(a=>actionSize(a)===k);
+   if(!group.length)return '';
+   const cards=group.flatMap(a=>(a.locais?.length?a.locais:[null]).map((l,i)=>card(a,l,i,a.locais?.length||1)));
+   locations+=cards.length;
+   const hint={pequena:'Até 5 invasores',media:'De 6 a 9 invasores',grande:'10 ou mais invasores',pendente:'Sem configuração de invasores confirmada'}[k];
+   return '<section class="ab-group"><header class="ab-group-head"><div><h2>'+sizeNames[k]+'</h2><p>'+hint+'</p></div><span>'+group.length+' ações</span></header><div class="ab-grid">'+cards.join('')+'</div></section>';
+ }).join('');
+ document.getElementById('counter').textContent=(selectedSize==='todas'?list.length:list.filter(a=>actionSize(a)===selectedSize).length)+' ações · '+locations+' locais';
+ document.getElementById('actions').innerHTML=html||'<p class="ab-empty">Nenhuma ação encontrada neste filtro.</p>';
 }
 function setupCategories(){
  const select=document.getElementById('category');
@@ -39,3 +55,5 @@ function setupCategories(){
 
 fetch('data/acoes-blipadas.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Falha ao carregar ações');return r.json()}).then(data=>{records=data.acoes||[];setupCategories();draw()}).catch(e=>{document.getElementById('counter').textContent=e.message});['search','filter','category'].forEach(id=>document.getElementById(id).addEventListener(id==='search'?'input':'change',draw));
 document.getElementById('actions').addEventListener('click',e=>{const b=e.target.closest('button[data-coords]');if(b&&navigator.clipboard)navigator.clipboard.writeText(b.dataset.coords).then(()=>{b.textContent='Copiado!';setTimeout(()=>b.textContent='Copiar',1200)}).catch(()=>{});});
+
+document.querySelectorAll('[data-size]').forEach(b=>b.addEventListener('click',()=>{selectedSize=b.dataset.size;draw();}));
