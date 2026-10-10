@@ -62,6 +62,21 @@ function draw() {
 }
 function reset() {['search','category','weapon','team','budget'].forEach(id=>$(id).value='');$('sort').value='name';selectedSize='todas';onlyFavorites=false;draw();}
 function duration(seconds) {if(amount(seconds)===null)return 'A confirmar';const n=Number(seconds);return `${Math.floor(n/60)} min${n%60?' '+n%60+' s':''}`;}
+const kitPrices={'ARMA BRANCA':975,'ARMA PISTOLA':38000,'ARMA SUB':47000,'ARMA FUZIL':180000,'MUNIÇÃO PISTOLA (x100)':13500,'MUNIÇÃO SUB (x200)':18000,'MUNIÇÃO FUZIL (x250)':22000,'COLETE':13000,'PLACA BALÍSTICA':13000,'PENDRIVE 1':6000,'PENDRIVE 2':10500,'PENDRIVE 3':13750,'PENDRIVE 4':19000,'PENDRIVE 5':30000};
+function kitEstimate(a, team) {
+ const rows=(a.itens||[]).map(i=>{const name=String(i.nome||'').toUpperCase(),unit=kitPrices[name];const original=Math.max(0,Number(i.quantidade)||0);const qty=name.startsWith('PENDRIVE')?original:team;return {name,qty,unit,total:unit===undefined?null:qty*unit};});
+ const known=rows.every(r=>r.total!==null);return {rows,total:known?rows.reduce((s,r)=>s+r.total,0):null};
+}
+function simulationHTML(a,valid,preset) {
+ const opts=valid.length?valid:[Math.max(1,(a.itens||[]).find(i=>String(i.nome).startsWith('ARMA '))?.quantidade||1)];
+ return `<section class="ab-dossier-section"><div class="ab-section-title"><h3>04 / Simulador de gastos</h3></div><label class="ab-label" for="dossier-team">Quantidade de participantes</label><select id="dossier-team" class="ab-sim-select">${opts.map(n=>`<option value="${n}" ${n===preset?'selected':''}>${n} participantes</option>`).join('')}</select><p class="ab-help">Estimativa para equipar cada participante com 1 arma, 1 caixa de munição e 1 colete quando previstos. Pendrive é contabilizado uma única vez. Não inclui premiação.</p><div id="sim-results" aria-live="polite"></div><button class="ab-btn" id="copy-sim">Copiar orçamento ↗</button></section>`;
+}
+function updateKitSimulation() {
+ if(!current||!$('dossier-team')||!$('sim-results'))return;
+ const n=Number($('dossier-team').value),estimate=kitEstimate(current.a,n);
+ $('sim-results').innerHTML=`<div class="ab-table-scroll"><table class="ab-rules"><thead><tr><th>Item</th><th>Qtd.</th><th>Unitário</th><th>Subtotal</th></tr></thead><tbody>${estimate.rows.map(r=>`<tr><td>${escape(r.name)}</td><td>${r.qty}</td><td>${money(r.unit)}</td><td>${money(r.total)}</td></tr>`).join('')}</tbody></table></div><div class="ab-ledger"><div><span>Gasto estimado para ${n} participantes</span><b>${money(estimate.total)}</b></div><div><span>Kit completo cadastrado (referência)</span><b>${money(amount(current.a.custo))}</b></div></div>`;
+}
+function simulationText() {const n=Number($('dossier-team').value),e=kitEstimate(current.a,n);return ['HIGH ROLEPLAY | ORÇAMENTO DE AÇÃO',current.a.nome+' — '+current.title,'Participantes: '+n,...e.rows.map(r=>'- '+r.qty+'× '+r.name+' — '+money(r.total)),'GASTO ESTIMADO: '+money(e.total),'Kit completo cadastrado: '+money(amount(current.a.custo)),'Valores estimados; premiação não incluída.'].join('\\n');}
 function dossier(e) {
  current=e;const a=e.a, valid=teams(e), rows=rulesFor(a,e.l), preset=valid.includes(Number($('team').value))?Number($('team').value):valid.at(-1);
  const selected=checklist.get(e.id)||new Set();
@@ -69,8 +84,8 @@ function dossier(e) {
  <section class="ab-dossier-section"><div class="ab-section-title"><h3>01 / Investimento do kit</h3></div><div class="ab-ledger"><div><span>Kit completo publicado</span><b>${money(amount(a.custo))}</b></div></div></section>
  <section class="ab-dossier-section"><div class="ab-section-title"><h3>02 / Regras de confronto</h3></div>${rows.length?`<div class="ab-table-scroll"><table class="ab-rules"><thead><tr><th scope="col">Invasores</th><th scope="col">Policiais</th><th scope="col">Reféns máx.</th></tr></thead><tbody>${rows.map(r=>`<tr data-team-row="${escape(r.invasores)}"><td>${escape(r.invasores)}</td><td>${escape(r.policiais)}</td><td>${escape(r.refens)}</td></tr>`).join('')}</tbody></table></div>`:'<p class="ab-help">Combinações de confronto a confirmar. A quantidade de armas do kit não define o limite de participantes.</p>'}</section>
  <section class="ab-dossier-section"><div class="ab-section-title"><h3>03 / Checklist de preparação</h3><span id="check-progress"></span></div><div class="ab-kit">${(a.itens||[]).map((i,index)=>{const src=imageSrc(i.imagem||pics[i.nome]);return `<label class="ab-kit-item"><input type="checkbox" data-check="${index}" ${selected.has(index)?'checked':''}>${src?`<img src="${escape(src)}" loading="lazy" alt="">`:''}<span><b>${escape(itemName(i.nome))}</b><small>Quantidade: ${escape(i.quantidade)}</small></span></label>`;}).join('')}</div><p class="ab-help">Marcação de conferência nesta sessão. Não altera o custo da simulação.</p></section>
- ${a.observacao?`<aside class="ab-observation"><b>Observação cadastrada</b><p>${escape(a.observacao)}</p></aside>`:''}<button class="ab-btn ab-primary ab-full" id="copy-plan">Copiar planejamento para o Discord ↗</button><details class="ab-copy-preview"><summary>Ver texto do planejamento</summary><pre id="plan-text"></pre></details></div>`;
- updateDossierFavorite();updateSimulation();updateProgress();$('dossier').showModal();
+ ${simulationHTML(a,valid,preset)}\n ${a.observacao?`<aside class="ab-observation"><b>Observação cadastrada</b><p>${escape(a.observacao)}</p></aside>`:''}<button class="ab-btn ab-primary ab-full" id="copy-plan">Copiar planejamento para o Discord ↗</button><details class="ab-copy-preview"><summary>Ver texto do planejamento</summary><pre id="plan-text"></pre></details></div>`;
+ updateDossierFavorite();updateSimulation();updateKitSimulation();updateProgress();$('dossier').showModal();
 }
 function updateSimulation() {if(!current)return;document.querySelectorAll('[data-team-row]').forEach(r=>r.classList.remove('ab-selected-row'));$('plan-text').textContent=planText();}
 function updateProgress() {const count=checklist.get(current.id)?.size||0;$('check-progress').textContent=count+'/'+(current.a.itens||[]).length+' conferidos';}
@@ -93,11 +108,11 @@ document.addEventListener('click',e=>{
  if(b.dataset.comparisonOpen!==undefined){$('comparison').close();dossier(entries[Number(b.dataset.comparisonOpen)]);}
  if(b.id==='dossier-favorite')toggleFavorite(current.id);
  if(b.id==='copy-coords')copy(coords(current));
- if(b.id==='copy-plan')copy(planText());
+ if(b.id==='copy-plan')copy(planText());\n if(b.id==='copy-sim')copy(simulationText());
  if(b.id==='share'){const url=new URL(location.href);url.search='';url.hash='acao='+encodeURIComponent(current.id);copy(url.href);}
 });
 document.addEventListener('change',e=>{
- if(e.target.id==='dossier-team')updateSimulation();
+ if(e.target.id==='dossier-team'){updateSimulation();updateKitSimulation();}
  if(e.target.dataset.check!==undefined){const checked=checklist.get(current.id)||new Set(),index=Number(e.target.dataset.check);e.target.checked?checked.add(index):checked.delete(index);checklist.set(current.id,checked);updateProgress();}
 });
 // Broken images use the brand, without repeatedly retrying a missing asset.
