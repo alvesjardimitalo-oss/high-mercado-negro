@@ -1141,7 +1141,53 @@
           "descricao": "Banco Central — Downtown",
           "imagem": "banco_entrada.webp"
         }
-      ]
+      ],
+      "policiais_minimos": 11,
+      "regras_confronto": [
+        {
+          "invasores": 7,
+          "policiais": 11,
+          "refens": 3
+        },
+        {
+          "invasores": 8,
+          "policiais": 12,
+          "refens": 3
+        },
+        {
+          "invasores": 9,
+          "policiais": 13,
+          "refens": 3
+        },
+        {
+          "invasores": 10,
+          "policiais": 14,
+          "refens": 3
+        },
+        {
+          "invasores": 11,
+          "policiais": 15,
+          "refens": 3
+        },
+        {
+          "invasores": 12,
+          "policiais": 16,
+          "refens": 3
+        },
+        {
+          "invasores": 13,
+          "policiais": 17,
+          "refens": 3
+        },
+        {
+          "invasores": 14,
+          "policiais": 18,
+          "refens": 3
+        }
+      ],
+      "pendrive_exigido": "PENDRIVE 5",
+      "cooldown_segundos": 5000,
+      "tempo_maximo_minutos": 25
     },
     {
       "nome": "BANCO PALETO",
