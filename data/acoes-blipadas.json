@@ -1269,7 +1269,38 @@
         }
       ],
       "observacao": "Localização pendente de confirmação",
-      "locais": []
+      "locais": [],
+      "policiais_minimos": 10,
+      "regras_confronto": [
+        {
+          "invasores": 8,
+          "policiais": 10,
+          "refens": 4
+        },
+        {
+          "invasores": 9,
+          "policiais": 11,
+          "refens": 4
+        },
+        {
+          "invasores": 10,
+          "policiais": 12,
+          "refens": 4
+        },
+        {
+          "invasores": 11,
+          "policiais": 13,
+          "refens": 4
+        },
+        {
+          "invasores": 12,
+          "policiais": 14,
+          "refens": 4
+        }
+      ],
+      "pendrive_exigido": "PENDRIVE 5",
+      "cooldown_segundos": 5000,
+      "tempo_maximo_minutos": 20
     },
     {
       "nome": "CYPRESS",
