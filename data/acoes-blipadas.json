@@ -1086,6 +1086,37 @@
       "observacao": "",
       "locais": [
         {
+          "nome": "Açougue",
+          "x": 990.5,
+          "y": -2149.6,
+          "z": 30.2,
+          "descricao": "Açougue — zona industrial de Cypress Flats / sudeste",
+          "imagem": "acougue_interior.webp",
+          "policiais_minimos": 8,
+          "regras_confronto": [
+            {
+              "invasores": 5,
+              "policiais": 8,
+              "refens": 4
+            },
+            {
+              "invasores": 6,
+              "policiais": 9,
+              "refens": 4
+            },
+            {
+              "invasores": 7,
+              "policiais": 10,
+              "refens": 4
+            },
+            {
+              "invasores": 8,
+              "policiais": 11,
+              "refens": 4
+            }
+          ]
+        },
+        {
           "nome": "Galinheiro",
           "x": -68.6,
           "y": 6253.9,
