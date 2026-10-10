@@ -717,7 +717,28 @@
           "descricao": "Celeiro do Hipódromo — nordeste de Los Santos",
           "imagem": "celeiro_hipodromo.webp"
         }
-      ]
+      ],
+      "policiais_minimos": 3,
+      "regras_confronto": [
+        {
+          "invasores": 2,
+          "policiais": 3,
+          "refens": 2
+        },
+        {
+          "invasores": 3,
+          "policiais": 4,
+          "refens": 2
+        },
+        {
+          "invasores": 4,
+          "policiais": 5,
+          "refens": 2
+        }
+      ],
+      "cooldown_segundos": 1700,
+      "tempo_maximo_minutos": 20,
+      "bonus_policial": "Aleatório"
     },
     {
       "nome": "CONTAINER",
