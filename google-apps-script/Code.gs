@@ -112,6 +112,9 @@ function publicarNoGitHub() {
     if (ok !== ui.Button.YES) return;
   }
 
+  // Publica as ações antes do catálogo para evitar anunciar sucesso parcial.
+  publicarAcoesBlipadas_(pub);
+
   const content = JSON.stringify(res.catalogo, null, 2);
   const payload = {
     message: `Atualiza Mercado Negro • ${agora_('dd/MM/yyyy HH:mm')} • por ${por}${res.mudancas.length ? ` • ${res.mudancas.length} mudança(s)` : ''}`,
@@ -122,8 +125,6 @@ function publicarNoGitHub() {
 
   const put = UrlFetchApp.fetch(pub.api, {method:'put', headers: pub.headers, contentType:'application/json', payload:JSON.stringify(payload), muteHttpExceptions:true});
   if (![200,201].includes(put.getResponseCode())) throw new Error(`GitHub PUT ${put.getResponseCode()}: ${put.getContentText()}`);
-
-  publicarAcoesBlipadas_(pub); // Atualiza também o catálogo das ações, usando as mesmas credenciais e botão.
 
   ui.alert(`Publicado com sucesso.\n\n${res.catalogo.itens.length} itens enviados.\n${res.mudancas.length ? res.mudancas.length + ' mudança(s) registrada(s) no histórico.\nO aviso com imagem será postado no Discord pelo GitHub em 1–2 minutos.' : 'Nenhuma mudança de preço (sem aviso no Discord).'}\n\nO site atualiza em 1–2 minutos.`);
 }
