@@ -35,17 +35,17 @@ function updateDossierFavorite() {const b=$('dossier-favorite');if(b){b.setAttri
 function toggleCompare(id) {if(compare.has(id))compare.delete(id);else if(compare.size<3)compare.add(id);else return toast('Compare até 3 locais por vez. Remova um para adicionar outro.'); draw();}
 function drawDirectory() {
  $('size-cards').innerHTML=Object.keys(ranges).map((k,index)=>{
-   const group=entries.filter(e=>e.size===k);if(!group.length)return '';
+   const group=entries.filter(e=>e.a.status!=='inativo'&&e.size===k);if(!group.length)return '';
    const cover=group.find(e=>photo(e));
    return `<button class="ab-directory-card" data-size="${k}" aria-pressed="${selectedSize===k}"><div class="ab-directory-art">${cover?picture(cover):''}<span class="ab-directory-number">0${index+1}</span><img class="ab-directory-logo" src="assets/high_logo.png" alt="High Roleplay"></div><div class="ab-directory-body"><span class="ab-eyebrow">${ranges[k]}</span><h3>Operações ${sizes[k].toLowerCase()}</h3><p>${descriptions[k]}</p><div><span>${new Set(group.map(e=>e.a.nome)).size} ações · ${group.length} fichas</span><b aria-hidden="true">↗</b></div></div></button>`;
  }).join('');
 }
 function card(e) {
  const n=entries.indexOf(e), fav=favorites.has(e.id), checked=compare.has(e.id), t=teams(e);
- return `<article class="ab-card"><div class="ab-card-media">${picture(e,'ab-cover')}<span class="ab-tag">${e.a.status==='indisponivel'?'INDISPONÍVEL · SEM BLIP':escape(ranges[e.size])}</span><button class="ab-star" data-favorite="${n}" aria-label="${fav?'Remover dos favoritos':'Favoritar'}: ${escape(e.title)}" aria-pressed="${fav}">${fav?'★':'☆'}</button></div><div class="ab-card-body"><p class="ab-card-category">${escape(e.a.nome)}</p><h3>${escape(e.title)}</h3><div class="ab-card-spec"><span>♙ ${t.length?t[0]+(t.length>1?'–'+t.at(-1):'')+' invasores':'Contingente a confirmar'}</span><span>${escape(weapon(e.a))}</span></div><div class="ab-card-money"><div><span>INVESTIMENTO DO KIT</span><strong>${money(amount(e.a.custo))}</strong></div></div><div class="ab-card-actions"><button class="ab-btn ab-primary" data-open="${n}">Ver dossiê <span aria-hidden="true">↗</span></button><button class="ab-compare-btn" data-compare="${n}" aria-pressed="${checked}" aria-label="${checked?'Remover da comparação':'Comparar'}: ${escape(e.title)}">${checked?'✓ Comparando':'+ Comparar'}</button></div></div></article>`;
+ return `<article class="ab-card"><div class="ab-card-media">${picture(e,'ab-cover')}<span class="ab-tag">${e.a.status==='inativo'?'INATIVO':e.a.status==='indisponivel'?'INDISPONÍVEL · SEM BLIP':escape(ranges[e.size])}</span><button class="ab-star" data-favorite="${n}" aria-label="${fav?'Remover dos favoritos':'Favoritar'}: ${escape(e.title)}" aria-pressed="${fav}">${fav?'★':'☆'}</button></div><div class="ab-card-body"><p class="ab-card-category">${escape(e.a.nome)}</p><h3>${escape(e.title)}</h3><div class="ab-card-spec"><span>♙ ${t.length?t[0]+(t.length>1?'–'+t.at(-1):'')+' invasores':'Contingente a confirmar'}</span><span>${escape(weapon(e.a))}</span></div><div class="ab-card-money"><div><span>INVESTIMENTO DO KIT</span><strong>${money(amount(e.a.custo))}</strong></div></div><div class="ab-card-actions"><button class="ab-btn ab-primary" data-open="${n}">Ver dossiê <span aria-hidden="true">↗</span></button><button class="ab-compare-btn" data-compare="${n}" aria-pressed="${checked}" aria-label="${checked?'Remover da comparação':'Comparar'}: ${escape(e.title)}">${checked?'✓ Comparando':'+ Comparar'}</button></div></div></article>`;
 }
 function draw() {
- const f=filters(), base=entries.filter(e=>matches(e,{...f,size:'todas'},favorites));
+ const f=filters(), base=entries.filter(e=>e.a.status!=='inativo'&&matches(e,{...f,size:'todas'},favorites));
  $('size-tabs').innerHTML=Object.entries(sizes).map(([k,v])=>`<button data-size="${k}" aria-pressed="${selectedSize===k}">${v}<span>${base.filter(e=>k==='todas'||e.size===k).length}</span></button>`).join('');
  document.querySelectorAll('.ab-directory-card').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.size===selectedSize)));
  const shown=base.filter(e=>selectedSize==='todas'||e.size===selectedSize);
@@ -53,7 +53,9 @@ function draw() {
  const groups=[...new Set(shown.map(e=>e.a.nome))].map(name=>({name,rows:shown.filter(e=>e.a.nome===name)}));
  groups.sort((a,b)=>$('sort').value==='name'?a.name.localeCompare(b.name,'pt-BR'):score(b.rows[0])-score(a.rows[0])||a.name.localeCompare(b.name,'pt-BR'));
  $('actions').innerHTML=groups.map(g=>`<section class="ab-group"><div class="ab-group-head"><h3>${escape(g.name)}</h3><span>${g.rows.length} ${g.rows.length===1?'ficha':'fichas'}</span></div><div class="ab-grid">${g.rows.map(card).join('')}</div></section>`).join('')||`<div class="ab-empty"><span>⌕</span><h3>Nenhuma ação com esses filtros.</h3><p>${onlyFavorites?'Favorite os locais pelo símbolo ☆ ou ajuste os filtros.':'Experimente ampliar o orçamento ou alterar o tamanho da equipe.'}</p><button class="ab-btn" data-reset>Limpar filtros</button></div>`;
- $('counter').textContent=`${groups.length} ações · ${shown.length} fichas de locais`;
+ const inactive=entries.filter(e=>e.a.status==='inativo');
+ if(inactive.length)$('actions').insertAdjacentHTML('beforeend',`<section class="ab-group" aria-label="Ações inativas"><div class="ab-group-head"><h3>AÇÕES INATIVAS</h3><span>${inactive.length} ${inactive.length===1?'ficha':'fichas'}</span></div><p class="ab-help">Ações fora de operação. Valores históricos preservados na calculadora.</p><div class="ab-grid">${inactive.map(card).join('')}</div></section>`);
+ $('counter').textContent=`${groups.length} ações ativas · ${shown.length} fichas de locais`;
  $('favorites').setAttribute('aria-pressed',String(onlyFavorites));
  $('favorites').textContent=(onlyFavorites?'★':'☆')+' Somente favoritos ('+entries.filter(e=>favorites.has(e.id)).length+')';
  $('compare-bar').hidden=!compare.size;$('compare-count').textContent=`${compare.size}/3 locais selecionados`;$('compare-open').disabled=compare.size<2;
@@ -112,9 +114,9 @@ async function load() {
   const response=await fetch('data/acoes-blipadas.json',{cache:'no-store'});if(!response.ok)throw Error('Não foi possível carregar os dados.');
   const data=await response.json();if(!Array.isArray(data.acoes))throw Error('Dados das ações indisponíveis.');
   entries=entriesFor(data.acoes);tax=taxFor(data.meta);$('tax-label').textContent=pct(tax*100);
-  const names=[...new Set(entries.map(e=>e.a.nome))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
+  const names=[...new Set(entries.filter(e=>e.a.status!=='inativo').map(e=>e.a.nome))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
   $('category').innerHTML='<option value="">Todas as ações</option>'+names.map(n=>`<option value="${escape(n)}">${escape(n)}</option>`).join('');
-  $('overview').innerHTML=`<div><strong>${names.length}</strong><span>AÇÕES CADASTRADAS</span></div><div><strong>${entries.filter(e=>e.l).length}</strong><span>LOCAIS CADASTRADOS</span></div><div><strong>${pct(tax*100)}</strong><span>TAXA DE LAVAGEM</span></div><div class="ab-overview-note"><span>SEU PRÓXIMO PASSO</span><b>Preparar. Comparar. Escolher. ↗</b></div>`;
+  $('overview').innerHTML=`<div><strong>${names.length}</strong><span>AÇÕES CADASTRADAS</span></div><div><strong>${entries.filter(e=>e.a.status!=='inativo'&&e.l).length}</strong><span>LOCAIS CADASTRADOS</span></div><div><strong>${pct(tax*100)}</strong><span>TAXA DE LAVAGEM</span></div><div class="ab-overview-note"><span>SEU PRÓXIMO PASSO</span><b>Preparar. Comparar. Escolher. ↗</b></div>`;
   document.querySelector('.ab-art-index').textContent='01—'+String(names.length).padStart(2,'0');drawDirectory();draw();openLinked();
  } catch(error) {
   $('overview').textContent='Dados indisponíveis no momento.';$('counter').textContent='Falha ao carregar o guia.';
