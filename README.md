@@ -80,3 +80,17 @@ Nunca coloque o token do GitHub em uma célula ou arquivo do repositório. O scr
 6. Confira a página `acoes-blipadas.html` e o arquivo `data/acoes-blipadas.json` no GitHub.
 
 O token GitHub permanece nas propriedades do Apps Script; não o cole na planilha nem no repositório. Caso haja outros arquivos ou personalizações locais no projeto Apps Script, revise antes de substituir.
+
+### Guia de operações — atualização de interface
+
+O guia mantém a planilha como fonte de preços, kits, prêmios e regras. A atualização inclui:
+
+- Cards por local agrupados pela ação, entrada por porte e dossiês com fotos e coordenadas.
+- Busca específica por localização; filtros por equipe exata cadastrada, armamento e orçamento total do kit.
+- Ordenação por nome, custo, lucro mínimo e retorno percentual sobre custo.
+- Favoritos salvos no navegador e comparação de até três locais.
+- Checklist por local durante a sessão, compartilhamento de link e cópia do planejamento para Discord.
+- Lavagem obtida de `meta.taxa_lavagem` (padrão 0,30); divisão do lucro entre participantes permitidos. A seleção de equipe não reduz o custo do kit publicado.
+- Regras por localização têm prioridade sobre as regras gerais. Dados ausentes não são tratados como valores zerados.
+
+Os cálculos puros ficam em `assets/acoes-core.mjs`. Verificação: `node tools/test-acoes.mjs`.

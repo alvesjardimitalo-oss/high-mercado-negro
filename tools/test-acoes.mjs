@@ -1,0 +1,28 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { entriesFor, economy, taxFor, matches, sizeFor } from '../assets/acoes-core.mjs';
+const data = JSON.parse(readFileSync(new URL('../data/acoes-blipadas.json', import.meta.url)));
+const entries = entriesFor(data.acoes);
+assert.equal(new Set(entries.map(e => e.id)).size, entries.length, 'Location IDs must be unique');
+const action = { nome: 'AÇÃO TESTE', premio_min: 1000, premio_max: 2000, custo: 800,
+  regras_confronto: [{invasores: 3, policiais: 4, refens: 1}], itens: [{nome: 'ARMA SUB'}] };
+assert.deepEqual(economy(action, .3, 4), {low: -100, high: 600, roi: -12.5, perLow: -25, perHigh: 150});
+assert.equal(economy({...action, custo: undefined}).low, null);
+assert.equal(economy({...action, custo: 0}).roi, null);
+assert.equal(economy(action, .3, 0).perLow, null);
+assert.equal(taxFor({taxa_lavagem: 0}), 0);
+assert.equal(taxFor({taxa_lavagem: .3}), .3);
+assert.equal(taxFor({taxa_lavagem: 30}), .3);
+const local = {nome:'Rockford',descricao:'Local específico',x:1,y:2,z:3,regras_confronto:[{invasores: 10}]};
+const [entry] = entriesFor([{...action, locais:[local]}]);
+assert.equal(sizeFor(action, local), 'grande');
+assert.equal(sizeFor({}), 'pendente');
+assert.ok(matches(entry, {q: 'especifico', budget: 800}));
+assert.ok(!matches(entry, {budget: 799}));
+assert.ok(matches(entry, {team: 10, budget: ''}));
+assert.ok(!matches(entry, {team: 3, budget: ''}));
+assert.ok(matches(entry, {weapon:'SUB',budget:''}));
+assert.ok(matches(entry, {favorites:true,budget:''}, new Set([entry.id])));
+assert.ok(!matches(entry, {favorites:true,budget:''}, new Set()));
+assert.equal(entriesFor([{...action,status:'inativo'}]).length,0);
+console.log(`Ações: cálculos e filtros verificados; ${entries.length} fichas sem IDs duplicados.`);
