@@ -4,7 +4,7 @@ const $=id=>document.getElementById(id);
 const money=n=>n===null||n===undefined||!Number.isFinite(+n)?'PENDENTE':new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}).format(n);
 const pct=n=>n===null||n===undefined||!Number.isFinite(+n)?'—':new Intl.NumberFormat('pt-BR',{style:'percent',maximumFractionDigits:1}).format(n);
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const imgFor=file=>/^[^/\\]+\.(?:webp|png|jpe?g)$/i.test(String(file||''))?'assets/itens/'+encodeURIComponent(file):'';
+const imgFor=file=>/^https:\/\//i.test(String(file||''))?String(file):/^[^/\\]+\.(?:webp|png|jpe?g)$/i.test(String(file||''))?'assets/itens/'+encodeURIComponent(file):'';
 let catalog={itens:[]},data={acoes:[],meta:{}},current=null,options={};
 const SAVED_KEY='high-mercado-negro-planejamento-v1';
 const drafts=(()=>{
