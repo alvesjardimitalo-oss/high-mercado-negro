@@ -8,9 +8,9 @@ export const PRICE_ALIASES = Object.freeze({
  'ARMA PISTOLA':'PISTOLA T54',
  'ARMA SUB':'UZI',
  'ARMA FUZIL':'FAL',
- 'MUNIÇÃO PISTOLA (X100)':'PISTOLA 100X',
- 'MUNIÇÃO SUB (X200)':'SMG 200X',
- 'MUNIÇÃO FUZIL (X250)':'FUZIL 250X'
+ 'MUNICAO PISTOLA (X100)':'PISTOLA 100X',
+ 'MUNICAO SUB (X200)':'SMG 200X',
+ 'MUNICAO FUZIL (X250)':'FUZIL 250X'
 });
 const numeric=x=>x!==null&&x!==undefined&&String(x).trim()!==''&&Number.isFinite(Number(x))?Number(x):null;
 export function priceFor(item, catalog, mode='pista'){
