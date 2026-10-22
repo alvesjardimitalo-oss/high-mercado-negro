@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#110b20">
+<meta name="description" content="Planejador econômico de ações blipadas da High Roleplay: requisitos, custos dos kits e prêmios sugeridos após lavagem.">
+<title>Planejador de Ações | Mercado Negro • High RP</title>
+<link rel="icon" href="assets/icons/icon-192.png">
+<link rel="stylesheet" href="assets/planejador-acoes.css?v=1">
+</head>
+<body class="planner">
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="index.html"><img src="assets/high_logo.png" alt=""><span><strong>MERCADO NEGRO</strong><small>HIGH ROLEPLAY · ECONOMIA ILEGAL</small></span></a>
+    <nav aria-label="Navegação"><a href="index.html">Início</a><a href="acoes-blipadas.html">Ações</a><a class="current" href="planejador-acoes.html">Planejador</a><a href="tabela.html">Preços</a></nav>
+    <a class="sheet-shortcut" target="_blank" rel="noopener noreferrer" href="https://docs.google.com/spreadsheets/d/1zs-LNN1XS8t9cYwHe4_6TMxRDIy6yS-cLv66Rx_K9C4/edit#gid=2026102201">Abrir planilha ↗</a>
+  </div>
+</header>
+<main class="shell">
+<section class="intro">
+ <div><div class="kicker"><span class="dot"></span> HIGH SEASON 2 / OPERAÇÕES BLIPADAS / PLANEJAMENTO</div><h1>Calcule o risco.<br><em>Defina o lucro.</em></h1><p>Do kit inicial ao prêmio após lavagem. Compare o que a facção realmente gasta e simule buffs ou nerfs sem alterar os valores já aprovados.</p></div>
+ <div class="intro-figure"><span>FONTE DO VALOR ATUAL</span><strong>MERCADO NEGRO</strong><span>Lavagem de 30% • Prêmios atuais já incluem os buffs anteriores</span><img src="assets/high_logo.png" alt=""></div>
+</section>
+<section class="strip" id="overview" aria-label="Resumo"><div><small>AÇÕES CADASTRADAS</small><strong id="totalActions">—</strong></div><div><small>ATIVAS</small><strong id="activeActions">—</strong></div><div><small>MODELOS COM PREÇO PENDENTE</small><strong id="pendingPrices">—</strong></div><div class="strip-note"><small>IMPORTANTE</small><span>A proposta é uma simulação. Não altera os prêmios oficiais nem os buffs anteriores.</span></div></section>
+<div class="workspace">
+<aside class="sidebar">
+ <div class="side-heading"><h2>Selecione a ação</h2><span id="actionCount">—</span></div>
+ <label class="search"><span>BUSCA</span><input id="actionSearch" placeholder="Ação ou local..." autocomplete="off" type="search"></label>
+ <label class="search"><span>FILTRO</span><select id="actionStatus"><option value="ativos">Ações ativas</option><option value="todos">Todas, incluindo inativas</option><option value="revisar">Inspeção de preços</option></select></label>
+ <div id="actionList" class="action-list" role="listbox" aria-label="Ações disponíveis"></div>
+</aside>
+<section class="simulation">
+ <div class="block selected"><div class="sec-top"><div><div class="eyebrow">01 / OPERAÇÃO SELECIONADA</div><h2 id="selectedTitle">Carregando ações...</h2><p id="selectedSub">Escolha um alvo para começar.</p></div><div class="status-chip" id="actionStatusBadge">—</div></div>
+ <div class="location-photos" id="photos" aria-label="Fotos dos locais da ação"></div>
+ <div class="requirements" id="requirements"></div></div>
+ <div class="block">
+ <div class="sec-top"><div><div class="eyebrow">02 / INSUMOS E PREÇOS</div><h2>Quanto custa iniciar?</h2></div><span class="hint">Custo do kit por ação</span></div>
+ <div class="controls three">
+ <label>BASE DE PREÇO<select id="priceMode"><option value="pista">PISTA</option><option value="parceria">PARCERIA</option></select></label>
+ <label>INVASORES<select id="teamCount"></select></label>
+ <label>ROLAGEM DO KIT<button class="subtle" type="button" id="scaleTeam">Ajustar itens para a equipe</button></label>
+ </div>
+ <div class="table-scroll"><table class="kit"><thead><tr><th>ITEM EXIGIDO</th><th>QTD</th><th>UNITÁRIO (R$)</th><th>TOTAL</th></tr></thead><tbody id="kitRows"></tbody><tfoot><tr><td colspan="3">TOTAL INVESTIDO NO KIT</td><td id="kitTotal">—</td></tr></tfoot></table></div>
+ <p class="footnote" id="kitWarning"></p>
+ </div>
+ <div class="block"><div class="sec-top"><div><div class="eyebrow">03 / ECONOMIA DA AÇÃO</div><h2>Lucro real, depois da lavagem</h2></div><span class="hint">Prêmios atuais inalterados</span></div>
+ <div class="metrics" id="currentMetrics"></div>
+ <div class="note">O <strong>buff anterior já está dentro do prêmio atual</strong>. Não somamos BUFF/NERF do histórico pela segunda vez. A munição (x100/x200/x250) é uma quantidade por caixa, não o preço.</div>
+ </div>
+ <div class="block proposal"><div class="sec-top"><div><div class="eyebrow">04 / SUGESTÃO DE PREMIAÇÃO</div><h2>Propor buff ou nerf</h2></div><span id="recommendationBadge" class="rec-badge">—</span></div>
+ <div class="controls four">
+ <label>ROI LÍQUIDO DESEJADO (%)<input id="roiGoal" type="number" min="0" max="500" step="1" value="25"></label>
+ <label>PROPORÇÃO MÁX / MÍN (%)<input id="spreadGoal" type="number" min="0" max="100" step="1" value="15"></label>
+ <label>PRÊMIO MÍN. PROPOSTO (SUJO)<input id="customPayout" type="number" min="0" step="1" placeholder="Sugestão automática"></label>
+ <label>AÇÃO<button type="button" class="subtle" id="resetPayout">Usar cálculo automático</button></label>
+ </div>
+ <div id="proposalMetrics" class="metrics forecast"></div>
+ <label class="rationale">JUSTIFICATIVA DA PROPOSTA<textarea id="rationale" rows="3" placeholder="Ex.: custo do kit, lavagem de 30%, lucro líquido desejado por integrante e equilíbrio com o porte da ação."></textarea></label>
+ <div class="toolbar"><button type="button" class="primary" id="copyProposal">Copiar proposta</button><button type="button" id="downloadCsv">Exportar CSV</button><button type="button" id="saveDraft">Salvar rascunho local</button><a class="sheet" href="https://docs.google.com/spreadsheets/d/1zs-LNN1XS8t9cYwHe4_6TMxRDIy6yS-cLv66Rx_K9C4/edit#gid=2026102201" target="_blank" rel="noopener noreferrer">Planilha do Ilegal ↗</a></div>
+ <p class="footnote">A aba <strong>PLANEJADOR AÇÕES</strong> já contém todas as ações e as fórmulas para alterar a meta de lucro e quantidade de itens. Copie ou exporte uma proposta individual para registrá-la; publicar novos prêmios no jogo exige revisão da gestão.</p>
+ </div>
+</section>
+</div>
+<div class="footer-note">HIGH ROLEPLAY · MODELO ECONÔMICO FICTÍCIO FIVEM · FONTE: data/acoes-blipadas.json + data/catalogo.json</div>
+</main>
+<div role="status" id="toast" class="toast" hidden></div>
+<script type="module" src="assets/planejador-acoes.mjs?v=1"></script>
+</body>
+</html>
