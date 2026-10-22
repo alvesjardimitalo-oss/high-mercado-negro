@@ -1,9 +1,10 @@
 /* Mercado Negro • High — service worker
    Online: sempre busca a versão mais nova (preços nunca ficam velhos).
    Offline / internet ruim: usa a última versão salva no aparelho.      */
-const CACHE = 'hmn-v2';
+const CACHE = 'hmn-v3-action-planner';
 const CORE = ['./', './index.html', './tabela.html', './categoria.html', './historico.html', './como-funciona.html',
-  './assets/style.css', './assets/app.js', './assets/high_logo.png', './data/catalogo.json', './manifest.webmanifest'];
+  './assets/style.css', './assets/app.js', './assets/high_logo.png', './data/catalogo.json', './data/acoes-blipadas.json',
+  './planejador-acoes.html','./assets/planejador-acoes.css','./assets/planejador-acoes.mjs','./assets/planejador-core.mjs','./manifest.webmanifest'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
