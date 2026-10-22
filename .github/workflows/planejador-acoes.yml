@@ -1,0 +1,23 @@
+name: Mercado Negro • Planejador de Ações
+on:
+  push:
+    branches: [main, 'feature/**']
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validar-planejador:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verificar sintaxe dos módulos
+        run: |
+          node --check assets/planejador-core.mjs
+          node --check assets/planejador-acoes.mjs
+          node --check tools/test-planejador.mjs
+      - name: Testar custos, lavagem, ROI e prêmios aprovados
+        run: node tools/test-planejador.mjs
