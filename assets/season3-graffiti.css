@@ -171,3 +171,67 @@ body{
  .home-hero{background:linear-gradient(90deg,#080e0dec,#0a0f0bc5),var(--s3-scene) center center / 135% auto no-repeat,#080b0b!important}
  .guide,.table-page-hero,.category-hero,.maintenance-panel{background:linear-gradient(90deg,#080e0de8,#0a0f0bd9),var(--s3-scene) center / 125% auto no-repeat,#101816!important}
 }
+
+/* S3.4 — fundo QG vetorial local e iluminação verde nos itens.
+   O SVG preserva a nitidez inclusive em monitores 2K/4K. */
+:root{
+ --s3-scene:url('./season3-qg-background.svg');
+}
+body{
+ background:
+ linear-gradient(180deg,rgba(6,9,9,.83),rgba(6,9,9,.94)),
+ var(--s3-scene) center top / cover fixed no-repeat,
+ #080b0b!important;
+}
+.home-hero{
+ background:
+ linear-gradient(90deg,rgba(4,10,7,.9),rgba(7,14,9,.76) 48%,rgba(6,13,8,.67)),
+ var(--s3-scene) center 47% / cover no-repeat,
+ #080b0b!important;
+}
+.guide,.table-page-hero,.category-hero{
+ background:
+ linear-gradient(90deg,rgba(7,12,11,.92),rgba(8,14,11,.80)),
+ var(--s3-scene) center / cover no-repeat,
+ #101816!important;
+}
+.maintenance-panel{
+ background:
+ linear-gradient(90deg,rgba(8,14,12,.94),rgba(8,14,12,.8)),
+ var(--s3-scene) center / cover no-repeat,
+ #101816!important;
+}
+/* Tirar o roxo das vitrines sem perder silhueta ou detalhes dos itens */
+.item-image,.table-thumb{
+ position:relative;isolation:isolate;
+ background:radial-gradient(circle at 50% 38%,rgba(160,240,64,.18),rgba(35,64,38,.11) 42%,#091410 78%)!important;
+ border:1px solid rgba(160,240,64,.29)!important;
+ box-shadow:inset 0 1px 0 rgba(195,255,149,.08),0 7px 20px rgba(0,0,0,.18);
+}
+.item-image::before,.table-thumb::before{
+ content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+ background:linear-gradient(145deg,rgba(160,240,64,.055),transparent 65%);
+}
+.item-image img,.table-thumb img{
+ position:relative;z-index:1;
+ filter:hue-rotate(170deg) saturate(.9) drop-shadow(0 11px 14px rgba(78,142,53,.25))!important;
+ transition:transform .25s ease,filter .25s ease;
+}
+.item-card:hover .item-image img,.market-table tbody tr:hover .table-thumb img{
+ transform:scale(1.05);
+ filter:hue-rotate(170deg) saturate(1.05) drop-shadow(0 14px 21px rgba(160,240,64,.20))!important;
+}
+.item-card[data-highlight="true"]{
+ border-color:rgba(160,240,64,.65)!important;
+ box-shadow:inset 3px 0 0 #a0f040,0 9px 24px rgba(0,0,0,.2)!important;
+}
+.item-image-empty span,.table-thumb-empty span{color:#a0f040!important;filter:none!important}
+[data-status="indisponivel"] .item-image img,
+[data-status="indisponivel"] .table-thumb img{
+ filter:grayscale(1) opacity(.56)!important;
+}
+@media(max-width:700px){
+ body{background:linear-gradient(180deg,rgba(6,9,9,.9),rgba(6,9,9,.96)),var(--s3-scene) center top / auto 100vh no-repeat,#080b0b!important}
+ .home-hero{background:linear-gradient(90deg,rgba(4,10,7,.92),rgba(7,14,9,.72)),var(--s3-scene) 62% center / auto 100% no-repeat,#080b0b!important}
+ .guide,.table-page-hero,.category-hero,.maintenance-panel{background:linear-gradient(90deg,rgba(8,14,12,.92),rgba(8,14,12,.84)),var(--s3-scene) center / cover no-repeat,#101816!important}
+}
