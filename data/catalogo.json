@@ -2,8 +2,8 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-11-17T17:39:00-03:00",
-    "publicado_por": "High Ilegal - Season 3",
+    "atualizado_em": "2026-11-17T20:09:13-03:00",
+    "publicado_por": "Italo Alves - Sênior Ilegal",
     "moeda": "BRL",
     "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM.",
     "alerta": "",
@@ -299,15 +299,440 @@
       }
     },
     {
-      "categoria": "CONTRABANDO",
+      "categoria": "ARMAS",
       "item": "CAIXA DE ATTACHS",
+      "parceria": 7000,
+      "pista": 7630,
+      "status": "inativo",
+      "destaque": false,
+      "observacao": "Preço definido na revisão de 17/11/2026",
+      "ordem": 19,
+      "imagem": "attachbox.png",
+      "variacao": {
+        "novo": true,
+        "em": "2026-11-17T20:09:13-03:00"
+      }
+    },
+    {
+      "categoria": "ARMAS",
+      "item": "PAGER",
+      "parceria": 5000,
+      "pista": 7000,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "",
+      "ordem": 20,
+      "imagem": "pager.png",
+      "variacao": {
+        "novo": true,
+        "em": "2026-11-17T20:09:13-03:00"
+      }
+    },
+    {
+      "categoria": "DESMANCHE",
+      "item": "CARTAO ILEGIVEL",
+      "parceria": 10000,
+      "pista": 10900,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "Preço definido na revisão de 17/11/2026",
+      "ordem": 44,
+      "imagem": "dismantle.png",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T16:29:17-03:00"
+      }
+    },
+    {
+      "categoria": "DESMANCHE",
+      "item": "CARTAO ILEGIVEL ++",
+      "parceria": 18000,
+      "pista": 19440,
+      "status": "inativo",
+      "destaque": false,
+      "observacao": "Preço de referência estimado; item inativo nesta revisão",
+      "ordem": 45,
+      "imagem": "dismantleplus.png",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T16:29:17-03:00"
+      }
+    },
+    {
+      "categoria": "DESMANCHE",
+      "item": "BLOQUEADOR DE SINAL",
+      "parceria": 15000,
+      "pista": 16200,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "Preço definido na revisão de 17/11/2026",
+      "ordem": 46,
+      "imagem": "blocksignal.png",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T16:29:17-03:00"
+      }
+    },
+    {
+      "categoria": "DESMANCHE",
+      "item": "LOCKPICK",
+      "parceria": 5000,
+      "pista": 5450,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "Preço definido na revisão de 17/11/2026",
+      "ordem": 47,
+      "imagem": "lockpick.png",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T16:29:17-03:00"
+      }
+    },
+    {
+      "categoria": "DESMANCHE",
+      "item": "LOCKPICK ++",
+      "parceria": 10000,
+      "pista": 10900,
+      "status": "inativo",
+      "destaque": false,
+      "observacao": "Preço definido na revisão de 17/11/2026",
+      "ordem": 48,
+      "imagem": "lockpickplus.png",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T16:29:17-03:00"
+      }
+    },
+    {
+      "categoria": "DESMANCHE",
+      "item": "RADAR HACKER",
+      "parceria": 22000,
+      "pista": 25000,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "Preço definido na revisão de 17/11/2026",
+      "ordem": 49,
+      "imagem": "lockpickplus.png",
+      "variacao": {
+        "novo": true,
+        "em": "2026-11-17T20:09:13-03:00"
+      }
+    },
+    {
+      "categoria": "DROGAS",
+      "item": "PACOTE DE DROGAS",
+      "parceria": 5000,
+      "pista": 5450,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "Preço definido na revisão de 17/11/2026",
+      "ordem": 63,
+      "imagem": "packdrug1.png",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T16:29:17-03:00"
+      }
+    },
+    {
+      "categoria": "DROGAS",
+      "item": "UNIDADE DA DROGA",
+      "parceria": 150,
+      "pista": 165,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "Preço definido na revisão de 17/11/2026",
+      "ordem": 64,
+      "imagem": "metadone.png",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T16:29:17-03:00"
+      }
+    },
+    {
+      "categoria": "DROGAS",
+      "item": "COLETE BALISTICO",
+      "parceria": 12000,
+      "pista": 12960,
+      "status": "inativo",
+      "destaque": false,
+      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
+      "ordem": 65,
+      "imagem": "ballisticplate.png",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T16:29:17-03:00"
+      }
+    },
+    {
+      "categoria": "DROGAS",
+      "item": "CAPUZ",
       "parceria": 7000,
       "pista": 7630,
       "status": "ativo",
       "destaque": false,
       "observacao": "Preço definido na revisão de 17/11/2026",
-      "ordem": 19,
-      "imagem": "attachbox.png",
+      "ordem": 66,
+      "imagem": "hood.png",
+      "variacao": {
+        "novo": true,
+        "em": "2026-11-17T20:09:13-03:00"
+      }
+    },
+    {
+      "categoria": "DROGAS",
+      "item": "KIT FOGUETEIRO",
+      "parceria": 10000,
+      "pista": 10900,
+      "status": "ativo",
+      "destaque": true,
+      "observacao": "Kit de fogos de artifício para aviso RP e diversão; parceria R$ 10.000; pista +9%",
+      "ordem": 67,
+      "imagem": "kitfogueteiro-s3.svg",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T17:39:00-03:00"
+      }
+    },
+    {
+      "categoria": "DROGAS",
+      "item": "RADAR DO CORRE",
+      "parceria": 9000,
+      "pista": 9810,
+      "status": "inativo",
+      "destaque": false,
+      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
+      "ordem": 68,
+      "imagem": "mapabairro1.png",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T16:29:17-03:00"
+      }
+    },
+    {
+      "categoria": "FALSIFICAÇÃO",
+      "item": "DOLAR FALSO (UN.)",
+      "parceria": 150,
+      "pista": 165,
+      "status": "inativo",
+      "destaque": false,
+      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
+      "ordem": 52,
+      "imagem": "dollarfake.png",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T16:29:17-03:00"
+      }
+    },
+    {
+      "categoria": "FALSIFICAÇÃO",
+      "item": "KIT DOS 7",
+      "parceria": 22000,
+      "pista": 23760,
+      "status": "inativo",
+      "destaque": false,
+      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
+      "ordem": 53,
+      "imagem": "kitdossete.png",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T16:29:17-03:00"
+      }
+    },
+    {
+      "categoria": "HOSPITAL ILEGAL",
+      "item": "BANDAGEM INFECTADA",
+      "parceria": 2500,
+      "pista": 2725,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "Ativo; preço de referência estimado em 17/11/2026",
+      "ordem": 54,
+      "imagem": "infectedbandage.png",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T16:29:17-03:00"
+      }
+    },
+    {
+      "categoria": "HOSPITAL ILEGAL",
+      "item": "ADRENALINA CLANDESTINA",
+      "parceria": 16000,
+      "pista": 17280,
+      "status": "ativo",
+      "destaque": true,
+      "observacao": "Ativo; preço de referência estimado em 17/11/2026",
+      "ordem": 55,
+      "imagem": "adrenaline2.png",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T16:29:17-03:00"
+      }
+    },
+    {
+      "categoria": "HOSPITAL ILEGAL",
+      "item": "ADRENALINA CLANDESTINA PLUS",
+      "parceria": 28000,
+      "pista": 30240,
+      "status": "inativo",
+      "destaque": true,
+      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
+      "ordem": 56,
+      "imagem": "adrenalineclandestineplus.png",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T16:29:17-03:00"
+      }
+    },
+    {
+      "categoria": "HOSPITAL ILEGAL",
+      "item": "PACOTE DE METADONA",
+      "parceria": 5000,
+      "pista": 5450,
+      "status": "inativo",
+      "destaque": true,
+      "observacao": "Preço de referência estimado; item inativo nesta revisão",
+      "ordem": 57,
+      "imagem": "packdrug1.png",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T16:29:17-03:00"
+      }
+    },
+    {
+      "categoria": "HOSPITAL ILEGAL",
+      "item": "UNIDADE DE METADONA",
+      "parceria": 150,
+      "pista": 165,
+      "status": "inativo",
+      "destaque": true,
+      "observacao": "Preço de referência estimado; item inativo nesta revisão",
+      "ordem": 58,
+      "imagem": "metadone.png",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T16:29:17-03:00"
+      }
+    },
+    {
+      "categoria": "laVAGEM",
+      "item": "CARTAO NUHIGH PRATA",
+      "parceria": 18000,
+      "pista": 19440,
+      "status": "inativo",
+      "destaque": true,
+      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
+      "ordem": 50,
+      "imagem": "cartaoclonado1.png",
+      "variacao": {
+        "novo": true,
+        "em": "2026-11-17T20:09:13-03:00"
+      }
+    },
+    {
+      "categoria": "LAVAGEM",
+      "item": "CARTAO NUHIGH OURO",
+      "parceria": 28000,
+      "pista": 30240,
+      "status": "inativo",
+      "destaque": true,
+      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
+      "ordem": 51,
+      "imagem": "cartaoclonado2.png",
+      "variacao": {
+        "novo": true,
+        "em": "2026-11-17T20:09:13-03:00"
+      }
+    },
+    {
+      "categoria": "LAVAGEM",
+      "item": "PENDRIVE I",
+      "parceria": 9000,
+      "pista": 9810,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "Preço definido na revisão de 17/11/2026",
+      "ordem": 69,
+      "imagem": "pendrive1.png",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T16:29:17-03:00"
+      }
+    },
+    {
+      "categoria": "LAVAGEM",
+      "item": "PENDRIVE II",
+      "parceria": 19000,
+      "pista": 20120,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "Preço definido na revisão de 17/11/2026",
+      "ordem": 70,
+      "imagem": "pendrive2.png",
+      "variacao": {
+        "parceria_antes": 14000,
+        "pista_antes": 15120,
+        "em": "2026-11-17T20:09:13-03:00"
+      }
+    },
+    {
+      "categoria": "LAVAGEM",
+      "item": "PENDRIVE III",
+      "parceria": 32000,
+      "pista": 34520,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "Preço definido na revisão de 17/11/2026",
+      "ordem": 71,
+      "imagem": "pendrive3.png",
+      "variacao": {
+        "parceria_antes": 19000,
+        "pista_antes": 20520,
+        "em": "2026-11-17T20:09:13-03:00"
+      }
+    },
+    {
+      "categoria": "LAVAGEM",
+      "item": "ALGEMA",
+      "parceria": 7000,
+      "pista": 7630,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "Preço definido na revisão de 17/11/2026",
+      "ordem": 72,
+      "imagem": "handcuff.png",
+      "variacao": {
+        "novo": true,
+        "em": "2026-11-17T20:09:13-03:00"
+      }
+    },
+    {
+      "categoria": "LAVAGEM",
+      "item": "ALCOOL EM GEL",
+      "parceria": 1000,
+      "pista": 1100,
+      "status": "inativo",
+      "destaque": false,
+      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
+      "ordem": 73,
+      "imagem": "alcoolemgel.png",
       "variacao": {
         "parceria_antes": 0,
         "pista_antes": 0,
@@ -332,7 +757,7 @@
     },
     {
       "categoria": "MECÂNICA ILEGAL",
-      "item": "TICKET DE CORRIDA",
+      "item": "CARTAO DE CORRIDAS",
       "parceria": 2000,
       "pista": 2200,
       "status": "ativo",
@@ -348,7 +773,7 @@
     },
     {
       "categoria": "MECÂNICA ILEGAL",
-      "item": "TICKET DE CORRIDA ++",
+      "item": "CARTÃO DE CORRIDAS ++",
       "parceria": 4000,
       "pista": 4360,
       "status": "inativo",
@@ -443,6 +868,54 @@
       }
     },
     {
+      "categoria": "MECÂNICA ILEGAL",
+      "item": "BLOQUEADOR DE RADAR",
+      "parceria": 20000,
+      "pista": 21600,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "Referência sugerida S3: equipamento de bloqueio de radar; revisar após testes; pista +8%",
+      "ordem": 28,
+      "imagem": "radarjammer-s3.svg",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T17:39:00-03:00"
+      }
+    },
+    {
+      "categoria": "MECÂNICA ILEGAL",
+      "item": "RASTREADOR DE RADAR",
+      "parceria": 14000,
+      "pista": 15120,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "Referência sugerida S3: detector/rastreador de radar; revisar após testes; pista +8%",
+      "ordem": 29,
+      "imagem": "radardetector-s3.svg",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T17:39:00-03:00"
+      }
+    },
+    {
+      "categoria": "MECÂNICA ILEGAL",
+      "item": "RASTREADOR VEICULAR",
+      "parceria": 12000,
+      "pista": 12960,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "Referência sugerida S3: localizador veicular; revisar após testes; pista +8%",
+      "ordem": 30,
+      "imagem": "rastreador-s3.svg",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T17:39:00-03:00"
+      }
+    },
+    {
       "categoria": "MUNIÇÃO",
       "item": "ENERGETICO ZERO",
       "parceria": 1000,
@@ -450,7 +923,7 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "Preço definido na revisão de 17/11/2026",
-      "ordem": 28,
+      "ordem": 31,
       "imagem": "energetic2.png",
       "variacao": {
         "parceria_antes": 0,
@@ -466,28 +939,12 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "Preço definido na revisão de 17/11/2026",
-      "ordem": 28,
+      "ordem": 32,
       "imagem": "caixa_m_pistola.png",
       "variacao": {
         "parceria_antes": 0,
         "pista_antes": 0,
         "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "MECÂNICA ILEGAL",
-      "item": "BLOQUEADOR DE RADAR",
-      "parceria": 20000,
-      "pista": 21600,
-      "status": "ativo",
-      "destaque": false,
-      "observacao": "Preço sugerido para a Season 3: bloqueio de radar; pista +8%.",
-      "ordem": 28,
-      "imagem": "radarjammer-s3.svg",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T17:39:00-03:00"
       }
     },
     {
@@ -498,28 +955,12 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "Caixa de 100 munições SMG; preço de parceria oficial R$ 9.000; pista +9%",
-      "ordem": 29,
+      "ordem": 33,
       "imagem": "caixa_m_smg.png",
       "variacao": {
         "parceria_antes": 0,
         "pista_antes": 0,
         "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "MECÂNICA ILEGAL",
-      "item": "RASTREADOR DE RADAR",
-      "parceria": 14000,
-      "pista": 15120,
-      "status": "ativo",
-      "destaque": false,
-      "observacao": "Preço sugerido para a Season 3: rastreador de radar; pista +8%.",
-      "ordem": 29,
-      "imagem": "radardetector-s3.svg",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T17:39:00-03:00"
       }
     },
     {
@@ -530,28 +971,12 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "Caixa de 100 munições de fuzil; preço de parceria oficial R$ 12.000; pista +8%",
-      "ordem": 30,
+      "ordem": 34,
       "imagem": "caixa_m_rifle.png",
       "variacao": {
         "parceria_antes": 0,
         "pista_antes": 0,
         "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "MECÂNICA ILEGAL",
-      "item": "RASTREADOR VEICULAR",
-      "parceria": 12000,
-      "pista": 12960,
-      "status": "ativo",
-      "destaque": false,
-      "observacao": "Preço sugerido para a Season 3: rastreamento veicular; pista +8%.",
-      "ordem": 30,
-      "imagem": "rastreador-s3.svg",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T17:39:00-03:00"
       }
     },
     {
@@ -562,7 +987,7 @@
       "status": "inativo",
       "destaque": false,
       "observacao": "Preço de referência estimado; item inativo nesta revisão",
-      "ordem": 31,
+      "ordem": 35,
       "imagem": "caixa_m_rifle.png",
       "variacao": {
         "parceria_antes": 0,
@@ -578,7 +1003,7 @@
       "status": "inativo",
       "destaque": false,
       "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
-      "ordem": 32,
+      "ordem": 36,
       "imagem": "sniperammo.png",
       "variacao": {
         "parceria_antes": 0,
@@ -594,7 +1019,7 @@
       "status": "ativo",
       "destaque": false,
       "observacao": "Preço definido na revisão de 17/11/2026",
-      "ordem": 33,
+      "ordem": 37,
       "imagem": "c4.png",
       "variacao": {
         "parceria_antes": 0,
@@ -610,7 +1035,7 @@
       "status": "inativo",
       "destaque": false,
       "observacao": "Preço de referência estimado; item inativo nesta revisão",
-      "ordem": 34,
+      "ordem": 38,
       "imagem": "c4premium.png",
       "variacao": {
         "parceria_antes": 0,
@@ -626,12 +1051,28 @@
       "status": "inativo",
       "destaque": true,
       "observacao": "Preço de referência estimado; item inativo nesta revisão",
-      "ordem": 35,
+      "ordem": 39,
       "imagem": "c4.png",
       "variacao": {
         "parceria_antes": 0,
         "pista_antes": 0,
         "em": "2026-11-17T16:29:17-03:00"
+      }
+    },
+    {
+      "categoria": "MUNIÇÃO",
+      "item": "CAIXA DE MUNIÇÃO GRANDE",
+      "parceria": 28000,
+      "pista": 30240,
+      "status": "ativo",
+      "destaque": false,
+      "observacao": "Referência sugerida S3; preço provisório até definir capacidade de munição; pista +8%",
+      "ordem": 39,
+      "imagem": "caixa-municao-grande-s3.svg",
+      "variacao": {
+        "parceria_antes": 0,
+        "pista_antes": 0,
+        "em": "2026-11-17T17:39:00-03:00"
       }
     },
     {
@@ -642,7 +1083,7 @@
       "status": "inativo",
       "destaque": false,
       "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
-      "ordem": 36,
+      "ordem": 40,
       "imagem": "controleexplosivo.png",
       "variacao": {
         "parceria_antes": 0,
@@ -658,7 +1099,7 @@
       "status": "inativo",
       "destaque": false,
       "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
-      "ordem": 37,
+      "ordem": 41,
       "imagem": "caixadeexplosivo.png",
       "variacao": {
         "parceria_antes": 0,
@@ -674,7 +1115,7 @@
       "status": "inativo",
       "destaque": false,
       "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
-      "ordem": 38,
+      "ordem": 42,
       "imagem": "attach_flashlight.png",
       "variacao": {
         "parceria_antes": 0,
@@ -690,248 +1131,8 @@
       "status": "inativo",
       "destaque": false,
       "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
-      "ordem": 39,
-      "imagem": "attach_flashlight.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "MUNIÇÃO",
-      "item": "CAIXA DE MUNIÇÃO GRANDE",
-      "parceria": 28000,
-      "pista": 30240,
-      "status": "ativo",
-      "destaque": false,
-      "observacao": "Preço de referência provisório até confirmar capacidade da caixa; pista +8%.",
-      "ordem": 39,
-      "imagem": "caixa-municao-grande-s3.svg",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T17:39:00-03:00"
-      }
-    },
-    {
-      "categoria": "DESMANCHE",
-      "item": "CARTAO ILEGIVEL",
-      "parceria": 10000,
-      "pista": 10900,
-      "status": "ativo",
-      "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
-      "ordem": 40,
-      "imagem": "dismantle.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "DESMANCHE",
-      "item": "CARTAO ILEGIVEL ++",
-      "parceria": 18000,
-      "pista": 19440,
-      "status": "inativo",
-      "destaque": false,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
-      "ordem": 41,
-      "imagem": "dismantleplus.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "DESMANCHE",
-      "item": "BLOQUEADOR DE SINAL",
-      "parceria": 15000,
-      "pista": 16200,
-      "status": "ativo",
-      "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
-      "ordem": 42,
-      "imagem": "blocksignal.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "DESMANCHE",
-      "item": "LOCKPICK",
-      "parceria": 5000,
-      "pista": 5450,
-      "status": "ativo",
-      "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 43,
-      "imagem": "lockpick.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "DESMANCHE",
-      "item": "LOCKPICK ++",
-      "parceria": 10000,
-      "pista": 10900,
-      "status": "ativo",
-      "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
-      "ordem": 44,
-      "imagem": "lockpickplus.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "FALSIFICAÇÃO",
-      "item": "CARTAO NUHIGH PRATA",
-      "parceria": 18000,
-      "pista": 19440,
-      "status": "inativo",
-      "destaque": true,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
-      "ordem": 45,
-      "imagem": "cartaoclonado1.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "FALSIFICAÇÃO",
-      "item": "CARTAO NUHIGH OURO",
-      "parceria": 28000,
-      "pista": 30240,
-      "status": "inativo",
-      "destaque": true,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
-      "ordem": 46,
-      "imagem": "cartaoclonado2.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "FALSIFICAÇÃO",
-      "item": "DOLAR FALSO (UN.)",
-      "parceria": 150,
-      "pista": 165,
-      "status": "inativo",
-      "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
-      "ordem": 47,
-      "imagem": "dollarfake.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "FALSIFICAÇÃO",
-      "item": "KIT DOS 7",
-      "parceria": 22000,
-      "pista": 23760,
-      "status": "inativo",
-      "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
-      "ordem": 48,
-      "imagem": "kitdossete.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "HOSPITAL ILEGAL",
-      "item": "BANDAGEM INFECTADA",
-      "parceria": 2500,
-      "pista": 2725,
-      "status": "ativo",
-      "destaque": false,
-      "observacao": "Ativo; preço de referência estimado em 17/11/2026",
-      "ordem": 49,
-      "imagem": "infectedbandage.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "HOSPITAL ILEGAL",
-      "item": "ADRENALINA CLANDESTINA",
-      "parceria": 16000,
-      "pista": 17280,
-      "status": "ativo",
-      "destaque": true,
-      "observacao": "Ativo; preço de referência estimado em 17/11/2026",
-      "ordem": 50,
-      "imagem": "adrenaline2.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "HOSPITAL ILEGAL",
-      "item": "ADRENALINA CLANDESTINA PLUS",
-      "parceria": 28000,
-      "pista": 30240,
-      "status": "inativo",
-      "destaque": true,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
-      "ordem": 51,
-      "imagem": "adrenalineclandestineplus.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "HOSPITAL ILEGAL",
-      "item": "PACOTE DE METADONA",
-      "parceria": 5000,
-      "pista": 5450,
-      "status": "inativo",
-      "destaque": true,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
-      "ordem": 52,
-      "imagem": "packdrug1.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "HOSPITAL ILEGAL",
-      "item": "UNIDADE DE METADONA",
-      "parceria": 150,
-      "pista": 165,
-      "status": "inativo",
-      "destaque": true,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
-      "ordem": 53,
-      "imagem": "metadone.png",
+      "imagem": "attach_flashlight.png",
       "variacao": {
         "parceria_antes": 0,
         "pista_antes": 0,
@@ -946,7 +1147,7 @@
       "status": "inativo",
       "destaque": false,
       "observacao": "Preço de referência estimado; item inativo nesta revisão",
-      "ordem": 54,
+      "ordem": 59,
       "imagem": "tablethack.png",
       "variacao": {
         "parceria_antes": 0,
@@ -962,7 +1163,7 @@
       "status": "inativo",
       "destaque": false,
       "observacao": "Preço de referência estimado; item inativo nesta revisão",
-      "ordem": 55,
+      "ordem": 60,
       "imagem": "tablethacksuper.png",
       "variacao": {
         "parceria_antes": 0,
@@ -978,7 +1179,7 @@
       "status": "inativo",
       "destaque": false,
       "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
-      "ordem": 56,
+      "ordem": 61,
       "imagem": "mapabairro1.png",
       "variacao": {
         "parceria_antes": 0,
@@ -994,214 +1195,8 @@
       "status": "inativo",
       "destaque": false,
       "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
-      "ordem": 57,
-      "imagem": "superaltofalante.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "DROGAS",
-      "item": "PACOTE DE DROGAS",
-      "parceria": 5000,
-      "pista": 5450,
-      "status": "ativo",
-      "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
-      "ordem": 58,
-      "imagem": "packdrug1.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "DROGAS",
-      "item": "UNIDADE DA DROGA",
-      "parceria": 150,
-      "pista": 165,
-      "status": "ativo",
-      "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
-      "ordem": 59,
-      "imagem": "metadone.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "DROGAS",
-      "item": "COLETE",
-      "parceria": 12000,
-      "pista": 12960,
-      "status": "inativo",
-      "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
-      "ordem": 60,
-      "imagem": "ballisticplate.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "CONTRABANDO",
-      "item": "CAPUZ",
-      "parceria": 7000,
-      "pista": 7630,
-      "status": "ativo",
-      "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
-      "ordem": 61,
-      "imagem": "hood.png",
-      "variacao": {
-        "novo": true,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "DROGAS",
-      "item": "MAPEAMENTO DE BAIRRO",
-      "parceria": 9000,
-      "pista": 9810,
-      "status": "inativo",
-      "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 62,
-      "imagem": "mapabairro1.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "LAVAGEM",
-      "item": "PENDRIVE 1",
-      "parceria": 9000,
-      "pista": 9810,
-      "status": "ativo",
-      "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
-      "ordem": 63,
-      "imagem": "pendrive1.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "LAVAGEM",
-      "item": "PENDRIVE 2",
-      "parceria": 14000,
-      "pista": 15120,
-      "status": "ativo",
-      "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
-      "ordem": 64,
-      "imagem": "pendrive2.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "LAVAGEM",
-      "item": "PENDRIVE 3",
-      "parceria": 19000,
-      "pista": 20520,
-      "status": "ativo",
-      "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
-      "ordem": 65,
-      "imagem": "pendrive3.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "LAVAGEM",
-      "item": "PENDRIVE 4",
-      "parceria": 24000,
-      "pista": 25920,
-      "status": "ativo",
-      "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
-      "ordem": 66,
-      "imagem": "pendrive4.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "LAVAGEM",
-      "item": "PENDRIVE 5",
-      "parceria": 32000,
-      "pista": 34240,
-      "status": "ativo",
-      "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
-      "ordem": 67,
-      "imagem": "pendrive5.png",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "DROGAS ",
-      "item": "KIT FOGUETEIRO",
-      "parceria": 10000,
-      "pista": 10900,
-      "status": "ativo",
-      "destaque": true,
-      "observacao": "Fogos para aviso RP da presença policial e diversão; pista +9%.",
-      "ordem": 67,
-      "imagem": "kitfogueteiro-s3.svg",
-      "variacao": {
-        "parceria_antes": 0,
-        "pista_antes": 0,
-        "em": "2026-11-17T17:39:00-03:00"
-      }
-    },
-    {
-      "categoria": "CONTRABANDO",
-      "item": "ALGEMA",
-      "parceria": 7000,
-      "pista": 7630,
-      "status": "ativo",
-      "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
-      "ordem": 68,
-      "imagem": "handcuff.png",
-      "variacao": {
-        "novo": true,
-        "em": "2026-11-17T16:29:17-03:00"
-      }
-    },
-    {
-      "categoria": "LAVAGEM",
-      "item": "ALCOOL EM GEL",
-      "parceria": 1000,
-      "pista": 1100,
-      "status": "inativo",
-      "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
-      "ordem": 69,
-      "imagem": "alcoolemgel.png",
+      "imagem": "superaltofalante.png",
       "variacao": {
         "parceria_antes": 0,
         "pista_antes": 0,
@@ -1247,6 +1242,118 @@
     ]
   },
   "historico": [
+    {
+      "em": "2026-11-17T20:09:13-03:00",
+      "por": "Italo Alves - Sênior Ilegal",
+      "mudancas": [
+        {
+          "tipo": "novo",
+          "categoria": "ARMAS",
+          "item": "PAGER",
+          "parceria": 5000,
+          "pista": 7000
+        },
+        {
+          "tipo": "novo",
+          "categoria": "DESMANCHE",
+          "item": "RADAR HACKER",
+          "parceria": 22000,
+          "pista": 25000
+        },
+        {
+          "tipo": "novo",
+          "categoria": "DROGAS",
+          "item": "CAPUZ",
+          "parceria": 7000,
+          "pista": 7630
+        },
+        {
+          "tipo": "renomeado",
+          "categoria": "LAVAGEM",
+          "item": "PENDRIVE I",
+          "renomeado_de": "PENDRIVE 1",
+          "parceria": 9000,
+          "pista": 9810
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "LAVAGEM",
+          "item": "PENDRIVE II",
+          "parceria_antes": 14000,
+          "pista_antes": 15120,
+          "parceria": 19000,
+          "pista": 20120,
+          "renomeado_de": "PENDRIVE 2"
+        },
+        {
+          "tipo": "alterado",
+          "categoria": "LAVAGEM",
+          "item": "PENDRIVE III",
+          "parceria_antes": 19000,
+          "pista_antes": 20520,
+          "parceria": 32000,
+          "pista": 34520,
+          "renomeado_de": "PENDRIVE 3"
+        },
+        {
+          "tipo": "novo",
+          "categoria": "LAVAGEM",
+          "item": "ALGEMA",
+          "parceria": 7000,
+          "pista": 7630
+        },
+        {
+          "tipo": "renomeado",
+          "categoria": "MECÂNICA ILEGAL",
+          "item": "CARTAO DE CORRIDAS",
+          "renomeado_de": "TICKET DE CORRIDA",
+          "parceria": 2000,
+          "pista": 2200
+        },
+        {
+          "tipo": "removido",
+          "categoria": "CONTRABANDO",
+          "item": "CAIXA DE ATTACHS",
+          "parceria_antes": 7000,
+          "pista_antes": 7630
+        },
+        {
+          "tipo": "removido",
+          "categoria": "DESMANCHE",
+          "item": "LOCKPICK ++",
+          "parceria_antes": 10000,
+          "pista_antes": 10900
+        },
+        {
+          "tipo": "removido",
+          "categoria": "CONTRABANDO",
+          "item": "CAPUZ",
+          "parceria_antes": 7000,
+          "pista_antes": 7630
+        },
+        {
+          "tipo": "removido",
+          "categoria": "LAVAGEM",
+          "item": "PENDRIVE 4",
+          "parceria_antes": 24000,
+          "pista_antes": 25920
+        },
+        {
+          "tipo": "removido",
+          "categoria": "LAVAGEM",
+          "item": "PENDRIVE 5",
+          "parceria_antes": 32000,
+          "pista_antes": 34240
+        },
+        {
+          "tipo": "removido",
+          "categoria": "CONTRABANDO",
+          "item": "ALGEMA",
+          "parceria_antes": 7000,
+          "pista_antes": 7630
+        }
+      ]
+    },
     {
       "em": "2026-11-17T16:29:17-03:00",
       "por": "Italo Alves - Sênior Ilegal",
