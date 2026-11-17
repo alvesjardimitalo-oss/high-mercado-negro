@@ -146,3 +146,66 @@ body.s3-inner-page{
  .s3-inner-page .s3-route-ribbon{flex-direction:column;align-items:flex-start}
 }
 @media(prefers-reduced-motion:reduce){.s3-inner-page *{transition:none!important}}
+
+/* V7.1 — categorias consistentes, sem painel recortado e sem imagem repetida no fundo. */
+body.s3-inner-page{
+ min-height:100vh;
+ background:
+   radial-gradient(950px 480px at 50% 120px,rgba(142,230,49,.095),transparent 72%),
+   radial-gradient(750px 480px at 2% 250px,rgba(240,50,196,.075),transparent 72%),
+   linear-gradient(180deg,#080f0d,#060a09 72%)!important;
+}
+.s3-inner-page .s3-global-header{
+ position:sticky!important;top:0;z-index:1000!important;
+ background:#060c0bf5!important;
+}
+.s3-inner-page main.wrap{
+ padding-top:18px!important;
+}
+.s3-inner-page .category-hero,
+.s3-inner-page .table-page-hero,
+.s3-inner-page .guide{
+ min-height:290px!important;
+ margin:8px 0 24px!important;
+ background:
+  linear-gradient(90deg,rgba(5,13,10,.98) 0%,rgba(5,13,10,.94) 43%,rgba(5,13,10,.35) 100%),
+  url("./season3-cinematic/capa-personagens.webp") center 39%/cover no-repeat!important;
+ border:1px solid #496f41!important;
+ border-bottom:3px solid #a0f040!important;
+ border-radius:14px!important;
+}
+.s3-inner-page .category-hero:before,.s3-inner-page .table-page-hero:before,.s3-inner-page .guide:before{
+ background:linear-gradient(90deg,#050d0b7a,transparent 78%)!important;
+ z-index:-1!important;
+}
+.s3-inner-page .category-hero:after,.s3-inner-page .table-page-hero:after,.s3-inner-page .guide:after{
+ opacity:.16!important;
+}
+.s3-inner-page .category-hero > *,
+.s3-inner-page .table-page-hero > *,
+.s3-inner-page .guide > *{z-index:2!important}
+.s3-inner-page .category-hero .s3-segment-hero-img{
+ z-index:1!important;opacity:.88!important;
+ background:
+ linear-gradient(90deg,rgba(5,13,10,.8),rgba(5,13,10,.06) 54%,rgba(5,13,10,.3)),
+ var(--s3-segment-image,url("./season3-cinematic/banner-armas.webp")) center/cover no-repeat!important;
+}
+.s3-inner-page .category-title,
+.s3-inner-page .table-page-hero h1,
+.s3-inner-page .guide h1{
+ margin:8px 0 12px!important;
+ font-size:clamp(42px,5vw,72px)!important;
+}
+.s3-inner-page .category-hero .eyebrow{margin-top:13px!important}
+.s3-inner-page .category-hero .toolbar{margin-top:19px!important;max-width:785px!important}
+.s3-inner-page .s3-route-ribbon{margin:0 0 12px!important}
+.s3-inner-page .item-card{min-width:0}
+.s3-inner-page #itemList{padding-bottom:15px}
+@media(max-width:700px){
+ .s3-inner-page .category-hero,.s3-inner-page .table-page-hero,.s3-inner-page .guide{
+ min-height:265px!important;
+ background-position:center!important;
+ }
+ .s3-inner-page .category-hero .s3-segment-hero-img{opacity:.25!important;width:100%!important}
+ .s3-inner-page .category-title{font-size:48px!important}
+}
