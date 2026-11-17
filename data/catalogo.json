@@ -2,7 +2,7 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-11-17T20:09:13-03:00",
+    "atualizado_em": "2026-11-17T20:12:17-03:00",
     "publicado_por": "Italo Alves - Sênior Ilegal",
     "moeda": "BRL",
     "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM.",
@@ -495,7 +495,7 @@
       "destaque": true,
       "observacao": "Kit de fogos de artifício para aviso RP e diversão; parceria R$ 10.000; pista +9%",
       "ordem": 67,
-      "imagem": "kitfogueteiro-s3.svg",
+      "imagem": "kitfogueteiro-s3.png",
       "variacao": {
         "parceria_antes": 0,
         "pista_antes": 0,
@@ -876,7 +876,7 @@
       "destaque": false,
       "observacao": "Referência sugerida S3: equipamento de bloqueio de radar; revisar após testes; pista +8%",
       "ordem": 28,
-      "imagem": "radarjammer-s3.svg",
+      "imagem": "radarjammer-s3.png",
       "variacao": {
         "parceria_antes": 0,
         "pista_antes": 0,
@@ -892,7 +892,7 @@
       "destaque": false,
       "observacao": "Referência sugerida S3: detector/rastreador de radar; revisar após testes; pista +8%",
       "ordem": 29,
-      "imagem": "radardetector-s3.svg",
+      "imagem": "radardetector-s3.png",
       "variacao": {
         "parceria_antes": 0,
         "pista_antes": 0,
@@ -908,7 +908,7 @@
       "destaque": false,
       "observacao": "Referência sugerida S3: localizador veicular; revisar após testes; pista +8%",
       "ordem": 30,
-      "imagem": "rastreador-s3.svg",
+      "imagem": "rastreador-s3.png",
       "variacao": {
         "parceria_antes": 0,
         "pista_antes": 0,
@@ -1068,7 +1068,7 @@
       "destaque": false,
       "observacao": "Referência sugerida S3; preço provisório até definir capacidade de munição; pista +8%",
       "ordem": 39,
-      "imagem": "caixa-municao-grande-s3.svg",
+      "imagem": "caixa-municao-grande-s3.png",
       "variacao": {
         "parceria_antes": 0,
         "pista_antes": 0,
