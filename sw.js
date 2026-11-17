@@ -1,9 +1,9 @@
 /* Mercado Negro • High — service worker
    Online: sempre busca a versão mais nova (preços nunca ficam velhos).
    Offline / internet ruim: usa a última versão salva no aparelho.      */
-const CACHE = 'hmn-season3-v3.1';
+const CACHE = 'hmn-season3-graffiti-v3.2';
 const CORE = ['./', './index.html', './tabela.html', './categoria.html', './historico.html', './como-funciona.html',
-  './assets/style.css', './assets/season3.css', './assets/app.js', './assets/high_logo.png', './data/catalogo.json', './manifest.webmanifest'];
+  './assets/style.css', './assets/season3.css', './assets/season3-graffiti.css', './assets/app.js', './assets/high_logo.png', './data/catalogo.json', './manifest.webmanifest'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
