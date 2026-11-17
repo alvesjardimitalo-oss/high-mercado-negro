@@ -118,7 +118,11 @@ async function initHome(){
   const search=document.querySelector('#globalSearch');
 
   if(grid){
-    const cats=[...new Set(active.map(i=>i.categoria).filter(Boolean))];
+    const categorias=[...new Set(active.map(i=>String(i.categoria||'').trim()).filter(Boolean))];
+    const principais=new Set(['armas','municao','lavagem','desmanche','drogas','mecanica-ilegal','hospital-ilegal']);
+    const cats=categorias.filter(c=>!principais.has(slugify(c)));
+    const section=grid.closest('section');
+    if(section) section.hidden=cats.length===0;
     grid.innerHTML=cats.map(c=>{
       const count=active.filter(i=>slugify(i.categoria)===slugify(c)).length;
       const visual=categoryVisual(c);
@@ -131,7 +135,7 @@ async function initHome(){
         </div>
       </a>`;
     }).join('');
-    document.querySelectorAll('[data-category-count-home]').forEach(el=>el.textContent=cats.length);
+    document.querySelectorAll('[data-category-count-home]').forEach(el=>el.textContent=categorias.length);
   }
 
   const favBox=document.querySelector('#favoritesSection');
