@@ -1,0 +1,148 @@
+/* HIGH ILEGAL S3 — IDENTIDADE CINEMATOGRÁFICA NAS PÁGINAS INTERNAS
+   v7: extensão da arte aprovada da homepage; não altera regras, dados ou cálculos. */
+body.s3-inner-page{
+ --s3-acid:#9ff234;--s3-pink:#f032c4;
+ margin:0;color:#f2f7ed;font-family:Inter,Arial,sans-serif;
+ background:
+ linear-gradient(180deg,#050b09ad,#050b09e8 650px,#080f0c 1200px),
+ url("./season3-cinematic/capa-personagens.webp") center 64px / 100% auto no-repeat,
+ #070b09!important;
+}
+.s3-inner-page:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+ background:radial-gradient(900px 600px at 50% 0,#a0f04012,transparent 90%),
+ radial-gradient(700px 500px at 0 20%,#f032c417,transparent 82%)}
+.s3-inner-page .s3-global-header{position:relative;z-index:80}
+.s3-inner-page main.wrap{max-width:1300px;padding-bottom:50px}
+.s3-inner-page .category-hero,
+.s3-inner-page .table-page-hero,
+.s3-inner-page .guide{
+ position:relative;isolation:isolate;overflow:hidden;
+ background:linear-gradient(90deg,#07110df4 0%,#07110de3 44%,#06100dbb 65%,#07110dd4 100%),
+ url("./season3-cinematic/capa-personagens.webp") center 39% / cover no-repeat!important;
+ border:1px solid #567c48!important;border-bottom:3px solid #a0f040a6!important;
+ border-radius:16px!important;
+ box-shadow:0 16px 56px #0009,0 0 45px #a0f0400d!important;
+ padding:clamp(25px,4vw,45px)!important;
+ min-height:315px;display:flex;flex-direction:column;justify-content:center;
+ margin:27px 0 22px!important;
+}
+.s3-inner-page .category-hero:before,
+.s3-inner-page .table-page-hero:before,
+.s3-inner-page .guide:before{
+ content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;
+ background:radial-gradient(circle at 78% 33%,#a0f04022,transparent 47%),
+ linear-gradient(90deg,#050b0ac4 0%,#050b0aaf 45%,transparent 95%);
+}
+.s3-inner-page .category-hero:after,
+.s3-inner-page .table-page-hero:after,
+.s3-inner-page .guide:after{
+ content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.24!important;
+ background:url("./season3-glass-cracks.svg") center / 100% 100% no-repeat!important;
+ color:transparent!important;font-size:0!important;
+}
+.s3-inner-page .category-hero>*,
+.s3-inner-page .table-page-hero>*,
+.s3-inner-page .guide>*{position:relative;z-index:1}
+.s3-inner-page .category-hero{min-height:335px}
+.s3-inner-page .s3-segment-hero-img{
+ position:absolute;z-index:0;right:0;top:0;height:100%;width:51%;
+ background:linear-gradient(90deg,#07100f 0%,transparent 38%,#0c140a48 100%),
+ var(--s3-segment-image,url("./season3-cinematic/banner-armas.webp")) center/cover no-repeat;
+ mask-image:linear-gradient(90deg,transparent,#000 33%);opacity:.9;pointer-events:none;
+}
+.s3-inner-page .category-title,
+.s3-inner-page .table-page-hero h1,
+.s3-inner-page .guide h1{
+ font-family:'Barlow Condensed',Impact,Arial,sans-serif;font-style:italic;font-weight:900;
+ font-size:clamp(46px,6vw,82px)!important;
+ line-height:.96;letter-spacing:.01em!important;margin:16px 0 14px;
+ text-shadow:2px 5px 20px #000c;
+}
+.s3-inner-page .category-title span,
+.s3-inner-page .table-page-hero h1 span,
+.s3-inner-page .guide h1 span{color:#a0f040!important;-webkit-text-fill-color:#a0f040!important;background:none!important}
+.s3-inner-page .back{color:#caff9b!important;font-size:11px;font-weight:900;letter-spacing:.055em}
+.s3-inner-page .eyebrow{color:#f594e2!important;font-weight:900;letter-spacing:.18em}
+.s3-inner-page .updated{color:#c5dac2!important}
+.s3-inner-page .category-hero .toolbar{
+ max-width:850px;display:flex;gap:12px;margin-top:18px;align-items:center
+}
+.s3-inner-page .category-hero .searchbar,
+.s3-inner-page .global-table-toolbar .searchbar{
+ background:#06130ddb!important;border:1px solid #557549!important;border-radius:9px!important
+}
+.s3-inner-page .category-hero .searchbar input{background:transparent!important}
+.s3-inner-page .category-hero .pill{background:#09170cdd!important;color:#c9ff9c!important;border-color:#588044!important}
+.s3-inner-page .guide-lead,.s3-inner-page .table-page-hero p{
+ max-width:720px!important;color:#e0e9dc!important;font-size:14px!important;line-height:1.55}
+.s3-inner-page .table-page-grid{width:100%}
+.s3-inner-page .table-mini-stats{position:relative;z-index:2}
+.s3-inner-page .table-mini-stat{background:#0a140ee0!important;border-color:#698c4b!important}
+.s3-inner-page .global-table-toolbar{
+ background:linear-gradient(125deg,#111f16ec,#0b1512ee)!important;
+ border:1px solid #456640!important;box-shadow:0 12px 30px #0005;border-radius:14px!important}
+.s3-inner-page .market-table-shell{border:1px solid #39593f!important;border-radius:12px!important;overflow:hidden}
+.s3-inner-page .market-table th{background:#1b3221!important;color:#d1ffac!important}
+.s3-inner-page .market-table tbody tr:hover{background:#233b2566!important}
+.s3-inner-page #itemList.items-grid{gap:15px}
+.s3-inner-page .item-card{
+ border:1px solid #3f6240!important;background:linear-gradient(155deg,#14251bf2,#0a1310f6)!important;
+ border-radius:13px!important;box-shadow:0 12px 30px #0005!important;overflow:hidden
+}
+.s3-inner-page .item-card:hover{
+ border-color:#a0f040!important;box-shadow:0 13px 40px #0009,0 0 18px #a0f04019!important}
+.s3-inner-page .item-image{
+ background:radial-gradient(circle at 50% 37%,#98e64e2d,#0b1a10 62%,#06100c)!important;
+ border:1px solid #41692f!important;border-radius:11px!important;
+ min-height:150px;position:relative;overflow:hidden
+}
+.s3-inner-page .item-image:before{
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(120deg,transparent 35%,#ffffff0b 50%,transparent 67%),
+ url("./season3-glass-cracks.svg") center/cover no-repeat;opacity:.16}
+.s3-inner-page .item-image img{
+ filter:drop-shadow(0 14px 13px #0009) drop-shadow(0 0 12px #a0f04022)!important;
+ position:relative;z-index:1}
+.s3-inner-page .item-card h3{color:#f6fff1!important}
+.s3-inner-page .price{background:#08130ebf!important;border-color:#42603b!important}
+.s3-inner-page .price.pista strong{color:#bcff82!important}
+.s3-inner-page .guide-grid{position:relative;z-index:1}
+.s3-inner-page .guide-card,
+.s3-inner-page .history-entry,
+.s3-inner-page .rule{
+ background:linear-gradient(145deg,#18271df2,#0b1611f5)!important;
+ border:1px solid #3c5a3e!important;border-radius:12px!important;
+ box-shadow:0 12px 35px #0005!important
+}
+.s3-inner-page .guide-card{padding:24px!important}
+.s3-inner-page .guide-card h2{font-family:'Barlow Condensed',Impact,sans-serif;
+ font-size:clamp(22px,2.8vw,31px);color:#f2fff0!important}
+.s3-inner-page .guide-card .guide-tag{color:#baff82!important}
+.s3-inner-page .history-entry header{background:#213c27!important}
+.s3-inner-page .footer{background:#07100be8!important;border-color:#37503b!important}
+.s3-inner-page .s3-route-ribbon{
+ background:#0b160fdd;border:1px solid #425e3f;border-radius:11px;
+ display:flex;align-items:center;justify-content:space-between;gap:12px;
+ padding:12px 17px;margin:0 0 20px;color:#bcff86;
+ font-size:11px;font-weight:900;letter-spacing:.065em
+}
+.s3-inner-page .s3-route-ribbon a{color:#caff97;text-decoration:none}
+@media(max-width:850px){
+ .s3-inner-page .category-hero,.s3-inner-page .table-page-hero,.s3-inner-page .guide{min-height:280px}
+ .s3-inner-page .s3-segment-hero-img{width:68%;opacity:.42}
+ .s3-inner-page .category-hero .toolbar{flex-wrap:wrap}
+}
+@media(max-width:630px){
+ body.s3-inner-page{background-size:auto,auto 450px;background-position:center top}
+ .s3-inner-page main.wrap{padding-inline:12px}
+ .s3-inner-page .category-hero,.s3-inner-page .table-page-hero,.s3-inner-page .guide{
+  margin:12px 0 14px!important;border-radius:11px!important;
+  padding:24px 18px!important;min-height:285px}
+ .s3-inner-page .category-title,.s3-inner-page .table-page-hero h1,.s3-inner-page .guide h1{
+  font-size:47px!important;line-height:1}
+ .s3-inner-page .s3-segment-hero-img{width:100%;opacity:.19;mask-image:none}
+ .s3-inner-page .category-hero .toolbar{flex-direction:column;align-items:stretch}
+ .s3-inner-page .category-hero .searchbar{width:100%}
+ .s3-inner-page .s3-route-ribbon{flex-direction:column;align-items:flex-start}
+}
+@media(prefers-reduced-motion:reduce){.s3-inner-page *{transition:none!important}}
