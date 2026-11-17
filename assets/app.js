@@ -198,6 +198,11 @@ async function initCategory(){
   document.querySelector('#catIcon') && (document.querySelector('#catIcon').textContent=iconFor(cat));
   document.querySelector('#catName') && (document.querySelector('#catName').textContent=cat);
   document.querySelector('#catCount') && (document.querySelector('#catCount').textContent=`${items.length} ITENS ATIVOS`);
+  document.querySelector('#s3CategoryTotal') && (document.querySelector('#s3CategoryTotal').textContent=items.length+' ITENS DISPONÍVEIS');
+  document.querySelectorAll('.s3-v8-side-link[data-segment-link]').forEach(a=>{
+    if(a.dataset.segmentLink===slugCat){a.classList.add('is-active');a.setAttribute('aria-current','page');}
+  });
+
   const list=document.querySelector('#itemList'), search=document.querySelector('#categorySearch');
   const render=q=>{if(!list)return;const term=normalizeText(q);const filtered=favFirst(items.filter(i=>!term||normalizeText(`${i.item} ${i.categoria} ${i.observacao||''}`).includes(term)));list.innerHTML=filtered.length?filtered.map(i=>itemCard(i)).join(''):'<div class="empty">Nenhum item encontrado nesta categoria.</div>';};
   render(''); search?.addEventListener('input',e=>render(e.target.value));
@@ -240,6 +245,21 @@ async function initGlobalTable(){
   const sortButtons=[...document.querySelectorAll('[data-sort]')];
   const reset=document.querySelector('#tableReset');
   const mobileList=document.querySelector('#globalTableMobile');
+  // Season 3: vitrine e tabela são duas visualizações dos mesmos itens.
+  const gallery=document.querySelector('#tableGallery');
+  const viewButtons=[...document.querySelectorAll('[data-v8-view]')];
+  if(gallery){
+    document.body.dataset.v8Mode='gallery';
+    viewButtons.forEach(btn=>btn.addEventListener('click',()=>{
+      const mode=btn.dataset.v8View==='table'?'table':'gallery';
+      document.body.dataset.v8Mode=mode;
+      viewButtons.forEach(x=>{
+        const active=x===btn;x.classList.toggle('active',active);
+        x.setAttribute('aria-pressed',active?'true':'false');
+      });
+    }));
+  }
+
 
   const params=new URLSearchParams(location.search);
   let selected='TODOS';
@@ -307,6 +327,8 @@ async function initGlobalTable(){
     if(count) count.textContent=`${rows.length} ${rows.length===1?'ITEM':'ITENS'}`;
     if(body) body.innerHTML=rows.length?rows.map(tableRow).join(''):`<tr><td colspan="5"><div class="empty">Nenhum item encontrado.</div></td></tr>`;
     if(mobileList) mobileList.innerHTML=rows.length?rows.map(mobileCard).join(''):`<div class="empty">Nenhum item encontrado.</div>`;
+    if(gallery) gallery.innerHTML=rows.length?rows.map(i=>itemCard(i,true)).join(''):'<div class="empty">Nenhum item encontrado.</div>';
+
     sortButtons.forEach(btn=>{
       const activeSort=btn.dataset.sort===sortKey;
       btn.classList.toggle('active',activeSort);
