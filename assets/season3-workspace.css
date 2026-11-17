@@ -83,3 +83,11 @@
 @media(max-width:900px){.s3-v8 .s3-v8-shell{display:block;padding:12px 13px 38px}.s3-v8 .s3-v8-sidebar{position:relative;top:auto;display:flex;align-items:center;gap:12px;padding:12px;margin:0 0 15px}.s3-v8 .s3-v8-side-brand{padding:0;border:0;flex:0 0 auto}.s3-v8 .s3-v8-side-brand img{width:42px;height:42px}.s3-v8 .s3-v8-side-brand strong{font-size:18px}.s3-v8 .s3-v8-side-art,.s3-v8 .s3-v8-side-nav-heading,.s3-v8 .s3-v8-side-footer{display:none}.s3-v8 .s3-v8-side-links{display:flex;flex-direction:row;gap:5px;overflow-x:auto;flex:1;min-width:0}.s3-v8 .s3-v8-side-link{flex:0 0 auto;font-size:12px;min-height:35px;padding:6px 8px}.s3-v8 .s3-v8-side-link b{display:none}.s3-v8 .s3-v8-sidebar>.s3-v8-side-link{display:none}}
 @media(max-width:680px){.s3-v8 .s3-v8-sidebar{display:block}.s3-v8 .s3-v8-side-brand{margin-bottom:8px}.s3-v8 .s3-v8-shell{padding:10px 10px 34px}.s3-v8 .items-grid,.s3-v8 #tableGallery{grid-template-columns:1fr}.s3-v8 .guide-grid{grid-template-columns:1fr}.s3-v8 .guide-card.wide{grid-column:auto}.s3-v8 .s3-v8-section-row{flex-wrap:wrap}.s3-v8 .s3-v8-view-toggle{width:100%}.s3-v8 .s3-v8-view-toggle button{flex:1}.s3-v8 .global-table-toolbar-row{flex-wrap:wrap}.s3-v8 .global-table-toolbar .searchbar{flex:1 1 100%}.s3-v8 .s3-v8-list-view{overflow-x:auto}.s3-v8 .history-entry li{grid-template-columns:1fr}.s3-v8 .item-image{height:165px!important;min-height:165px!important}}
 @media(prefers-reduced-motion:reduce){.s3-v8 .item-card,.s3-v8 .s3-v8-side-link{transition:none!important}}
+
+/* Em telas pequenas, lista detalhada passa a cartões compactos, sem tabela horizontal. */
+@media(max-width:680px){
+ .s3-v8[data-v8-mode="table"] .s3-v8-list-view{display:none!important}
+ .s3-v8[data-v8-mode="table"] .s3-v8-mobile-list{display:grid!important;grid-template-columns:1fr;gap:11px}
+ .s3-v8 .table-mobile-card{background:#0e1c13!important;border:1px solid #507441!important;border-radius:11px!important;padding:12px}
+ .s3-v8 .table-mobile-prices>div{background:#09150e!important;border-color:#436839!important}
+}
