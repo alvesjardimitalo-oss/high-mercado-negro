@@ -118,7 +118,13 @@ async function initHome(){
   const search=document.querySelector('#globalSearch');
 
   if(grid){
-    const cats=[...new Set(active.map(i=>i.categoria).filter(Boolean))];
+    // Segmentos centrais primeiro; os demais continuam acessíveis sem perder itens.
+    const prioridade=['armas','municao','lavagem','desmanche','drogas','mecanica-ilegal','hospital-ilegal'];
+    const cats=[...new Set(active.map(i=>i.categoria).filter(Boolean))]
+      .sort((a,b)=>{
+        const ia=prioridade.indexOf(slugify(a)),ib=prioridade.indexOf(slugify(b));
+        return (ia<0?100:ia)-(ib<0?100:ib);
+      });
     grid.innerHTML=cats.map(c=>{
       const count=active.filter(i=>slugify(i.categoria)===slugify(c)).length;
       const visual=categoryVisual(c);
