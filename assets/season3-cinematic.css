@@ -177,27 +177,35 @@ body.home-v3.s3-cinematic-home{
 .s3-spot-mecanica{left:46%;top:62%;width:24%;height:38%}
 .s3-spot-hospital{left:70%;top:62%;width:30%;height:38%}
 
-/* v7.2 — home realmente full-bleed. Sem faixas pretas nas laterais. */
+/* v7.3 — arte central preservada; laterais com cenário desfocado.
+   Não ampliar a imagem nem os sete hotspots. Mobile continua separado. */
 @media(min-width:901px){
- body.s3-cinematic-home{width:100%;max-width:none;overflow-x:hidden}
+ body.s3-cinematic-home{overflow-x:hidden}
  .s3-cinematic-home .s3-desktop-showcase{
-   width:100vw;max-width:none;position:relative;left:50%;transform:translateX(-50%);
+   width:100%;max-width:none;left:auto;transform:none;
+   position:relative;isolation:isolate;
    background:
-    linear-gradient(180deg,#07130b88,#07130b88),
-    url("./season3-cinematic/capa-completa.webp") center top/cover no-repeat,
-    #08130c!important;
+     radial-gradient(650px 450px at 10% 22%,rgba(240,50,196,.14),transparent 70%),
+     radial-gradient(720px 540px at 90% 35%,rgba(160,240,64,.15),transparent 70%),
+     #08130d!important;
+ }
+ .s3-cinematic-home .s3-desktop-showcase::before{
+   content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+   background:url("./season3-cinematic/capa-completa.webp") center top/cover no-repeat;
+   filter:blur(28px) brightness(.38) saturate(.95);
+   transform:scale(1.055);
  }
  .s3-cinematic-home .s3-art-frame{
-   position:relative;max-width:none!important;width:100%!important;
-   margin:0!important;border:0!important;box-shadow:none!important;
-   background:#07130b;
+   max-width:1448px!important;width:100%!important;
+   margin:0 auto!important;border-left:1px solid #a0f04026!important;
+   border-right:1px solid #a0f04026!important;
+   box-shadow:0 18px 65px #000a,0 0 26px #a0f04020!important;
  }
  .s3-cinematic-home .s3-approved-art{
-   display:block;width:100%!important;height:auto!important;max-width:none!important;
-   object-fit:fill!important;aspect-ratio:1448/971;
+   display:block;width:100%!important;height:auto!important;
+   max-width:100%!important;object-fit:contain!important;
+   aspect-ratio:1448/971;
  }
- .s3-cinematic-home .s3-desktop-tip{
-   max-width:none;width:100%;padding:14px 12px 2px;
-   background:linear-gradient(180deg,#06100bee,transparent);
- }
+ .s3-cinematic-home .s3-hit-map{inset:0}
+ .s3-cinematic-home .s3-desktop-tip{max-width:1448px;margin:12px auto 0}
 }
