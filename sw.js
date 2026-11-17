@@ -1,9 +1,9 @@
 /* Mercado Negro • High — service worker
    Online: sempre busca a versão mais nova (preços nunca ficam velhos).
    Offline / internet ruim: usa a última versão salva no aparelho.      */
-const CACHE = 'hmn-season3-glass-v4.1';
+const CACHE = 'hmn-s3-landing-v5.0';
 const CORE = ['./', './index.html', './tabela.html', './categoria.html', './historico.html', './como-funciona.html',
-  './assets/style.css', './assets/season3.css', './assets/season3-graffiti.css', './assets/season3-banners.css', './assets/season3-glass-cracks.svg', './assets/ilegal-high-season3-logo.svg', './assets/season3-qg-background.svg', './assets/app.js', './assets/high_logo.png', './data/catalogo.json', './manifest.webmanifest'];
+  './assets/style.css', './assets/season3.css', './assets/season3-graffiti.css', './assets/season3-experience.css', './assets/season3-players-illustration.svg', './assets/season3-glass-cracks.svg', './assets/ilegal-high-season3-logo.svg', './assets/season3-qg-background.svg', './assets/app.js', './assets/high_logo.png', './data/catalogo.json', './manifest.webmanifest'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
