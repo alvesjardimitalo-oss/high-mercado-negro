@@ -146,3 +146,9 @@
 @media(prefers-reduced-motion:reduce){
  .home-v3 .category-card-visual,.home-v3 .category-card-visual .category-product{transition:none!important}
 }
+/* Vidro realmente visível: fraturas vetoriais por cima da arte, sem afetar cliques. */
+.home-v3 .category-card-visual:after{
+ background:url("./season3-glass-cracks.svg") center/100% 100% no-repeat!important;
+ opacity:.68!important;mix-blend-mode:screen;
+}
+.home-v3 .category-card-visual:hover:after{opacity:.85!important}
