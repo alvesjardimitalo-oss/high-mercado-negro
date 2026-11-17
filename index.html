@@ -20,14 +20,14 @@
   <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Mercado Negro">
-  <link rel="stylesheet" href="assets/style.css?v=3.1"><link rel="stylesheet" href="assets/season3.css?v=3.1"><link rel="stylesheet" href="assets/season3-graffiti.css?v=3.4">
+  <link rel="stylesheet" href="assets/style.css?v=3.1"><link rel="stylesheet" href="assets/season3.css?v=3.1"><link rel="stylesheet" href="assets/season3-graffiti.css?v=3.4"><link rel="stylesheet" href="assets/season3-banners.css?v=4.0">
 </head>
 <body class="home-v3">
   <div class="noise"></div><div class="season3-bar"><strong>● HIGH ILEGAL · SEASON 3</strong><span>NOVA TEMPORADA · MERCADO NEGRO</span></div>
   <header class="topbar home-topbar">
     <div class="wrap topbar-inner">
       <a class="brand" href="index.html">
-        <img src="assets/high_logo.png" alt="High">
+        <img src="assets/ilegal-high-season3-logo.svg" alt="High">
         <div class="brand-copy"><strong>MERCADO NEGRO</strong><span>HIGH ROLEPLAY • SEASON 3</span></div>
       </a>
       <nav class="topnav home-nav">
@@ -42,24 +42,17 @@
   </header>
 
   <main>
-    <section class="home-hero">
-      <div class="home-hero-glow"></div>
-      <div class="wrap home-hero-inner">
-        <div class="home-hero-copy">
-          <div class="season3-kicker">HIGH ROLEPLAY · SEASON 3</div><div class="eyebrow">CENTRAL DA ECONOMIA ILEGAL</div>
-          <h1>MERCADO <span>NEGRO</span></h1>
-          <p>A nova temporada começou. Consulte os preços de parceria e pista, explore os segmentos e prepare suas operações na Season 3.</p>
-          <div class="home-points">
-            <div><b>◆</b><span>PREÇOS<br>ATUALIZADOS</span></div>
-            <div><b>◈</b><span>PARCERIA<br>E PISTA</span></div>
-            <div><b>✦</b><span>ITENS<br>ORGANIZADOS</span></div>
-          </div>
-        </div>
-        <div class="home-hero-visual" aria-hidden="true">
-          <div class="hero-orb"></div>
-          <img class="hero-gun hero-gun-a" src="assets/itens/t54.png" alt="" onerror="this.style.display='none'">
-          <img class="hero-gun hero-gun-b" src="assets/itens/ak102.png" alt="" onerror="this.style.display='none'">
-          <div class="hero-stamp">HIGH<br><span>ILEGAL</span></div>
+    <section class="home-hero s3-hero">
+      <div class="s3-hero-backdrop" aria-hidden="true"></div>
+      <div class="wrap s3-hero-inner">
+        <span class="s3-eyebrow"><span class="s3-live-dot"></span> ECONOMIA ILEGAL · NOVA TEMPORADA</span>
+        <img class="s3-main-logo" src="assets/ilegal-high-season3-logo.svg" width="390" height="390" alt="Ilegal High Season 3">
+        <div class="s3-hero-title">MERCADO <em>NEGRO</em></div>
+        <p>Explore os segmentos do ilegal, consulte os valores oficiais de parceria e pista e descubra o catálogo da Season 3.</p>
+        <div class="s3-hero-status">
+          <span>✦ PREÇOS ATUALIZADOS</span>
+          <span>◆ CATÁLOGO OFICIAL</span>
+          <span>◈ SEASON 3</span>
         </div>
       </div>
     </section>
@@ -73,8 +66,8 @@
 
     <section id="categorias" class="wrap home-categories">
       <div class="home-section-title">
-        <div><div class="eyebrow">CATÁLOGO OPERACIONAL</div><h2>CATEGORIAS</h2></div>
-        <p>Escolha uma categoria e veja todos os itens disponíveis.</p>
+        <div><div class="eyebrow">CATÁLOGO OPERACIONAL</div><h2>SEGMENTOS <span>DO ILEGAL</span></h2></div>
+        <p>Escolha um fragmento para acessar os itens, preços e equipamentos de cada segmento.</p>
       </div>
       <div id="categoryGrid" class="category-grid category-grid-visual"></div>
     </section>
@@ -104,7 +97,7 @@
   </main>
 
   <footer class="footer"><div class="wrap footer-row"><span>HIGH ROLEPLAY © 2026 • MERCADO NEGRO</span><span>PREÇOS REFERENTES EXCLUSIVAMENTE À ECONOMIA FICTÍCIA DO SERVIDOR • FIVEM</span></div><div class="wrap footer-row"><nav class="footer-links" aria-label="Rodapé"><a href="index.html">Início</a><a href="tabela.html">Tabela Geral</a><a href="categoria.html?c=lavagem#calculadora">Calculadora de lavagem</a><span style="color:#8b9e8d">Ações em reestruturação</span><a href="historico.html">Histórico</a><a href="como-funciona.html">Como funciona</a></nav></div></footer>
-  <script src="assets/app.js?v=3.3"></script>
+  <script src="assets/app.js?v=4.0"></script>
   <script>initHome().catch(e=>document.querySelector('#categoryGrid').innerHTML='<div class="empty">'+e.message+'</div>')</script>
 </body>
 </html>
