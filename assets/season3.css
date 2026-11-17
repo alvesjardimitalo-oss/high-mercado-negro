@@ -89,3 +89,68 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
  .season3-kicker{font-size:9px}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+
+/* Season 3.1 — aplicação explícita em TODAS as rotas */
+body{--shadow:0 18px 50px rgba(0,0,0,.48);}
+body .guide,body .category-hero,body .table-page-hero{
+ position:relative;padding:42px clamp(19px,3vw,38px) 32px!important;
+ margin:28px 0 26px!important;border:1px solid #304239!important;border-radius:22px;
+ background:radial-gradient(550px 280px at 88% 0%,rgba(160,240,64,.13),transparent 75%),
+ linear-gradient(130deg,#19221f,#0b1011)!important;overflow:hidden
+}
+body .guide::after,body .category-hero::after,body .table-page-hero::after{
+ content:"S3";position:absolute;right:18px;top:7px;font-size:clamp(74px,13vw,160px);
+ font-weight:950;letter-spacing:-.1em;color:rgba(160,240,64,.055);pointer-events:none
+}
+body .guide>*,body .category-hero>*,body .table-page-hero>*{position:relative;z-index:1}
+body .guide h1 span,body .table-page-hero h1 span,body .category-title span{
+ color:#a0f040!important;background:none!important;-webkit-text-fill-color:#a0f040!important
+}
+body .guide-lead,body .guide-card p,body .guide-card li,body .table-page-hero p{color:#b6c7bb!important}
+body .guide-card,body .history-entry{
+ background:linear-gradient(145deg,#182320,#101618)!important;
+ border:1px solid #33453b!important;box-shadow:0 10px 30px rgba(0,0,0,.16)!important
+}
+body .guide-card.warn{border-color:rgba(255,201,60,.42)!important;background:linear-gradient(135deg,rgba(255,201,60,.055),#111a18)!important}
+body .guide-card .guide-tag{color:#a0f040!important}
+body .guide-card.warn .guide-tag{color:#ffc93c!important}
+body .guide-card h2{color:#f1f7ef!important}
+body .history-entry header{background:#1b2a20!important;border-bottom:1px solid #38513d!important}
+body .history-entry li{border-color:#2a3931!important}
+body .history-entry header strong{color:#d8ffc4!important}
+body .global-table-toolbar{background:linear-gradient(135deg,#16211d,#0e1515)!important;
+ border:1px solid #35483a!important;border-radius:16px;padding:15px!important}
+body .global-table-toolbar .searchbar{border:1px solid #3d5540!important}
+body .global-table-toolbar .searchbar:focus-within,
+body .category-hero .searchbar:focus-within{border-color:#a0f040!important;box-shadow:0 0 0 3px rgba(160,240,64,.13)}
+body .table-mini-stat,body .table-filters button,body .filter-chip,body .global-table-mobile .item-card{
+ background:#14201b!important;border-color:#344c3c!important;color:#e8f7e7!important
+}
+body .table-filters button.active,body .filter-chip.active,
+body .table-filters button[aria-pressed="true"]{background:#a0f040!important;color:#14210e!important}
+body .market-table-shell{background:#101918!important;border-color:#30483c!important}
+body .market-table thead th{background:#1b2a22!important;color:#cef6b6!important;border-bottom-color:#405c42!important}
+body .market-table td{border-bottom-color:#273b30!important}
+body .global-table-mobile .item-card{box-shadow:0 6px 22px #0003}
+body .rules .rule{background:rgba(160,240,64,.04)!important;border-color:#3b523d!important}
+body .rules .rule strong{color:#a0f040!important}
+body .footer{background:#080d0c!important}
+body .home-stat{border-color:#344c3c!important}
+body .season3-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;
+ padding:9px 16px;border-bottom:1px solid #354b3a;background:#14211b;color:#c6f4a5;
+ font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+body .season3-bar strong{color:#a0f040}
+body .season3-bar span:last-child{color:#8da59a;font-weight:600}
+body .home-hero-copy h1 span{background:linear-gradient(95deg,#a0f040,#e1ffb5)!important;
+ -webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important}
+body .home-hero-glow{background:radial-gradient(circle,rgba(160,240,64,.23),transparent 67%)!important;filter:blur(25px)!important}
+body .category-grid .category-card{border-color:#38513c!important}
+body .price.pista{border-color:#436037!important}
+body .price.pista strong{color:#bdf98d!important}
+@media(max-width:700px){
+ body .guide,body .category-hero,body .table-page-hero{padding:28px 19px!important;margin:16px 0 23px!important}
+ body .season3-bar{font-size:9px;letter-spacing:.06em}
+ body .season3-bar span:last-child{display:none}
+ body .guide::after,body .category-hero::after,body .table-page-hero::after{font-size:76px}
+}
