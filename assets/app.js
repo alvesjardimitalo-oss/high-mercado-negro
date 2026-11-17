@@ -125,7 +125,10 @@ async function initHome(){
         const ia=prioridade.indexOf(slugify(a)),ib=prioridade.indexOf(slugify(b));
         return (ia<0?100:ia)-(ib<0?100:ib);
       });
-    grid.innerHTML=cats.map(c=>{
+    const extras=cats.filter(c=>!prioridade.includes(slugify(c)));
+    const extraSection=grid.closest('section');
+    if(extraSection) extraSection.hidden=extras.length===0;
+    grid.innerHTML=extras.map(c=>{
       const count=active.filter(i=>slugify(i.categoria)===slugify(c)).length;
       const visual=categoryVisual(c);
       return `<a class="category-card category-card-visual cat-${slugify(c)}" href="categoria.html?c=${slugify(c)}">
