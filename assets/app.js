@@ -176,6 +176,23 @@ async function initCategory(){
   const matched=active.find(i=>slugify(i.categoria)===slugify(raw));
   const cat=matched?.categoria||active[0]?.categoria||'';
   const items=active.filter(i=>slugify(i.categoria)===slugify(cat));
+  // A cada categoria, mostrar sua arte oficial da Season 3 no cabeçalho.
+  const segmentArts={
+    'armas':'banner-armas.webp',
+    'municao':'banner-municao.webp',
+    'lavagem':'banner-lavagem.webp',
+    'desmanche':'banner-desmanche.webp',
+    'drogas':'banner-drogas.webp',
+    'mecanica-ilegal':'banner-mecanica-ilegal.webp',
+    'hospital-ilegal':'banner-hospital-ilegal.webp'
+  };
+  const slugCat=slugify(cat);
+  const banner=segmentArts[slugCat];
+  if(banner){
+    document.documentElement.style.setProperty('--s3-segment-image', 'url("assets/season3-cinematic/'+encodeURIComponent(banner)+'")');
+    document.body.dataset.segment=slugCat;
+  }
+
   const favFirst=list=>[...list].sort((a,b)=>Number(isFav(b))-Number(isFav(a)));
   document.title=`${cat} • Mercado Negro High`;
   document.querySelector('#catIcon') && (document.querySelector('#catIcon').textContent=iconFor(cat));
