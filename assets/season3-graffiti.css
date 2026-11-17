@@ -1,0 +1,142 @@
+/* HIGH ILEGAL — SEASON 3 / GRAFFITI QG
+   Referencia visual: artes aviso 1–22 enviadas pelo usuario.
+   Cena do QG e brasao S3 do proprio High OS. */
+:root{
+ --bg:#080b0b;--bg2:#0b1010;--panel:#121a19;--panel2:#192321;
+ --line:#34463c;--purple:#a0f040;--purple2:#c7ff8b;
+ --yellow:#a0f040;--good:#a0f040;--text:#f2f5ed;
+ --muted:#adbbb4;--neon-green:#a0f040;--neon-pink:#f040d0;
+ --s3-scene:url('https://alvesjardimitalo-oss.github.io/high-os/assets/season3-cena.jpg');
+ --s3-logo:url('https://alvesjardimitalo-oss.github.io/high-os/assets/season3-logo.png');
+}
+body{
+ background:
+ linear-gradient(180deg,rgba(6,9,9,.82),rgba(6,9,9,.93)),
+ var(--s3-scene) center top/100% auto fixed,
+ #080b0b!important;color:#eff5ef!important;
+}
+body::before{
+ content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+ background:radial-gradient(700px 420px at 86% 10%,rgba(160,240,64,.09),transparent 70%),
+ radial-gradient(550px 360px at 12% 22%,rgba(240,64,208,.07),transparent 75%);
+}
+.noise{opacity:.22}
+.season3-bar{
+ background:linear-gradient(90deg,#0c1611,#203222 50%,#11181a)!important;
+ border-bottom:1px solid #506f42!important;
+ box-shadow:inset 0 -1px rgba(160,240,64,.12)!important;
+}
+.season3-bar strong{color:#caff9d!important}
+.season3-bar span:last-child{color:#dca4e3!important}
+.topbar,.operations .topbar{
+ background:rgba(8,13,12,.93)!important;border-bottom:1px solid #34493b!important;
+}
+.brand{min-width:0}
+.brand img{filter:drop-shadow(0 0 10px rgba(160,240,64,.2))}
+.brand-copy strong{color:#eaf6e8!important}
+.brand-copy span{color:#b3c0b4!important}
+.topnav a:hover,.topnav a.active,.topnav .table-nav-active{
+ border-color:#7a9c46!important;background:#a0f04018!important;color:#caff9e!important;
+}
+.home-hero{
+ isolation:isolate;min-height:470px!important;
+ background:
+ linear-gradient(90deg,#080e0de8 0%,#0a1010b8 49%,#0a0f0ba6 100%),
+ var(--s3-scene) center 55%/cover no-repeat!important;
+ border-bottom:1px solid #63844c!important;
+}
+.home-hero::before{
+ content:'';position:absolute;inset:0;pointer-events:none;z-index:-1;
+ background:linear-gradient(180deg,rgba(0,0,0,.1),transparent 70%,#080b0b),
+ radial-gradient(circle at 72% 56%,rgba(160,240,64,.15),transparent 43%);
+}
+.home-hero::after{background:transparent!important}
+.home-hero-inner{min-height:470px!important;align-items:center}
+.home-hero-copy{padding:64px 0!important}
+.home-hero-copy .eyebrow{color:#c2ffa1!important;letter-spacing:.22em}
+.home-hero-copy h1{
+ color:#f2f7f1!important;letter-spacing:-.055em!important;
+ font-weight:950;text-shadow:0 9px 27px #000d;
+}
+.home-hero-copy h1 span{
+ color:#a0f040!important;background:linear-gradient(105deg,#a0f040,#d5ff9f)!important;
+ -webkit-background-clip:text!important;background-clip:text!important;
+ -webkit-text-fill-color:transparent!important;
+ filter:drop-shadow(0 0 13px rgba(160,240,64,.23));
+}
+.home-hero-copy p{color:#d1d9d0!important;font-size:16px!important;max-width:610px}
+.home-hero-visual{position:relative;min-height:320px;display:flex;align-items:center;justify-content:center}
+.home-hero-visual::before{
+ content:'';position:absolute;inset:-12% -6%;z-index:2;pointer-events:none;
+ background:var(--s3-logo) center/contain no-repeat;
+ filter:drop-shadow(0 0 21px rgba(160,240,64,.3));
+}
+.home-hero-visual .hero-gun,.home-hero-visual .hero-orb,.home-hero-visual .hero-stamp{display:none!important}
+.season3-kicker{
+ background:rgba(13,25,17,.82)!important;border:1px solid #95cf53!important;
+ color:#bbfc87!important;box-shadow:0 0 30px rgba(160,240,64,.08);
+}
+.home-commandbar{background:#0f1915!important;border:1px solid #3b563f!important;
+ padding:14px!important;border-radius:15px;margin-top:24px!important;box-shadow:0 15px 40px #0006}
+.home-action.purple,.home-action.yellow{
+ background:linear-gradient(110deg,#a0f040,#76c51b)!important;
+ border-color:#c1ff7c!important;color:#111a0a!important;
+}
+.home-action:hover{filter:brightness(1.13)}
+.home-categories,.home-featured,.home-stats{position:relative}
+.home-section-title h2,.guide h1,.table-page-hero h1,.category-title{
+ font-weight:950!important;letter-spacing:-.045em!important;
+}
+.home-section-title h2:after{content:'';display:block;height:3px;width:72px;
+ background:linear-gradient(90deg,#a0f040,#f040d0);margin-top:10px;border-radius:4px}
+.category-card,.item-card,.guide-card,.history-entry,.home-stat,.rule{
+ background:linear-gradient(145deg,rgba(27,37,34,.96),rgba(13,19,18,.98))!important;
+ border:1px solid #3a5040!important;box-shadow:0 16px 40px #0004;
+}
+.category-card:before{background:radial-gradient(circle,rgba(160,240,64,.2),transparent 67%)!important}
+.category-card:hover,.item-card:hover,.guide-card:hover{
+ border-color:#a0f040!important;box-shadow:0 13px 43px #0009,0 0 0 1px #a0f04044!important;
+}
+.category-card h3,.item-card h3,.guide-card h2{color:#f1f7e9!important}
+.category-icon{color:#a0f040!important}
+.item-image{background:radial-gradient(circle,rgba(160,240,64,.14),#0d1412 70%)!important}
+.price,.tag-inline,.pill{background:#0b1310!important;border-color:#3c543d!important}
+.price.pista strong,.price.pista,.category-count{color:#b9fa80!important}
+.guide,.table-page-hero,.category-hero{
+ background:linear-gradient(90deg,rgba(7,12,11,.92),rgba(8,14,11,.72)),
+ var(--s3-scene) center/cover!important;
+ border:1px solid #4e6a47!important;
+}
+.guide::after,.table-page-hero::after,.category-hero::after{
+ content:'S3'!important;color:rgba(160,240,64,.1)!important;
+}
+.guide-lead,.guide-card p,.guide-card li{color:#bdccc0!important}
+.guide-card .guide-tag{color:#f38cde!important}
+.history-entry header{background:#203024!important;border-bottom-color:#4b6246!important}
+.history-entry header strong{color:#caff99!important}
+.global-table-toolbar,.market-table-shell{background:#0d1613!important;border-color:#415844!important}
+.market-table th{background:#203126!important;color:#d8ffbd!important}
+.market-table tr:hover{background:rgba(160,240,64,.065)!important}
+input,select,textarea{background:#0d1713!important;border-color:#405840!important}
+input:focus,select:focus,textarea:focus{border-color:#a0f040!important;box-shadow:0 0 0 3px #a0f04022!important}
+.footer{border-top:1px solid #384d3e!important;background:#080d0c!important}
+.footer-links a:hover,.back:hover{color:#a0f040!important}
+.maintenance-panel{background:
+ linear-gradient(90deg,rgba(8,14,12,.90),rgba(8,14,12,.75)),
+ var(--s3-scene) center/cover!important;border-color:#70954e!important}
+.operations{--ab-purple:#a0f040;--ab-green:#a0f040;--ab-line:#34463c}
+@media(max-width:900px){
+ .home-hero-inner{grid-template-columns:1fr!important}
+ .home-hero-visual{display:none!important}
+ .home-hero{min-height:350px!important}
+ .home-hero-inner{min-height:350px!important}
+ .home-hero-copy{padding:44px 0!important}
+}
+@media(max-width:700px){
+ body{background-attachment:scroll}
+ .home-hero{background-position:center!important}
+ .home-hero-copy h1{font-size:clamp(47px,12vw,68px)!important}
+ .home-commandbar{padding:10px!important}
+ .guide,.table-page-hero,.category-hero{background-position:center}
+}
+@media(prefers-reduced-motion:reduce){.category-card,.item-card,.home-action{transition:none!important}}
