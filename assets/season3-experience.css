@@ -1,0 +1,117 @@
+/* ILEGAL HIGH SEASON 3 — homepage redesign v5.0
+   Poster GTA-inspired with original characters, seven glass fragments.
+   Entirely self contained; preserves site data and other pages. */
+body.home-v3{background:#060c0a!important}
+body.home-v3 .noise{opacity:.13}
+body.home-v3 .topbar{background:#080d0cfa!important;border-bottom:1px solid #3b6037!important}
+body.home-v3 .topbar .brand img{width:56px;height:56px;object-fit:contain}
+body.home-v3 .season3-bar{background:linear-gradient(90deg,#09120d,#20301c,#140d17)!important}
+.s3-experience{display:block;overflow:hidden}
+.s3-poster{position:relative;isolation:isolate;min-height:345px;overflow:hidden;
+ background:linear-gradient(180deg,#1a1121,#0a1410);border-bottom:3px solid #a0f040}
+.s3-poster-art{position:absolute;inset:0;z-index:0;background:url("./season3-players-illustration.svg") center 46%/cover no-repeat}
+.s3-poster:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+ background:linear-gradient(90deg,#070d0b15 0%,#06100a66 33%,#061009bb 50%,#06100b66 69%,#070d0b11 100%),
+ linear-gradient(180deg,transparent 65%,#07140aaa)}
+.s3-poster:after{content:"";pointer-events:none;position:absolute;inset:0;z-index:3;opacity:.38;
+ background:url("./season3-glass-cracks.svg") center/100% 100% no-repeat}
+.s3-poster-center{position:relative;z-index:4;display:flex;align-items:center;flex-direction:column;
+ justify-content:center;text-align:center;padding:22px 12px 27px;min-height:345px}
+.s3-poster-kicker{color:#d3ffac;font-size:10px;font-weight:900;letter-spacing:.19em;text-shadow:0 2px 10px #000}
+.s3-poster-logo{width:186px;height:186px;margin:-12px auto -28px;object-fit:contain;
+ filter:drop-shadow(0 10px 12px #000b) drop-shadow(0 0 15px #a0f04033)}
+.s3-poster h1{font-family:Impact,"Arial Black",sans-serif;font-size:clamp(33px,5vw,67px);
+ line-height:1.02;letter-spacing:.008em;color:#f9fff1;text-shadow:3px 6px 0 #050a08,0 0 30px #000e;margin:0}
+.s3-poster h1 em{font-style:normal;color:#a0f040;text-shadow:2px 4px 0 #061009,0 0 24px #a0f04066}
+.s3-poster p{margin:7px 0 0;color:#f0f8ee;font-size:11px;font-weight:900;letter-spacing:.22em}
+.s3-shard-zone{position:relative;padding:19px 0 28px;
+ background:radial-gradient(850px 400px at 50% -10%,#547b2336,transparent),
+ linear-gradient(180deg,#07130d,#08100e 78%,#0c1210)}
+.s3-shard-zone:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.23;
+ background:url("./season3-glass-cracks.svg") center top/100% auto repeat-y}
+.s3-shard-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:3px 0 16px}
+.s3-shard-heading span{font-size:10px;font-weight:900;color:#b2f787;letter-spacing:.17em}
+.s3-shard-heading h2{font-family:Impact,"Arial Black",sans-serif;font-weight:900;font-size:clamp(27px,3vw,42px);
+ line-height:1.08;letter-spacing:.018em;color:#f7fff5;margin:5px 0 0}
+.s3-shard-heading h2 em{color:#a0f040;font-style:normal}
+.s3-shard-heading p{font-size:9px;color:#bdc9bc;font-weight:900;letter-spacing:.13em}
+.s3-glass-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;align-items:stretch}
+.s3-glass-shard{--s3-shard:#a0f040;position:relative;display:block;overflow:hidden;isolation:isolate;
+ height:165px;text-decoration:none;color:#fff!important;
+ clip-path:polygon(2% 0%,96% 1.5%,100% 11%,98% 97%,5% 100%,0% 91%,1% 15%);
+ background:#111e16;transition:transform .25s ease,filter .25s ease}
+.s3-glass-shard:nth-child(3n+2){clip-path:polygon(0 10%,7% 0,93% 1%,100% 5%,98% 91%,93% 100%,0 98%)}
+.s3-glass-shard:nth-child(3n){clip-path:polygon(1% 1%,94% 0,100% 11%,98% 92%,93% 100%,0 97%,2% 12%)}
+.s3-glass-shard:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+ background:radial-gradient(circle at 66% 38%,color-mix(in srgb,var(--s3-shard) 33%,transparent),transparent 64%),
+ linear-gradient(135deg,#233422,#101718 55%,#06120a)}
+.s3-glass-shard:after{content:"";position:absolute;inset:0;z-index:4;pointer-events:none;
+ background:url("./season3-glass-cracks.svg") center/100% 100% no-repeat,
+ linear-gradient(130deg,#eaffdf66,transparent 12%,transparent 91%,#a0f04055);
+ opacity:.82;mix-blend-mode:screen}
+.s3-shard-art{position:absolute;inset:0;z-index:1;overflow:hidden;
+ background:linear-gradient(0deg,#030705d1,transparent 75%),
+ url("./season3-qg-background.svg") center/cover no-repeat}
+.s3-shard-art:after{content:"";position:absolute;inset:0;
+ background:linear-gradient(90deg,#040a06a8 0%,transparent 60%),linear-gradient(0deg,#020903db,transparent 50%)}
+.s3-shard-item{position:absolute;z-index:1;width:72%;height:135px;top:4px;right:0;object-fit:contain;
+ filter:drop-shadow(0 12px 12px #000e) drop-shadow(0 0 18px #9ef34533)}
+.s3-shard-item-b{width:40%;height:110px;top:36px;right:47%;opacity:.55;transform:rotate(-13deg)}
+.s3-shard-ink{position:absolute;bottom:0;left:0;right:0;z-index:3;display:flex;align-items:center;
+ gap:10px;padding:15px 14px 15px;background:linear-gradient(90deg,#030804df,#07170c9e 75%,transparent);
+ border-bottom:3px solid var(--s3-shard)}
+.s3-shard-glyph{color:#c5ff85;font-size:29px;font-weight:900;text-shadow:0 0 14px #a0f04088}
+.s3-shard-text{min-width:0;display:flex;flex-direction:column;gap:1px}
+.s3-shard-text strong{font-family:Impact,"Arial Black",sans-serif;font-style:italic;
+ color:#fff!important;font-size:clamp(17px,1.75vw,29px);line-height:1.05;letter-spacing:.01em;
+ text-shadow:2px 3px 2px #000d}
+.s3-shard-text span{color:#cbd5c7;font-weight:900;letter-spacing:.06em;font-size:9px}
+.s3-shard-open{margin-left:auto;color:#beff88;font-size:20px;opacity:.8}
+.s3-glass-shard:hover{transform:translateY(-5px) scale(1.014);filter:drop-shadow(0 0 22px #a0f04075)}
+.s3-glass-shard:focus-visible{outline:4px solid #cfff9f;outline-offset:4px}
+.s3-glass-shard:hover .s3-shard-item{transform:scale(1.06)}
+.s3-glass-shard:hover .s3-shard-item-b{transform:rotate(-9deg) scale(1.09)}
+.s3-shard-armas{--s3-shard:#a0f040}
+.s3-shard-municao{--s3-shard:#d8ff6f}
+.s3-shard-lavagem{--s3-shard:#61e797}
+.s3-shard-desmanche{--s3-shard:#79eab0}
+.s3-shard-drogas{--s3-shard:#a0f040}
+.s3-shard-mecanica-ilegal{--s3-shard:#ed54cf}
+.s3-shard-hospital-ilegal{--s3-shard:#7afcb5;grid-column:span 3;height:156px}
+.s3-shard-hospital-ilegal .s3-shard-item{width:48%;height:150px;right:10%;top:0}
+.s3-shard-hospital-ilegal .s3-shard-item-b{width:25%;height:120px;right:43%;top:26px}
+.s3-shard-hospital-ilegal .s3-shard-ink{width:60%;background:linear-gradient(90deg,#031008f2,#06120cae,transparent)}
+.s3-shard-hospital-ilegal .s3-shard-text strong{font-size:32px}
+.home-v3 .s3-shortcuts{margin-top:19px!important}
+.home-v3 #categorias{padding-top:25px}
+.home-v3 #categorias .category-grid-visual{grid-template-columns:repeat(3,minmax(0,1fr))}
+.home-v3 #categorias .category-card-visual{min-height:220px!important}
+@media(min-width:1320px){
+.s3-poster{min-height:375px}.s3-poster-center{min-height:375px}.s3-glass-shard{height:185px}
+}
+@media(max-width:900px){
+.s3-poster{min-height:320px}.s3-poster-center{min-height:320px}
+.s3-glass-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.s3-shard-hospital-ilegal{grid-column:span 2}
+.s3-shard-text strong{font-size:24px}
+}
+@media(max-width:610px){
+.s3-poster,.s3-poster-center{min-height:310px}
+.s3-poster-art{background-position:49% center;background-size:auto 100%}
+.s3-poster-logo{width:150px;height:150px;margin:-4px auto -13px}
+.s3-poster h1{font-size:37px}.s3-poster p{font-size:9px}
+.s3-shard-zone{padding-top:17px}
+.s3-shard-heading{align-items:start;flex-direction:column}
+.s3-shard-heading p{font-size:8px}
+.s3-glass-grid{grid-template-columns:1fr;gap:10px}
+.s3-glass-shard{height:164px}
+.s3-shard-hospital-ilegal{grid-column:auto;height:164px}
+.s3-shard-hospital-ilegal .s3-shard-item{width:72%}
+.s3-shard-hospital-ilegal .s3-shard-item-b{width:40%;right:47%}
+.s3-shard-hospital-ilegal .s3-shard-ink{width:100%}
+.s3-shard-hospital-ilegal .s3-shard-text strong{font-size:24px}
+.home-v3 #categorias .category-grid-visual{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+.s3-glass-shard,.s3-shard-item{transition:none!important}
+}
