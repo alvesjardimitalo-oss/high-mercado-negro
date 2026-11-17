@@ -120,7 +120,7 @@ async function initHome(){
   if(grid){
     // Segmentos centrais primeiro; os demais continuam acessíveis sem perder itens.
     const prioridade=['armas','municao','lavagem','desmanche','drogas','mecanica-ilegal','hospital-ilegal'];
-    const cats=[...new Set(active.map(i=>i.categoria).filter(Boolean))]
+    const cats=[...new Set(active.map(i=>String(i.categoria||'').trim()).filter(Boolean))]
       .sort((a,b)=>{
         const ia=prioridade.indexOf(slugify(a)),ib=prioridade.indexOf(slugify(b));
         return (ia<0?100:ia)-(ib<0?100:ib);
