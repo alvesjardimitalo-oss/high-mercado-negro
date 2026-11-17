@@ -267,7 +267,7 @@ async function initGlobalTable(){
   let sortKey='ordem';
   let sortDir='asc';
 
-  const categories=[...new Set(active.map(i=>i.categoria).filter(Boolean))];
+  const categories=[...new Map(active.filter(i=>String(i.categoria||'').trim()).map(i=>[slugify(i.categoria),String(i.categoria).trim()])).values()];
   const paramCat=params.get('c');
   if(params.get('fav')) selected=FAV_FILTER;
   else if(paramCat){const m=categories.find(c=>slugify(c)===slugify(paramCat)); if(m) selected=m;}
