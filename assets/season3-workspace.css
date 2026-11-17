@@ -1,0 +1,85 @@
+/* HIGH ILEGAL — SEASON 3 · WORKSPACE V8
+   Componentes internos redesenhados, mantendo a lógica de catálogo existente. */
+.s3-inner-page.s3-v8{background:radial-gradient(700px 450px at 88% 12%,#8df04615,transparent 75%),linear-gradient(160deg,#070d0b,#0b120d 64%,#070c0a)!important;color:#eef8ea}
+.s3-v8 .s3-global-header{position:sticky!important;top:0;z-index:90!important;background:#060b0afa!important}
+.s3-v8 .s3-v8-shell{display:grid;grid-template-columns:255px minmax(0,1fr);gap:clamp(18px,2.3vw,32px);width:min(1700px,100%);margin:0 auto;padding:24px clamp(15px,2.4vw,42px) 56px;align-items:start}
+.s3-v8 .s3-v8-content{min-width:0}
+.s3-v8 .s3-v8-sidebar{position:sticky;top:97px;overflow:hidden;background:linear-gradient(158deg,#15271b,#080f0b 75%);border:1px solid #46633d;border-radius:16px;box-shadow:0 20px 50px #0008;padding:13px}
+.s3-v8 .s3-v8-side-brand{display:flex;gap:10px;align-items:center;padding:8px 7px 13px;border-bottom:1px solid #385039}
+.s3-v8 .s3-v8-side-brand img{object-fit:contain;width:57px;height:57px}
+.s3-v8 .s3-v8-side-brand small{font-size:9px;color:#f08adf;letter-spacing:.13em;font-weight:900;display:block}
+.s3-v8 .s3-v8-side-brand strong{display:block;font-family:"Barlow Condensed",Impact,sans-serif;line-height:.98;letter-spacing:.015em;font-size:23px;color:#c1fa8d}
+.s3-v8 .s3-v8-side-art{height:102px;margin:12px 0;border-radius:9px;border:1px solid #45693a;background:linear-gradient(90deg,#07100c40,#07100c6c),url("./season3-cinematic/capa-personagens.webp") center/cover}
+.s3-v8 .s3-v8-side-nav-heading{display:flex;justify-content:space-between;align-items:center;color:#a5ee5c;font-size:10px;font-weight:900;letter-spacing:.12em;margin:16px 7px 8px}
+.s3-v8 .s3-v8-side-nav-heading span:last-child{color:#f064ca}
+.s3-v8 .s3-v8-side-links{display:flex;flex-direction:column;gap:4px}
+.s3-v8 .s3-v8-side-link{display:flex;align-items:center;gap:10px;min-height:41px;border:1px solid transparent;border-radius:8px;padding:8px 9px;color:#d6e3d1;text-decoration:none;font-family:"Barlow Condensed",Arial,sans-serif;font-size:14px;font-weight:800;letter-spacing:.05em;transition:.18s ease}
+.s3-v8 .s3-v8-side-link b{margin-left:auto;color:#92d959;font-size:12px}
+.s3-v8 .s3-v8-side-icon{font-size:18px;color:#aaf16a;flex:0 0 23px;text-align:center}
+.s3-v8 .s3-v8-side-link:hover,.s3-v8 .s3-v8-side-link.is-active{background:#a0f0401a;border-color:#91d94e89;color:#caff96}
+.s3-v8 .s3-v8-tools-heading{margin-top:18px}
+.s3-v8 .s3-v8-side-footer{border-top:1px solid #3c5743;margin-top:15px;padding:14px 4px 2px;color:#9cae9c;font-size:9px;font-weight:900;letter-spacing:.055em}
+.s3-v8 .s3-v8-live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#a0f040;box-shadow:0 0 13px #a0f040;margin-right:6px}
+.s3-v8 .s3-route-ribbon{margin:0 0 13px!important;background:#122419c9;border:1px solid #49743f}
+.s3-v8 .category-hero,.s3-v8 .table-page-hero,.s3-v8 .guide{margin:0 0 20px!important;min-height:270px!important;border-radius:13px!important;background:linear-gradient(90deg,#06100cf3 0%,#06100ce8 38%,#06100c74 100%),url("./season3-cinematic/capa-personagens.webp") center/cover no-repeat!important}
+.s3-v8 .category-hero{min-height:285px!important}
+.s3-v8 .category-hero .s3-segment-hero-img{opacity:.66!important;width:47%!important}
+.s3-v8 .category-title,.s3-v8 .guide h1,.s3-v8 .table-page-hero h1{font-family:"Barlow Condensed",Impact,sans-serif;font-size:clamp(42px,4.3vw,69px)!important}
+.s3-v8 .s3-v8-section-row{display:flex;align-items:end;justify-content:space-between;gap:12px;border-bottom:1px solid #507642;margin:8px 0 16px;padding-bottom:12px}
+.s3-v8 .s3-v8-micro{font-weight:900;letter-spacing:.18em;color:#adf57c;font-size:10px}
+.s3-v8 .s3-v8-section-row h2{font-family:"Barlow Condensed",Impact,sans-serif;font-size:clamp(26px,2.8vw,38px);font-style:italic;color:#f9fff5;line-height:1.1;margin:6px 0 0}
+.s3-v8 .s3-v8-section-row em{font-style:normal;color:#a0f040}
+.s3-v8 .s3-v8-section-count{font-size:10px;font-weight:900;letter-spacing:.1em;color:#d1eeaa}
+.s3-v8 .items-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.s3-v8 .item-card{padding:0!important;overflow:hidden!important;position:relative;border:1px solid #517241!important;border-radius:12px!important;background:linear-gradient(160deg,#203020,#09110c)!important;display:flex;flex-direction:column;min-width:0;box-shadow:0 12px 35px #0008!important}
+.s3-v8 .item-card:before{content:"";position:absolute;inset:0 0 auto;z-index:1;height:4px;background:linear-gradient(90deg,#a0f040,#ec4aca,#8bf12d);pointer-events:none}
+.s3-v8 .item-card:hover{border-color:#a7f158!important;box-shadow:0 16px 37px #000b,0 0 20px #a0f04024!important;transform:translateY(-2px)}
+.s3-v8 .item-image{height:190px!important;min-height:190px!important;margin:0!important;border:0!important;border-radius:0!important;background:radial-gradient(circle at 50% 45%,#91d64c25,transparent 63%),linear-gradient(145deg,#1c3021,#08120f)!important;position:relative}
+.s3-v8 .item-image:after{content:"";position:absolute;inset:0;pointer-events:none;background:url("./season3-glass-cracks.svg") center/cover;opacity:.14}
+.s3-v8 .item-image img{padding:20px;filter:drop-shadow(0 17px 16px #000b)!important}
+.s3-v8 .item-card-top{padding:13px 15px 0;margin:0 0 8px!important}
+.s3-v8 .item-card h3{padding:0 15px!important;margin:0 0 12px!important;font-family:"Barlow Condensed",Impact,sans-serif;font-size:clamp(20px,2vw,25px)!important;letter-spacing:.02em;line-height:1.05;color:#f9fff6!important}
+.s3-v8 .item-card .prices{padding:0 14px;gap:8px}
+.s3-v8 .item-card .price{padding:12px 10px!important;border-radius:6px!important;border:1px solid #527447!important;background:#07130d!important}
+.s3-v8 .item-card .price span{font-size:9px;color:#bbccb4}
+.s3-v8 .item-card .price strong{font-size:clamp(13px,1.45vw,18px);white-space:nowrap}
+.s3-v8 .item-card .price.pista{background:#0d2111!important;border-color:#83b85c!important}
+.s3-v8 .item-card .price.pista strong{color:#b8fa81!important}
+.s3-v8 .item-card .notice{margin:11px 14px 0!important;font-size:10px;color:#e8d36d}
+.s3-v8 .item-card .item-actions{padding:12px 14px 14px;margin-top:auto}
+.s3-v8 .item-card .item-open{margin:0 14px 15px;color:#a0f040}
+.s3-v8 .item-card .tag-inline{background:#08130e;border:1px solid #668a4c;color:#c9ffa7}
+.s3-v8 .s3-v8-catalog-panel{min-width:0}
+.s3-v8 .s3-v8-view-toggle{display:flex;gap:6px}
+.s3-v8 .s3-v8-view-toggle button{cursor:pointer;padding:10px 12px;background:#101c14;border:1px solid #466c3c;color:#c6e1b6;border-radius:7px;font-family:"Barlow Condensed",Arial,sans-serif;font-size:13px;font-weight:900}
+.s3-v8 .s3-v8-view-toggle button.active{background:#a0f040;color:#091309}
+.s3-v8 #tableGallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;padding-bottom:22px}
+.s3-v8 .s3-v8-list-view,.s3-v8 .s3-v8-mobile-list{display:none!important}
+.s3-v8[data-v8-mode="table"] #tableGallery{display:none!important}
+.s3-v8[data-v8-mode="table"] .s3-v8-list-view{display:block!important}
+.s3-v8 .global-table-toolbar{border:1px solid #466940!important;padding:15px!important;background:#112018!important;border-radius:10px!important}
+.s3-v8 .filter-chip{border:1px solid #486447!important;background:#09140e!important;color:#c0d8b2!important}
+.s3-v8 .filter-chip.active,.s3-v8 .filter-chip:hover{background:#a0f040!important;border-color:#a0f040!important;color:#071008!important}
+.s3-v8 .ghost-button,.s3-v8 .discord-image-button{background:#15271b!important;border:1px solid #658b4c!important;color:#d0eabc!important}
+.s3-v8 .discord-image-button{background:linear-gradient(105deg,#a0f040,#76c82b)!important;color:#09200c!important}
+.s3-v8 .market-table-shell{max-height:none!important;background:#0b140f!important;border:1px solid #61854e!important;border-radius:9px!important}
+.s3-v8 .market-table th{background:#253c28!important;color:#c7ff9b!important;font-size:10px!important}
+.s3-v8 .market-table td{border-bottom:1px solid #395140!important}
+.s3-v8 .market-table tbody tr:hover{background:#a0f04011!important}
+.s3-v8 .table-thumb{background:radial-gradient(circle,#638a4026,#09140e)!important;border-color:#517744!important}
+.s3-v8 .history-list{counter-reset:history}
+.s3-v8 .history-entry{display:block;border:1px solid #526e46!important;border-radius:10px!important;background:#0c1710!important;overflow:hidden;margin:0 0 14px}
+.s3-v8 .history-entry header{background:linear-gradient(90deg,#234229,#0c1711)!important;align-items:center}
+.s3-v8 .history-entry header:before{counter-increment:history;content:"REGISTRO " counter(history,'decimal-leading-zero');font-size:10px;color:#a5f276;font-weight:900;letter-spacing:.1em}
+.s3-v8 .history-entry li{border-color:#355039}
+.s3-v8 .guide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.s3-v8 .guide-card{position:relative;background:linear-gradient(145deg,#1b2b1f,#09130f)!important;border:1px solid #517343!important;border-radius:10px!important;padding:26px!important}
+.s3-v8 .guide-card:before{content:"";height:3px;position:absolute;top:0;left:0;right:0;background:linear-gradient(90deg,#a0f040,#e947c5)}
+.s3-v8 .guide-card h2{font-family:"Barlow Condensed",Impact,sans-serif;font-size:31px!important}
+.s3-v8 .guide-card .guide-tag{color:#aff97b!important}
+.s3-v8 .guide-card.wide{grid-column:1/-1}
+.s3-v8 .footer{margin-top:12px}
+@media(max-width:1250px){.s3-v8 .s3-v8-shell{grid-template-columns:215px minmax(0,1fr);gap:16px}.s3-v8 .items-grid,.s3-v8 #tableGallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:900px){.s3-v8 .s3-v8-shell{display:block;padding:12px 13px 38px}.s3-v8 .s3-v8-sidebar{position:relative;top:auto;display:flex;align-items:center;gap:12px;padding:12px;margin:0 0 15px}.s3-v8 .s3-v8-side-brand{padding:0;border:0;flex:0 0 auto}.s3-v8 .s3-v8-side-brand img{width:42px;height:42px}.s3-v8 .s3-v8-side-brand strong{font-size:18px}.s3-v8 .s3-v8-side-art,.s3-v8 .s3-v8-side-nav-heading,.s3-v8 .s3-v8-side-footer{display:none}.s3-v8 .s3-v8-side-links{display:flex;flex-direction:row;gap:5px;overflow-x:auto;flex:1;min-width:0}.s3-v8 .s3-v8-side-link{flex:0 0 auto;font-size:12px;min-height:35px;padding:6px 8px}.s3-v8 .s3-v8-side-link b{display:none}.s3-v8 .s3-v8-sidebar>.s3-v8-side-link{display:none}}
+@media(max-width:680px){.s3-v8 .s3-v8-sidebar{display:block}.s3-v8 .s3-v8-side-brand{margin-bottom:8px}.s3-v8 .s3-v8-shell{padding:10px 10px 34px}.s3-v8 .items-grid,.s3-v8 #tableGallery{grid-template-columns:1fr}.s3-v8 .guide-grid{grid-template-columns:1fr}.s3-v8 .guide-card.wide{grid-column:auto}.s3-v8 .s3-v8-section-row{flex-wrap:wrap}.s3-v8 .s3-v8-view-toggle{width:100%}.s3-v8 .s3-v8-view-toggle button{flex:1}.s3-v8 .global-table-toolbar-row{flex-wrap:wrap}.s3-v8 .global-table-toolbar .searchbar{flex:1 1 100%}.s3-v8 .s3-v8-list-view{overflow-x:auto}.s3-v8 .history-entry li{grid-template-columns:1fr}.s3-v8 .item-image{height:165px!important;min-height:165px!important}}
+@media(prefers-reduced-motion:reduce){.s3-v8 .item-card,.s3-v8 .s3-v8-side-link{transition:none!important}}
