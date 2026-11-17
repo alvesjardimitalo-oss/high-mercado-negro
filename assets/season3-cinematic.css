@@ -148,7 +148,9 @@ body.home-v3.s3-cinematic-home{
  .s3-header-brand small{font-size:8px}
  .s3-header-action{font-size:9px;padding:9px}
  .s3-primary-nav a{font-size:11px;gap:4px;padding:0 2px}
- .s3-primary-nav a:nth-child(4),.s3-primary-nav a:nth-child(5){display:none}
+ .s3-primary-nav{justify-content:flex-start;overflow-x:auto;scrollbar-width:none;gap:12px}
+ .s3-primary-nav::-webkit-scrollbar{display:none}
+ .s3-primary-nav a{flex:0 0 auto}
  .s3-mobile-cover{height:285px}
  .s3-mobile-cover-copy strong{font-size:41px}
  .s3-mobile-logo{width:153px;height:153px}

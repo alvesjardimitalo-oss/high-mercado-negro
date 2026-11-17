@@ -64,7 +64,10 @@ function categoryArt(c){
 async function loadCatalog(){
   const r=await fetch(`${CATALOG_URL}?v=${Date.now()}`);
   if(!r.ok) throw new Error('Não foi possível carregar o catálogo.');
-  return r.json();
+  const data=await r.json();
+  // Padroniza categorias (ex.: "laVAGEM " → "LAVAGEM") para não duplicar nem sair fora de ordem.
+  (data.itens||[]).forEach(i=>{ if(i) i.categoria=String(i.categoria||'').trim().toLocaleUpperCase('pt-BR'); });
+  return data;
 }
 
 function updateMeta(data){
@@ -189,7 +192,7 @@ async function initCategory(){
   const slugCat=slugify(cat);
   const banner=segmentArts[slugCat];
   if(banner){
-    document.documentElement.style.setProperty('--s3-segment-image', 'url("assets/season3-cinematic/'+encodeURIComponent(banner)+'")');
+    document.documentElement.style.setProperty('--s3-segment-image', 'url("'+new URL('assets/season3-cinematic/'+encodeURIComponent(banner),location.href).href+'")');
     document.body.dataset.segment=slugCat;
   }
 
@@ -248,16 +251,20 @@ async function initGlobalTable(){
   // Season 3: vitrine e tabela são duas visualizações dos mesmos itens.
   const gallery=document.querySelector('#tableGallery');
   const viewButtons=[...document.querySelectorAll('[data-v8-view]')];
+  const STORE_VIEW='hmn_view_v1';
+  const setMode=mode=>{
+    mode=mode==='table'?'table':'gallery';
+    document.body.dataset.v8Mode=mode;
+    viewButtons.forEach(x=>{
+      const active=(x.dataset.v8View==='table'?'table':'gallery')===mode;
+      x.classList.toggle('active',active);
+      x.setAttribute('aria-pressed',active?'true':'false');
+    });
+    store.set(STORE_VIEW,mode);
+  };
   if(gallery){
-    document.body.dataset.v8Mode='gallery';
-    viewButtons.forEach(btn=>btn.addEventListener('click',()=>{
-      const mode=btn.dataset.v8View==='table'?'table':'gallery';
-      document.body.dataset.v8Mode=mode;
-      viewButtons.forEach(x=>{
-        const active=x===btn;x.classList.toggle('active',active);
-        x.setAttribute('aria-pressed',active?'true':'false');
-      });
-    }));
+    setMode(store.get(STORE_VIEW,'gallery'));
+    viewButtons.forEach(btn=>btn.addEventListener('click',()=>{setMode(btn.dataset.v8View);render();}));
   }
 
 
@@ -325,9 +332,11 @@ async function initGlobalTable(){
   const render=()=>{
     const rows=getRows();
     if(count) count.textContent=`${rows.length} ${rows.length===1?'ITEM':'ITENS'}`;
-    if(body) body.innerHTML=rows.length?rows.map(tableRow).join(''):`<tr><td colspan="5"><div class="empty">Nenhum item encontrado.</div></td></tr>`;
-    if(mobileList) mobileList.innerHTML=rows.length?rows.map(mobileCard).join(''):`<div class="empty">Nenhum item encontrado.</div>`;
-    if(gallery) gallery.innerHTML=rows.length?rows.map(i=>itemCard(i,true)).join(''):'<div class="empty">Nenhum item encontrado.</div>';
+    // Monta só a visualização em uso (vitrine ou lista) para a busca ficar mais leve.
+    const listMode=!gallery||document.body.dataset.v8Mode==='table';
+    if(body) body.innerHTML=!listMode?'':rows.length?rows.map(tableRow).join(''):`<tr><td colspan="5"><div class="empty">Nenhum item encontrado.</div></td></tr>`;
+    if(mobileList) mobileList.innerHTML=!listMode?'':rows.length?rows.map(mobileCard).join(''):`<div class="empty">Nenhum item encontrado.</div>`;
+    if(gallery) gallery.innerHTML=listMode?'':rows.length?rows.map(i=>itemCard(i,true)).join(''):'<div class="empty">Nenhum item encontrado.</div>';
 
     sortButtons.forEach(btn=>{
       const activeSort=btn.dataset.sort===sortKey;
@@ -644,6 +653,8 @@ function priceTrend(i){
   const v=i?.variacao; if(!v?.em) return null;
   const d=new Date(v.em); if(isNaN(d)||Date.now()-d>TREND_DAYS*864e5) return null;
   if(v.novo) return {cls:'novo',label:'NOVO',title:`Adicionado em ${d.toLocaleDateString('pt-BR')}`};
+  // Sem preço anterior válido (importação inicial com R$ 0) não é variação real.
+  if(!(Number(v.parceria_antes)>0&&Number(v.pista_antes)>0)) return null;
   const dp=Number(i.pista)-Number(v.pista_antes), dc=Number(i.parceria)-Number(v.parceria_antes);
   const dir=dp||dc; if(!dir) return null;
   const title=`Antes: parceria ${money(v.parceria_antes)} • pista ${money(v.pista_antes)} (alterado em ${d.toLocaleDateString('pt-BR')})`;

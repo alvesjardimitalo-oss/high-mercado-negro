@@ -204,7 +204,8 @@ function montarCatalogo_(anterior, opts) {
 
   const itens = values.slice(1).map((r, n) => {
     const linha = n + 2;
-    const categoria = String(r[idx('CATEGORIA')] || '').trim();
+    // Categoria sempre em MAIÚSCULAS (evita "laVAGEM", "Lavagem " etc. separados no site).
+    const categoria = String(r[idx('CATEGORIA')] || '').trim().toLocaleUpperCase();
     const item = String(r[idx('ITEM')] || '').trim();
     if (!categoria || !item) return null;
 
@@ -236,8 +237,12 @@ function montarCatalogo_(anterior, opts) {
     // Variação de preço (selo SUBIU/CAIU/NOVO no site). Se o preço não mudou, mantém a última variação.
     let variacao = (ant && ant.variacao) || null;
     if (ant) {
-      if (Number(ant.parceria) !== parceria || Number(ant.pista) !== pista)
-        variacao = {parceria_antes: Number(ant.parceria), pista_antes: Number(ant.pista), em: agoraIso};
+      if (Number(ant.parceria) !== parceria || Number(ant.pista) !== pista) {
+        // Preço anterior zerado não é "subiu": o item está recebendo valor agora.
+        variacao = (Number(ant.parceria) > 0 && Number(ant.pista) > 0)
+          ? {parceria_antes: Number(ant.parceria), pista_antes: Number(ant.pista), em: agoraIso}
+          : {novo: true, em: agoraIso};
+      }
     } else if (anterior) {
       variacao = {novo: true, em: agoraIso};
     }

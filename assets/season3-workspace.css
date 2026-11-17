@@ -91,3 +91,33 @@
  .s3-v8 .table-mobile-card{background:#0e1c13!important;border:1px solid #507441!important;border-radius:11px!important;padding:12px}
  .s3-v8 .table-mobile-prices>div{background:#09150e!important;border-color:#436839!important}
 }
+
+/* v8.2 — celular: itens aparecem mais cedo, sem blocos repetidos no topo. */
+@media(max-width:680px){
+ .s3-v8 .s3-route-ribbon{display:none!important}
+ .s3-v8 .s3-v8-sidebar{padding:8px!important;margin:0 0 10px!important;position:sticky!important;top:0;z-index:30;backdrop-filter:blur(8px);background:#07100cee!important}
+ .s3-v8 .s3-v8-side-brand{display:none!important}
+ .s3-v8 .s3-v8-side-links{scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent)}
+ .s3-v8 .s3-v8-side-links::-webkit-scrollbar{display:none}
+ .s3-v8 .s3-v8-side-link{font-size:11px!important;min-height:32px!important;border-radius:999px!important;padding:5px 11px!important;border:1px solid #2f4a30!important}
+ .s3-v8 .s3-v8-side-link.is-active{background:#a0f040!important;color:#08120a!important;border-color:#a0f040!important}
+ .s3-v8 .s3-v8-side-link.is-active .s3-v8-side-icon{color:#08120a!important}
+ .s3-v8 .category-hero,.s3-v8 .table-page-hero{min-height:0!important;padding:18px 16px!important;margin-bottom:14px!important}
+ .s3-v8 .category-hero .back,.s3-v8 .table-page-hero .back{display:none}
+ .s3-v8 .category-hero .eyebrow,.s3-v8 .table-page-hero .eyebrow{margin-top:0!important}
+ .s3-v8 .category-title,.s3-v8 .table-page-hero h1{font-size:40px!important;margin:6px 0 8px!important}
+ .s3-v8 .table-page-hero p{display:none}
+ .s3-v8 .table-page-grid{grid-template-columns:1fr!important;gap:10px!important}
+ .s3-v8 .table-mini-stats{display:flex!important;gap:8px}
+ .s3-v8 .table-mini-stat{flex:1;padding:9px 12px!important;min-height:0!important}
+ .s3-v8 .table-mini-stat strong{font-size:20px!important}
+ .s3-v8 .category-hero .toolbar{margin-top:12px!important}
+ .s3-v8 .category-hero .pill{display:none}
+ .s3-v8 .s3-v8-section-row{margin-bottom:10px!important}
+ .s3-v8 .s3-v8-section-row h2{font-size:26px!important}
+ .s3-v8 .global-table-toolbar-row{display:grid!important;grid-template-columns:1fr 1fr;gap:8px!important}
+ .s3-v8 .global-table-toolbar .searchbar{grid-column:1 / -1;min-height:48px!important;height:48px}
+ .s3-v8 .global-table-toolbar-row>button{width:100%;min-height:42px;padding:8px 6px!important;font-size:10px!important;white-space:normal}
+ .s3-v8 .table-filters{flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+ .s3-v8 .table-filters .filter-chip{flex:0 0 auto}
+}
