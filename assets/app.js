@@ -176,8 +176,9 @@ async function initCategory(){
   const data=await loadCatalog(); updateMeta(data);
   const active=(data.itens||[]).filter(isActive);
   const raw=new URLSearchParams(location.search).get('c')||'';
-  const matched=active.find(i=>slugify(i.categoria)===slugify(raw));
-  const cat=matched?.categoria||active[0]?.categoria||'';
+  const matched=active.find(i=>slugify(i.categoria)===slugify(raw))||(data.itens||[]).find(i=>i&&slugify(i.categoria)===slugify(raw));
+  if(!matched){ renderCategoryNotFound(raw,active); return; }
+  const cat=matched.categoria;
   const items=active.filter(i=>slugify(i.categoria)===slugify(cat));
   // A cada categoria, mostrar sua arte oficial da Season 3 no cabeçalho.
   const segmentArts={
@@ -210,6 +211,7 @@ async function initCategory(){
   const render=q=>{if(!list)return;const term=normalizeText(q);const filtered=favFirst(items.filter(i=>!term||normalizeText(`${i.item} ${i.categoria} ${i.observacao||''}`).includes(term)));list.innerHTML=filtered.length?filtered.map(i=>itemCard(i)).join(''):'<div class="empty">Nenhum item encontrado nesta categoria.</div>';};
   render(''); search?.addEventListener('input',e=>render(e.target.value));
   document.addEventListener('hmn:favs',()=>render(search?.value||''));
+  renderComingSoon((data.itens||[]).filter(i=>i&&!isActive(i)&&slugify(i.categoria)===slugify(cat)),list);
   const rules=document.querySelector('#rules');
   if(rules&&slugify(cat)==='lavagem'&&Array.isArray(data.regras?.lavagem)&&data.regras.lavagem.length){
     const grupos=[...new Set(data.regras.lavagem.map(r=>String(r.grupo||'REGRAS').trim().toUpperCase()).filter(Boolean))];
@@ -225,6 +227,30 @@ async function initCategory(){
   }
 }
 
+
+/* ── Segmento inexistente: avisa em vez de abrir outro segmento sem explicar ── */
+function renderCategoryNotFound(raw,active){
+  const cats=[...new Map(active.map(i=>[slugify(i.categoria),i.categoria])).entries()];
+  document.title='Segmento não encontrado • Mercado Negro High';
+  const set=(sel,txt)=>{const el=document.querySelector(sel); if(el) el.textContent=txt;};
+  set('#catName','NÃO ENCONTRADO'); set('#catIcon','⚠'); set('#catCount','0 ITENS'); set('#s3CategoryTotal','—');
+  const tb=document.querySelector('.category-hero .toolbar'); if(tb) tb.style.display='none';
+  const list=document.querySelector('#itemList');
+  if(list) list.outerHTML=`<div class="s3-notfound"><strong>Segmento ${raw?`“${esc(raw)}” `:''}não encontrado</strong><p>O link pode estar errado ou o segmento foi removido nesta temporada. Escolha um dos segmentos abaixo:</p><div class="s3-notfound-links">${cats.map(([slug,c])=>`<a href="categoria.html?c=${slug}">${iconFor(c)} ${esc(c)}</a>`).join('')}<a href="tabela.html">▤ TABELA GERAL</a></div></div>`;
+}
+
+/* ── Em breve: itens inativos do segmento, sem preço ── */
+function renderComingSoon(items,anchor){
+  document.querySelector('#s3ComingSoon')?.remove();
+  if(!items.length||!anchor) return;
+  const sorted=[...items].sort((a,b)=>Number(a.ordem||0)-Number(b.ordem||0));
+  const box=document.createElement('section');
+  box.id='s3ComingSoon'; box.className='s3-coming-soon';
+  box.innerHTML=`<div class="s3-v8-section-row"><div><span class="s3-v8-micro">◆ PRÓXIMAS LIBERAÇÕES</span><h2>EM <em>BREVE</em></h2></div><span class="s3-v8-section-count">${sorted.length} ${sorted.length===1?'ITEM':'ITENS'} EM PREPARAÇÃO</span></div>
+  <p class="s3-coming-note">Itens previstos para este segmento. Valores serão divulgados quando forem liberados.</p>
+  <div class="s3-coming-grid">${sorted.map(i=>`<article class="s3-coming-card">${imageMarkup(i)}<div class="s3-coming-copy"><span class="s3-coming-tag">EM BREVE</span><h3>${esc(i.item)}</h3></div></article>`).join('')}</div>`;
+  anchor.insertAdjacentElement('afterend',box);
+}
 
 function categoryChip(c, active=false){
   return `<button type="button" class="filter-chip${active?' active':''}" data-category="${esc(c)}">${esc(c)}</button>`;

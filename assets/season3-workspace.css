@@ -121,3 +121,22 @@
  .s3-v8 .table-filters{flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
  .s3-v8 .table-filters .filter-chip{flex:0 0 auto}
 }
+
+/* v8.3 — Em breve + segmento não encontrado */
+.s3-coming-soon{margin:34px 0 10px;padding-top:24px;border-top:1px dashed #3c5a36}
+.s3-coming-note{margin:-4px 0 16px;color:#9fb79f;font-size:13px}
+.s3-coming-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.s3-coming-card{position:relative;overflow:hidden;border:1px dashed #4a6a3f;border-radius:12px;background:linear-gradient(160deg,#141f16,#0a100c);transition:border-color .2s,transform .2s}
+.s3-coming-card:hover{border-color:#a0f040;transform:translateY(-2px)}
+.s3-coming-card .item-image{height:130px!important;min-height:130px!important;background:transparent!important;display:flex;align-items:center;justify-content:center}
+.s3-coming-card .item-image img{width:100%!important;height:100%!important;padding:6px!important;object-fit:contain}
+.s3-coming-copy{padding:10px 12px 13px}
+.s3-coming-copy h3{margin:7px 0 0;font-family:"Barlow Condensed",Impact,sans-serif;font-size:19px;line-height:1.05;color:#dfe9dc;text-transform:uppercase}
+.s3-coming-tag{display:inline-block;padding:3px 8px;border-radius:999px;border:1px solid #c86bff88;color:#e2a8ff;background:#2a123366;font-size:9px;font-weight:900;letter-spacing:.12em}
+.s3-notfound{padding:30px 24px;border:1px solid #6b4a3a;border-radius:13px;background:linear-gradient(160deg,#241913,#0d0a08)}
+.s3-notfound strong{display:block;font-family:"Barlow Condensed",Impact,sans-serif;font-size:30px;color:#ffc93c;text-transform:uppercase}
+.s3-notfound p{color:#c9bfae;margin:8px 0 18px}
+.s3-notfound-links{display:flex;flex-wrap:wrap;gap:8px}
+.s3-notfound-links a{padding:9px 14px;border:1px solid #4f7442;border-radius:999px;color:#d8ffb4;text-decoration:none;font-weight:800;font-size:12px;letter-spacing:.04em}
+.s3-notfound-links a:hover{background:#a0f040;color:#08120a}
+@media(max-width:680px){.s3-coming-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.s3-coming-card .item-image{height:100px!important;min-height:100px!important}.s3-coming-copy h3{font-size:16px}}
