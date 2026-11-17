@@ -1,12 +1,12 @@
 /* Mercado Negro • High — service worker
    Online: sempre busca a versão mais nova (preços nunca ficam velhos).
    Offline / internet ruim: usa a última versão salva no aparelho.      */
-const CACHE = 'hmn-s3-cinematic-inner-v7.0';
+const CACHE = 'hmn-s3-cinematic-inner-v7.1';
 const CORE = ['./', './index.html', './tabela.html', './categoria.html', './historico.html', './como-funciona.html',
   './assets/style.css', './assets/season3.css', './assets/season3-graffiti.css', './assets/season3-cinematic.css', './assets/season3-inner-pages.css', './assets/season3-glass-cracks.svg', './assets/season3-qg-background.svg', './assets/ilegal-high-season3-logo.svg', './assets/app.js', './data/catalogo.json', './manifest.webmanifest', './assets/season3-cinematic/capa-completa.webp', './assets/season3-cinematic/capa-personagens.webp', './assets/season3-cinematic/banner-armas.webp', './assets/season3-cinematic/banner-municao.webp', './assets/season3-cinematic/banner-lavagem.webp', './assets/season3-cinematic/banner-desmanche.webp', './assets/season3-cinematic/banner-drogas.webp', './assets/season3-cinematic/banner-mecanica-ilegal.webp', './assets/season3-cinematic/banner-hospital-ilegal.webp'];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(CACHE).then(async cache => { await Promise.allSettled(CORE.map(url => cache.add(url))); }).then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', e => {
@@ -38,8 +38,18 @@ self.addEventListener('fetch', e => {
   }
 
   // Páginas, CSS, JS e catálogo: rede primeiro, cópia salva se estiver offline.
-  e.respondWith(fetch(req).then(r => {
-    if (r.ok) { const copy = r.clone(); caches.open(CACHE).then(c => c.put(cacheKey(req), copy)); }
-    return r;
-  }).catch(() => caches.match(cacheKey(req)).then(hit => hit || caches.match('./index.html'))));
+  e.respondWith((async () => {
+    try {
+      const response = await fetch(req, {cache:'no-store'});
+      if (response.ok) {
+        const cache = await caches.open(CACHE);
+        await cache.put(cacheKey(req), response.clone()).catch(() => {});
+      }
+      return response;
+    } catch (_) {
+      const cache = await caches.open(CACHE);
+      const hit = await cache.match(cacheKey(req));
+      return hit || new Response('Sem conexão: conteúdo ainda não armazenado neste dispositivo.', {status:503,headers:{'Content-Type':'text/plain; charset=utf-8'}});
+    }
+  })());
 });
