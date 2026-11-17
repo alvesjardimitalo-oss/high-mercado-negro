@@ -1,0 +1,148 @@
+/* HIGH ILEGAL · SEASON 3
+   Banners "fragmentos de vidro" — versão 4.0 (reversível)
+   Apenas a página inicial usa esta folha. Nenhuma regra econômica é alterada. */
+:root{--s3-green:#a0f040;--s3-magenta:#f040d0;--s3-ink:#080d0b}
+.home-v3{background-color:#07100b}
+.home-v3 .brand img{width:58px;height:58px;object-fit:contain;filter:drop-shadow(0 0 7px #9c37c880)!important}
+.home-v3 .s3-hero{
+ position:relative;isolation:isolate;overflow:hidden;min-height:405px!important;
+ border-bottom:1px solid #a0f04066!important;
+ background:linear-gradient(100deg,rgba(4,9,7,.88),rgba(5,13,9,.66) 48%,rgba(5,8,8,.84)),
+ url("./season3-qg-background.svg") center 48%/cover no-repeat!important
+}
+.home-v3 .s3-hero:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(650px 300px at 50% 30%,#a0f0401c,transparent 75%),
+ repeating-linear-gradient(114deg,transparent 0 225px,#f4fff40a 226px,transparent 228px),
+ linear-gradient(0deg,#06100e,transparent 35%)}
+.home-v3 .s3-hero:after{content:"";position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(115deg,transparent 43%,#f5fff12e 43.09%,transparent 43.24%),
+ linear-gradient(70deg,transparent 72%,#f5fff129 72.06%,transparent 72.18%);
+ opacity:.45}
+.home-v3 .s3-hero-inner{position:relative;z-index:2;display:flex;min-height:405px;flex-direction:column;
+ align-items:center;justify-content:center;text-align:center;gap:8px;padding:24px 12px 28px}
+.home-v3 .s3-eyebrow{color:#d8ffc7;font-weight:800;font-size:10px;letter-spacing:.2em}
+.home-v3 .s3-live-dot{display:inline-block;width:7px;height:7px;margin-right:7px;background:#a0f040;border-radius:50%;box-shadow:0 0 12px #a0f040}
+.home-v3 .s3-main-logo{width:clamp(186px,21vw,258px);height:clamp(186px,21vw,258px);
+ object-fit:contain;margin:-20px 0 -25px;filter:drop-shadow(0 12px 24px #0009) drop-shadow(0 0 14px #a0f04022)}
+.home-v3 .s3-hero-title{font-size:clamp(31px,4vw,55px);line-height:.99;font-weight:1000;
+ color:#fff;letter-spacing:-.055em;text-transform:uppercase;text-shadow:0 4px 16px #000b}
+.home-v3 .s3-hero-title em{font-style:normal;color:#c0ff80}
+.home-v3 .s3-hero p{max-width:680px;color:#d3ddd5!important;line-height:1.5;margin:8px auto;
+ font-size:clamp(12px,1.25vw,15px)}
+.home-v3 .s3-hero-status{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:9px}
+.home-v3 .s3-hero-status span{font-size:9px;font-weight:900;letter-spacing:.09em;color:#bbff90;
+ background:#0b1d14d9;border:1px solid #527f43;padding:8px 11px;border-radius:5px}
+.home-v3 .home-commandbar{margin-top:25px!important;position:relative;z-index:5}
+.home-v3 .home-categories{padding-top:20px}
+.home-v3 .home-section-title h2 span{color:var(--s3-green)}
+.home-v3 .home-categories .eyebrow{color:var(--s3-magenta)!important}
+.home-v3 .category-grid-visual{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ column-gap:14px;row-gap:18px;align-items:stretch}
+.home-v3 .category-card-visual{
+ --shard-accent:#a0f040;--shard-secondary:#f040d0;
+ display:flex!important;flex-direction:column;min-width:0;min-height:320px!important;
+ position:relative;isolation:isolate;padding:0!important;border:0!important;
+ border-radius:0!important;overflow:hidden;
+ background:linear-gradient(155deg,#2b3b2f,#07110c)!important;
+ clip-path:polygon(0.8% 5%,7% 0.5%,90% 2%,99% 0%,98.6% 91%,94% 99.3%,3% 97%,0 90%);
+ filter:drop-shadow(0 7px 12px #0008);
+ box-shadow:none!important;transform:translateZ(0);
+ transition:transform .24s ease,filter .24s ease
+}
+.home-v3 .category-card-visual:nth-child(3n+2){
+ clip-path:polygon(2% 1%,96% 0%,100% 10%,98% 98%,4% 100%,0 94%,1% 15%)}
+.home-v3 .category-card-visual:nth-child(3n){
+ clip-path:polygon(0 0,93% 2%,100% 8%,99% 90%,92% 100%,1% 98%,2% 13%)}
+.home-v3 .category-card-visual:before{display:block!important;content:"";position:absolute;inset:0;
+ background:linear-gradient(130deg,var(--shard-accent),transparent 13%,transparent 84%,var(--shard-secondary));
+ opacity:.58;z-index:1;pointer-events:none}
+.home-v3 .category-card-visual:after{
+ content:"";position:absolute;inset:2px;z-index:4;pointer-events:none;
+ background:linear-gradient(133deg,#fafff58a 0 1px,transparent 2px),
+ linear-gradient(33deg,transparent 0 83%,#edffeb8f 83.12%,transparent 83.4%),
+ linear-gradient(157deg,transparent 0 23%,#f1ffee55 23.1%,transparent 23.3%),
+ linear-gradient(82deg,transparent 0 93%,#ffffff50 93.2%,transparent 93.45%);
+ clip-path:polygon(0 0,100% 0,100% 100%,0 100%);opacity:.55}
+.home-v3 .category-card-visual .category-art{
+ flex:1;min-height:211px;height:211px!important;position:relative;overflow:hidden;
+ background:linear-gradient(180deg,#080f0b35,#0c120d4a 50%,#0b100de8),
+ url("./season3-qg-background.svg") center/cover no-repeat!important;
+}
+.home-v3 .category-card-visual .category-art:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(circle at 73% 42%,color-mix(in srgb,var(--shard-accent) 29%,transparent),transparent 53%),
+ linear-gradient(110deg,#0007,transparent 75%);}
+.home-v3 .category-card-visual .category-art:after{content:"";position:absolute;inset:0;z-index:3;
+ background:linear-gradient(180deg,transparent 40%,#07100cae 93%);pointer-events:none}
+.home-v3 .category-card-visual .category-art-grid{opacity:.2;z-index:1}
+.home-v3 .category-card-visual .category-product{
+ z-index:2;object-fit:contain;filter:drop-shadow(0 15px 20px #000d) drop-shadow(0 0 16px #a0f04033);
+ transition:transform .3s ease,filter .3s ease}
+.home-v3 .category-card-visual .category-product-a{width:91%;height:210px;top:0;right:-11%;transform:rotate(-6deg)}
+.home-v3 .category-card-visual .category-product-b{width:55%;height:148px;top:60px;left:-12%;opacity:.8;transform:rotate(11deg)}
+.home-v3 .category-card-visual .category-art-icon{font-size:66px;right:13px;top:2px;opacity:.14;z-index:2;filter:none}
+.home-v3 .category-card-visual .category-card-content{
+ z-index:3;min-height:102px;padding:12px 18px 15px!important;
+ background:linear-gradient(90deg,#080e0de8,#111b14f7)!important;
+ border-top:2px solid var(--shard-accent)!important}
+.home-v3 .category-card-visual .category-card-heading{display:flex;align-items:center;gap:9px}
+.home-v3 .category-card-visual h3{
+ font-family:Impact,"Arial Black",Inter,system-ui,sans-serif;font-style:italic;
+ letter-spacing:.012em;text-transform:uppercase;color:#f8fff3!important;
+ font-size:clamp(19px,2.2vw,28px)!important;line-height:1.08;
+ text-shadow:1px 2px 2px #000}
+.home-v3 .category-card-visual .category-symbol{font-size:22px;filter:drop-shadow(0 0 8px var(--shard-accent))}
+.home-v3 .category-card-visual .category-count{
+ position:absolute;top:12px;right:12px;background:#070f0ce0!important;
+ border:1px solid #a0f04080!important;color:#bdfa87!important;
+ font-size:9px!important;padding:5px 8px;z-index:7}
+.home-v3 .category-card-visual p{
+ color:#bac7b8!important;min-height:0;margin:6px 0 5px!important;
+ font-size:11px;line-height:1.3;max-width:95%}
+.home-v3 .category-card-visual .category-open{
+ background:transparent!important;display:inline-flex;justify-content:flex-start;
+ color:#b5ff77!important;padding:5px 0 0;font-size:10px;letter-spacing:.12em}
+.home-v3 .category-card-visual .category-open b{color:var(--shard-accent)!important}
+.home-v3 .category-card-visual:hover{
+ transform:translateY(-7px) scale(1.009)!important;filter:drop-shadow(0 10px 22px #a0f04033)}
+.home-v3 .category-card-visual:hover .category-product-a{
+ transform:rotate(-3deg) scale(1.08);filter:drop-shadow(0 16px 23px #000e) drop-shadow(0 0 21px #a0f04077)}
+.home-v3 .category-card-visual:focus-visible{outline:3px solid #caff8b;outline-offset:4px}
+/* Sete segmentos centrais: colorização e imagens coerentes com cada setor. */
+.home-v3 .cat-armas{--shard-accent:#b8f467;--shard-secondary:#ea5ccf}
+.home-v3 .cat-municao{--shard-accent:#bafe63;--shard-secondary:#e6ae54}
+.home-v3 .cat-lavagem{--shard-accent:#60ed8c;--shard-secondary:#e8d768}
+.home-v3 .cat-desmanche{--shard-accent:#86e975;--shard-secondary:#58ded1}
+.home-v3 .cat-drogas,.home-v3 .cat-drogas-rotas{--shard-accent:#8ced3e;--shard-secondary:#f040d0}
+.home-v3 .cat-mecanica-ilegal,.home-v3 .cat-mecanica{--shard-accent:#e178dc;--shard-secondary:#a0f040}
+.home-v3 .cat-hospital-ilegal{--shard-accent:#76edb2;--shard-secondary:#f040d0}
+.home-v3 .cat-hospital-ilegal .category-product-a{right:-1%!important;width:73%!important}
+.home-v3 .cat-lavagem .category-product-a{right:-9%!important}
+.home-v3 .cat-desmanche .category-product-a{right:-5%!important}
+.home-v3 .category-card-visual:nth-child(7){grid-column:span 2}
+.home-v3 .category-card-visual:nth-child(7) .category-product-a{width:58%;right:0}
+.home-v3 .category-card-visual:nth-child(7) .category-card-content{max-width:100%}
+@media(max-width:980px){
+ .home-v3 .category-grid-visual{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .home-v3 .category-card-visual:nth-child(7){grid-column:auto}
+ .home-v3 .category-card-visual{min-height:310px!important}
+ .home-v3 .category-card-visual h3{font-size:23px!important}
+}
+@media(max-width:620px){
+ .home-v3 .s3-hero{min-height:365px!important}
+ .home-v3 .s3-hero-inner{min-height:365px;padding:22px 12px 27px}
+ .home-v3 .s3-main-logo{width:185px;height:185px;margin:-12px 0 -18px}
+ .home-v3 .s3-hero-title{font-size:33px}
+ .home-v3 .s3-hero-status span{font-size:8px;padding:6px 7px}
+ .home-v3 .category-grid-visual{grid-template-columns:1fr;row-gap:13px}
+ .home-v3 .category-card-visual,.home-v3 .category-card-visual:nth-child(7){
+  grid-column:auto;min-height:265px!important}
+ .home-v3 .category-card-visual .category-art{height:169px!important;min-height:169px}
+ .home-v3 .category-card-visual .category-product-a{height:170px}
+ .home-v3 .category-card-visual .category-product-b{height:115px;top:42px}
+ .home-v3 .category-card-visual .category-card-content{min-height:94px}
+ .home-v3 .category-card-visual h3{font-size:24px!important}
+ .home-v3 .category-card-visual:nth-child(7) .category-product-a{width:78%}
+}
+@media(prefers-reduced-motion:reduce){
+ .home-v3 .category-card-visual,.home-v3 .category-card-visual .category-product{transition:none!important}
+}
