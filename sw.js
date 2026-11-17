@@ -1,7 +1,7 @@
 /* Mercado Negro • High — service worker
    Online: sempre busca a versão mais nova (preços nunca ficam velhos).
    Offline / internet ruim: usa a última versão salva no aparelho.      */
-const CACHE = 'hmn-season3-graffiti-v3.4';
+const CACHE = 'hmn-season3-graffiti-v3.5';
 const CORE = ['./', './index.html', './tabela.html', './categoria.html', './historico.html', './como-funciona.html',
   './assets/style.css', './assets/season3.css', './assets/season3-graffiti.css', './assets/season3-qg-background.svg', './assets/app.js', './assets/high_logo.png', './data/catalogo.json', './manifest.webmanifest'];
 
