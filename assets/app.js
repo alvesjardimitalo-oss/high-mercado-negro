@@ -444,17 +444,32 @@ async function generateDiscordMarketImage(items,data){
   canvas.width=W;canvas.height=H;
   const ctx=canvas.getContext('2d');
 
+  // Season 3: arte nativa no canvas para exportação PNG sem dependência de imagens externas.
   const bg=ctx.createLinearGradient(0,0,W,H);
-  bg.addColorStop(0,'#08060c');
-  bg.addColorStop(.58,'#100818');
-  bg.addColorStop(1,'#07060a');
+  bg.addColorStop(0,'#080d0c');
+  bg.addColorStop(.56,'#121d18');
+  bg.addColorStop(1,'#070b0b');
   ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-
-  // Subtle purple branding shapes, like the old official table.
-  ctx.fillStyle='rgba(111,0,185,.14)';
-  ctx.beginPath();ctx.arc(W-180,100,330,0,Math.PI*2);ctx.fill();
-  ctx.fillStyle='rgba(142,0,230,.07)';
-  ctx.fillRect(0,headerH-12,W,12);
+  // Parede grafitada escura do QG — blocos discretos e luz verde da mesa.
+  for(let yy=0;yy<Math.min(H,980);yy+=48){
+    for(let xx=0;xx<W;xx+=128){
+      const offset=(Math.floor(yy/48)%2)*64;
+      ctx.strokeStyle='rgba(101,132,110,.085)';
+      ctx.strokeRect(xx+offset,yy,126,46);
+    }
+  }
+  const greenGlow=ctx.createRadialGradient(W*.78,70,14,W*.78,70,590);
+  greenGlow.addColorStop(0,'rgba(160,240,64,.21)');
+  greenGlow.addColorStop(1,'rgba(160,240,64,0)');
+  ctx.fillStyle=greenGlow;ctx.fillRect(0,0,W,790);
+  const pinkGlow=ctx.createRadialGradient(60,60,10,60,60,420);
+  pinkGlow.addColorStop(0,'rgba(240,64,208,.09)');
+  pinkGlow.addColorStop(1,'rgba(240,64,208,0)');
+  ctx.fillStyle=pinkGlow;ctx.fillRect(0,0,520,500);
+  ctx.fillStyle='rgba(160,240,64,.07)';
+  ctx.fillRect(0,headerH-14,W,14);
+  ctx.fillStyle='#a0f040';ctx.fillRect(0,headerH-3,W,3);
+  ctx.fillStyle='#f040d0';ctx.fillRect(0,headerH-3,105,3);
 
   let logo=null;
   try{logo=await loadCanvasImage('./assets/high_logo.png');}catch(_){}
@@ -465,55 +480,55 @@ async function generateDiscordMarketImage(items,data){
 
   const titleX=logo?margin+185:margin;
   ctx.fillStyle='#f4f0f6';ctx.font='900 38px Arial, sans-serif';
-  ctx.fillText('TABELA DE PREÇOS DO MERCADO NEGRO',titleX,59);
-  ctx.fillStyle='#8f2cff';ctx.font='900 32px Arial, sans-serif';ctx.fillText('HIGH',titleX,101);
-  ctx.fillStyle='#f4ec25';ctx.fillText('ROLEPLAY',titleX+91,101);
+  ctx.fillText('MERCADO NEGRO • TABELA OFICIAL',titleX,59);
+  ctx.fillStyle='#a0f040';ctx.font='900 32px Arial, sans-serif';ctx.fillText('HIGH',titleX,101);
+  ctx.fillStyle='#f040d0';ctx.fillText('ILEGAL',titleX+91,101);
 
   ctx.textAlign='right';
-  ctx.fillStyle='#d9cfdf';ctx.font='900 18px Arial, sans-serif';ctx.fillText(`${rows.length} ITENS ATIVOS`,W-margin,48);
+  ctx.fillStyle='#d5e7d1';ctx.font='900 18px Arial, sans-serif';ctx.fillText(`${rows.length} ITENS ATIVOS`,W-margin,48);
   const d=new Date(data.meta?.atualizado_em);
-  ctx.fillStyle='#9a8fa4';ctx.font='800 14px Arial, sans-serif';
+  ctx.fillStyle='#9daf9c';ctx.font='800 14px Arial, sans-serif';
   ctx.fillText(isNaN(d)?'ATUALIZAÇÃO NÃO INFORMADA':`ATUALIZADA EM ${d.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}).toUpperCase()}`,W-margin,76);
-  ctx.fillText('SEASON 2 • ATO 2',W-margin,102);
+  ctx.fillText('HIGH ILEGAL • SEASON 3',W-margin,102);
   ctx.textAlign='left';
 
   function drawGroup(group,x,y){
     roundedRect(ctx,x,y,colW,groupTitleH,4);
-    ctx.fillStyle='#351448';ctx.fill();
-    ctx.fillStyle='#6f00a8';ctx.fillRect(x,y,6,groupTitleH);
-    ctx.fillStyle='#f4ec25';ctx.font='900 17px Arial, sans-serif';
+    ctx.fillStyle='#213126';ctx.fill();
+    ctx.fillStyle='#a0f040';ctx.fillRect(x,y,6,groupTitleH);
+    ctx.fillStyle='#a0f040';ctx.font='900 17px Arial, sans-serif';
     drawTextFit(ctx,String(group.name||'').toUpperCase(),x+14,y+25,colW-90,17,'900');
-    ctx.textAlign='right';ctx.fillStyle='#d2c7d7';ctx.font='800 12px Arial, sans-serif';ctx.fillText(`${group.items.length} ITENS`,x+colW-12,y+24);ctx.textAlign='left';
+    ctx.textAlign='right';ctx.fillStyle='#cde0c3';ctx.font='800 12px Arial, sans-serif';ctx.fillText(`${group.items.length} ITENS`,x+colW-12,y+24);ctx.textAlign='left';
     y+=groupTitleH;
 
     const itemX=x+padX;
     const pistaX=x+colW-14;
     const parceriaX=x+colW-132;
-    ctx.fillStyle='#17111d';ctx.fillRect(x,y,colW,tableHeadH);
-    ctx.fillStyle='#93879b';ctx.font='800 10px Arial, sans-serif';
+    ctx.fillStyle='#1c2921';ctx.fillRect(x,y,colW,tableHeadH);
+    ctx.fillStyle='#9dad9c';ctx.font='800 10px Arial, sans-serif';
     ctx.fillText('ITEM',itemX,y+16);
     ctx.textAlign='right';ctx.fillText('PARCERIA',parceriaX,y+16);ctx.fillText('PISTA',pistaX,y+16);ctx.textAlign='left';
     y+=tableHeadH;
 
     group.items.forEach((i,idx)=>{
-      ctx.fillStyle=idx%2===0?'#0f0d12':'#141019';ctx.fillRect(x,y,colW,rowH);
-      ctx.strokeStyle='rgba(132,109,145,.15)';ctx.beginPath();ctx.moveTo(x,y+rowH);ctx.lineTo(x+colW,y+rowH);ctx.stroke();
-      ctx.fillStyle='#e9e4ed';
+      ctx.fillStyle=idx%2===0?'#101a15':'#18251d';ctx.fillRect(x,y,colW,rowH);
+      ctx.strokeStyle='rgba(160,240,64,.12)';ctx.beginPath();ctx.moveTo(x,y+rowH);ctx.lineTo(x+colW,y+rowH);ctx.stroke();
+      ctx.fillStyle='#eaf3e8';
       drawTextFit(ctx,String(i.item||'').toUpperCase(),itemX,y+19,parceriaX-itemX-18,13,'700');
-      ctx.textAlign='right';ctx.fillStyle='#d8d0de';ctx.font='800 12px Arial, sans-serif';ctx.fillText(money(i.parceria),parceriaX,y+19);
-      ctx.fillStyle='#f4ec25';ctx.font='900 12px Arial, sans-serif';ctx.fillText(money(i.pista),pistaX,y+19);ctx.textAlign='left';
+      ctx.textAlign='right';ctx.fillStyle='#d6e7d2';ctx.font='800 12px Arial, sans-serif';ctx.fillText(money(i.parceria),parceriaX,y+19);
+      ctx.fillStyle='#a0f040';ctx.font='900 12px Arial, sans-serif';ctx.fillText(money(i.pista),pistaX,y+19);ctx.textAlign='left';
       y+=rowH;
     });
 
     const groupRules=rulesForGroup(group);
     if(groupRules.length){
-      ctx.fillStyle='#17111d';ctx.fillRect(x,y,colW,ruleHeadH);
-      ctx.fillStyle='#f4ec25';ctx.font='900 12px Arial, sans-serif';
+      ctx.fillStyle='#1c2921';ctx.fillRect(x,y,colW,ruleHeadH);
+      ctx.fillStyle='#a0f040';ctx.font='900 12px Arial, sans-serif';
       ctx.textAlign='center';ctx.fillText('LAVAGEM E SECAGEM DE DINHEIRO',x+colW/2,y+17);ctx.textAlign='left';
       y+=ruleHeadH;
       groupRules.forEach((r,idx)=>{
-        ctx.fillStyle=idx%2===0?'#0d0b10':'#110d15';ctx.fillRect(x,y,colW,ruleRowH);
-        ctx.strokeStyle='rgba(244,236,37,.16)';ctx.beginPath();ctx.moveTo(x+10,y);ctx.lineTo(x+colW-10,y);ctx.stroke();
+        ctx.fillStyle=idx%2===0?'#101a15':'#152119';ctx.fillRect(x,y,colW,ruleRowH);
+        ctx.strokeStyle='rgba(160,240,64,.19)';ctx.beginPath();ctx.moveTo(x+10,y);ctx.lineTo(x+colW-10,y);ctx.stroke();
         const file=String(r.imagem||'').trim();
         const ri=file?ruleImageMap[file]:null;
         let tx=x+12;
@@ -527,9 +542,9 @@ async function generateDiscordMarketImage(items,data){
         }
         const grupo=String(r.grupo||'').trim().toUpperCase();
         const title=(grupo?grupo+' • ':'')+String(r.tipo||r.titulo||'').toUpperCase();
-        ctx.fillStyle='#f4ec25';ctx.font='900 10px Arial, sans-serif';ctx.textAlign='left';
+        ctx.fillStyle='#a0f040';ctx.font='900 10px Arial, sans-serif';ctx.textAlign='left';
         drawTextFit(ctx,title,tx,y+22,tw,10,'900','left');
-        ctx.fillStyle='#ece7ef';ctx.font='800 9px Arial, sans-serif';
+        ctx.fillStyle='#eaf3e8';ctx.font='800 9px Arial, sans-serif';
         drawTextFit(ctx,String(r.texto||'').toUpperCase(),tx,y+43,tw,9,'800','left');
         y+=ruleRowH;
       });
@@ -545,14 +560,14 @@ async function generateDiscordMarketImage(items,data){
     col.forEach(g=>{y=drawGroup(g,x,y);});
   });
 
-  ctx.fillStyle='#0c0910';ctx.fillRect(0,H-footerH,W,footerH);
-  ctx.fillStyle='#f4ec25';ctx.font='800 10px Arial, sans-serif';
-  ctx.fillText('HIGH ROLEPLAY • PREÇOS REFERENTES EXCLUSIVAMENTE À ECONOMIA FICTÍCIA DO SERVIDOR / FIVEM',margin,H-17);
-  ctx.textAlign='right';ctx.fillStyle='#6d6373';ctx.fillText('GERADO AUTOMATICAMENTE PELO CATÁLOGO OFICIAL',W-margin,H-17);ctx.textAlign='left';
+  ctx.fillStyle='#0a120e';ctx.fillRect(0,H-footerH,W,footerH);
+  ctx.fillStyle='#a0f040';ctx.font='800 10px Arial, sans-serif';
+  ctx.fillText('HIGH ILEGAL • SEASON 3 • ECONOMIA FICTÍCIA DO SERVIDOR / FIVEM',margin,H-17);
+  ctx.textAlign='right';ctx.fillStyle='#85998a';ctx.fillText('GERADO AUTOMATICAMENTE PELO CATÁLOGO OFICIAL',W-margin,H-17);ctx.textAlign='left';
 
   const blob=await canvasBlob(canvas);
   const url=URL.createObjectURL(blob);
-  const fileName=`mercado-negro-high-${new Date().toISOString().slice(0,10)}.png`;
+  const fileName=`mercado-negro-high-season3-${new Date().toISOString().slice(0,10)}.png`;
   showDiscordImagePreview(url,blob,fileName);
 }
 
