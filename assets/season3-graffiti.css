@@ -235,3 +235,14 @@ body{
  .home-hero{background:linear-gradient(90deg,rgba(4,10,7,.92),rgba(7,14,9,.72)),var(--s3-scene) 62% center / auto 100% no-repeat,#080b0b!important}
  .guide,.table-page-hero,.category-hero,.maintenance-panel{background:linear-gradient(90deg,rgba(8,14,12,.92),rgba(8,14,12,.84)),var(--s3-scene) center / cover no-repeat,#101816!important}
 }
+
+/* S3.5: preserve original object/icon hues; green highlight comes from the card,
+   not from rotating the hues of the product itself. */
+.item-image img,.table-thumb img{
+ filter:drop-shadow(0 12px 15px rgba(70,145,49,.24))!important;
+}
+.item-card:hover .item-image img,.market-table tbody tr:hover .table-thumb img{
+ filter:drop-shadow(0 14px 19px rgba(160,240,64,.30))!important;
+}
+[data-status="indisponivel"] .item-image img,
+[data-status="indisponivel"] .table-thumb img{filter:grayscale(1) opacity(.55)!important}
