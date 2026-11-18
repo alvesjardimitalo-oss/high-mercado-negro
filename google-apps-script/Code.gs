@@ -247,7 +247,8 @@ function montarCatalogo_(anterior, opts) {
       variacao = {novo: true, em: agoraIso};
     }
 
-    const out = {categoria, item, parceria, pista, status, destaque: /^(sim|s|true|1|x)$/i.test(String(destaqueRaw).trim()) || destaqueRaw === true, observacao, ordem, imagem};
+    const out = {categoria, item, parceria, pista, status, destaque: /^(sim|s|true|1|x)$/i.test(String(destaqueRaw).trim()) || destaqueRaw === true, ordem, imagem};
+    // OBSERVAÇÃO fica só na planilha (anotação interna da staff) — não vai para o site público.
     if (variacao) out.variacao = variacao;
     return out;
   }).filter(Boolean).sort((a,b) => a.categoria.localeCompare(b.categoria,'pt-BR') || a.ordem-b.ordem || a.item.localeCompare(b.item,'pt-BR'));

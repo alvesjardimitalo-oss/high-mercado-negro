@@ -66,7 +66,7 @@ async function loadCatalog(){
   if(!r.ok) throw new Error('Não foi possível carregar o catálogo.');
   const data=await r.json();
   // Padroniza categorias (ex.: "laVAGEM " → "LAVAGEM") para não duplicar nem sair fora de ordem.
-  (data.itens||[]).forEach(i=>{ if(i) i.categoria=String(i.categoria||'').trim().toLocaleUpperCase('pt-BR'); });
+  (data.itens||[]).forEach(i=>{ if(i){ i.categoria=String(i.categoria||'').trim().toLocaleUpperCase('pt-BR'); delete i.observacao; } }); // observação da planilha é só da staff
   return data;
 }
 
@@ -97,7 +97,6 @@ function itemCard(i,showCategory=false){
     </div>
     <h3>${esc(i.item)}</h3>
     <div class="prices"><div class="price"><span>Parceria</span><strong>${money(i.parceria)}</strong></div><div class="price pista"><span>Pista</span><strong>${money(i.pista)}</strong></div></div>
-    ${i.observacao?`<div class="notice">⚠ ${esc(i.observacao)}</div>`:''}
     ${itemActions(i)}
     ${showCategory?`<a class="item-open" href="categoria.html?c=${slugify(i.categoria)}">ABRIR ${esc(i.categoria).toUpperCase()} →</a>`:''}
   </article>`;
@@ -163,7 +162,7 @@ async function initHome(){
     const renderSearch=q=>{
       const term=normalizeText(q);
       if(!term){resultsBox.innerHTML='';resultsBox.classList.remove('open');return;}
-      const results=active.filter(i=>normalizeText(`${i.item} ${i.categoria} ${i.observacao||''}`).includes(term));
+      const results=active.filter(i=>normalizeText(`${i.item} ${i.categoria}`).includes(term));
       resultsBox.classList.add('open');
       resultsBox.innerHTML=`<div class="global-results-head"><div><span class="eyebrow">RESULTADOS DA BUSCA</span><strong>${results.length} ${results.length===1?'ITEM ENCONTRADO':'ITENS ENCONTRADOS'}</strong></div><button type="button" id="clearGlobalSearch">LIMPAR</button></div><div class="items-grid search-results-grid">${results.length?results.map(i=>itemCard(i,true)).join(''):`<div class="empty">Nenhum item encontrado para “${esc(q)}”.</div>`}</div>`;
       document.querySelector('#clearGlobalSearch')?.addEventListener('click',()=>{search.value='';renderSearch('');search.focus();});
@@ -208,7 +207,7 @@ async function initCategory(){
   });
 
   const list=document.querySelector('#itemList'), search=document.querySelector('#categorySearch');
-  const render=q=>{if(!list)return;const term=normalizeText(q);const filtered=favFirst(items.filter(i=>!term||normalizeText(`${i.item} ${i.categoria} ${i.observacao||''}`).includes(term)));list.innerHTML=filtered.length?filtered.map(i=>itemCard(i)).join(''):'<div class="empty">Nenhum item encontrado nesta categoria.</div>';};
+  const render=q=>{if(!list)return;const term=normalizeText(q);const filtered=favFirst(items.filter(i=>!term||normalizeText(`${i.item} ${i.categoria}`).includes(term)));list.innerHTML=filtered.length?filtered.map(i=>itemCard(i)).join(''):'<div class="empty">Nenhum item encontrado nesta categoria.</div>';};
   render(''); search?.addEventListener('input',e=>render(e.target.value));
   document.addEventListener('hmn:favs',()=>render(search?.value||''));
   renderComingSoon((data.itens||[]).filter(i=>i&&!isActive(i)&&slugify(i.categoria)===slugify(cat)),list);
@@ -324,7 +323,7 @@ async function initGlobalTable(){
   const getRows=()=>{
     const term=normalizeText(query);
     let rows=active.filter(i=>selected==='TODOS'||(selected===FAV_FILTER?isFav(i):slugify(i.categoria)===slugify(selected)));
-    if(term) rows=rows.filter(i=>normalizeText(`${i.item} ${i.categoria} ${i.observacao||''}`).includes(term));
+    if(term) rows=rows.filter(i=>normalizeText(`${i.item} ${i.categoria}`).includes(term));
     rows=[...rows].sort((a,b)=>compare(a,b,sortKey)*(sortDir==='asc'?1:-1));
     return rows;
   };
@@ -334,7 +333,7 @@ async function initGlobalTable(){
     const st=statusInfo(i);
     return `<tr data-status="${st?st.cls:'ativo'}">
       <td class="col-img">${tableImageMarkup(i)}</td>
-      <td class="col-item"><div class="table-item-name">${esc(i.item)}${st?` <span class="status-badge ${st.cls}">${st.label}</span>`:''} ${trendBadge(i)}</div>${i.observacao?`<div class="table-note">${esc(i.observacao)}</div>`:''}${itemActions(i,true)}</td>
+      <td class="col-item"><div class="table-item-name">${esc(i.item)}${st?` <span class="status-badge ${st.cls}">${st.label}</span>`:''} ${trendBadge(i)}</div>${itemActions(i,true)}</td>
       <td><a class="category-link" href="categoria.html?c=${slugify(i.categoria)}">${esc(i.categoria)}</a></td>
       <td class="money-cell partnership">${money(i.parceria)}</td>
       <td class="money-cell track"><strong>${money(i.pista)}</strong>${diff?`<small>+ ${money(diff)} vs parceria</small>`:''}</td>

@@ -17,7 +17,6 @@
       "pista": 48150,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 1,
       "imagem": "m1922.png",
       "variacao": {
@@ -33,7 +32,6 @@
       "pista": 48150,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 2,
       "imagem": "t54.png",
       "variacao": {
@@ -49,7 +47,6 @@
       "pista": 48150,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 3,
       "imagem": "desert.png",
       "variacao": {
@@ -65,7 +62,6 @@
       "pista": 106000,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 4,
       "imagem": "uzi.png",
       "variacao": {
@@ -81,7 +77,6 @@
       "pista": 106000,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 5,
       "imagem": "tec9.png",
       "variacao": {
@@ -97,7 +92,6 @@
       "pista": 189000,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 6,
       "imagem": "ak102.png",
       "variacao": {
@@ -113,7 +107,6 @@
       "pista": 48150,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 7,
       "imagem": "cz52.png",
       "variacao": {
@@ -129,7 +122,6 @@
       "pista": 189000,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 8,
       "imagem": "sigsauer556.png",
       "variacao": {
@@ -145,7 +137,6 @@
       "pista": 106000,
       "status": "ativo",
       "destaque": false,
-      "observacao": "SUB (MTAR): preço de parceria oficial R$ 100.000; pista +6%",
       "ordem": 9,
       "imagem": "f2000.png",
       "variacao": {
@@ -161,7 +152,6 @@
       "pista": 189000,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 10,
       "imagem": "fnfal.png",
       "variacao": {
@@ -177,7 +167,6 @@
       "pista": 189000,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 11,
       "imagem": "ak74n.png",
       "variacao": {
@@ -193,7 +182,6 @@
       "pista": 115500,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 12,
       "imagem": "mossberg500.png",
       "variacao": {
@@ -209,7 +197,6 @@
       "pista": 106000,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 13,
       "imagem": "mpf45.png",
       "variacao": {
@@ -225,7 +212,6 @@
       "pista": 48150,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 14,
       "imagem": "glockrajada.png",
       "variacao": {
@@ -241,7 +227,6 @@
       "pista": 48150,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 15,
       "imagem": "WEAPON_PISTOL50.png",
       "variacao": {
@@ -257,7 +242,6 @@
       "pista": 336000,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 16,
       "imagem": "WEAPON_SNIPERRIFLE3.png",
       "variacao": {
@@ -273,7 +257,6 @@
       "pista": 294000,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 17,
       "imagem": "WEAPON_SNIPERRIFLE.png",
       "variacao": {
@@ -289,7 +272,6 @@
       "pista": 262500,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 18,
       "imagem": "WEAPON_COMBAMG2.png",
       "variacao": {
@@ -305,7 +287,6 @@
       "pista": 7630,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 19,
       "imagem": "attachbox.png",
       "variacao": {
@@ -320,7 +301,6 @@
       "pista": 7000,
       "status": "ativo",
       "destaque": false,
-      "observacao": "",
       "ordem": 20,
       "imagem": "pager.png",
       "variacao": {
@@ -335,7 +315,6 @@
       "pista": 10900,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 46,
       "imagem": "dismantle.png",
       "variacao": {
@@ -351,7 +330,6 @@
       "pista": 19440,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 47,
       "imagem": "dismantleplus.png",
       "variacao": {
@@ -367,7 +345,6 @@
       "pista": 16200,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 48,
       "imagem": "blocksignal.png",
       "variacao": {
@@ -383,7 +360,6 @@
       "pista": 5450,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 49,
       "imagem": "lockpick.png",
       "variacao": {
@@ -399,7 +375,6 @@
       "pista": 10900,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 50,
       "imagem": "lockpickplus.png",
       "variacao": {
@@ -415,7 +390,6 @@
       "pista": 25000,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 51,
       "imagem": "lockpickplus.png",
       "variacao": {
@@ -430,7 +404,6 @@
       "pista": 5450,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 65,
       "imagem": "packdrug1.png",
       "variacao": {
@@ -446,7 +419,6 @@
       "pista": 165,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 66,
       "imagem": "metadone.png",
       "variacao": {
@@ -462,7 +434,6 @@
       "pista": 12960,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 67,
       "imagem": "ballisticplate.png",
       "variacao": {
@@ -478,7 +449,6 @@
       "pista": 7630,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 68,
       "imagem": "hood.png",
       "variacao": {
@@ -493,7 +463,6 @@
       "pista": 10900,
       "status": "ativo",
       "destaque": true,
-      "observacao": "Kit de fogos de artifício para aviso RP e diversão; parceria R$ 10.000; pista +9%",
       "ordem": 69,
       "imagem": "kitfogueteiro-s3.png",
       "variacao": {
@@ -509,7 +478,6 @@
       "pista": 9810,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 70,
       "imagem": "mapabairro1.png",
       "variacao": {
@@ -525,7 +493,6 @@
       "pista": 165,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 54,
       "imagem": "dollarfake.png",
       "variacao": {
@@ -541,7 +508,6 @@
       "pista": 23760,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 55,
       "imagem": "kitdossete.png",
       "variacao": {
@@ -557,7 +523,6 @@
       "pista": 2725,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Ativo; preço de referência estimado em 17/11/2026",
       "ordem": 56,
       "imagem": "infectedbandage.png",
       "variacao": {
@@ -573,7 +538,6 @@
       "pista": 17280,
       "status": "ativo",
       "destaque": true,
-      "observacao": "Ativo; preço de referência estimado em 17/11/2026",
       "ordem": 57,
       "imagem": "adrenaline2.png",
       "variacao": {
@@ -589,7 +553,6 @@
       "pista": 30240,
       "status": "inativo",
       "destaque": true,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 58,
       "imagem": "adrenalineclandestineplus.png",
       "variacao": {
@@ -605,7 +568,6 @@
       "pista": 5450,
       "status": "inativo",
       "destaque": true,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 59,
       "imagem": "packdrug1.png",
       "variacao": {
@@ -621,7 +583,6 @@
       "pista": 165,
       "status": "ativo",
       "destaque": true,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 60,
       "imagem": "metadone.png",
       "variacao": {
@@ -637,7 +598,6 @@
       "pista": 19440,
       "status": "inativo",
       "destaque": true,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 52,
       "imagem": "cartaoclonado1.png",
       "variacao": {
@@ -652,7 +612,6 @@
       "pista": 30240,
       "status": "inativo",
       "destaque": true,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 53,
       "imagem": "cartaoclonado2.png",
       "variacao": {
@@ -667,7 +626,6 @@
       "pista": 9810,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 71,
       "imagem": "pendrive1.png",
       "variacao": {
@@ -683,7 +641,6 @@
       "pista": 20120,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 72,
       "imagem": "pendrive2.png",
       "variacao": {
@@ -699,7 +656,6 @@
       "pista": 34520,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 73,
       "imagem": "pendrive3.png",
       "variacao": {
@@ -715,7 +671,6 @@
       "pista": 7630,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 74,
       "imagem": "handcuff.png",
       "variacao": {
@@ -730,7 +685,6 @@
       "pista": 1100,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 75,
       "imagem": "alcoolemgel.png",
       "variacao": {
@@ -746,7 +700,6 @@
       "pista": 12960,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 21,
       "imagem": "racestablet.png",
       "variacao": {
@@ -762,7 +715,6 @@
       "pista": 2200,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 22,
       "imagem": "racesticket.png",
       "variacao": {
@@ -778,7 +730,6 @@
       "pista": 4360,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 23,
       "imagem": "racesticketplus.png",
       "variacao": {
@@ -794,7 +745,6 @@
       "pista": 10900,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 24,
       "imagem": "notebook.png",
       "variacao": {
@@ -810,7 +760,6 @@
       "pista": 10900,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 25,
       "imagem": "nitro.png",
       "variacao": {
@@ -826,7 +775,6 @@
       "pista": 19440,
       "status": "inativo",
       "destaque": true,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 26,
       "imagem": "Nitro+.png",
       "variacao": {
@@ -842,7 +790,6 @@
       "pista": 16200,
       "status": "inativo",
       "destaque": true,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 27,
       "imagem": "Aerofolio_Esportivo.png",
       "variacao": {
@@ -858,7 +805,6 @@
       "pista": 16200,
       "status": "inativo",
       "destaque": true,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 28,
       "imagem": "Escapamento_Esportivo.png",
       "variacao": {
@@ -874,7 +820,6 @@
       "pista": 21600,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Referência sugerida S3: equipamento de bloqueio de radar; revisar após testes; pista +8%",
       "ordem": 29,
       "imagem": "radarjammer-s3.png",
       "variacao": {
@@ -890,7 +835,6 @@
       "pista": 15120,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Referência sugerida S3: detector/rastreador de radar; revisar após testes; pista +8%",
       "ordem": 30,
       "imagem": "radardetector-s3.png",
       "variacao": {
@@ -906,7 +850,6 @@
       "pista": 12960,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Referência sugerida S3: localizador veicular; revisar após testes; pista +8%",
       "ordem": 31,
       "imagem": "rastreador-s3.png",
       "variacao": {
@@ -922,7 +865,6 @@
       "pista": 1100,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 32,
       "imagem": "energetic2.png",
       "variacao": {
@@ -938,7 +880,6 @@
       "pista": 5450,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 33,
       "imagem": "caixa_m_pistola.png",
       "variacao": {
@@ -954,7 +895,6 @@
       "pista": 9810,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Caixa de 100 munições SMG; preço de parceria oficial R$ 9.000; pista +9%",
       "ordem": 34,
       "imagem": "caixa_m_smg.png",
       "variacao": {
@@ -970,7 +910,6 @@
       "pista": 12960,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Caixa de 100 munições de fuzil; preço de parceria oficial R$ 12.000; pista +8%",
       "ordem": 35,
       "imagem": "caixa_m_rifle.png",
       "variacao": {
@@ -986,7 +925,6 @@
       "pista": 19440,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 36,
       "imagem": "caixa_m_rifle.png",
       "variacao": {
@@ -1002,7 +940,6 @@
       "pista": 19440,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 37,
       "imagem": "sniperammo.png",
       "variacao": {
@@ -1018,7 +955,6 @@
       "pista": 6540,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Preço definido na revisão de 17/11/2026",
       "ordem": 38,
       "imagem": "c4.png",
       "variacao": {
@@ -1034,7 +970,6 @@
       "pista": 12960,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 39,
       "imagem": "c4premium.png",
       "variacao": {
@@ -1050,7 +985,6 @@
       "pista": 30240,
       "status": "ativo",
       "destaque": false,
-      "observacao": "Referência sugerida S3; preço provisório até definir capacidade de munição; pista +8%",
       "ordem": 40,
       "imagem": "caixa-municao-grande-s3.png",
       "variacao": {
@@ -1066,7 +1000,6 @@
       "pista": 9810,
       "status": "inativo",
       "destaque": true,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 41,
       "imagem": "c4.png",
       "variacao": {
@@ -1082,7 +1015,6 @@
       "pista": 8720,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 42,
       "imagem": "controleexplosivo.png",
       "variacao": {
@@ -1098,7 +1030,6 @@
       "pista": 27000,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 43,
       "imagem": "caixadeexplosivo.png",
       "variacao": {
@@ -1114,7 +1045,6 @@
       "pista": 4360,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 44,
       "imagem": "attach_flashlight.png",
       "variacao": {
@@ -1130,7 +1060,6 @@
       "pista": 3815,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 45,
       "imagem": "attach_flashlight.png",
       "variacao": {
@@ -1146,7 +1075,6 @@
       "pista": 12960,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 61,
       "imagem": "tablethack.png",
       "variacao": {
@@ -1162,7 +1090,6 @@
       "pista": 21600,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Preço de referência estimado; item inativo nesta revisão",
       "ordem": 62,
       "imagem": "tablethacksuper.png",
       "variacao": {
@@ -1178,7 +1105,6 @@
       "pista": 9810,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 63,
       "imagem": "mapabairro1.png",
       "variacao": {
@@ -1194,7 +1120,6 @@
       "pista": 10900,
       "status": "inativo",
       "destaque": false,
-      "observacao": "Valor de referência estimado em 17/11/2026 pela economia vigente; sujeito a revisão antes da ativação",
       "ordem": 64,
       "imagem": "superaltofalante.png",
       "variacao": {
