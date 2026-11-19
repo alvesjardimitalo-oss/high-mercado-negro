@@ -1,6 +1,19 @@
 const CATALOG_URL = './data/catalogo.json';
 const ITEM_IMAGE_BASE = './assets/itens/';
 const RULE_IMAGE_BASES = ['./assets/itens/','./assets/'];
+/* Divisão do valor: quanto fica com o cliente e quanto fica com o serviço. */
+const DIVISOES = {
+  'lavagem':{titulo:'LAVAGEM DE DINHEIRO',img:'dirtydollar.png',cliente:75,servico:25,servicoNome:'LAVAGEM',
+    explica:'O cliente traz o dinheiro sujo e recebe 75% limpo. A lavagem fica com 25%.',exemplo:['R$ 100.000 SUJO','R$ 75.000 PARA O CLIENTE','R$ 25.000 PARA A LAVAGEM']},
+  'desmanche':{titulo:'DESMANCHE',img:'dismantle.png',cliente:75,servico:25,servicoNome:'DESMANCHE',
+    explica:'Do valor total do desmanche, o cliente fica com 75% e o desmanche fica com 25%.',exemplo:['R$ 100.000 NO DESMANCHE','R$ 75.000 PARA O CLIENTE','R$ 25.000 PARA O DESMANCHE']}
+};
+function divisaoMarkup(slug){
+  const d=DIVISOES[slug]; if(!d) return '';
+  return `<section class="split-card"><div class="split-head"><img src="${ITEM_IMAGE_BASE}${encodeURIComponent(d.img)}" alt="" loading="lazy" onerror="this.style.display='none'"><div><span>COMO FUNCIONA A DIVISÃO</span><strong>${esc(d.titulo)}</strong><p>${esc(d.explica)}</p></div></div>
+  <div class="split-bar" role="img" aria-label="Cliente ${d.cliente}%, ${esc(d.servicoNome)} ${d.servico}%"><div class="split-cliente" style="width:${d.cliente}%"><b>${d.cliente}%</b><small>CLIENTE</small></div><div class="split-servico" style="width:${d.servico}%"><b>${d.servico}%</b><small>${esc(d.servicoNome)}</small></div></div>
+  <div class="split-example"><span>EXEMPLO</span>${d.exemplo.map((e,ix)=>`<em class="${ix===1?'is-cliente':ix===2?'is-servico':''}">${esc(e)}</em>`).join('<i>→</i>')}</div></section>`;
+}
 
 const icons = {
   'armas':'🔫','municao':'💥','tecnologia-utilitarios':'💻','drogas':'🧪','drogas-rotas':'🧪',
@@ -212,9 +225,11 @@ async function initCategory(){
   document.addEventListener('hmn:favs',()=>render(search?.value||''));
   renderComingSoon((data.itens||[]).filter(i=>i&&!isActive(i)&&slugify(i.categoria)===slugify(cat)),list);
   const rules=document.querySelector('#rules');
+  const splitHtml=divisaoMarkup(slugify(cat));
+  if(rules&&splitHtml&&!(slugify(cat)==='lavagem'&&Array.isArray(data.regras?.lavagem)&&data.regras.lavagem.length)) rules.innerHTML=splitHtml;
   if(rules&&slugify(cat)==='lavagem'&&Array.isArray(data.regras?.lavagem)&&data.regras.lavagem.length){
     const grupos=[...new Set(data.regras.lavagem.map(r=>String(r.grupo||'REGRAS').trim().toUpperCase()).filter(Boolean))];
-    rules.innerHTML=`<div class="rules-heading"><span>REGRAS OPERACIONAIS</span><strong>LAVAGEM E SECAGEM DE DINHEIRO</strong><p>Percentuais e imagens publicados diretamente pela planilha oficial.</p></div>`+grupos.map(grupo=>{
+    rules.innerHTML=splitHtml+`<div class="rules-heading"><span>REGRAS OPERACIONAIS</span><strong>LAVAGEM E SECAGEM DE DINHEIRO</strong><p>Percentuais e imagens publicados diretamente pela planilha oficial.</p></div>`+grupos.map(grupo=>{
       const tituloGrupo=grupo==='SECAGEM'?'SECAGEM DE DINHEIRO':grupo==='LAVAGEM'?'LAVAGEM DE DINHEIRO':grupo;
       const rows=data.regras.lavagem.filter(r=>String(r.grupo||'REGRAS').trim().toUpperCase()===grupo);
       return `<section class="rule-group"><div class="rule-group-title">${esc(tituloGrupo)}</div><div class="rule-group-grid">${rows.map(r=>{
@@ -487,13 +502,24 @@ async function generateDiscordMarketImage(items,data){
   const colW=(W-margin*2-colGap*2)/3;
   const groupTitleH=38;
   const tableHeadH=24;
-  const rowH=29;
+  const rowH=38;
+  const thumb=30;
   const groupGap=12;
   const padX=12;
   const lavagemRules=Array.isArray(data?.regras?.lavagem)?data.regras.lavagem:[];
   const ruleRowH=62;
   const ruleHeadH=25;
-  const rulesForGroup=g=>slugify(g.name)==='lavagem'?lavagemRules:[];
+  const rulesForGroup=()=>[]; // percentuais agora vão no quadro de divisão abaixo
+  const splitH=150;
+  const splitFor=g=>DIVISOES[slugify(g.name)]||null;
+
+  // Fotos dos itens (mesmas do site) e ícones das divisões.
+  const itemImageMap={};
+  await Promise.all([...rows.map(i=>String(i.imagem||'').trim()),...Object.values(DIVISOES).map(d=>d.img)].map(async file=>{
+    if(!file||file in itemImageMap) return;
+    itemImageMap[file]=null;
+    try{itemImageMap[file]=await loadCanvasImage(ITEM_IMAGE_BASE+encodeURIComponent(file));}catch(_){}
+  }));
 
   const ruleImageMap={};
   await Promise.all(lavagemRules.map(async r=>{
@@ -502,7 +528,7 @@ async function generateDiscordMarketImage(items,data){
     ruleImageMap[file]=await loadRuleCanvasImage(file);
   }));
 
-  const blockHeight=g=>groupTitleH+tableHeadH+(g.items.length*rowH)+(rulesForGroup(g).length?(ruleHeadH+rulesForGroup(g).length*ruleRowH+8):0)+groupGap;
+  const blockHeight=g=>groupTitleH+tableHeadH+(g.items.length*rowH)+(splitFor(g)?splitH+8:0)+groupGap;
   const columns=[[],[],[]];
   const heights=[0,0,0];
 
@@ -578,7 +604,7 @@ async function generateDiscordMarketImage(items,data){
     ctx.textAlign='right';ctx.fillStyle='#cde0c3';ctx.font='800 12px Arial, sans-serif';ctx.fillText(`${group.items.length} ITENS`,x+colW-12,y+24);ctx.textAlign='left';
     y+=groupTitleH;
 
-    const itemX=x+padX;
+    const itemX=x+padX+thumb+10;
     const pistaX=x+colW-14;
     const parceriaX=x+colW-132;
     ctx.fillStyle='#1c2921';ctx.fillRect(x,y,colW,tableHeadH);
@@ -590,13 +616,41 @@ async function generateDiscordMarketImage(items,data){
     group.items.forEach((i,idx)=>{
       ctx.fillStyle=idx%2===0?'#101a15':'#18251d';ctx.fillRect(x,y,colW,rowH);
       ctx.strokeStyle='rgba(160,240,64,.12)';ctx.beginPath();ctx.moveTo(x,y+rowH);ctx.lineTo(x+colW,y+rowH);ctx.stroke();
+      const tx0=x+padX,ty0=y+(rowH-thumb)/2;
+      roundedRect(ctx,tx0,ty0,thumb,thumb,5);ctx.fillStyle='#2a3a2e';ctx.fill();
+      ctx.strokeStyle='rgba(160,240,64,.22)';ctx.stroke();
+      const im=itemImageMap[String(i.imagem||'').trim()];
+      if(im){const r=Math.min((thumb-4)/im.width,(thumb-4)/im.height),iw=im.width*r,ih=im.height*r;ctx.drawImage(im,tx0+(thumb-iw)/2,ty0+(thumb-ih)/2,iw,ih);}
+      const ty=y+rowH/2+5;
       ctx.fillStyle='#eaf3e8';
-      drawTextFit(ctx,String(i.item||'').toUpperCase(),itemX,y+19,parceriaX-itemX-18,13,'700');
-      ctx.textAlign='right';ctx.fillStyle='#d6e7d2';ctx.font='800 12px Arial, sans-serif';ctx.fillText(money(i.parceria),parceriaX,y+19);
-      ctx.fillStyle='#a0f040';ctx.font='900 12px Arial, sans-serif';ctx.fillText(money(i.pista),pistaX,y+19);ctx.textAlign='left';
+      drawTextFit(ctx,String(i.item||'').toUpperCase(),itemX,ty,parceriaX-itemX-70,13,'700');
+      ctx.textAlign='right';ctx.fillStyle='#d6e7d2';ctx.font='800 12px Arial, sans-serif';ctx.fillText(money(i.parceria),parceriaX,ty);
+      ctx.fillStyle='#a0f040';ctx.font='900 12px Arial, sans-serif';ctx.fillText(money(i.pista),pistaX,ty);ctx.textAlign='left';
       y+=rowH;
     });
 
+    const sp=splitFor(group);
+    if(sp){
+      y+=8;
+      roundedRect(ctx,x,y,colW,splitH,6);ctx.fillStyle='#0d1611';ctx.fill();ctx.strokeStyle='rgba(160,240,64,.35)';ctx.stroke();
+      const ic=itemImageMap[sp.img];
+      if(ic){const r=Math.min(46/ic.width,46/ic.height);ctx.drawImage(ic,x+12+(46-ic.width*r)/2,y+10+(46-ic.height*r)/2,ic.width*r,ic.height*r);}
+      ctx.fillStyle='#9daf9c';ctx.font='900 9px Arial, sans-serif';ctx.fillText('COMO FUNCIONA A DIVISÃO',x+68,y+22);
+      ctx.fillStyle='#f4f0f6';drawTextFit(ctx,sp.titulo,x+68,y+41,colW-80,16,'900');
+      ctx.fillStyle='#c9d8c6';drawTextFit(ctx,sp.explica.toUpperCase(),x+68,y+57,colW-80,9,'700');
+      const bx=x+12,by=y+68,bw=colW-24,bh=40,cw=bw*sp.cliente/100;
+      roundedRect(ctx,bx,by,bw,bh,5);ctx.fillStyle='#f040d0';ctx.fill();
+      ctx.save();roundedRect(ctx,bx,by,bw,bh,5);ctx.clip();ctx.fillStyle='#a0f040';ctx.fillRect(bx,by,cw,bh);ctx.restore();
+      ctx.fillStyle='#08120a';ctx.font='900 18px Arial, sans-serif';ctx.fillText(sp.cliente+'%',bx+12,by+26);
+      ctx.font='900 11px Arial, sans-serif';ctx.fillText('FICA COM O CLIENTE',bx+60,by+25);
+      ctx.textAlign='center';ctx.fillStyle='#ffffff';ctx.font='900 16px Arial, sans-serif';ctx.fillText(sp.servico+'%',bx+cw+(bw-cw)/2,by+19);
+      ctx.font='900 8px Arial, sans-serif';ctx.fillText(sp.servicoNome,bx+cw+(bw-cw)/2,by+32);ctx.textAlign='left';
+      ctx.fillStyle='#9daf9c';ctx.font='900 9px Arial, sans-serif';ctx.fillText('EXEMPLO:',x+12,y+128);
+      ctx.fillStyle='#eaf3e8';drawTextFit(ctx,sp.exemplo[0]+'  →  ',x+64,y+128,colW-80,10,'800');
+      ctx.fillStyle='#a0f040';drawTextFit(ctx,sp.exemplo[1],x+12,y+143,colW/2,10,'900');
+      ctx.textAlign='right';ctx.fillStyle='#ff7be6';drawTextFit(ctx,sp.exemplo[2],x+colW-12,y+143,colW/2-10,10,'900','right');ctx.textAlign='left';
+      y+=splitH;
+    }
     const groupRules=rulesForGroup(group);
     if(groupRules.length){
       ctx.fillStyle='#1c2921';ctx.fillRect(x,y,colW,ruleHeadH);

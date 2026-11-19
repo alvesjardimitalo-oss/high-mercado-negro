@@ -1,7 +1,7 @@
 /* Mercado Negro • High — service worker
    Online: sempre busca a versão mais nova (preços nunca ficam velhos).
    Offline / internet ruim: usa a última versão salva no aparelho.      */
-const CACHE = 'hmn-s3-workspace-v8.4';
+const CACHE = 'hmn-s3-workspace-v8.5';
 const CORE = ['./', './index.html', './tabela.html', './categoria.html', './historico.html', './como-funciona.html',
   './assets/style.css', './assets/season3.css', './assets/season3-graffiti.css', './assets/season3-cinematic.css', './assets/season3-inner-pages.css', './assets/season3-workspace.css', './assets/season3-glass-cracks.svg', './assets/season3-qg-background.svg', './assets/ilegal-high-season3-logo.svg', './assets/app.js', './data/catalogo.json', './manifest.webmanifest', './assets/season3-cinematic/capa-completa.webp', './assets/season3-cinematic/capa-personagens.webp', './assets/season3-cinematic/banner-armas.webp', './assets/season3-cinematic/banner-municao.webp', './assets/season3-cinematic/banner-lavagem.webp', './assets/season3-cinematic/banner-desmanche.webp', './assets/season3-cinematic/banner-drogas.webp', './assets/season3-cinematic/banner-mecanica-ilegal.webp', './assets/season3-cinematic/banner-hospital-ilegal.webp'];
 
