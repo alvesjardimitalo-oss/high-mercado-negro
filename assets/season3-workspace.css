@@ -161,3 +161,5 @@
 .split-example em.is-servico{color:#ff7be6;border-color:#f040d066}
 .split-example i{font-style:normal;color:#6f8a6c}
 @media(max-width:680px){.split-head strong{font-size:22px}.split-head p{font-size:13px}.split-bar{height:52px}.split-bar b{font-size:20px}.split-servico{padding:0 6px!important}}
+.split-label{margin:14px 0 -8px;color:#9fb79f;font-size:10px;font-weight:900;letter-spacing:.12em}
+.split-example em.is-maquina{color:#b9b9b9;border-color:#ffffff33;text-decoration:line-through;text-decoration-thickness:1px}
