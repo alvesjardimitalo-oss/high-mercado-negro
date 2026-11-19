@@ -2,7 +2,7 @@
   "meta": {
     "titulo": "Mercado Negro",
     "subtitulo": "High Roleplay",
-    "atualizado_em": "2026-11-17T20:19:57-03:00",
+    "atualizado_em": "2026-11-18T21:19:03-03:00",
     "publicado_por": "Italo Alves - Sênior Ilegal",
     "moeda": "BRL",
     "aviso": "Preços referentes exclusivamente à economia fictícia do High Roleplay / FiveM.",
@@ -299,7 +299,7 @@
       "item": "PAGER",
       "parceria": 5000,
       "pista": 7000,
-      "status": "ativo",
+      "status": "inativo",
       "destaque": false,
       "ordem": 20,
       "imagem": "pager.png",
@@ -388,7 +388,7 @@
       "item": "RADAR HACKER",
       "parceria": 22000,
       "pista": 25000,
-      "status": "ativo",
+      "status": "inativo",
       "destaque": false,
       "ordem": 51,
       "imagem": "lockpickplus.png",
@@ -432,7 +432,7 @@
       "item": "COLETE BALISTICO",
       "parceria": 12000,
       "pista": 12960,
-      "status": "inativo",
+      "status": "ativo",
       "destaque": false,
       "ordem": 67,
       "imagem": "ballisticplate.png",
@@ -461,7 +461,7 @@
       "item": "KIT FOGUETEIRO",
       "parceria": 10000,
       "pista": 10900,
-      "status": "ativo",
+      "status": "inativo",
       "destaque": true,
       "ordem": 69,
       "imagem": "kitfogueteiro-s3.png",
@@ -473,7 +473,7 @@
     },
     {
       "categoria": "DROGAS",
-      "item": "RADAR DO CORRE",
+      "item": "MAPEAMENTO DE BAIRRO",
       "parceria": 9000,
       "pista": 9810,
       "status": "inativo",
@@ -566,7 +566,7 @@
       "item": "PACOTE DE METADONA",
       "parceria": 5000,
       "pista": 5450,
-      "status": "inativo",
+      "status": "ativo",
       "destaque": true,
       "ordem": 59,
       "imagem": "packdrug1.png",
@@ -621,7 +621,7 @@
     },
     {
       "categoria": "LAVAGEM",
-      "item": "PENDRIVE I",
+      "item": "PENDRIVE CLANDESTINO",
       "parceria": 9000,
       "pista": 9810,
       "status": "ativo",
@@ -636,7 +636,7 @@
     },
     {
       "categoria": "LAVAGEM",
-      "item": "PENDRIVE II",
+      "item": "PENDRIVE CLANDESTINO II",
       "parceria": 19000,
       "pista": 20120,
       "status": "ativo",
@@ -651,7 +651,7 @@
     },
     {
       "categoria": "LAVAGEM",
-      "item": "PENDRIVE III",
+      "item": "PENDRIVE CLANDESTINO III",
       "parceria": 32000,
       "pista": 34520,
       "status": "ativo",
@@ -695,7 +695,7 @@
     },
     {
       "categoria": "MECÂNICA ILEGAL",
-      "item": "TABLET DE CORRIDA",
+      "item": "TABLET DESCARTÁVEL",
       "parceria": 12000,
       "pista": 12960,
       "status": "ativo",
@@ -710,7 +710,7 @@
     },
     {
       "categoria": "MECÂNICA ILEGAL",
-      "item": "CARTAO DE CORRIDAS",
+      "item": "CARTAO DESCARTÁVEL",
       "parceria": 2000,
       "pista": 2200,
       "status": "ativo",
@@ -725,7 +725,7 @@
     },
     {
       "categoria": "MECÂNICA ILEGAL",
-      "item": "CARTÃO DE CORRIDAS ++",
+      "item": "CARTÃO DESCARTÁVEL ++",
       "parceria": 4000,
       "pista": 4360,
       "status": "inativo",
@@ -818,7 +818,7 @@
       "item": "BLOQUEADOR DE RADAR",
       "parceria": 20000,
       "pista": 21600,
-      "status": "ativo",
+      "status": "inativo",
       "destaque": false,
       "ordem": 29,
       "imagem": "radarjammer-s3.png",
@@ -833,7 +833,7 @@
       "item": "RASTREADOR DE RADAR",
       "parceria": 14000,
       "pista": 15120,
-      "status": "ativo",
+      "status": "inativo",
       "destaque": false,
       "ordem": 30,
       "imagem": "radardetector-s3.png",
@@ -848,7 +848,7 @@
       "item": "RASTREADOR VEICULAR",
       "parceria": 12000,
       "pista": 12960,
-      "status": "ativo",
+      "status": "inativo",
       "destaque": false,
       "ordem": 31,
       "imagem": "rastreador-s3.png",
@@ -863,7 +863,7 @@
       "item": "ENERGETICO ZERO",
       "parceria": 1000,
       "pista": 1100,
-      "status": "ativo",
+      "status": "inativo",
       "destaque": false,
       "ordem": 32,
       "imagem": "energetic2.png",
@@ -890,7 +890,7 @@
     },
     {
       "categoria": "MUNIÇÃO",
-      "item": "SMG 100X",
+      "item": "SMG 200X",
       "parceria": 9000,
       "pista": 9810,
       "status": "ativo",
@@ -905,7 +905,7 @@
     },
     {
       "categoria": "MUNIÇÃO",
-      "item": "FUZIL 100X",
+      "item": "FUZIL 250X",
       "parceria": 12000,
       "pista": 12960,
       "status": "ativo",
@@ -983,7 +983,7 @@
       "item": "CAIXA DE MUNIÇÃO GRANDE",
       "parceria": 28000,
       "pista": 30240,
-      "status": "ativo",
+      "status": "inativo",
       "destaque": false,
       "ordem": 40,
       "imagem": "caixa-municao-grande-s3.png",
@@ -1136,11 +1136,11 @@
         "tipo": "DINHEIRO SUJO",
         "titulo": "Lavagem de dinheiro sujo",
         "maquina": 10,
-        "lavagem": 20,
-        "cliente": 70,
+        "lavagem": 15,
+        "cliente": 75,
         "ativo": true,
         "imagem": "dirtydollar.png",
-        "texto": "10% da máquina | 20% da lavagem | 70% do cliente"
+        "texto": "10% da máquina | 15% da lavagem | 75% do cliente"
       },
       {
         "grupo": "SECAGEM",
@@ -1149,7 +1149,7 @@
         "maquina": 30,
         "lavagem": 20,
         "cliente": 50,
-        "ativo": true,
+        "ativo": false,
         "imagem": "dollar.png",
         "texto": "30% da máquina | 20% da lavagem | 50% do cliente"
       },
@@ -1160,13 +1160,145 @@
         "maquina": 15,
         "lavagem": 10,
         "cliente": 75,
-        "ativo": true,
+        "ativo": false,
         "imagem": "dirtywetdollar.png",
         "texto": "15% da máquina | 10% da lavagem | 75% do cliente"
       }
     ]
   },
   "historico": [
+    {
+      "em": "2026-11-18T21:19:03-03:00",
+      "por": "Italo Alves - Sênior Ilegal",
+      "mudancas": [
+        {
+          "tipo": "novo",
+          "categoria": "DROGAS",
+          "item": "COLETE BALISTICO",
+          "parceria": 12000,
+          "pista": 12960
+        },
+        {
+          "tipo": "novo",
+          "categoria": "HOSPITAL ILEGAL",
+          "item": "PACOTE DE METADONA",
+          "parceria": 5000,
+          "pista": 5450
+        },
+        {
+          "tipo": "renomeado",
+          "categoria": "LAVAGEM",
+          "item": "PENDRIVE CLANDESTINO",
+          "renomeado_de": "PENDRIVE I",
+          "parceria": 9000,
+          "pista": 9810
+        },
+        {
+          "tipo": "renomeado",
+          "categoria": "LAVAGEM",
+          "item": "PENDRIVE CLANDESTINO II",
+          "renomeado_de": "PENDRIVE II",
+          "parceria": 19000,
+          "pista": 20120
+        },
+        {
+          "tipo": "renomeado",
+          "categoria": "LAVAGEM",
+          "item": "PENDRIVE CLANDESTINO III",
+          "renomeado_de": "PENDRIVE III",
+          "parceria": 32000,
+          "pista": 34520
+        },
+        {
+          "tipo": "renomeado",
+          "categoria": "MECÂNICA ILEGAL",
+          "item": "TABLET DESCARTÁVEL",
+          "renomeado_de": "TABLET DE CORRIDA",
+          "parceria": 12000,
+          "pista": 12960
+        },
+        {
+          "tipo": "renomeado",
+          "categoria": "MECÂNICA ILEGAL",
+          "item": "CARTAO DESCARTÁVEL",
+          "renomeado_de": "CARTAO DE CORRIDAS",
+          "parceria": 2000,
+          "pista": 2200
+        },
+        {
+          "tipo": "renomeado",
+          "categoria": "MUNIÇÃO",
+          "item": "SMG 200X",
+          "renomeado_de": "SMG 100X",
+          "parceria": 9000,
+          "pista": 9810
+        },
+        {
+          "tipo": "renomeado",
+          "categoria": "MUNIÇÃO",
+          "item": "FUZIL 250X",
+          "renomeado_de": "FUZIL 100X",
+          "parceria": 12000,
+          "pista": 12960
+        },
+        {
+          "tipo": "removido",
+          "categoria": "ARMAS",
+          "item": "PAGER",
+          "parceria_antes": 5000,
+          "pista_antes": 7000
+        },
+        {
+          "tipo": "removido",
+          "categoria": "DESMANCHE",
+          "item": "RADAR HACKER",
+          "parceria_antes": 22000,
+          "pista_antes": 25000
+        },
+        {
+          "tipo": "removido",
+          "categoria": "DROGAS",
+          "item": "KIT FOGUETEIRO",
+          "parceria_antes": 10000,
+          "pista_antes": 10900
+        },
+        {
+          "tipo": "removido",
+          "categoria": "MECÂNICA ILEGAL",
+          "item": "BLOQUEADOR DE RADAR",
+          "parceria_antes": 20000,
+          "pista_antes": 21600
+        },
+        {
+          "tipo": "removido",
+          "categoria": "MECÂNICA ILEGAL",
+          "item": "RASTREADOR DE RADAR",
+          "parceria_antes": 14000,
+          "pista_antes": 15120
+        },
+        {
+          "tipo": "removido",
+          "categoria": "MECÂNICA ILEGAL",
+          "item": "RASTREADOR VEICULAR",
+          "parceria_antes": 12000,
+          "pista_antes": 12960
+        },
+        {
+          "tipo": "removido",
+          "categoria": "MUNIÇÃO",
+          "item": "ENERGETICO ZERO",
+          "parceria_antes": 1000,
+          "pista_antes": 1100
+        },
+        {
+          "tipo": "removido",
+          "categoria": "MUNIÇÃO",
+          "item": "CAIXA DE MUNIÇÃO GRANDE",
+          "parceria_antes": 28000,
+          "pista_antes": 30240
+        }
+      ]
+    },
     {
       "em": "2026-11-17T20:19:57-03:00",
       "por": "Italo Alves - Sênior Ilegal",
