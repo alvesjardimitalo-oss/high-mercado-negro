@@ -4,9 +4,9 @@ const RULE_IMAGE_BASES = ['./assets/itens/','./assets/'];
 /* Divisão do valor: quanto fica com o cliente e quanto fica com o serviço. */
 const DIVISOES = {
   'lavagem':{titulo:'LAVAGEM DE DINHEIRO',img:'dirtydollar.png',cliente:75,servico:25,servicoNome:'LAVAGEM',
-    explica:'O cliente traz o dinheiro sujo e recebe 75% limpo. A lavagem fica com 25%.',exemplo:['R$ 100.000 SUJO','R$ 75.000 PARA O CLIENTE','R$ 25.000 PARA A LAVAGEM']},
+    explica:'A lavagem fica com 25% do valor lavado. O cliente recebe 75% em dinheiro limpo.',exemplo:['LAVOU R$ 100.000','CLIENTE RECEBE R$ 75.000','LAVAGEM FICA COM R$ 25.000']},
   'desmanche':{titulo:'DESMANCHE',img:'dismantle.png',cliente:75,servico:25,servicoNome:'DESMANCHE',
-    explica:'Do valor total do desmanche, o cliente fica com 75% e o desmanche fica com 25%.',exemplo:['R$ 100.000 NO DESMANCHE','R$ 75.000 PARA O CLIENTE','R$ 25.000 PARA O DESMANCHE']}
+    explica:'O desmanche fica com 25% do valor lavado. O cliente recebe 75%.',exemplo:['LAVOU R$ 100.000','CLIENTE RECEBE R$ 75.000','DESMANCHE FICA COM R$ 25.000']}
 };
 function divisaoMarkup(slug){
   const d=DIVISOES[slug]; if(!d) return '';
@@ -225,19 +225,10 @@ async function initCategory(){
   document.addEventListener('hmn:favs',()=>render(search?.value||''));
   renderComingSoon((data.itens||[]).filter(i=>i&&!isActive(i)&&slugify(i.categoria)===slugify(cat)),list);
   const rules=document.querySelector('#rules');
-  const splitHtml=divisaoMarkup(slugify(cat));
-  if(rules&&splitHtml&&!(slugify(cat)==='lavagem'&&Array.isArray(data.regras?.lavagem)&&data.regras.lavagem.length)) rules.innerHTML=splitHtml;
-  if(rules&&slugify(cat)==='lavagem'&&Array.isArray(data.regras?.lavagem)&&data.regras.lavagem.length){
-    const grupos=[...new Set(data.regras.lavagem.map(r=>String(r.grupo||'REGRAS').trim().toUpperCase()).filter(Boolean))];
-    rules.innerHTML=splitHtml+`<div class="rules-heading"><span>REGRAS OPERACIONAIS</span><strong>LAVAGEM E SECAGEM DE DINHEIRO</strong><p>Percentuais e imagens publicados diretamente pela planilha oficial.</p></div>`+grupos.map(grupo=>{
-      const tituloGrupo=grupo==='SECAGEM'?'SECAGEM DE DINHEIRO':grupo==='LAVAGEM'?'LAVAGEM DE DINHEIRO':grupo;
-      const rows=data.regras.lavagem.filter(r=>String(r.grupo||'REGRAS').trim().toUpperCase()===grupo);
-      return `<section class="rule-group"><div class="rule-group-title">${esc(tituloGrupo)}</div><div class="rule-group-grid">${rows.map(r=>{
-        const img=ruleImageMarkup(r);
-        return `<article class="rule rule-rich">${img}<div class="rule-copy"><strong>${esc(r.titulo||r.tipo)}</strong><span>${esc(r.texto)}</span><small>${esc(grupo)}</small></div></article>`;
-      }).join('')}</div></section>`;
-    }).join('')+lavagemCalculatorMarkup();
-    initLavagemCalculator(data.regras.lavagem.filter(r=>r.ativo!==false));
+  const divSlug=slugify(cat);
+  if(rules&&DIVISOES[divSlug]){
+    rules.innerHTML=divisaoMarkup(divSlug)+divisaoCalculatorMarkup(divSlug);
+    initDivisaoCalculator(divSlug);
   }
 }
 
@@ -874,6 +865,27 @@ function parseValor(raw){
   else s=s.replace(/\./g,'').replace(',','.');    // 100.000 ou 100000,50
   const n=Number(s.replace(/[^0-9.]/g,''));
   return Number.isFinite(n)?Math.round(n*mult):0;
+}
+function divisaoCalculatorMarkup(slug){
+  const d=DIVISOES[slug];
+  return `<section id="calculadora" class="calc-box">
+    <div class="calc-head"><span class="eyebrow">CALCULADORA</span><strong>QUANTO FICA PARA CADA UM</strong><p>Digite o valor lavado. Aceita 150000, 150.000, 150k ou 1,5kk.</p></div>
+    <div class="calc-input searchbar"><span>R$</span><input id="calcValor" inputmode="decimal" placeholder="Valor lavado (ex.: 500k)" autocomplete="off"></div>
+    <div id="calcResult" class="calc-result"></div>
+  </section>`;
+}
+function initDivisaoCalculator(slug){
+  const d=DIVISOES[slug], input=document.querySelector('#calcValor'), out=document.querySelector('#calcResult');
+  if(!d||!input||!out) return;
+  const render=()=>{
+    const v=parseValor(input.value), serv=Math.round(v*d.servico/100), cli=v-serv;
+    out.innerHTML=`<article class="calc-card"><div class="calc-split">
+      <div class="calc-client"><span>Cliente recebe • ${d.cliente}%</span><b>${money(cli)}</b></div>
+      <div><span>${esc(d.servicoNome.charAt(0)+d.servicoNome.slice(1).toLowerCase())} fica com • ${d.servico}%</span><b>${money(serv)}</b></div>
+    </div></article>`;
+  };
+  input.addEventListener('input',render); render();
+  if(location.hash==='#calculadora') setTimeout(()=>document.querySelector('#calculadora')?.scrollIntoView({behavior:'smooth',block:'start'}),150);
 }
 function lavagemCalculatorMarkup(){
   return `<section id="calculadora" class="calc-box">
