@@ -1,26 +1,24 @@
 const CATALOG_URL = './data/catalogo.json';
 const ITEM_IMAGE_BASE = './assets/itens/';
 const RULE_IMAGE_BASES = ['./assets/itens/','./assets/'];
-/* Divisão do valor lavado: a máquina consome 10% (some, vai pro limbo);
-   o que sobra é dividido entre cliente (75%) e serviço (25%). */
+/* Divisão do valor que SAI da lavagem (já limpo): 75% cliente, 25% serviço. */
 const DIVISOES = {
-  'lavagem':{titulo:'LAVAGEM DE DINHEIRO',img:'dirtydollar.png',maquina:10,cliente:75,servico:25,servicoNome:'LAVAGEM'},
-  'desmanche':{titulo:'DESMANCHE',img:'dismantle.png',maquina:10,cliente:75,servico:25,servicoNome:'DESMANCHE'}
+  'lavagem':{titulo:'LAVAGEM DE DINHEIRO',img:'dirtydollar.png',cliente:75,servico:25,servicoNome:'LAVAGEM'},
+  'desmanche':{titulo:'DESMANCHE',img:'dismantle.png',cliente:75,servico:25,servicoNome:'DESMANCHE'}
 };
 function divisaoCalc(d,v){
-  const maq=Math.round(v*d.maquina/100), sobra=v-maq, serv=Math.round(sobra*d.servico/100);
-  return {maq,sobra,serv,cli:sobra-serv};
+  const serv=Math.round(v*d.servico/100);
+  return {serv,cli:v-serv};
 }
 function divisaoExplica(d){
   const nome=d.servicoNome==='LAVAGEM'?'a lavagem':'o desmanche';
-  return `A máquina consome ${d.maquina}% do valor lavado. Do que sobra, o cliente fica com ${d.cliente}% e ${nome} com ${d.servico}%.`;
+  return `O valor que sai da lavagem é dividido: ${d.cliente}% para o cliente e ${d.servico}% para ${nome}.`;
 }
 function divisaoMarkup(slug){
   const d=DIVISOES[slug]; if(!d) return '';
   return `<section class="split-card"><div class="split-head"><img src="${ITEM_IMAGE_BASE}${encodeURIComponent(d.img)}" alt="" loading="lazy" onerror="this.style.display='none'"><div><span>COMO FUNCIONA A DIVISÃO</span><strong>${esc(d.titulo)}</strong><p>${esc(divisaoExplica(d))}</p></div></div>
-  <div class="split-label">DIVISÃO DO QUE SOBRA DEPOIS DA MÁQUINA (${100-d.maquina}% DO VALOR)</div>
   <div class="split-bar" role="img" aria-label="Cliente ${d.cliente}%, ${esc(d.servicoNome)} ${d.servico}%"><div class="split-cliente" style="width:${d.cliente}%"><b>${d.cliente}%</b><small>CLIENTE</small></div><div class="split-servico" style="width:${d.servico}%"><b>${d.servico}%</b><small>${esc(d.servicoNome)}</small></div></div>
-  ${(()=>{const c=divisaoCalc(d,100000);return `<div class="split-example"><span>EXEMPLO</span><em>LAVOU ${money(100000)}</em><i>→</i><em class="is-maquina">MÁQUINA −${money(c.maq)}</em><i>→</i><em>SOBRA ${money(c.sobra)}</em><i>→</i><em class="is-cliente">CLIENTE ${money(c.cli)}</em><em class="is-servico">${esc(d.servicoNome)} ${money(c.serv)}</em></div>`})()}</section>`;
+  ${(()=>{const c=divisaoCalc(d,100000);return `<div class="split-example"><span>EXEMPLO</span><em>SAIU ${money(100000)} DA LAVAGEM</em><i>→</i><em class="is-cliente">CLIENTE RECEBE ${money(c.cli)}</em><em class="is-servico">${esc(d.servicoNome)} FICA COM ${money(c.serv)}</em></div>`})()}</section>`;
 }
 
 const icons = {
@@ -509,7 +507,7 @@ async function generateDiscordMarketImage(items,data){
   const ruleRowH=62;
   const ruleHeadH=25;
   const rulesForGroup=()=>[]; // percentuais agora vão no quadro de divisão abaixo
-  const splitH=176;
+  const splitH=160;
   const splitFor=g=>DIVISOES[slugify(g.name)]||null;
 
   // Fotos dos itens (mesmas do site) e ícones das divisões.
@@ -636,9 +634,8 @@ async function generateDiscordMarketImage(items,data){
       if(ic){const r=Math.min(46/ic.width,46/ic.height);ctx.drawImage(ic,x+12+(46-ic.width*r)/2,y+10+(46-ic.height*r)/2,ic.width*r,ic.height*r);}
       ctx.fillStyle='#9daf9c';ctx.font='900 9px Arial, sans-serif';ctx.fillText('COMO FUNCIONA A DIVISÃO',x+68,y+22);
       ctx.fillStyle='#f4f0f6';drawTextFit(ctx,sp.titulo,x+68,y+41,colW-80,16,'900');
-      ctx.fillStyle='#c9d8c6';drawTextFit(ctx,`A MÁQUINA CONSOME ${sp.maquina}% DO VALOR LAVADO (SOME).`,x+68,y+57,colW-80,9,'700');
-      ctx.fillStyle='#9daf9c';ctx.font='900 9px Arial, sans-serif';ctx.fillText(`DIVISÃO DO QUE SOBRA DEPOIS DA MÁQUINA (${100-sp.maquina}% DO VALOR):`,x+12,y+80);
-      const bx=x+12,by=y+88,bw=colW-24,bh=40,cw=bw*sp.cliente/100;
+      ctx.fillStyle='#c9d8c6';drawTextFit(ctx,'O VALOR QUE SAI DA LAVAGEM É DIVIDIDO ASSIM:',x+68,y+57,colW-80,10,'800');
+      const bx=x+12,by=y+70,bw=colW-24,bh=40,cw=bw*sp.cliente/100;
       roundedRect(ctx,bx,by,bw,bh,5);ctx.fillStyle='#f040d0';ctx.fill();
       ctx.save();roundedRect(ctx,bx,by,bw,bh,5);ctx.clip();ctx.fillStyle='#a0f040';ctx.fillRect(bx,by,cw,bh);ctx.restore();
       ctx.fillStyle='#08120a';ctx.font='900 18px Arial, sans-serif';ctx.fillText(sp.cliente+'%',bx+12,by+26);
@@ -646,10 +643,10 @@ async function generateDiscordMarketImage(items,data){
       ctx.textAlign='center';ctx.fillStyle='#ffffff';ctx.font='900 16px Arial, sans-serif';ctx.fillText(sp.servico+'%',bx+cw+(bw-cw)/2,by+19);
       ctx.font='900 8px Arial, sans-serif';ctx.fillText(sp.servicoNome,bx+cw+(bw-cw)/2,by+32);ctx.textAlign='left';
       const ex=divisaoCalc(sp,100000);
-      ctx.fillStyle='#9daf9c';ctx.font='900 9px Arial, sans-serif';ctx.fillText('EXEMPLO:',x+12,y+148);
-      ctx.fillStyle='#eaf3e8';drawTextFit(ctx,`LAVOU ${money(100000)}  →  MÁQUINA −${money(ex.maq)}  →  SOBRA ${money(ex.sobra)}`,x+64,y+148,colW-76,10,'800');
-      ctx.fillStyle='#a0f040';drawTextFit(ctx,`CLIENTE RECEBE ${money(ex.cli)}`,x+12,y+165,colW/2,11,'900');
-      ctx.textAlign='right';ctx.fillStyle='#ff7be6';drawTextFit(ctx,`${sp.servicoNome} FICA COM ${money(ex.serv)}`,x+colW-12,y+165,colW/2-10,11,'900','right');ctx.textAlign='left';
+      ctx.fillStyle='#9daf9c';ctx.font='900 9px Arial, sans-serif';ctx.fillText('EXEMPLO:',x+12,y+130);
+      ctx.fillStyle='#eaf3e8';drawTextFit(ctx,`SAIU ${money(100000)} DA LAVAGEM`,x+64,y+130,colW-76,10,'800');
+      ctx.fillStyle='#a0f040';drawTextFit(ctx,`CLIENTE RECEBE ${money(ex.cli)}`,x+12,y+148,colW/2,11,'900');
+      ctx.textAlign='right';ctx.fillStyle='#ff7be6';drawTextFit(ctx,`${sp.servicoNome} FICA COM ${money(ex.serv)}`,x+colW-12,y+148,colW/2-10,11,'900','right');ctx.textAlign='left';
       y+=splitH;
     }
     const groupRules=rulesForGroup(group);
@@ -879,8 +876,8 @@ function parseValor(raw){
 function divisaoCalculatorMarkup(slug){
   const d=DIVISOES[slug];
   return `<section id="calculadora" class="calc-box">
-    <div class="calc-head"><span class="eyebrow">CALCULADORA</span><strong>QUANTO FICA PARA CADA UM</strong><p>Digite o valor lavado. Aceita 150000, 150.000, 150k ou 1,5kk.</p></div>
-    <div class="calc-input searchbar"><span>R$</span><input id="calcValor" inputmode="decimal" placeholder="Valor lavado (ex.: 500k)" autocomplete="off"></div>
+    <div class="calc-head"><span class="eyebrow">CALCULADORA</span><strong>QUANTO FICA PARA CADA UM</strong><p>Digite o valor que saiu da lavagem. Aceita 150000, 150.000, 150k ou 1,5kk.</p></div>
+    <div class="calc-input searchbar"><span>R$</span><input id="calcValor" inputmode="decimal" placeholder="Valor que saiu da lavagem (ex.: 500k)" autocomplete="off"></div>
     <div id="calcResult" class="calc-result"></div>
   </section>`;
 }
@@ -891,10 +888,8 @@ function initDivisaoCalculator(slug){
     const v=parseValor(input.value), c=divisaoCalc(d,v);
     const nome=d.servicoNome.charAt(0)+d.servicoNome.slice(1).toLowerCase();
     out.innerHTML=`<article class="calc-card"><div class="calc-split">
-      <div><span>Máquina consome • ${d.maquina}% (some)</span><b>−${money(c.maq)}</b></div>
-      <div><span>Sobra para dividir</span><b>${money(c.sobra)}</b></div>
-      <div class="calc-client"><span>Cliente recebe • ${d.cliente}% da sobra</span><b>${money(c.cli)}</b></div>
-      <div><span>${esc(nome)} fica com • ${d.servico}% da sobra</span><b>${money(c.serv)}</b></div>
+      <div class="calc-client"><span>Cliente recebe • ${d.cliente}%</span><b>${money(c.cli)}</b></div>
+      <div><span>${esc(nome)} fica com • ${d.servico}%</span><b>${money(c.serv)}</b></div>
     </div></article>`;
   };
   input.addEventListener('input',render); render();
